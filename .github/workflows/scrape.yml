@@ -1,0 +1,42 @@
+name: Scrape hours
+
+on:
+  schedule:
+    - cron: "0 12 * * *"  # 12:00 UTC ≈ 08:00 ET
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: scraper/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scraper/requirements.txt
+          playwright install --with-deps chromium
+
+      - name: Run scraper
+        run: python -m scraper.main
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain data/hours.json)" ]; then
+            git add data/hours.json
+            git commit -m "chore(data): refresh hours [skip ci]"
+            git push
+          else
+            echo "No changes."
+          fi
