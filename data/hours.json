@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "last_updated": "2026-05-13T14:22:55-04:00",
+=======
+  "last_updated": "2026-05-13T14:29:29-04:00",
+>>>>>>> 7e1a384 (feat: add Upcoming Class Schedule from RecWell homepage calendar)
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -55,7 +59,11 @@
       },
       "notes": [],
       "scrape_status": "ok",
+<<<<<<< HEAD
       "last_scraped": "2026-05-13T14:22:55-04:00"
+=======
+      "last_scraped": "2026-05-13T14:29:29-04:00"
+>>>>>>> 7e1a384 (feat: add Upcoming Class Schedule from RecWell homepage calendar)
     },
     {
       "id": "curry-hicks-pool",
@@ -126,7 +134,11 @@
         "Please Note the Hicks Pool will be CLOSED on the following dates: Saturday, April 4, 2026; Saturday, April 11, 2026"
       ],
       "scrape_status": "ok",
+<<<<<<< HEAD
       "last_scraped": "2026-05-13T14:22:55-04:00"
+=======
+      "last_scraped": "2026-05-13T14:29:29-04:00"
+>>>>>>> 7e1a384 (feat: add Upcoming Class Schedule from RecWell homepage calendar)
     },
     {
       "id": "rockwell-climbing",
@@ -183,7 +195,11 @@
       },
       "notes": [],
       "scrape_status": "ok",
+<<<<<<< HEAD
       "last_scraped": "2026-05-13T14:22:55-04:00"
+=======
+      "last_scraped": "2026-05-13T14:29:29-04:00"
+>>>>>>> 7e1a384 (feat: add Upcoming Class Schedule from RecWell homepage calendar)
     },
     {
       "id": "recreation-center",
@@ -240,7 +256,11 @@
       },
       "notes": [],
       "scrape_status": "ok",
+<<<<<<< HEAD
       "last_scraped": "2026-05-13T14:22:55-04:00"
+=======
+      "last_scraped": "2026-05-13T14:29:29-04:00"
+>>>>>>> 7e1a384 (feat: add Upcoming Class Schedule from RecWell homepage calendar)
     },
     {
       "id": "mullins-ice",
@@ -278,7 +298,11 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
+<<<<<<< HEAD
       "last_scraped": "2026-05-13T14:22:55-04:00"
+=======
+      "last_scraped": "2026-05-13T14:29:29-04:00"
+>>>>>>> 7e1a384 (feat: add Upcoming Class Schedule from RecWell homepage calendar)
     }
   ],
   "programs": [
@@ -498,6 +522,87 @@
       "category": "fitness",
       "signup_required": true,
       "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=5f1c880c-f517-4eaa-887f-c99c7dc7e9f4"
+    }
+  ],
+  "schedule": [
+    {
+      "date": "2026-05-13",
+      "weekday": "Wed",
+      "events": [
+        {
+          "time": "16:00",
+          "name": "Slow Flow Yoga 60"
+        },
+        {
+          "time": "16:00",
+          "name": "Barre 45"
+        },
+        {
+          "time": "16:15",
+          "name": "Rhythm Ride 45"
+        },
+        {
+          "time": "17:00",
+          "name": "Sculpt 60"
+        },
+        {
+          "time": "17:15",
+          "name": "Rhythm Ride 60"
+        },
+        {
+          "time": "18:15",
+          "name": "Vinyasa Yoga 60"
+        },
+        {
+          "time": "18:15",
+          "name": "Pilates 60"
+        },
+        {
+          "time": "18:30",
+          "name": "Rhythm Ride 60"
+        },
+        {
+          "time": "19:30",
+          "name": "Yin Yoga 60"
+        }
+      ]
+    },
+    {
+      "date": "2026-05-14",
+      "weekday": "Thu",
+      "events": [
+        {
+          "time": "07:30",
+          "name": "Power Yoga 60"
+        },
+        {
+          "time": "08:15",
+          "name": "Pilates 60"
+        },
+        {
+          "time": "08:45",
+          "name": "Sculpt 60"
+        },
+        {
+          "time": "12:15",
+          "name": "Rhythm Ride 30"
+        }
+      ]
+    },
+    {
+      "date": "2026-05-15",
+      "weekday": "Fri",
+      "events": []
+    },
+    {
+      "date": "2026-05-16",
+      "weekday": "Sat",
+      "events": []
+    },
+    {
+      "date": "2026-05-17",
+      "weekday": "Sun",
+      "events": []
     }
   ]
 }

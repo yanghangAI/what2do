@@ -167,6 +167,50 @@
     fitness: "Group Fitness",
   };
 
+  function todayIsoInTz() {
+    var parts = new Intl.DateTimeFormat("en-CA", {
+      timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit",
+    }).formatToParts(new Date());
+    var m = {};
+    parts.forEach(function (p) { m[p.type] = p.value; });
+    return m.year + "-" + m.month + "-" + m.day;
+  }
+
+  function formatDateHeading(iso, weekday) {
+    var bits = iso.split("-");
+    var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    var mo = months[parseInt(bits[1], 10) - 1];
+    return weekday + ", " + mo + " " + parseInt(bits[2], 10) + " " + bits[0];
+  }
+
+  function renderSchedule(days) {
+    var root = document.getElementById("schedule");
+    if (!root) return;
+    root.innerHTML = "";
+    if (!days || !days.length) {
+      root.appendChild(el("p", { class: "section-note" }, ["No upcoming classes."]));
+      return;
+    }
+    var today = todayIsoInTz();
+    days.forEach(function (day) {
+      if (day.date < today) return;
+      var heading = el("h3", day.date === today ? { class: "today" } : {}, [
+        formatDateHeading(day.date, day.weekday) + (day.date === today ? " — Today" : ""),
+      ]);
+      var list = el("ul", { class: "schedule-list" }, day.events.map(function (e) {
+        return el("li", {}, [
+          el("span", { class: "t" }, [formatTime(e.time)]),
+          el("span", {}, [e.name]),
+        ]);
+      }));
+      if (!day.events.length) return;
+      root.appendChild(el("div", { class: "schedule-day" }, [heading, list]));
+    });
+    if (!root.children.length) {
+      root.appendChild(el("p", { class: "section-note" }, ["No upcoming classes."]));
+    }
+  }
+
   function renderPrograms(programs) {
     var root = document.getElementById("programs");
     if (!root) return;
@@ -209,6 +253,7 @@
         .filter(function (f) { return f.category === cat; })
         .forEach(function (f) { container.appendChild(renderCard(f, now)); });
     });
+    renderSchedule(doc.schedule || []);
     renderPrograms(doc.programs || []);
   }
 
