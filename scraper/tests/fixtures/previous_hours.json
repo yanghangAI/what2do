@@ -1,0 +1,20 @@
+{
+  "last_updated": "2026-05-10T08:00:00-04:00",
+  "timezone": "America/New_York",
+  "facilities": [
+    {
+      "id": "curry-hicks-pool",
+      "name": "Curry Hicks Pool",
+      "category": "swim",
+      "location": {"label": "Curry Hicks Cage, UMass Amherst", "maps_url": "https://maps"},
+      "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
+      "hours": {
+        "mon": [{"open": "11:00", "close": "14:00"}],
+        "tue": [], "wed": [], "thu": [], "fri": [], "sat": [], "sun": []
+      },
+      "notes": [],
+      "scrape_status": "ok",
+      "last_scraped": "2026-05-10T08:00:00-04:00"
+    }
+  ]
+}
