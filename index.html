@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UMass Activity Hours</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header>
+  <h1>UMass Activity Hours</h1>
+  <p class="subtitle">Swim · Climbing · Ice Skating</p>
+  <p id="updated" class="updated">Loading…</p>
+</header>
+
+<main id="app">
+  <section data-category="swim">
+    <h2>Swim</h2>
+    <div class="cards" data-cards-for="swim"></div>
+  </section>
+  <section data-category="climbing">
+    <h2>Climbing</h2>
+    <div class="cards" data-cards-for="climbing"></div>
+  </section>
+  <section data-category="ice">
+    <h2>Ice Skating</h2>
+    <div class="cards" data-cards-for="ice"></div>
+  </section>
+</main>
+
+<footer>
+  <p>Data scraped daily from official UMass sources. Not affiliated with UMass.</p>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
