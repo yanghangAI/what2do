@@ -97,6 +97,16 @@ table.week tr.today td { font-weight: 600; }
 
 ul.notes { padding-left: 1.25rem; margin: 0.5rem 0; font-size: 0.9rem; }
 
+.signup-notice {
+  background: var(--warn-bg);
+  color: var(--warn-fg);
+  border-left: 4px solid var(--warn-fg);
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  margin: 0 0 0.5rem;
+}
+
 .section-note {
   color: var(--muted);
   font-size: 0.9rem;

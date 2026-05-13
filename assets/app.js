@@ -233,11 +233,9 @@
         .slice()
         .sort(function (a, b) { return a.name.localeCompare(b.name); })
         .map(function (p) {
-          var children = [el("a", { href: p.url, target: "_blank", rel: "noopener" }, [p.name])];
-          if (p.signup_required) {
-            children.push(el("span", { class: "signup-badge" }, ["Sign-up"]));
-          }
-          return el("li", {}, children);
+          return el("li", {}, [
+            el("a", { href: p.url, target: "_blank", rel: "noopener" }, [p.name]),
+          ]);
         }));
       root.appendChild(el("div", { class: "programs-group" }, [
         el("h3", {}, [label]),
