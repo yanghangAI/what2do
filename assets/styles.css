@@ -107,6 +107,13 @@ ul.notes { padding-left: 1.25rem; margin: 0.5rem 0; font-size: 0.9rem; }
   margin: 0 0 0.5rem;
 }
 
+.source-link {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0.75rem 0 0;
+}
+.source-link a { color: var(--accent); }
+
 .section-note {
   color: var(--muted);
   font-size: 0.9rem;
