@@ -169,17 +169,59 @@ def _section_text_after(soup: BeautifulSoup, regex: re.Pattern) -> str:
     return "\n".join(p for p in pieces if p)
 
 
+_DATE_LINE_RE = re.compile(
+    r"\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday|"
+    r"jan(uary)?|feb(ruary)?|mar(ch)?|apr(il)?|may|jun(e)?|jul(y)?|"
+    r"aug(ust)?|sep(tember)?|oct(ober)?|nov(ember)?|dec(ember)?)\b.*\b20\d{2}\b",
+    re.I,
+)
+
+
 def _extract_notes(section_text: str) -> list[str]:
-    notes: list[str] = []
-    for raw in section_text.splitlines():
-        stripped = raw.strip().strip("*").strip()
-        if not stripped:
-            continue
-        days, ivals = _parse_schedule_line(stripped)
+    """Pull human-readable notes (closures, exceptions) from a facility section.
+
+    The page often presents a closure header followed by date lines, e.g.:
+        Please Note the Hicks Pool will be CLOSED on the following dates:
+        Saturday, April 4, 2026
+        Saturday, April 11, 2026
+    We pair the header with subsequent date-shaped lines into one note.
+    Standalone date lines (no header above) are also kept so we never lose
+    a closure date.
+    """
+    raw_lines = [
+        ln.strip().strip("*").strip()
+        for ln in section_text.splitlines()
+        if ln.strip().strip("*").strip()
+    ]
+    # Drop lines that are pure schedule entries
+    candidates: list[str] = []
+    for line in raw_lines:
+        _, ivals = _parse_schedule_line(line)
         if ivals:
             continue
-        if re.search(r"closed", stripped, re.I):
-            notes.append(stripped)
+        candidates.append(line)
+
+    notes: list[str] = []
+    i = 0
+    while i < len(candidates):
+        line = candidates[i]
+        is_closure_header = bool(re.search(r"closed|closure", line, re.I))
+        is_date = bool(_DATE_LINE_RE.search(line))
+        if is_closure_header:
+            dates: list[str] = []
+            j = i + 1
+            while j < len(candidates) and _DATE_LINE_RE.search(candidates[j]):
+                dates.append(candidates[j])
+                j += 1
+            if dates:
+                notes.append(line + " " + "; ".join(dates))
+            else:
+                notes.append(line)
+            i = j
+            continue
+        if is_date:
+            notes.append(line)
+        i += 1
     return notes
 
 

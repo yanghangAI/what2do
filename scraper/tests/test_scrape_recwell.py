@@ -43,3 +43,11 @@ def test_all_seven_days_present_even_if_closed():
     results = scrape_recwell(html)
     for f in results:
         assert set(f["hours"].keys()) == {"mon", "tue", "wed", "thu", "fri", "sat", "sun"}
+
+
+def test_curry_hicks_closure_note_includes_dates():
+    html = FIXTURE.read_text()
+    results = {f["id"]: f for f in scrape_recwell(html)}
+    notes = results["curry-hicks-pool"]["notes"]
+    assert any("April 4" in n and "April 11" in n for n in notes), \
+        f"Expected closure dates merged into a single note; got {notes!r}"
