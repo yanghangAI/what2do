@@ -170,6 +170,11 @@ ul.schedule-list li .t {
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
+ul.schedule-list a {
+  color: var(--accent);
+  text-decoration: none;
+}
+ul.schedule-list a:hover { text-decoration: underline; }
 
 .signup-badge {
   font-size: 0.7rem;

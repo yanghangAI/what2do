@@ -183,7 +183,7 @@
     return weekday + ", " + mo + " " + parseInt(bits[2], 10) + " " + bits[0];
   }
 
-  function renderSchedule(days) {
+  function renderSchedule(days, programIndex) {
     var root = document.getElementById("schedule");
     if (!root) return;
     root.innerHTML = "";
@@ -198,9 +198,13 @@
         formatDateHeading(day.date, day.weekday) + (day.date === today ? " — Today" : ""),
       ]);
       var list = el("ul", { class: "schedule-list" }, day.events.map(function (e) {
+        var url = programIndex[e.name.toLowerCase()];
+        var nameNode = url
+          ? el("a", { href: url, target: "_blank", rel: "noopener" }, [e.name])
+          : el("span", {}, [e.name]);
         return el("li", {}, [
           el("span", { class: "t" }, [formatTime(e.time)]),
-          el("span", {}, [e.name]),
+          nameNode,
         ]);
       }));
       if (!day.events.length) return;
@@ -253,7 +257,11 @@
         .filter(function (f) { return f.category === cat; })
         .forEach(function (f) { container.appendChild(renderCard(f, now)); });
     });
-    renderSchedule(doc.schedule || []);
+    var programIndex = {};
+    (doc.programs || []).forEach(function (p) {
+      programIndex[p.name.toLowerCase()] = p.url;
+    });
+    renderSchedule(doc.schedule || [], programIndex);
     renderPrograms(doc.programs || []);
   }
 
