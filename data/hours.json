@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-13T13:41:45-04:00",
+  "last_updated": "2026-05-13T13:51:01-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -55,7 +55,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-13T13:41:45-04:00"
+      "last_scraped": "2026-05-13T13:51:01-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -126,7 +126,7 @@
         "Please Note the Hicks Pool will be CLOSED on the following dates:"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-13T13:41:45-04:00"
+      "last_scraped": "2026-05-13T13:51:01-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -183,7 +183,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-13T13:41:45-04:00"
+      "last_scraped": "2026-05-13T13:51:01-04:00"
     },
     {
       "id": "mullins-ice",
@@ -195,15 +195,24 @@
       },
       "source_url": "https://www.mullinscenter.com/mullins-community-ice-center/public-skating",
       "hours": {
-        "mon": [
+        "mon": [],
+        "tue": [],
+        "wed": [
           {
-            "open": "00:00",
-            "close": "01:00"
+            "open": "12:10",
+            "close": "13:50"
           }
         ],
-        "tue": [],
-        "wed": [],
-        "thu": [],
+        "thu": [
+          {
+            "open": "18:30",
+            "close": "19:20"
+          },
+          {
+            "open": "19:30",
+            "close": "20:20"
+          }
+        ],
         "fri": [],
         "sat": [],
         "sun": []
@@ -212,7 +221,7 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-13T13:41:45-04:00"
+      "last_scraped": "2026-05-13T13:51:01-04:00"
     }
   ]
 }

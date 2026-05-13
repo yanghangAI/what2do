@@ -1,11 +1,16 @@
 """Scrape public-skate hours from the Mullins Community Ice Center schedule.
 
-The schedule is JS-rendered by Finnly Connect, so live scraping requires Playwright.
-The parser itself works on rendered HTML and is unit-tested against a fixture.
+The schedule is JS-rendered by Finnly Connect using a Kendo scheduler. Each event
+appears as `<div class="k-event">` with an `aria-label` like:
+    "12:10 PM - 1:50 PM on Wednesday, May 13, 2026 at 12:10 PM to 1:50 PM"
+and inner text containing the event title (e.g. "Public Skating").
+
+`fetch_mullins_html` renders the page in Playwright and switches to Week view so
+all events for the current week are present. `parse_mullins_html` extracts events
+from rendered HTML and is unit-tested against a fixture.
 """
 from __future__ import annotations
 import re
-from datetime import datetime
 from bs4 import BeautifulSoup
 from scraper.models import Interval
 
@@ -13,7 +18,22 @@ SOURCE_URL = "https://www.mullinscenter.com/mullins-community-ice-center/public-
 SCHEDULE_URL = "https://mullinscenter.finnlyconnect.com/schedule/428"
 
 DAY_ORDER = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
-TIME_RE = re.compile(r"(\d{1,2})(?::(\d{2}))?\s*(am|pm)", re.I)
+WEEKDAY_TO_KEY = {
+    "monday": "mon", "tuesday": "tue", "wednesday": "wed",
+    "thursday": "thu", "friday": "fri", "saturday": "sat", "sunday": "sun",
+}
+
+# Matches "12:10 PM - 1:50 PM" anywhere in the aria-label
+ARIA_RANGE_RE = re.compile(
+    r"(\d{1,2}):(\d{2})\s*(AM|PM)\s*[-–]\s*(\d{1,2}):(\d{2})\s*(AM|PM)",
+    re.I,
+)
+# Matches the weekday name immediately following "on "
+ARIA_WEEKDAY_RE = re.compile(
+    r"\bon\s+(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\b",
+    re.I,
+)
+PUBLIC_SKATE_TEXT_RE = re.compile(r"public\s*skat", re.I)
 
 
 def _to_24h(hour: int, minute: int, ampm: str) -> str:
@@ -25,57 +45,37 @@ def _to_24h(hour: int, minute: int, ampm: str) -> str:
     return f"{hour:02d}:{minute:02d}"
 
 
-def _parse_time_range(text: str) -> Interval | None:
-    matches = TIME_RE.findall(text)
-    if len(matches) < 2:
+def _parse_event(event_el) -> tuple[str, Interval] | None:
+    aria = event_el.get("aria-label", "") or ""
+    text = event_el.get_text(" ", strip=True)
+    if not PUBLIC_SKATE_TEXT_RE.search(text):
         return None
-    h1, m1, ap1 = matches[0]
-    h2, m2, ap2 = matches[1]
-    return Interval(
-        open=_to_24h(int(h1), int(m1 or 0), ap1),
-        close=_to_24h(int(h2), int(m2 or 0), ap2),
+    rm = ARIA_RANGE_RE.search(aria)
+    dm = ARIA_WEEKDAY_RE.search(aria)
+    if not rm or not dm:
+        return None
+    day = WEEKDAY_TO_KEY[dm.group(1).lower()]
+    interval = Interval(
+        open=_to_24h(int(rm.group(1)), int(rm.group(2)), rm.group(3)),
+        close=_to_24h(int(rm.group(4)), int(rm.group(5)), rm.group(6)),
     )
-
-
-def _weekday_from_date_text(text: str) -> str | None:
-    """Find an ISO-ish date or weekday name in text and return mon/tue/.../sun."""
-    weekday_re = re.compile(r"\b(mon|tue|wed|thu|fri|sat|sun)[a-z]*\b", re.I)
-    m = weekday_re.search(text)
-    if m:
-        return m.group(1).lower()[:3]
-    date_re = re.compile(r"\b(20\d{2})-(\d{2})-(\d{2})\b")
-    m = date_re.search(text)
-    if m:
-        try:
-            d = datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)))
-            return DAY_ORDER[d.weekday()]
-        except ValueError:
-            return None
-    return None
+    return day, interval
 
 
 def parse_mullins_html(html: str) -> dict:
     soup = BeautifulSoup(html, "html.parser")
     hours: dict[str, list[Interval]] = {d: [] for d in DAY_ORDER}
 
-    # Look for any element whose text mentions "Public Skate" and extract a time range
-    # from the same element or its parents/siblings. Group by weekday found in
-    # the same containing "day" block.
-    for node in soup.find_all(string=re.compile(r"public\s*skate", re.I)):
-        container = node
-        for _ in range(6):  # walk up a bit to find the enclosing day block
-            if container is None or not hasattr(container, "parent"):
-                break
-            container = container.parent
-            if container is None:
-                break
-            block_text = container.get_text(" ", strip=True)
-            iv = _parse_time_range(block_text)
-            day = _weekday_from_date_text(block_text)
-            if iv and day:
-                if iv not in hours[day]:
-                    hours[day].append(iv)
-                break
+    for event_el in soup.find_all(class_="k-event"):
+        parsed = _parse_event(event_el)
+        if parsed is None:
+            continue
+        day, interval = parsed
+        if interval not in hours[day]:
+            hours[day].append(interval)
+
+    for day in DAY_ORDER:
+        hours[day].sort(key=lambda iv: iv.open)
 
     return {
         "id": "mullins-ice",
@@ -90,7 +90,7 @@ def parse_mullins_html(html: str) -> dict:
 
 
 def fetch_mullins_html(timeout_ms: int = 60_000) -> str:
-    """Render the live Finnly Connect schedule and return its HTML."""
+    """Render the live Finnly Connect schedule in Week view and return its HTML."""
     from playwright.sync_api import sync_playwright
 
     with sync_playwright() as p:
@@ -99,9 +99,10 @@ def fetch_mullins_html(timeout_ms: int = 60_000) -> str:
             page = browser.new_page()
             page.goto(SCHEDULE_URL, wait_until="networkidle", timeout=timeout_ms)
             try:
-                page.wait_for_selector("text=Public Skate", timeout=30_000)
+                page.locator("text=Week").first.click(timeout=10_000)
             except Exception:
                 pass
+            page.wait_for_timeout(3000)
             return page.content()
         finally:
             browser.close()
