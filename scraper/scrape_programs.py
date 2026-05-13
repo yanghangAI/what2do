@@ -20,10 +20,6 @@ CATEGORIES = [
     },
 ]
 
-EXCLUDED_NAME_PATTERNS = [
-    re.compile(r"15\s*minute\s*climbing\s*orientation", re.I),
-]
-
 # Each link's visible text is prefixed by a material-icons token (e.g.
 # "fitness_center Pilates 60") and suffixed by " $0".
 _ICON_PREFIX = re.compile(r"^[a-z][a-z_]+\s+")
@@ -50,7 +46,7 @@ def parse_programs_html(html: str, category: str) -> list[dict]:
         if "GetProgramDetails" not in href:
             continue
         name = _clean_name(a.get_text(" ", strip=True))
-        if not name or any(p.search(name) for p in EXCLUDED_NAME_PATTERNS):
+        if not name:
             continue
         if name in seen:
             continue

@@ -5,12 +5,12 @@ FIX_CLIMB = Path(__file__).parent / "fixtures" / "programs_climbing.html"
 FIX_FIT = Path(__file__).parent / "fixtures" / "programs_fitness.html"
 
 
-def test_climbing_excludes_orientation():
+def test_climbing_includes_all_programs():
     items = parse_programs_html(FIX_CLIMB.read_text(), "climbing")
     names = [i["name"] for i in items]
-    assert all("orientation" not in n.lower() for n in names), names
     assert "Boulder Brawl" in names
     assert "Intro to Climbing" in names
+    assert any("15 minute Climbing Orientation" in n for n in names)
 
 
 def test_fitness_strips_icon_and_price():
