@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-13T13:23:01-04:00",
+  "last_updated": "2026-05-13T13:41:45-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -55,7 +55,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-13T13:23:01-04:00"
+      "last_scraped": "2026-05-13T13:41:45-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -126,7 +126,7 @@
         "Please Note the Hicks Pool will be CLOSED on the following dates:"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-13T13:23:01-04:00"
+      "last_scraped": "2026-05-13T13:41:45-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -183,19 +183,24 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-13T13:23:01-04:00"
+      "last_scraped": "2026-05-13T13:41:45-04:00"
     },
     {
       "id": "mullins-ice",
-      "name": "mullins-ice",
-      "category": "swim",
+      "name": "Mullins Community Ice Rink \u2014 Public Skate",
+      "category": "ice",
       "location": {
-        "label": "",
-        "maps_url": ""
+        "label": "Mullins Center, UMass Amherst",
+        "maps_url": "https://www.google.com/maps/search/?api=1&query=Mullins+Center+UMass+Amherst"
       },
-      "source_url": "",
+      "source_url": "https://www.mullinscenter.com/mullins-community-ice-center/public-skating",
       "hours": {
-        "mon": [],
+        "mon": [
+          {
+            "open": "00:00",
+            "close": "01:00"
+          }
+        ],
         "tue": [],
         "wed": [],
         "thu": [],
@@ -203,9 +208,11 @@
         "sat": [],
         "sun": []
       },
-      "notes": [],
-      "scrape_status": "failed",
-      "last_scraped": "2026-05-13T13:23:01-04:00"
+      "notes": [
+        "Schedule changes weekly \u2014 see source link for the latest week."
+      ],
+      "scrape_status": "ok",
+      "last_scraped": "2026-05-13T13:41:45-04:00"
     }
   ]
 }
