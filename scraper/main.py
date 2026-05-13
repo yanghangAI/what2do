@@ -12,6 +12,7 @@ from scraper.merge import merge_results
 from scraper.models import HoursDoc
 from scraper.scrape_recwell import SOURCE_URL as RECWELL_URL, scrape_recwell
 from scraper.scrape_mullins import scrape_mullins
+from scraper.scrape_programs import fetch_programs
 
 OUT_PATH = Path(__file__).resolve().parent.parent / "data" / "hours.json"
 TZ = ZoneInfo("America/New_York")
@@ -64,8 +65,18 @@ def main() -> int:
     results.append(_run_mullins())
 
     doc = merge_results(results, prev, now_iso=now_iso)
+
+    try:
+        programs = fetch_programs()
+    except Exception as e:
+        print(f"programs scrape failed: {e}", file=sys.stderr)
+        prev_raw = json.loads(OUT_PATH.read_text()) if OUT_PATH.exists() else {}
+        programs = prev_raw.get("programs", [])
+
+    out = doc.to_dict()
+    out["programs"] = programs
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    OUT_PATH.write_text(json.dumps(doc.to_dict(), indent=2) + "\n")
+    OUT_PATH.write_text(json.dumps(out, indent=2) + "\n")
     print(f"wrote {OUT_PATH}")
     return 0
 

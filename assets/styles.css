@@ -97,6 +97,61 @@ table.week tr.today td { font-weight: 600; }
 
 ul.notes { padding-left: 1.25rem; margin: 0.5rem 0; font-size: 0.9rem; }
 
+.section-note {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0 0 0.75rem;
+}
+
+.programs-group { margin-bottom: 1.25rem; }
+.programs-group h3 {
+  font-size: 1rem;
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+ul.programs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.5rem;
+}
+
+ul.programs-list li {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+ul.programs-list a {
+  color: var(--fg);
+  text-decoration: none;
+  font-size: 0.95rem;
+  flex: 1;
+}
+ul.programs-list a:hover { color: var(--accent); }
+
+.signup-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.4rem;
+  border-radius: 999px;
+  background: var(--warn-bg);
+  color: var(--warn-fg);
+  white-space: nowrap;
+}
+
 footer {
   color: var(--muted);
   font-size: 0.85rem;

@@ -162,6 +162,42 @@
     return el("article", { class: "card" }, children);
   }
 
+  var PROGRAM_GROUP_LABELS = {
+    climbing: "Climbing",
+    fitness: "Group Fitness",
+  };
+
+  function renderPrograms(programs) {
+    var root = document.getElementById("programs");
+    if (!root) return;
+    root.innerHTML = "";
+    if (!programs || !programs.length) {
+      root.appendChild(el("p", { class: "section-note" }, ["No programs available."]));
+      return;
+    }
+    var byCat = {};
+    programs.forEach(function (p) {
+      (byCat[p.category] = byCat[p.category] || []).push(p);
+    });
+    Object.keys(byCat).sort().forEach(function (cat) {
+      var label = PROGRAM_GROUP_LABELS[cat] || cat;
+      var list = el("ul", { class: "programs-list" }, byCat[cat]
+        .slice()
+        .sort(function (a, b) { return a.name.localeCompare(b.name); })
+        .map(function (p) {
+          var children = [el("a", { href: p.url, target: "_blank", rel: "noopener" }, [p.name])];
+          if (p.signup_required) {
+            children.push(el("span", { class: "signup-badge" }, ["Sign-up"]));
+          }
+          return el("li", {}, children);
+        }));
+      root.appendChild(el("div", { class: "programs-group" }, [
+        el("h3", {}, [label]),
+        list,
+      ]));
+    });
+  }
+
   function render(doc) {
     var now = nowInTz();
     document.getElementById("updated").textContent =
@@ -173,6 +209,7 @@
         .filter(function (f) { return f.category === cat; })
         .forEach(function (f) { container.appendChild(renderCard(f, now)); });
     });
+    renderPrograms(doc.programs || []);
   }
 
   function showError(message) {

@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-13T14:11:12-04:00",
+  "last_updated": "2026-05-13T14:22:01-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -55,7 +55,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-13T14:11:12-04:00"
+      "last_scraped": "2026-05-13T14:22:01-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -126,7 +126,7 @@
         "Please Note the Hicks Pool will be CLOSED on the following dates: Saturday, April 4, 2026; Saturday, April 11, 2026"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-13T14:11:12-04:00"
+      "last_scraped": "2026-05-13T14:22:01-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -183,7 +183,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-13T14:11:12-04:00"
+      "last_scraped": "2026-05-13T14:22:01-04:00"
     },
     {
       "id": "recreation-center",
@@ -240,7 +240,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-13T14:11:12-04:00"
+      "last_scraped": "2026-05-13T14:22:01-04:00"
     },
     {
       "id": "mullins-ice",
@@ -278,7 +278,226 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-13T14:11:12-04:00"
+      "last_scraped": "2026-05-13T14:22:01-04:00"
+    }
+  ],
+  "programs": [
+    {
+      "id": "climbing-boulder-brawl",
+      "name": "Boulder Brawl",
+      "category": "climbing",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=210ac9f0-1fcc-4110-ba65-d9a47c7415aa"
+    },
+    {
+      "id": "climbing-intro-to-climbing",
+      "name": "Intro to Climbing",
+      "category": "climbing",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=8069f20e-aa1e-47cc-81da-3c8fd66d088f"
+    },
+    {
+      "id": "fitness-abc-60-abs-booty-cardio",
+      "name": "ABC 60 (Abs/Booty/Cardio)",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=62172f24-4bb7-43dc-b72d-17a8b82e3042"
+    },
+    {
+      "id": "fitness-arms-core-45",
+      "name": "Arms & Core 45",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=f96e4a3c-bbfa-4b1f-ae81-3e32fc4a7a2b"
+    },
+    {
+      "id": "fitness-ballet-60",
+      "name": "Ballet 60",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=59e10894-e50a-49f2-980b-29de2de6d256"
+    },
+    {
+      "id": "fitness-barre-45",
+      "name": "Barre 45",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=7160c8d6-59e9-467b-9959-22b22e7aefc0"
+    },
+    {
+      "id": "fitness-beginner-s-boxing-60",
+      "name": "Beginner's Boxing 60",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=6ad39c73-b7ce-436d-b817-25f3a4afccb5"
+    },
+    {
+      "id": "fitness-booty-burn-45",
+      "name": "Booty Burn 45",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=cb60a110-bdc5-4340-8b59-7376cece8dfd"
+    },
+    {
+      "id": "fitness-cardio-kickboxing-60",
+      "name": "Cardio Kickboxing 60",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=ee16fd3a-3ce4-442d-9192-a2007086bd37"
+    },
+    {
+      "id": "fitness-core-30",
+      "name": "Core 30",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=c3a7b72c-1e38-4ca6-8db4-7cf6bf0b1740"
+    },
+    {
+      "id": "fitness-friday-fun-athletic",
+      "name": "Friday Fun: Athletic",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=fa83ed17-7b83-4899-8e84-d711c5fe6869"
+    },
+    {
+      "id": "fitness-friday-fun-cycle",
+      "name": "Friday Fun: Cycle",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=e9f5474d-109a-4e65-85ac-e26e6d309a90"
+    },
+    {
+      "id": "fitness-friday-fun-mind-body",
+      "name": "Friday Fun: Mind Body",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=f57cbb43-161c-4907-a291-1c8fe70d9472"
+    },
+    {
+      "id": "fitness-line-dancing-60",
+      "name": "Line Dancing 60",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=17ec4472-0f8f-4cf7-9576-fd92663ce0b7"
+    },
+    {
+      "id": "fitness-meditation-movement-60",
+      "name": "Meditation & Movement 60",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=b061325f-3b8a-45b7-885e-6a12b76b2ad5"
+    },
+    {
+      "id": "fitness-pilates-60",
+      "name": "Pilates 60",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=e268df5f-4e5a-4145-a395-67d8fb7a7e5d"
+    },
+    {
+      "id": "fitness-power-yoga-60",
+      "name": "Power Yoga 60",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=d2678aa2-596a-4fe2-b3ab-099d6df52b42"
+    },
+    {
+      "id": "fitness-rec-cycle-45",
+      "name": "Rec Cycle 45",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=466671b3-24f8-4b42-84cd-064008d5e386"
+    },
+    {
+      "id": "fitness-rhythm-ride-30",
+      "name": "Rhythm Ride 30",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=3ad77428-26ae-4889-98c3-051577d8f26d"
+    },
+    {
+      "id": "fitness-rhythm-ride-45",
+      "name": "Rhythm Ride 45",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=0ec08b3a-41c3-4f05-b210-203fe9e7ca84"
+    },
+    {
+      "id": "fitness-rhythm-ride-60",
+      "name": "Rhythm Ride 60",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=0fb7e2a4-2846-4a40-a76f-ed0f694b1596"
+    },
+    {
+      "id": "fitness-sculpt-60",
+      "name": "Sculpt 60",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=1731569b-14b9-468f-9872-f2d52579f706"
+    },
+    {
+      "id": "fitness-slow-flow-yoga-60",
+      "name": "Slow Flow Yoga 60",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=fe34e8c6-32a9-4de2-9926-b0c93dfef03a"
+    },
+    {
+      "id": "fitness-step-45",
+      "name": "Step 45",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=4e5b7d85-5d08-483c-bcc2-1978b1068b46"
+    },
+    {
+      "id": "fitness-strength-45",
+      "name": "Strength 45",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=3daa114f-3ef5-4fba-b016-5987b29b5222"
+    },
+    {
+      "id": "fitness-strength-60",
+      "name": "Strength 60",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=b339ded3-8dae-4948-b26e-da2760f5476b"
+    },
+    {
+      "id": "fitness-thrive-at-five-yoga-at-the-pavilion",
+      "name": "Thrive at Five: Yoga at the Pavilion",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=7a5f4d8f-9622-4d68-8f03-1c0c271f4ed7"
+    },
+    {
+      "id": "fitness-vinyasa-yoga-60",
+      "name": "Vinyasa Yoga 60",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=cd0da8a0-a624-48ef-9576-70cafb46b4ae"
+    },
+    {
+      "id": "fitness-yin-yoga-60",
+      "name": "Yin Yoga 60",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=8afd745c-6ef4-4156-98a1-5d84463f8908"
+    },
+    {
+      "id": "fitness-yoga-at-the-contemporary-art-museum",
+      "name": "Yoga at the Contemporary Art Museum",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=8627a238-422e-48ec-b4c9-ad4b0b34a320"
+    },
+    {
+      "id": "fitness-zumba-60",
+      "name": "Zumba 60",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=5f1c880c-f517-4eaa-887f-c99c7dc7e9f4"
     }
   ]
 }
