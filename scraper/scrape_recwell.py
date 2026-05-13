@@ -39,6 +39,14 @@ FACILITIES = [
         "location_label": "Recreation Center, UMass Amherst",
         "maps_url": "https://www.google.com/maps/search/?api=1&query=UMass+Recreation+Center+Amherst",
     },
+    {
+        "id": "mullins-tennis",
+        "name": "Mullins Tennis & Pickleball Courts",
+        "category": "tennis",
+        "match": re.compile(r"Mullins\s+Tennis", re.I),
+        "location_label": "Mullins Center, UMass Amherst",
+        "maps_url": "https://www.google.com/maps/search/?api=1&query=Mullins+Center+UMass+Amherst",
+    },
 ]
 
 DAY_ALIASES = {
@@ -158,10 +166,17 @@ def _section_text_after(soup: BeautifulSoup, regex: re.Pattern) -> str:
         if isinstance(node, Tag) and node.name in _heading_tags():
             break
         if isinstance(node, Tag):
-            # Use <br> as line separator
-            for br in node.find_all("br"):
+            # Use <br> as the only line separator. Unwrap inline formatting
+            # tags first so a phrase like "<u>CLOSED</u> until further notice."
+            # is read as one line, not split where the <u> ends.
+            from copy import copy as _copy
+            local = _copy(node)
+            for br in local.find_all("br"):
                 br.replace_with("\n")
-            pieces.append(node.get_text("\n", strip=True))
+            for inline in local.find_all(["strong", "b", "em", "i", "u", "span", "a"]):
+                inline.unwrap()
+            local.smooth()  # merge adjacent NavigableStrings left by unwrap
+            pieces.append(local.get_text("\n", strip=True))
         elif isinstance(node, NavigableString):
             s = str(node).strip()
             if s:

@@ -248,7 +248,7 @@
     var now = nowInTz();
     document.getElementById("updated").textContent =
       "Last updated " + formatRelative(doc.last_updated);
-    ["swim", "climbing", "ice", "fitness"].forEach(function (cat) {
+    ["swim", "climbing", "ice", "fitness", "tennis"].forEach(function (cat) {
       var container = document.querySelector('[data-cards-for="' + cat + '"]');
       container.innerHTML = "";
       doc.facilities
