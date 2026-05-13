@@ -5,11 +5,19 @@ from scraper.models import Interval
 FIXTURE = Path(__file__).parent / "fixtures" / "recwell.html"
 
 
-def test_scrape_returns_three_facilities():
+def test_scrape_returns_all_configured_facilities():
     html = FIXTURE.read_text()
     results = scrape_recwell(html)
     ids = {f["id"] for f in results}
-    assert ids == {"boyden-pool", "curry-hicks-pool", "rockwell-climbing"}
+    assert {"boyden-pool", "curry-hicks-pool", "rockwell-climbing", "recreation-center"} <= ids
+
+
+def test_recreation_center_has_hours():
+    html = FIXTURE.read_text()
+    results = {f["id"]: f for f in scrape_recwell(html)}
+    rec = results["recreation-center"]
+    total = sum(len(v) for v in rec["hours"].values())
+    assert total >= 5, "Recreation Center should have hours on at least 5 days"
 
 
 def test_curry_hicks_monday_hours():

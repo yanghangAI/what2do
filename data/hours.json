@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-13T13:53:09-04:00",
+  "last_updated": "2026-05-13T13:59:13-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -55,7 +55,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-13T13:53:09-04:00"
+      "last_scraped": "2026-05-13T13:59:13-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -126,7 +126,7 @@
         "Please Note the Hicks Pool will be CLOSED on the following dates:"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-13T13:53:09-04:00"
+      "last_scraped": "2026-05-13T13:59:13-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -183,7 +183,64 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-13T13:53:09-04:00"
+      "last_scraped": "2026-05-13T13:59:13-04:00"
+    },
+    {
+      "id": "recreation-center",
+      "name": "Recreation Center",
+      "category": "fitness",
+      "location": {
+        "label": "Recreation Center, UMass Amherst",
+        "maps_url": "https://www.google.com/maps/search/?api=1&query=UMass+Recreation+Center+Amherst"
+      },
+      "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
+      "hours": {
+        "mon": [
+          {
+            "open": "06:00",
+            "close": "23:00"
+          }
+        ],
+        "tue": [
+          {
+            "open": "06:00",
+            "close": "23:00"
+          }
+        ],
+        "wed": [
+          {
+            "open": "06:00",
+            "close": "23:00"
+          }
+        ],
+        "thu": [
+          {
+            "open": "06:00",
+            "close": "23:00"
+          }
+        ],
+        "fri": [
+          {
+            "open": "06:00",
+            "close": "22:00"
+          }
+        ],
+        "sat": [
+          {
+            "open": "10:00",
+            "close": "22:00"
+          }
+        ],
+        "sun": [
+          {
+            "open": "10:00",
+            "close": "22:00"
+          }
+        ]
+      },
+      "notes": [],
+      "scrape_status": "ok",
+      "last_scraped": "2026-05-13T13:59:13-04:00"
     },
     {
       "id": "mullins-ice",
@@ -221,7 +278,7 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-13T13:53:09-04:00"
+      "last_scraped": "2026-05-13T13:59:13-04:00"
     }
   ]
 }

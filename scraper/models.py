@@ -4,7 +4,7 @@ from typing import Literal
 
 DAYS = ("mon", "tue", "wed", "thu", "fri", "sat", "sun")
 ScrapeStatus = Literal["ok", "stale", "failed"]
-Category = Literal["swim", "climbing", "ice"]
+Category = Literal["swim", "climbing", "ice", "fitness"]
 
 
 @dataclass(frozen=True)

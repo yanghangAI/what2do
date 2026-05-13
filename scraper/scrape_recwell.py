@@ -31,6 +31,14 @@ FACILITIES = [
         "location_label": "Recreation Center, UMass Amherst",
         "maps_url": "https://www.google.com/maps/search/?api=1&query=UMass+Recreation+Center+Amherst",
     },
+    {
+        "id": "recreation-center",
+        "name": "Recreation Center",
+        "category": "fitness",
+        "match": re.compile(r"^Recreation Center$", re.I),
+        "location_label": "Recreation Center, UMass Amherst",
+        "maps_url": "https://www.google.com/maps/search/?api=1&query=UMass+Recreation+Center+Amherst",
+    },
 ]
 
 DAY_ALIASES = {
