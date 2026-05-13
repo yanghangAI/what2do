@@ -1,0 +1,78 @@
+{
+  "last_updated": "2026-05-13T14:00:00-04:00",
+  "timezone": "America/New_York",
+  "facilities": [
+    {
+      "id": "curry-hicks-pool",
+      "name": "Curry Hicks Pool",
+      "category": "swim",
+      "location": {"label": "Curry Hicks Cage, UMass Amherst", "maps_url": "https://www.google.com/maps/search/?api=1&query=Curry+Hicks+Cage+UMass+Amherst"},
+      "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
+      "hours": {
+        "mon": [{"open": "11:00", "close": "14:00"}, {"open": "17:00", "close": "19:00"}],
+        "tue": [{"open": "09:00", "close": "12:00"}],
+        "wed": [{"open": "07:00", "close": "14:00"}, {"open": "17:00", "close": "19:00"}],
+        "thu": [{"open": "09:00", "close": "12:00"}],
+        "fri": [{"open": "07:00", "close": "09:00"}, {"open": "10:30", "close": "18:00"}],
+        "sat": [{"open": "11:00", "close": "19:30"}],
+        "sun": [{"open": "11:00", "close": "17:00"}]
+      },
+      "notes": ["Closed April 4 and April 11, 2026"],
+      "scrape_status": "ok",
+      "last_scraped": "2026-05-13T14:00:00-04:00"
+    },
+    {
+      "id": "boyden-pool",
+      "name": "Boyden Pool",
+      "category": "swim",
+      "location": {"label": "Boyden Gymnasium, UMass Amherst", "maps_url": "https://www.google.com/maps/search/?api=1&query=Boyden+Gymnasium+UMass+Amherst"},
+      "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
+      "hours": {
+        "mon": [{"open": "11:00", "close": "12:30"}],
+        "tue": [{"open": "11:00", "close": "12:30"}, {"open": "17:30", "close": "20:00"}],
+        "wed": [{"open": "11:00", "close": "12:30"}],
+        "thu": [{"open": "11:00", "close": "12:30"}, {"open": "17:30", "close": "20:00"}],
+        "fri": [{"open": "11:00", "close": "12:30"}],
+        "sat": [], "sun": []
+      },
+      "notes": [],
+      "scrape_status": "ok",
+      "last_scraped": "2026-05-13T14:00:00-04:00"
+    },
+    {
+      "id": "rockwell-climbing",
+      "name": "RockWell Climbing Gym",
+      "category": "climbing",
+      "location": {"label": "Recreation Center, UMass Amherst", "maps_url": "https://www.google.com/maps/search/?api=1&query=UMass+Recreation+Center+Amherst"},
+      "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
+      "hours": {
+        "mon": [{"open": "12:00", "close": "22:00"}],
+        "tue": [{"open": "12:00", "close": "22:00"}],
+        "wed": [{"open": "12:00", "close": "22:00"}],
+        "thu": [{"open": "12:00", "close": "22:00"}],
+        "fri": [{"open": "12:00", "close": "20:00"}],
+        "sat": [{"open": "12:00", "close": "20:00"}],
+        "sun": [{"open": "12:00", "close": "20:00"}]
+      },
+      "notes": ["Climbers must be 18+", "One-time orientation required"],
+      "scrape_status": "ok",
+      "last_scraped": "2026-05-13T14:00:00-04:00"
+    },
+    {
+      "id": "mullins-ice",
+      "name": "Mullins Community Ice Rink — Public Skate",
+      "category": "ice",
+      "location": {"label": "Mullins Center, UMass Amherst", "maps_url": "https://www.google.com/maps/search/?api=1&query=Mullins+Center+UMass+Amherst"},
+      "source_url": "https://www.mullinscenter.com/mullins-community-ice-center/public-skating",
+      "hours": {
+        "mon": [], "tue": [], "wed": [{"open": "13:00", "close": "14:50"}],
+        "thu": [], "fri": [{"open": "13:00", "close": "14:50"}],
+        "sat": [{"open": "13:00", "close": "14:50"}],
+        "sun": [{"open": "13:00", "close": "14:50"}]
+      },
+      "notes": ["Schedule changes weekly — see source link for the latest week."],
+      "scrape_status": "stale",
+      "last_scraped": "2026-05-11T08:00:00-04:00"
+    }
+  ]
+}
