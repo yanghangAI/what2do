@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-  "last_updated": "2026-05-13T14:22:55-04:00",
-=======
-  "last_updated": "2026-05-13T14:29:29-04:00",
->>>>>>> 7e1a384 (feat: add Upcoming Class Schedule from RecWell homepage calendar)
+  "last_updated": "2026-05-13T14:33:23-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -59,11 +55,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-<<<<<<< HEAD
-      "last_scraped": "2026-05-13T14:22:55-04:00"
-=======
-      "last_scraped": "2026-05-13T14:29:29-04:00"
->>>>>>> 7e1a384 (feat: add Upcoming Class Schedule from RecWell homepage calendar)
+      "last_scraped": "2026-05-13T14:33:23-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -134,11 +126,7 @@
         "Please Note the Hicks Pool will be CLOSED on the following dates: Saturday, April 4, 2026; Saturday, April 11, 2026"
       ],
       "scrape_status": "ok",
-<<<<<<< HEAD
-      "last_scraped": "2026-05-13T14:22:55-04:00"
-=======
-      "last_scraped": "2026-05-13T14:29:29-04:00"
->>>>>>> 7e1a384 (feat: add Upcoming Class Schedule from RecWell homepage calendar)
+      "last_scraped": "2026-05-13T14:33:23-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -195,11 +183,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-<<<<<<< HEAD
-      "last_scraped": "2026-05-13T14:22:55-04:00"
-=======
-      "last_scraped": "2026-05-13T14:29:29-04:00"
->>>>>>> 7e1a384 (feat: add Upcoming Class Schedule from RecWell homepage calendar)
+      "last_scraped": "2026-05-13T14:33:23-04:00"
     },
     {
       "id": "recreation-center",
@@ -256,11 +240,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-<<<<<<< HEAD
-      "last_scraped": "2026-05-13T14:22:55-04:00"
-=======
-      "last_scraped": "2026-05-13T14:29:29-04:00"
->>>>>>> 7e1a384 (feat: add Upcoming Class Schedule from RecWell homepage calendar)
+      "last_scraped": "2026-05-13T14:33:23-04:00"
     },
     {
       "id": "mullins-ice",
@@ -298,14 +278,17 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-<<<<<<< HEAD
-      "last_scraped": "2026-05-13T14:22:55-04:00"
-=======
-      "last_scraped": "2026-05-13T14:29:29-04:00"
->>>>>>> 7e1a384 (feat: add Upcoming Class Schedule from RecWell homepage calendar)
+      "last_scraped": "2026-05-13T14:33:23-04:00"
     }
   ],
   "programs": [
+    {
+      "id": "climbing-15-minute-climbing-orientation-offered-every-hour",
+      "name": "15 minute Climbing Orientation Offered Every Hour",
+      "category": "climbing",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=0b3378a0-0443-4a26-a643-208566f6b8ac"
+    },
     {
       "id": "climbing-boulder-brawl",
       "name": "Boulder Brawl",
