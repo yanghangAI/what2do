@@ -215,7 +215,7 @@
     }
   }
 
-  function renderPrograms(programs) {
+  function renderPrograms(programs, upcomingNames) {
     var root = document.getElementById("programs");
     if (!root) return;
     root.innerHTML = "";
@@ -227,14 +227,26 @@
     programs.forEach(function (p) {
       (byCat[p.category] = byCat[p.category] || []).push(p);
     });
+    // Sort each category so programs WITH upcoming sessions come first
     Object.keys(byCat).sort().forEach(function (cat) {
       var label = PROGRAM_GROUP_LABELS[cat] || cat;
       var list = el("ul", { class: "programs-list" }, byCat[cat]
         .slice()
-        .sort(function (a, b) { return a.name.localeCompare(b.name); })
+        .sort(function (a, b) {
+          var ua = upcomingNames.has(a.name.toLowerCase()) ? 0 : 1;
+          var ub = upcomingNames.has(b.name.toLowerCase()) ? 0 : 1;
+          if (ua !== ub) return ua - ub;
+          return a.name.localeCompare(b.name);
+        })
         .map(function (p) {
-          return el("li", {}, [
-            el("a", { href: p.url, target: "_blank", rel: "noopener" }, [p.name]),
+          var hasUpcoming = upcomingNames.has(p.name.toLowerCase());
+          var liClass = hasUpcoming ? "" : "program-empty";
+          var children = [el("span", { class: "program-name" }, [p.name])];
+          if (!hasUpcoming) {
+            children.push(el("span", { class: "program-empty-label" }, ["no upcoming"]));
+          }
+          return el("li", liClass ? { class: liClass } : {}, [
+            el("a", { href: p.url, target: "_blank", rel: "noopener" }, children),
           ]);
         }));
       root.appendChild(el("div", { class: "programs-group" }, [
@@ -299,7 +311,15 @@
       programIndex[p.name.toLowerCase()] = p.url;
     });
     renderSchedule(doc.schedule || [], programIndex);
-    renderPrograms(doc.programs || []);
+    var todayStr = todayIsoInTz();
+    var upcomingNames = new Set();
+    (doc.schedule || []).forEach(function (day) {
+      if (day.date < todayStr) return;
+      day.events.forEach(function (e) {
+        upcomingNames.add(e.name.toLowerCase());
+      });
+    });
+    renderPrograms(doc.programs || [], upcomingNames);
   }
 
   function showError(message) {
