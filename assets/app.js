@@ -195,11 +195,8 @@
     days.forEach(function (day) {
       if (day.date < today) return;
       var isToday = day.date === today;
-      var headingChildren = [formatDateHeading(day.date, day.weekday)];
-      if (isToday) {
-        headingChildren.push(el("span", { class: "today-badge" }, ["Today"]));
-      }
-      var heading = el("h3", {}, headingChildren);
+      var headingText = formatDateHeading(day.date, day.weekday) + (isToday ? " — Today" : "");
+      var heading = el("h3", isToday ? { class: "today" } : {}, [headingText]);
       var list = el("ul", { class: "schedule-list" }, day.events.map(function (e) {
         var url = programIndex[e.name.toLowerCase()];
         var nameNode = url
@@ -211,8 +208,7 @@
         ]);
       }));
       if (!day.events.length) return;
-      var dayClass = isToday ? "schedule-day today" : "schedule-day";
-      root.appendChild(el("div", { class: dayClass }, [heading, list]));
+      root.appendChild(el("div", { class: "schedule-day" }, [heading, list]));
     });
     if (!root.children.length) {
       root.appendChild(el("p", { class: "section-note" }, ["No upcoming classes."]));

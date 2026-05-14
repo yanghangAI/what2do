@@ -90,7 +90,27 @@ table.week th, table.week td {
   padding: 0.25rem 0.5rem;
   border-bottom: 1px solid var(--border);
 }
-table.week tr.today td { font-weight: 600; }
+table.week tr.today td,
+table.week tr.today th {
+  font-weight: 700;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+table.week tr.today th {
+  position: relative;
+  padding-left: 0.9rem;
+}
+table.week tr.today th::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+}
 
 .meta { font-size: 0.85rem; color: var(--muted); margin: 0.5rem 0 0; }
 .meta a { color: var(--accent); }
@@ -168,34 +188,7 @@ ul.programs-list a:hover { color: var(--accent); }
   margin: 0 0 0.5rem;
   font-size: 1rem;
 }
-.schedule-day.today {
-  background: color-mix(in srgb, var(--accent) 12%, var(--card-bg));
-  border-color: var(--accent);
-  border-left-width: 6px;
-  box-shadow: 0 1px 6px color-mix(in srgb, var(--accent) 25%, transparent);
-}
-.schedule-day.today h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--accent);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.today-badge {
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
-  background: var(--accent);
-  color: var(--bg);
-}
-.schedule-day.today ul.schedule-list li {
-  font-weight: 500;
-}
+.schedule-day h3.today { color: var(--accent); }
 ul.schedule-list {
   list-style: none;
   padding: 0;
