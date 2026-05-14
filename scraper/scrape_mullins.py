@@ -45,6 +45,26 @@ def _to_24h(hour: int, minute: int, ampm: str) -> str:
     return f"{hour:02d}:{minute:02d}"
 
 
+def _to_minutes(hhmm: str) -> int:
+    h, m = hhmm.split(":")
+    return int(h) * 60 + int(m)
+
+
+def _merge_close_intervals(intervals: list[Interval], gap_threshold_min: int) -> list[Interval]:
+    """Merge sorted intervals whose start follows the previous close by < threshold."""
+    if not intervals:
+        return intervals
+    merged = [intervals[0]]
+    for iv in intervals[1:]:
+        last = merged[-1]
+        gap = _to_minutes(iv.open) - _to_minutes(last.close)
+        if 0 <= gap < gap_threshold_min:
+            merged[-1] = Interval(open=last.open, close=iv.close)
+        else:
+            merged.append(iv)
+    return merged
+
+
 def _parse_event(event_el) -> tuple[str, Interval] | None:
     aria = event_el.get("aria-label", "") or ""
     text = event_el.get_text(" ", strip=True)
@@ -76,6 +96,7 @@ def parse_mullins_html(html: str) -> dict:
 
     for day in DAY_ORDER:
         hours[day].sort(key=lambda iv: iv.open)
+        hours[day] = _merge_close_intervals(hours[day], gap_threshold_min=15)
 
     return {
         "id": "mullins-ice",

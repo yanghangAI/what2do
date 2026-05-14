@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-14T10:00:41-04:00",
+  "last_updated": "2026-05-14T10:41:20-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -55,7 +55,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T10:00:41-04:00"
+      "last_scraped": "2026-05-14T10:41:20-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -126,7 +126,7 @@
         "Please Note the Hicks Pool will be CLOSED on the following dates: Saturday, April 4, 2026; Saturday, April 11, 2026"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T10:00:41-04:00"
+      "last_scraped": "2026-05-14T10:41:20-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -183,7 +183,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T10:00:41-04:00"
+      "last_scraped": "2026-05-14T10:41:20-04:00"
     },
     {
       "id": "recreation-center",
@@ -240,7 +240,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T10:00:41-04:00"
+      "last_scraped": "2026-05-14T10:41:20-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -264,7 +264,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T10:00:41-04:00"
+      "last_scraped": "2026-05-14T10:41:20-04:00"
     },
     {
       "id": "mullins-ice",
@@ -278,19 +278,10 @@
       "hours": {
         "mon": [],
         "tue": [],
-        "wed": [
-          {
-            "open": "12:10",
-            "close": "13:50"
-          }
-        ],
+        "wed": [],
         "thu": [
           {
             "open": "18:30",
-            "close": "19:20"
-          },
-          {
-            "open": "19:30",
             "close": "20:20"
           }
         ],
@@ -302,7 +293,7 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T10:00:41-04:00"
+      "last_scraped": "2026-05-14T10:41:20-04:00"
     }
   ],
   "programs": [
