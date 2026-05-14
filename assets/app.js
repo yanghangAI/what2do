@@ -287,7 +287,7 @@
     document.getElementById("updated").textContent =
       "Last updated " + formatRelative(doc.last_updated);
     renderOpenNow(doc.facilities, now);
-    ["swim", "climbing", "ice", "fitness", "tennis"].forEach(function (cat) {
+    ["swim", "ice", "climbing", "fitness", "tennis"].forEach(function (cat) {
       var container = document.querySelector('[data-cards-for="' + cat + '"]');
       container.innerHTML = "";
       doc.facilities
