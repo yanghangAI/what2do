@@ -67,7 +67,11 @@ def main() -> int:
 
     doc = merge_results(results, prev, now_iso=now_iso)
 
-    prev_raw = json.loads(OUT_PATH.read_text()) if OUT_PATH.exists() else {}
+    try:
+        prev_raw = json.loads(OUT_PATH.read_text()) if OUT_PATH.exists() else {}
+    except Exception as e:
+        print(f"warning: could not parse previous hours.json: {e}", file=sys.stderr)
+        prev_raw = {}
 
     try:
         programs = fetch_programs()
