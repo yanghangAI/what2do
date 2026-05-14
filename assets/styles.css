@@ -168,8 +168,33 @@ ul.programs-list a:hover { color: var(--accent); }
   margin: 0 0 0.5rem;
   font-size: 1rem;
 }
-.schedule-day h3.today {
+.schedule-day.today {
+  background: color-mix(in srgb, var(--accent) 12%, var(--card-bg));
+  border-color: var(--accent);
+  border-left-width: 6px;
+  box-shadow: 0 1px 6px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+.schedule-day.today h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
   color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.today-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--bg);
+}
+.schedule-day.today ul.schedule-list li {
+  font-weight: 500;
 }
 ul.schedule-list {
   list-style: none;
