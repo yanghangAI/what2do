@@ -192,12 +192,17 @@
       return;
     }
     var today = todayIsoInTz();
+    var orientationRe = /15\s*minute\s*climbing\s*orientation/i;
     days.forEach(function (day) {
       if (day.date < today) return;
+      var visibleEvents = day.events.filter(function (e) {
+        return !orientationRe.test(e.name);
+      });
+      if (!visibleEvents.length) return;
       var isToday = day.date === today;
       var headingText = formatDateHeading(day.date, day.weekday) + (isToday ? " — Today" : "");
       var heading = el("h3", isToday ? { class: "today" } : {}, [headingText]);
-      var list = el("ul", { class: "schedule-list" }, day.events.map(function (e) {
+      var list = el("ul", { class: "schedule-list" }, visibleEvents.map(function (e) {
         var url = programIndex[e.name.toLowerCase()];
         var nameNode = url
           ? el("a", { href: url, target: "_blank", rel: "noopener" }, [e.name])
@@ -207,7 +212,6 @@
           nameNode,
         ]);
       }));
-      if (!day.events.length) return;
       root.appendChild(el("div", { class: "schedule-day" }, [heading, list]));
     });
     if (!root.children.length) {
@@ -240,13 +244,9 @@
         })
         .map(function (p) {
           var hasUpcoming = upcomingNames.has(p.name.toLowerCase());
-          var liClass = hasUpcoming ? "" : "program-empty";
-          var children = [el("span", { class: "program-name" }, [p.name])];
-          if (!hasUpcoming) {
-            children.push(el("span", { class: "program-empty-label" }, ["no upcoming"]));
-          }
-          return el("li", liClass ? { class: liClass } : {}, [
-            el("a", { href: p.url, target: "_blank", rel: "noopener" }, children),
+          var attrs = hasUpcoming ? {} : { class: "program-empty", title: "No upcoming sessions" };
+          return el("li", attrs, [
+            el("a", { href: p.url, target: "_blank", rel: "noopener" }, [p.name]),
           ]);
         }));
       root.appendChild(el("div", { class: "programs-group" }, [

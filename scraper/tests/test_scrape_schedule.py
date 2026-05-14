@@ -13,7 +13,7 @@ Thu, May 14 2026
 """
 
 
-def test_groups_by_date_and_filters_orientation():
+def test_groups_by_date_and_keeps_all_events():
     days = parse_schedule_text(SAMPLE)
     assert len(days) == 2
     wed = days[0]
@@ -22,7 +22,9 @@ def test_groups_by_date_and_filters_orientation():
     names = [e["name"] for e in wed["events"]]
     assert "Slow Flow Yoga 60" in names
     assert "Barre 45" in names
-    assert all("orientation" not in n.lower() for n in names)
+    # Orientation is kept in the data so the frontend can cross-reference
+    # it with the programs list. Display-time filtering happens in app.js.
+    assert any("orientation" in n.lower() for n in names)
     thu = days[1]
     assert thu["date"] == "2026-05-14"
     assert thu["events"][0]["name"] == "Power Yoga 60"

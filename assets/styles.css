@@ -552,26 +552,15 @@ ul.programs-list a:hover::after {
 }
 
 ul.programs-list li.program-empty a {
-  opacity: 0.5;
+  opacity: 0.45;
 }
 ul.programs-list li.program-empty a:hover {
   opacity: 1;
 }
-ul.programs-list .program-name {
-  display: block;
-}
-ul.programs-list .program-empty-label {
-  display: block;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  margin-top: 0.2rem;
-}
-ul.programs-list li.program-empty a:hover .program-empty-label {
-  color: var(--paper);
+ul.programs-list li.program-empty a::after {
+  content: "⊘";
+  font-family: "Karla", sans-serif;
+  font-size: 1.05rem;
 }
 
 /* ====== Footer ====== */

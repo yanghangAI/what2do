@@ -5,7 +5,9 @@ finishes hydrating, the rendered text contains date headers (e.g.
 "Wed, May 13 2026") followed by event lines ("4:00 PM Slow Flow Yoga 60").
 We parse that into a flat list grouped by date.
 
-The user requested that '15 minute Climbing Orientation' entries be excluded.
+We do NOT filter any event names here — orientation and other entries are
+kept in the data so the frontend can cross-reference programs with sessions.
+The frontend handles display-time filtering.
 """
 from __future__ import annotations
 import re
@@ -23,9 +25,6 @@ _EVENT_RE = re.compile(
     r"^\s*(\d{1,2}):(\d{2})\s*(AM|PM)\s+(.+?)\s*$",
     re.I,
 )
-EXCLUDED_NAME_PATTERNS = [
-    re.compile(r"15\s*minute\s*climbing\s*orientation", re.I),
-]
 MONTHS = {
     "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
     "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12,
@@ -72,8 +71,6 @@ def parse_schedule_text(body_text: str) -> list[dict]:
         if not em:
             continue
         name = em.group(4).strip()
-        if any(p.search(name) for p in EXCLUDED_NAME_PATTERNS):
-            continue
         time_24 = _to_24h(int(em.group(1)), int(em.group(2)), em.group(3))
         by_date[current]["events"].append({"time": time_24, "name": name})
 

@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-14T10:55:05-04:00",
+  "last_updated": "2026-05-14T11:02:14-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -55,7 +55,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T10:55:05-04:00"
+      "last_scraped": "2026-05-14T11:02:14-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -126,7 +126,7 @@
         "Please Note the Hicks Pool will be CLOSED on the following dates: Saturday, April 4, 2026; Saturday, April 11, 2026"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T10:55:05-04:00"
+      "last_scraped": "2026-05-14T11:02:14-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -183,7 +183,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T10:55:05-04:00"
+      "last_scraped": "2026-05-14T11:02:14-04:00"
     },
     {
       "id": "recreation-center",
@@ -240,7 +240,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T10:55:05-04:00"
+      "last_scraped": "2026-05-14T11:02:14-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -264,7 +264,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T10:55:05-04:00"
+      "last_scraped": "2026-05-14T11:02:14-04:00"
     },
     {
       "id": "mullins-ice",
@@ -298,7 +298,7 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T10:55:05-04:00"
+      "last_scraped": "2026-05-14T11:02:14-04:00"
     }
   ],
   "programs": [
@@ -533,15 +533,80 @@
       "weekday": "Thu",
       "events": [
         {
+          "time": "12:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
           "time": "12:15",
           "name": "Rhythm Ride 30"
+        },
+        {
+          "time": "13:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "14:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "15:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "20:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "21:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
         }
       ]
     },
     {
       "date": "2026-05-15",
       "weekday": "Fri",
-      "events": []
+      "events": [
+        {
+          "time": "12:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "13:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "14:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "15:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        }
+      ]
     },
     {
       "date": "2026-05-16",
