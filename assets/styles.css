@@ -364,19 +364,6 @@ ul.notes li {
   padding-bottom: 0.5rem;
 }
 .schedule-day h3.today { color: var(--maroon); }
-.schedule-day h3.today::after {
-  content: "● live";
-  font-family: "Karla", sans-serif;
-  font-size: 0.65rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--paper);
-  background: var(--maroon);
-  padding: 0.2rem 0.5rem;
-  margin-left: auto;
-  align-self: center;
-}
 
 ul.schedule-list {
   list-style: none;
