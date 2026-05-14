@@ -244,10 +244,49 @@
     });
   }
 
+  function formatCountdown(minutesLeft) {
+    if (minutesLeft <= 0) return "closing now";
+    if (minutesLeft < 60) return minutesLeft + " min left";
+    var h = Math.floor(minutesLeft / 60);
+    var m = minutesLeft % 60;
+    if (m === 0) return h + "h left";
+    return h + "h " + m + "m left";
+  }
+
+  function renderOpenNow(facilities, now) {
+    var root = document.getElementById("open-now");
+    if (!root) return;
+    root.innerHTML = "";
+    var openItems = [];
+    facilities.forEach(function (f) {
+      var status = computeStatus(f.hours, now);
+      if (!status.open) return;
+      var minutesLeft = toMinutes(status.until) - now.minutes;
+      openItems.push({ facility: f, until: status.until, minutesLeft: minutesLeft });
+    });
+    if (!openItems.length) {
+      root.appendChild(el("p", { class: "open-now-empty" }, [
+        "Nothing open right now. Check the sections below for upcoming hours.",
+      ]));
+      return;
+    }
+    openItems.sort(function (a, b) { return a.minutesLeft - b.minutesLeft; });
+    var list = el("ul", { class: "open-now-list" }, openItems.map(function (it) {
+      var urgent = it.minutesLeft <= 30;
+      return el("li", urgent ? { class: "urgent" } : {}, [
+        el("span", { class: "on-name" }, [it.facility.name]),
+        el("span", { class: "on-until" }, ["until " + formatTime(it.until)]),
+        el("span", { class: "on-countdown" }, [formatCountdown(it.minutesLeft)]),
+      ]);
+    }));
+    root.appendChild(list);
+  }
+
   function render(doc) {
     var now = nowInTz();
     document.getElementById("updated").textContent =
       "Last updated " + formatRelative(doc.last_updated);
+    renderOpenNow(doc.facilities, now);
     ["swim", "climbing", "ice", "fitness", "tennis"].forEach(function (cat) {
       var container = document.querySelector('[data-cards-for="' + cat + '"]');
       container.innerHTML = "";

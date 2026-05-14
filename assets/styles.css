@@ -166,6 +166,92 @@ main section h2::before {
   flex-shrink: 0;
 }
 
+/* ====== Open now summary ====== */
+
+#open-now-section {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0.5rem;
+}
+
+ul.open-now-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0;
+  border: 2px solid var(--rule);
+  background: var(--card-bg);
+}
+
+ul.open-now-list li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 0.1rem 0.75rem;
+  padding: 0.75rem 1rem;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--card-bg);
+  position: relative;
+}
+
+ul.open-now-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--ok);
+}
+
+ul.open-now-list li.urgent::before { background: var(--closed); }
+
+ul.open-now-list .on-name {
+  font-family: "Big Shoulders Display", Impact, sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  align-self: end;
+}
+
+ul.open-now-list .on-until {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  align-self: end;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+ul.open-now-list .on-countdown {
+  grid-column: 1 / -1;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ok);
+  margin-top: 0.25rem;
+}
+ul.open-now-list li.urgent .on-countdown { color: var(--closed); }
+
+.open-now-empty {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--ink-soft);
+  border-style: dashed;
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
 /* ====== Facility cards ====== */
 
 .cards {
