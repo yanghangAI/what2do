@@ -2,7 +2,7 @@ name: Scrape hours
 
 on:
   schedule:
-    - cron: "0 12 * * *"  # 12:00 UTC ≈ 08:00 ET
+    - cron: "0 9 * * *"  # 09:00 UTC = 05:00 EDT / 04:00 EST (cron runs in UTC)
   workflow_dispatch:
 
 permissions:
