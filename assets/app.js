@@ -299,28 +299,72 @@
     july: 6, august: 7, september: 8, october: 9, november: 10, december: 11,
   };
 
-  function alertIsExpired(text, todayIso) {
-    // Find every "<Month> <D>, <Year>" mentioned in 'begin' / 'start' contexts.
-    // The alert is considered expired when today is past the LATEST such date.
-    var re = /(?:begin|start|effective|starting)[^.]{0,80}?\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(20\d{2})/gi;
-    var latest = null;
+  function _ampmToMinutes(h, m, ampm) {
+    var hour = parseInt(h, 10);
+    var minute = parseInt(m || 0, 10);
+    if (ampm.toLowerCase() === "am") hour = (hour === 12) ? 0 : hour;
+    else hour = (hour === 12) ? 12 : hour + 12;
+    return hour * 60 + minute;
+  }
+
+  function _extractAlertIntervals(text) {
+    // Find every "H[:MM] AM/PM - H[:MM] AM/PM" interval in the alert text.
+    var re = /(\d{1,2})(?::(\d{2}))?\s*(am|pm)\s*[-–]\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm)/gi;
+    var intervals = [];
     var m;
     while ((m = re.exec(text)) !== null) {
+      intervals.push({
+        open: _ampmToMinutes(m[1], m[2], m[3]),
+        close: _ampmToMinutes(m[4], m[5], m[6]),
+      });
+    }
+    return intervals;
+  }
+
+  function _scrapedIntervalsMinutes(facilities) {
+    var set = new Set();
+    facilities.forEach(function (f) {
+      Object.keys(f.hours).forEach(function (day) {
+        f.hours[day].forEach(function (iv) {
+          var o = toMinutes(iv.open), c = toMinutes(iv.close);
+          set.add(o + "-" + c);
+        });
+      });
+    });
+    return set;
+  }
+
+  function alertIsExpired(text, todayIso, facilities) {
+    // 1. Date-based: if every "begin/start on <date>" date has passed.
+    var dateRe = /(?:begin|start|effective|starting)[^.]{0,80}?\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(20\d{2})/gi;
+    var latest = null;
+    var m;
+    while ((m = dateRe.exec(text)) !== null) {
       var month = MONTH_NAMES[m[1].toLowerCase()];
       var day = parseInt(m[2], 10);
       var year = parseInt(m[3], 10);
       var iso = year + "-" + String(month + 1).padStart(2, "0") + "-" + String(day).padStart(2, "0");
       if (latest === null || iso > latest) latest = iso;
     }
-    if (!latest) return false;
-    return todayIso > latest;
+    if (latest && todayIso > latest) return true;
+
+    // 2. Content-based: if every time interval announced in the alert
+    //    already appears in our scraped facility data, the upstream hours
+    //    page has caught up and the alert is redundant.
+    var alertIntervals = _extractAlertIntervals(text);
+    if (alertIntervals.length === 0) return false;
+    var scraped = _scrapedIntervalsMinutes(facilities || []);
+    var matched = alertIntervals.filter(function (iv) {
+      return scraped.has(iv.open + "-" + iv.close);
+    });
+    return matched.length === alertIntervals.length;
   }
 
-  function renderAlert(text) {
+  function renderAlert(text, facilities) {
     var root = document.getElementById("alert-banner");
     if (!root) return;
     if (!text) { root.hidden = true; return; }
-    if (alertIsExpired(text, todayIsoInTz())) {
+    if (alertIsExpired(text, todayIsoInTz(), facilities)) {
       root.hidden = true;
       return;
     }
@@ -346,7 +390,7 @@
     var now = nowInTz();
     document.getElementById("updated").textContent =
       "Last updated " + formatRelative(doc.last_updated);
-    renderAlert(doc.alert);
+    renderAlert(doc.alert, doc.facilities);
     renderOpenNow(doc.facilities, now);
     ["swim", "ice", "climbing", "fitness", "tennis"].forEach(function (cat) {
       var container = document.querySelector('[data-cards-for="' + cat + '"]');
