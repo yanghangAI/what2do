@@ -152,6 +152,18 @@ def _parse_intervals(text: str) -> list[Interval]:
     return intervals
 
 
+def _find_semester_close_date(text: str) -> str | None:
+    """Parse 'will close for the semester at ... on <Day>, <Month> <D>, <Year>'."""
+    m = re.search(
+        r"close for the semester[^.]{0,80}?on\s+\w+,?\s*"
+        r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(20\d{2})",
+        text, re.I,
+    )
+    if not m:
+        return None
+    return f"{m.group(3)}-{_MONTHS_NUM[m.group(1).lower()]:02d}-{int(m.group(2)):02d}"
+
+
 def _find_start_dates(text: str) -> dict[str, str]:
     """Return {key: ISO date} for the alert's start-date phrases.
 
@@ -216,6 +228,7 @@ def parse_alert_overrides(text: str) -> dict[str, dict]:
         return {}
     lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
     starts = _find_start_dates(text)
+    semester_close = _find_semester_close_date(text)
     out: dict[str, dict] = {}
     for fid, heading_re, start_key in FACILITY_BLOCKS:
         block = _extract_block(lines, heading_re)
@@ -258,6 +271,7 @@ def parse_alert_overrides(text: str) -> dict[str, dict]:
         ):
             out[fid] = {
                 "start_date": starts.get(start_key) or starts.get("general"),
+                "closed_from": semester_close,
                 "hours": hours,
             }
     return out

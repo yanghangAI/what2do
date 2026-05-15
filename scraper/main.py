@@ -94,18 +94,28 @@ def main() -> int:
 
     today_iso = datetime.now(TZ).strftime("%Y-%m-%d")
     overrides = parse_alert_overrides(alert) if alert else {}
+    from scraper.models import DAYS as _DAYS
     overridden_ids: list[str] = []
     for facility in doc.facilities:
         ov = overrides.get(facility.id)
         if not ov:
             continue
-        if ov.get("start_date") and today_iso < ov["start_date"]:
-            continue  # not yet in effect
-        facility.hours = ov["hours"]
-        facility.notes = list(facility.notes) + [
-            f"Summer hours from RecWell facilities alert (effective {ov['start_date']})."
-        ]
-        overridden_ids.append(facility.id)
+        start = ov.get("start_date")
+        closed_from = ov.get("closed_from")
+        if start and today_iso >= start:
+            # Summer hours in effect
+            facility.hours = ov["hours"]
+            facility.notes = list(facility.notes) + [
+                f"Summer hours from RecWell alert (effective {start})."
+            ]
+            overridden_ids.append(facility.id + " [summer]")
+        elif closed_from and today_iso >= closed_from and (not start or today_iso < start):
+            # Semester-end transition gap: facility closed
+            facility.hours = {d: [] for d in _DAYS}
+            facility.notes = list(facility.notes) + [
+                f"Closed for semester transition; summer hours begin {start or 'soon'}."
+            ]
+            overridden_ids.append(facility.id + " [closed-gap]")
     if overridden_ids:
         print(f"applied alert overrides to: {', '.join(overridden_ids)}", file=sys.stderr)
 

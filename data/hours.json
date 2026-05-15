@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-14T22:13:58-04:00",
+  "last_updated": "2026-05-14T22:18:52-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -12,50 +12,19 @@
       },
       "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
       "hours": {
-        "mon": [
-          {
-            "open": "11:00",
-            "close": "12:30"
-          }
-        ],
-        "tue": [
-          {
-            "open": "11:00",
-            "close": "12:30"
-          },
-          {
-            "open": "17:30",
-            "close": "20:00"
-          }
-        ],
-        "wed": [
-          {
-            "open": "11:00",
-            "close": "12:30"
-          }
-        ],
-        "thu": [
-          {
-            "open": "11:00",
-            "close": "12:30"
-          },
-          {
-            "open": "17:30",
-            "close": "20:00"
-          }
-        ],
-        "fri": [
-          {
-            "open": "11:00",
-            "close": "12:30"
-          }
-        ],
+        "mon": [],
+        "tue": [],
+        "wed": [],
+        "thu": [],
+        "fri": [],
         "sat": [],
         "sun": []
       },
-      "notes": [],
+      "notes": [
+        "Closed for semester transition; summer hours begin 2026-05-20."
+      ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T22:13:58-04:00"
+      "last_scraped": "2026-05-14T22:18:52-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -67,66 +36,20 @@
       },
       "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
       "hours": {
-        "mon": [
-          {
-            "open": "11:00",
-            "close": "14:00"
-          },
-          {
-            "open": "17:00",
-            "close": "19:00"
-          }
-        ],
-        "tue": [
-          {
-            "open": "09:00",
-            "close": "12:00"
-          }
-        ],
-        "wed": [
-          {
-            "open": "07:00",
-            "close": "14:00"
-          },
-          {
-            "open": "17:00",
-            "close": "19:00"
-          }
-        ],
-        "thu": [
-          {
-            "open": "09:00",
-            "close": "12:00"
-          }
-        ],
-        "fri": [
-          {
-            "open": "07:00",
-            "close": "09:00"
-          },
-          {
-            "open": "10:30",
-            "close": "18:00"
-          }
-        ],
-        "sat": [
-          {
-            "open": "11:00",
-            "close": "19:30"
-          }
-        ],
-        "sun": [
-          {
-            "open": "11:00",
-            "close": "17:00"
-          }
-        ]
+        "mon": [],
+        "tue": [],
+        "wed": [],
+        "thu": [],
+        "fri": [],
+        "sat": [],
+        "sun": []
       },
       "notes": [
-        "Please Note the Hicks Pool will be CLOSED on the following dates: Saturday, April 4, 2026; Saturday, April 11, 2026"
+        "Please Note the Hicks Pool will be CLOSED on the following dates: Saturday, April 4, 2026; Saturday, April 11, 2026",
+        "Closed for semester transition; summer hours begin 2026-05-20."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T22:13:58-04:00"
+      "last_scraped": "2026-05-14T22:18:52-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -138,52 +61,19 @@
       },
       "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
       "hours": {
-        "mon": [
-          {
-            "open": "12:00",
-            "close": "22:00"
-          }
-        ],
-        "tue": [
-          {
-            "open": "12:00",
-            "close": "22:00"
-          }
-        ],
-        "wed": [
-          {
-            "open": "12:00",
-            "close": "22:00"
-          }
-        ],
-        "thu": [
-          {
-            "open": "12:00",
-            "close": "22:00"
-          }
-        ],
-        "fri": [
-          {
-            "open": "12:00",
-            "close": "20:00"
-          }
-        ],
-        "sat": [
-          {
-            "open": "12:00",
-            "close": "20:00"
-          }
-        ],
-        "sun": [
-          {
-            "open": "12:00",
-            "close": "20:00"
-          }
-        ]
+        "mon": [],
+        "tue": [],
+        "wed": [],
+        "thu": [],
+        "fri": [],
+        "sat": [],
+        "sun": []
       },
-      "notes": [],
+      "notes": [
+        "Closed for semester transition; summer hours begin 2026-05-26."
+      ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T22:13:58-04:00"
+      "last_scraped": "2026-05-14T22:18:52-04:00"
     },
     {
       "id": "recreation-center",
@@ -195,52 +85,19 @@
       },
       "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
       "hours": {
-        "mon": [
-          {
-            "open": "06:00",
-            "close": "23:00"
-          }
-        ],
-        "tue": [
-          {
-            "open": "06:00",
-            "close": "23:00"
-          }
-        ],
-        "wed": [
-          {
-            "open": "06:00",
-            "close": "23:00"
-          }
-        ],
-        "thu": [
-          {
-            "open": "06:00",
-            "close": "23:00"
-          }
-        ],
-        "fri": [
-          {
-            "open": "06:00",
-            "close": "22:00"
-          }
-        ],
-        "sat": [
-          {
-            "open": "10:00",
-            "close": "22:00"
-          }
-        ],
-        "sun": [
-          {
-            "open": "10:00",
-            "close": "22:00"
-          }
-        ]
+        "mon": [],
+        "tue": [],
+        "wed": [],
+        "thu": [],
+        "fri": [],
+        "sat": [],
+        "sun": []
       },
-      "notes": [],
+      "notes": [
+        "Closed for semester transition; summer hours begin 2026-05-20."
+      ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T22:13:58-04:00"
+      "last_scraped": "2026-05-14T22:18:52-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -264,7 +121,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T22:13:58-04:00"
+      "last_scraped": "2026-05-14T22:18:52-04:00"
     },
     {
       "id": "mullins-ice",
@@ -298,7 +155,7 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-14T22:13:58-04:00"
+      "last_scraped": "2026-05-14T22:18:52-04:00"
     }
   ],
   "programs": [
