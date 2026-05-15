@@ -294,10 +294,36 @@
     root.appendChild(list);
   }
 
+  var MONTH_NAMES = {
+    january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
+    july: 6, august: 7, september: 8, october: 9, november: 10, december: 11,
+  };
+
+  function alertIsExpired(text, todayIso) {
+    // Find every "<Month> <D>, <Year>" mentioned in 'begin' / 'start' contexts.
+    // The alert is considered expired when today is past the LATEST such date.
+    var re = /(?:begin|start|effective|starting)[^.]{0,80}?\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(20\d{2})/gi;
+    var latest = null;
+    var m;
+    while ((m = re.exec(text)) !== null) {
+      var month = MONTH_NAMES[m[1].toLowerCase()];
+      var day = parseInt(m[2], 10);
+      var year = parseInt(m[3], 10);
+      var iso = year + "-" + String(month + 1).padStart(2, "0") + "-" + String(day).padStart(2, "0");
+      if (latest === null || iso > latest) latest = iso;
+    }
+    if (!latest) return false;
+    return todayIso > latest;
+  }
+
   function renderAlert(text) {
     var root = document.getElementById("alert-banner");
     if (!root) return;
     if (!text) { root.hidden = true; return; }
+    if (alertIsExpired(text, todayIsoInTz())) {
+      root.hidden = true;
+      return;
+    }
     root.hidden = false;
     root.innerHTML = "";
     var inner = el("div", { class: "alert-inner" }, []);
