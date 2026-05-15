@@ -14,6 +14,7 @@ from scraper.scrape_recwell import SOURCE_URL as RECWELL_URL, scrape_recwell
 from scraper.scrape_mullins import scrape_mullins
 from scraper.scrape_programs import fetch_programs
 from scraper.scrape_schedule import fetch_schedule
+from scraper.scrape_alert import fetch_alert
 
 OUT_PATH = Path(__file__).resolve().parent.parent / "data" / "hours.json"
 TZ = ZoneInfo("America/New_York")
@@ -85,9 +86,16 @@ def main() -> int:
         print(f"schedule scrape failed: {e}", file=sys.stderr)
         schedule = prev_raw.get("schedule", [])
 
+    try:
+        alert = fetch_alert()
+    except Exception as e:
+        print(f"alert scrape failed: {e}", file=sys.stderr)
+        alert = prev_raw.get("alert")
+
     out = doc.to_dict()
     out["programs"] = programs
     out["schedule"] = schedule
+    out["alert"] = alert
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(json.dumps(out, indent=2) + "\n")
     print(f"wrote {OUT_PATH}")

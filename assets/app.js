@@ -294,10 +294,33 @@
     root.appendChild(list);
   }
 
+  function renderAlert(text) {
+    var root = document.getElementById("alert-banner");
+    if (!root) return;
+    if (!text) { root.hidden = true; return; }
+    root.hidden = false;
+    root.innerHTML = "";
+    var inner = el("div", { class: "alert-inner" }, []);
+    var lines = text.split("\n");
+    var heading = lines.shift();
+    inner.appendChild(el("p", { class: "alert-heading" }, [heading]));
+    var bodyText = lines.join("\n").trim();
+    if (bodyText) {
+      var pre = el("pre", { class: "alert-body" }, [bodyText]);
+      inner.appendChild(pre);
+    }
+    inner.appendChild(el("p", { class: "alert-source" }, [
+      el("a", { href: "https://www.umass.edu/recwell/", target: "_blank", rel: "noopener" },
+        ["Source: umass.edu/recwell"]),
+    ]));
+    root.appendChild(inner);
+  }
+
   function render(doc) {
     var now = nowInTz();
     document.getElementById("updated").textContent =
       "Last updated " + formatRelative(doc.last_updated);
+    renderAlert(doc.alert);
     renderOpenNow(doc.facilities, now);
     ["swim", "ice", "climbing", "fitness", "tennis"].forEach(function (cat) {
       var container = document.querySelector('[data-cards-for="' + cat + '"]');

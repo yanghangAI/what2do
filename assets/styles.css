@@ -166,6 +166,72 @@ main section h2::before {
   flex-shrink: 0;
 }
 
+/* ====== RecWell facilities alert banner ====== */
+
+#alert-banner {
+  background: var(--maroon);
+  color: var(--paper);
+  border-bottom: 4px double var(--paper);
+  padding: 0;
+  position: relative;
+}
+#alert-banner::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--mustard) 0 12px,
+    var(--ink) 12px 24px
+  );
+}
+.alert-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 1.25rem;
+}
+.alert-heading {
+  font-family: "Big Shoulders Display", Impact, sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0.25rem 0 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.alert-heading::before {
+  content: "⚠";
+  font-size: 1.6rem;
+  color: var(--mustard);
+  line-height: 1;
+}
+.alert-body {
+  font-family: "Karla", Georgia, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin: 0;
+  white-space: pre-wrap;
+  background: rgba(0,0,0,0.18);
+  padding: 0.85rem 1rem;
+  border-left: 3px solid var(--mustard);
+}
+.alert-source {
+  margin: 0.6rem 0 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: right;
+}
+.alert-source a {
+  color: var(--mustard);
+  text-decoration: none;
+  border-bottom: 1px solid var(--mustard);
+}
+
 /* ====== Open now summary ====== */
 
 #open-now-section {
