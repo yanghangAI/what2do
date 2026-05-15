@@ -71,3 +71,193 @@ def fetch_alert() -> str | None:
     r = requests.get(ALERT_URL, headers={"User-Agent": "Mozilla/5.0"}, timeout=30)
     r.raise_for_status()
     return parse_alert_html(r.text)
+
+
+# ---------- Alert-to-overrides parsing ----------
+
+from scraper.models import Interval
+
+DAY_ORDER = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+_DAY_TOKEN = {
+    "mon": "mon", "monday": "mon",
+    "tue": "tue", "tues": "tue", "tuesday": "tue",
+    "wed": "wed", "weds": "wed", "wednesday": "wed",
+    "thu": "thu", "thurs": "thu", "thursday": "thu",
+    "fri": "fri", "friday": "fri",
+    "sat": "sat", "saturday": "sat",
+    "sun": "sun", "sunday": "sun",
+}
+_MONTHS_NUM = {
+    "january": 1, "february": 2, "march": 3, "april": 4, "may": 5, "june": 6,
+    "july": 7, "august": 8, "september": 9, "october": 10, "november": 11, "december": 12,
+    "jan": 1, "feb": 2, "mar": 3, "apr": 4, "jun": 6, "jul": 7, "aug": 8,
+    "sep": 9, "sept": 9, "oct": 10, "nov": 11, "dec": 12,
+}
+
+# Facility blocks in the alert keyed by their ID in our hours data.
+# Each entry: (regex matching the facility's heading line, default-start-date-key).
+FACILITY_BLOCKS = [
+    ("recreation-center", re.compile(r"^Recreation Center\b", re.I), "general"),
+    ("boyden-pool",       re.compile(r"^Boyden Pool\b", re.I), "general"),
+    ("curry-hicks-pool",  re.compile(r"^Hicks Pool\b", re.I), "general"),
+    ("rockwell-climbing", re.compile(r"^RockWell\b", re.I), "rockwell"),
+]
+
+_TIME = r"(\d{1,2})(?::(\d{2}))?\s*(am|pm)"
+_RANGE_RE = re.compile(rf"{_TIME}\s*[-–]\s*{_TIME}", re.I)
+_DAY_RANGE_RE = re.compile(
+    r"(Monday|Mon|Tuesday|Tue|Tues|Wednesday|Wed|Thursday|Thu|Thurs|Friday|Fri|Saturday|Sat|Sunday|Sun)"
+    r"\s*[-–&]\s*"
+    r"(Monday|Mon|Tuesday|Tue|Tues|Wednesday|Wed|Thursday|Thu|Thurs|Friday|Fri|Saturday|Sat|Sunday|Sun)",
+    re.I,
+)
+_SINGLE_DAY_RE = re.compile(
+    r"\b(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\b", re.I,
+)
+
+
+def _to_24h(h: str, m: str | None, ampm: str) -> str:
+    hour = int(h)
+    minute = int(m) if m else 0
+    if ampm.lower() == "am":
+        hour = 0 if hour == 12 else hour
+    else:
+        hour = 12 if hour == 12 else hour + 12
+    return f"{hour:02d}:{minute:02d}"
+
+
+def _expand_days(text: str) -> list[str]:
+    """Pick out day tokens from a string like 'Monday-Friday' or 'Sat & Sun'."""
+    m = _DAY_RANGE_RE.search(text)
+    if m:
+        a = _DAY_TOKEN[m.group(1).lower()]
+        b = _DAY_TOKEN[m.group(2).lower()]
+        i, j = DAY_ORDER.index(a), DAY_ORDER.index(b)
+        if i <= j:
+            return DAY_ORDER[i : j + 1]
+        return [a, b]
+    days = []
+    for sm in _SINGLE_DAY_RE.finditer(text):
+        days.append(_DAY_TOKEN[sm.group(1).lower()])
+    return days
+
+
+def _parse_intervals(text: str) -> list[Interval]:
+    intervals: list[Interval] = []
+    for m in _RANGE_RE.finditer(text):
+        intervals.append(Interval(
+            open=_to_24h(m.group(1), m.group(2), m.group(3)),
+            close=_to_24h(m.group(4), m.group(5), m.group(6)),
+        ))
+    return intervals
+
+
+def _find_start_dates(text: str) -> dict[str, str]:
+    """Return {key: ISO date} for the alert's start-date phrases.
+
+    'general' = the main "Summer Hours will begin on <date>" sentence.
+    'rockwell' = the RockWell-specific override if present, else falls back
+    to general.
+    """
+    out: dict[str, str] = {}
+    rockwell_re = re.compile(
+        r"RockWell[^.]{0,80}?begin\s+on\s+\w+,?\s*"
+        r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(20\d{2})",
+        re.I,
+    )
+    general_re = re.compile(
+        r"Summer Hours[^.]{0,80}?begin\s+on\s+\w+,?\s*"
+        r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(20\d{2})",
+        re.I,
+    )
+    rm = rockwell_re.search(text)
+    if rm:
+        out["rockwell"] = f"{rm.group(3)}-{_MONTHS_NUM[rm.group(1).lower()]:02d}-{int(rm.group(2)):02d}"
+    gm = general_re.search(text)
+    if gm:
+        iso = f"{gm.group(3)}-{_MONTHS_NUM[gm.group(1).lower()]:02d}-{int(gm.group(2)):02d}"
+        out["general"] = iso
+        out.setdefault("rockwell", iso)
+    return out
+
+
+def _extract_block(lines: list[str], heading_re: re.Pattern) -> list[str]:
+    """Lines belonging to a facility block: from the heading until the next
+    facility heading or a blank line followed by another section heading."""
+    start = None
+    for i, ln in enumerate(lines):
+        if heading_re.search(ln):
+            start = i
+            break
+    if start is None:
+        return []
+    out = [lines[start]]
+    for ln in lines[start + 1:]:
+        if any(other.search(ln) for _, other, _ in FACILITY_BLOCKS if not other.search(lines[start])):
+            # next facility starts (excluding our own heading)
+            if any(other.search(ln) for fid, other, _ in FACILITY_BLOCKS if not heading_re.search(ln)):
+                break
+        if "Pools | Summer Hours" in ln and "Pools | Summer Hours" not in lines[start]:
+            break
+        out.append(ln)
+        if len(out) > 8:
+            break
+    return out
+
+
+def parse_alert_overrides(text: str) -> dict[str, dict]:
+    """Parse alert text into per-facility hour overrides.
+
+    Returns: {facility_id: {start_date: ISO, hours: {day: [Interval]}}}.
+    Only includes facilities for which we successfully parsed at least one
+    schedule line.
+    """
+    if not text:
+        return {}
+    lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+    starts = _find_start_dates(text)
+    out: dict[str, dict] = {}
+    for fid, heading_re, start_key in FACILITY_BLOCKS:
+        block = _extract_block(lines, heading_re)
+        if not block:
+            continue
+        hours: dict[str, list[Interval]] = {d: [] for d in DAY_ORDER}
+        # Each line in the block (after the heading) may include a day pattern
+        # and zero or more time ranges. CLOSED lines mean those days are empty.
+        # "Saturday–Sunday |" + next line "CLOSED" -> handle by joining with following.
+        joined: list[str] = []
+        i = 0
+        while i < len(block):
+            line = block[i]
+            # If the line ends with "|" or just has a day range without times
+            # and the next line is a time/CLOSED token, merge them.
+            if i + 1 < len(block) and (line.rstrip().endswith("|") or
+                                        (_DAY_RANGE_RE.search(line) and not _RANGE_RE.search(line) and not re.search(r"closed", line, re.I))):
+                joined.append(line + " " + block[i + 1])
+                i += 2
+            else:
+                joined.append(line)
+                i += 1
+        for line in joined:
+            days = _expand_days(line)
+            if not days:
+                continue
+            intervals = _parse_intervals(line)
+            is_closed = bool(re.search(r"\bclosed\b", line, re.I)) and not intervals
+            if not intervals and not is_closed:
+                continue
+            for d in days:
+                if intervals:
+                    for iv in intervals:
+                        if iv not in hours[d]:
+                            hours[d].append(iv)
+                # closed -> leave list empty
+        # Only emit if we actually got SOME schedule info
+        if any(hours[d] for d in DAY_ORDER) or any(
+            re.search(r"closed", ln, re.I) for ln in joined if _expand_days(ln)
+        ):
+            out[fid] = {
+                "start_date": starts.get(start_key) or starts.get("general"),
+                "hours": hours,
+            }
+    return out

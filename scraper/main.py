@@ -14,7 +14,7 @@ from scraper.scrape_recwell import SOURCE_URL as RECWELL_URL, scrape_recwell
 from scraper.scrape_mullins import scrape_mullins
 from scraper.scrape_programs import fetch_programs
 from scraper.scrape_schedule import fetch_schedule
-from scraper.scrape_alert import fetch_alert
+from scraper.scrape_alert import fetch_alert, parse_alert_overrides
 
 OUT_PATH = Path(__file__).resolve().parent.parent / "data" / "hours.json"
 TZ = ZoneInfo("America/New_York")
@@ -91,6 +91,23 @@ def main() -> int:
     except Exception as e:
         print(f"alert scrape failed: {e}", file=sys.stderr)
         alert = prev_raw.get("alert")
+
+    today_iso = datetime.now(TZ).strftime("%Y-%m-%d")
+    overrides = parse_alert_overrides(alert) if alert else {}
+    overridden_ids: list[str] = []
+    for facility in doc.facilities:
+        ov = overrides.get(facility.id)
+        if not ov:
+            continue
+        if ov.get("start_date") and today_iso < ov["start_date"]:
+            continue  # not yet in effect
+        facility.hours = ov["hours"]
+        facility.notes = list(facility.notes) + [
+            f"Summer hours from RecWell facilities alert (effective {ov['start_date']})."
+        ]
+        overridden_ids.append(facility.id)
+    if overridden_ids:
+        print(f"applied alert overrides to: {', '.join(overridden_ids)}", file=sys.stderr)
 
     out = doc.to_dict()
     out["programs"] = programs
