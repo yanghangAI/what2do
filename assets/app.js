@@ -133,6 +133,36 @@
     return el("table", { class: "week" }, [tbody]);
   }
 
+  function filterPastDateNote(note, todayIso) {
+    // If the note mentions specific dates, drop dates that have already passed.
+    // If every mentioned date is past, drop the whole note.
+    var dateRe = /\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),?\s+(20\d{2})\b/gi;
+    var dates = [];
+    var m;
+    while ((m = dateRe.exec(note)) !== null) {
+      var month = MONTH_NAMES[m[1].toLowerCase()];
+      var iso = m[3] + "-" + String(month + 1).padStart(2, "0") + "-" + String(parseInt(m[2], 10)).padStart(2, "0");
+      dates.push({ raw: m[0], iso: iso, start: m.index, end: m.index + m[0].length });
+    }
+    if (dates.length === 0) return note;
+    var future = dates.filter(function (d) { return d.iso >= todayIso; });
+    if (future.length === 0) return null;  // drop entire note
+    if (future.length === dates.length) return note;  // nothing to remove
+    // Some past, some future: rebuild keeping only future date mentions.
+    var futureSet = new Set(future.map(function (d) { return d.raw; }));
+    var rebuilt = note.replace(dateRe, function (match) {
+      return futureSet.has(match) ? match : "";
+    });
+    // Clean up doubled separators left by removed dates
+    rebuilt = rebuilt
+      .replace(/[,;]\s*[,;]/g, ",")
+      .replace(/[,;]\s*$/g, "")
+      .replace(/:\s*[,;]/g, ":")
+      .replace(/\s+/g, " ")
+      .trim();
+    return rebuilt;
+  }
+
   function renderCard(facility, now) {
     var children = [el("h3", {}, [facility.name])];
     if (facility.scrape_status !== "ok") {
@@ -142,8 +172,12 @@
     }
     children.push(renderStatus(facility, now));
     children.push(renderWeekTable(facility, now));
-    if (facility.notes && facility.notes.length) {
-      var ul = el("ul", { class: "notes" }, facility.notes.map(function (n) {
+    var todayIso = todayIsoInTz();
+    var visibleNotes = (facility.notes || [])
+      .map(function (n) { return filterPastDateNote(n, todayIso); })
+      .filter(function (n) { return n; });
+    if (visibleNotes.length) {
+      var ul = el("ul", { class: "notes" }, visibleNotes.map(function (n) {
         return el("li", {}, [n]);
       }));
       children.push(ul);
