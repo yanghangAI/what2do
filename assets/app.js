@@ -180,7 +180,7 @@
     var children = [el("p", { class: "status " + cls }, [label])];
     var readings = wq.latest_report && wq.latest_report.readings;
     if (wq.beaches) {
-      // Color band per E. coli value: single-sample limit 235, 5-week mean limit 126.
+      // Color band per E. coli value: single-sample limit 235, 5-sample mean limit 126.
       var bandFor = function (n, limit) {
         if (n == null) return "none";
         if (n <= limit) return "ok";
@@ -207,13 +207,13 @@
         children.push(el("table", { class: "wq-table" }, [
           el("thead", {}, [el("tr", {}, [
             el("th", {}, [""]),
-            el("th", {}, ["this week"]),
-            el("th", {}, ["5-week mean"]),
+            el("th", {}, ["latest sample"]),
+            el("th", {}, ["5-sample mean"]),
           ])]),
           el("tbody", {}, [beachRow("north"), beachRow("south")]),
         ]));
         children.push(el("p", { class: "beaches-note" }, [
-          "MPN/100 ml E. coli. ‘This week’ is read from the handwritten cell on the scanned form — may be off by a digit; see PDF to verify.",
+          "MPN/100 ml E. coli. ‘Latest sample’ is read from the handwritten cell on the scanned form — may be off by a digit; see PDF to verify.",
         ]));
       } else {
         // No numbers extracted — fall back to per-beach pass/fail verdict.
@@ -255,8 +255,8 @@
     // MA freshwater E. coli swim standards translated into a human-readable scale.
     var rows = [
       { range: "0 – 30",     band: "ok",     label: "Pristine",        note: "background levels; very clean" },
-      { range: "31 – 126",   band: "ok",     label: "Good",            note: "below the 5-week mean limit" },
-      { range: "127 – 235",  band: "warn",   label: "Caution",         note: "above 5-week mean limit but single sample still legal" },
+      { range: "31 – 126",   band: "ok",     label: "Good",            note: "below the 5-sample mean limit" },
+      { range: "127 – 235",  band: "warn",   label: "Caution",         note: "above 5-sample mean limit but single sample still legal" },
       { range: "236 – 1,000", band: "bad",   label: "Posted closed",   note: "exceeds single-sample limit (235 MPN/100 ml)" },
       { range: "> 1,000",    band: "bad",    label: "Heavily contaminated", note: "avoid contact" },
     ];
@@ -273,7 +273,7 @@
         "E. coli is counted in colonies (MPN = most probable number) per 100 ml of water. " +
         "Massachusetts requires every freshwater swim beach to stay at or below ",
         el("strong", {}, ["235 MPN/100 ml"]),
-        " on any single sample, and a 5-week running mean at or below ",
+        " on any single sample, and a 5-sample mean at or below ",
         el("strong", {}, ["126 MPN/100 ml"]),
         ". Rough guide:",
       ]),
@@ -282,7 +282,7 @@
         "Numbers tend to spike a day or two after heavy rain (runoff from upstream " +
         "septic systems, geese, livestock, etc.), then recover. A single ",
         el("em", {}, ["high"]), " sample doesn't necessarily mean the water is unsafe " +
-        "the next day — that's what the 5-week mean is for.",
+        "the next day — that's what the 5-sample mean is for.",
       ]),
     ]);
   }
