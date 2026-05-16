@@ -163,6 +163,57 @@
     return rebuilt;
   }
 
+  function renderWaterQuality(wq) {
+    var todayIso = todayIsoInTz();
+    var offSeason = !wq.last_updated || daysBetween(wq.last_updated, todayIso) > 21;
+    var cls, label;
+    if (offSeason) {
+      cls = "offseason"; label = "OFF-SEASON — no current testing";
+    } else if (wq.status === "allowed") {
+      cls = "open"; label = "SWIMMING ALLOWED";
+    } else if (wq.status === "closed") {
+      cls = "closed"; label = "POSTED CLOSED";
+    } else {
+      cls = "closed"; label = "STATUS UNKNOWN";
+    }
+    var children = [el("p", { class: "status " + cls }, [label])];
+    if (wq.beaches) {
+      var beachLabel = function (k) {
+        var s = wq.beaches[k];
+        var txt = s === "ok" ? "OK" : s === "closed" ? "closed" : "unknown";
+        return el("span", { class: "beach beach-" + s }, [
+          k === "north" ? "North Beach: " : "South Beach: ", txt,
+        ]);
+      };
+      children.push(el("p", { class: "beaches" }, [
+        beachLabel("north"),
+        document.createTextNode(" · "),
+        beachLabel("south"),
+      ]));
+    }
+    if (wq.detail) {
+      children.push(el("p", { class: "wq-detail" }, [wq.detail]));
+    }
+    if (wq.last_updated) {
+      children.push(el("p", { class: "wq-updated" }, [
+        "Last tested " + formatDateHeading(wq.last_updated, weekdayOfIso(wq.last_updated)),
+      ]));
+    }
+    return children;
+  }
+
+  function daysBetween(isoA, isoB) {
+    var a = Date.UTC.apply(null, isoA.split("-").map(Number).map(function (v, i) { return i === 1 ? v - 1 : v; }));
+    var b = Date.UTC.apply(null, isoB.split("-").map(Number).map(function (v, i) { return i === 1 ? v - 1 : v; }));
+    return Math.round((b - a) / 86400000);
+  }
+
+  function weekdayOfIso(iso) {
+    var bits = iso.split("-").map(Number);
+    var d = new Date(Date.UTC(bits[0], bits[1] - 1, bits[2]));
+    return ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][d.getUTCDay()];
+  }
+
   function renderCard(facility, now) {
     var children = [el("h3", {}, [facility.name])];
     if (facility.scrape_status !== "ok") {
@@ -170,8 +221,12 @@
         "Data may be outdated — last refreshed " + formatRelative(facility.last_scraped),
       ]));
     }
-    children.push(renderStatus(facility, now));
-    children.push(renderWeekTable(facility, now));
+    if (facility.water_quality) {
+      renderWaterQuality(facility.water_quality).forEach(function (c) { children.push(c); });
+    } else {
+      children.push(renderStatus(facility, now));
+      children.push(renderWeekTable(facility, now));
+    }
     var todayIso = todayIsoInTz();
     var visibleNotes = (facility.notes || [])
       .map(function (n) { return filterPastDateNote(n, todayIso); })

@@ -9,10 +9,11 @@ from zoneinfo import ZoneInfo
 import requests
 
 from scraper.merge import merge_results
-from scraper.models import HoursDoc
+from scraper.models import Facility, HoursDoc, Location
 from scraper.scrape_recwell import SOURCE_URL as RECWELL_URL, scrape_recwell
 from scraper.scrape_mullins import scrape_mullins
 from scraper.scrape_programs import fetch_programs
+from scraper.scrape_puffer import SOURCE_URL as PUFFER_URL, fetch_puffer
 from scraper.scrape_schedule import fetch_schedule
 from scraper.scrape_alert import (
     fetch_alert,
@@ -149,6 +150,36 @@ def main() -> int:
             overridden_ids.append(facility.id + " [closed-gap]")
     if overridden_ids:
         print(f"applied alert overrides to: {', '.join(overridden_ids)}", file=sys.stderr)
+
+    # Puffer's Pond water quality (separate data source — Town of Amherst).
+    prev_puffer_wq = None
+    for f in prev_raw.get("facilities", []):
+        if f.get("id") == "puffer-pond":
+            prev_puffer_wq = f.get("water_quality")
+            break
+    try:
+        puffer = fetch_puffer()
+        wq = puffer.to_dict() if puffer else prev_puffer_wq
+        puffer_status = "ok" if puffer else ("stale" if prev_puffer_wq else "failed")
+    except Exception as e:
+        print(f"puffer scrape failed: {e}", file=sys.stderr)
+        wq = prev_puffer_wq
+        puffer_status = "stale" if prev_puffer_wq else "failed"
+    doc.facilities.append(Facility(
+        id="puffer-pond",
+        name="Puffer's Pond",
+        category="swim",
+        location=Location(
+            label="Puffer's Pond, North Amherst",
+            maps_url="https://www.google.com/maps/search/?api=1&query=Puffer%27s+Pond+Amherst+MA",
+        ),
+        source_url=PUFFER_URL,
+        hours={d: [] for d in ("mon","tue","wed","thu","fri","sat","sun")},
+        notes=[],
+        scrape_status=puffer_status,
+        last_scraped=now_iso,
+        water_quality=wq,
+    ))
 
     out = doc.to_dict()
     out["programs"] = programs

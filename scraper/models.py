@@ -44,13 +44,14 @@ class Facility:
     notes: list[str]
     scrape_status: ScrapeStatus
     last_scraped: str
+    water_quality: dict | None = None
 
     def __post_init__(self) -> None:
         self.hours = {d: list(self.hours.get(d, [])) for d in DAYS}
 
     def to_dict(self) -> dict:
         full_hours = {d: [i.to_dict() for i in self.hours.get(d, [])] for d in DAYS}
-        return {
+        out = {
             "id": self.id,
             "name": self.name,
             "category": self.category,
@@ -61,6 +62,9 @@ class Facility:
             "scrape_status": self.scrape_status,
             "last_scraped": self.last_scraped,
         }
+        if self.water_quality is not None:
+            out["water_quality"] = self.water_quality
+        return out
 
     @classmethod
     def from_dict(cls, d: dict) -> "Facility":
@@ -74,6 +78,7 @@ class Facility:
             notes=list(d.get("notes", [])),
             scrape_status=d["scrape_status"],
             last_scraped=d["last_scraped"],
+            water_quality=d.get("water_quality"),
         )
 
 

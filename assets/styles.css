@@ -363,6 +363,29 @@ ul.open-now-list li.urgent .on-countdown { color: var(--closed); }
 }
 .status.open { color: var(--ok); }
 .status.closed { color: var(--closed); }
+.status.offseason { color: var(--muted); }
+
+.beaches {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  margin: -0.5rem 0 0.75rem;
+  color: var(--ink-soft);
+}
+.beach.beach-ok { color: var(--ok); }
+.beach.beach-closed { color: var(--closed); }
+.beach.beach-unknown { color: var(--muted); }
+
+.wq-detail {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin: 0 0 0.5rem;
+}
+.wq-updated {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0 0 0.75rem;
+  font-family: "JetBrains Mono", monospace;
+}
 
 .stale-banner {
   background: var(--warn-bg);
