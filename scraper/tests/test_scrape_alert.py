@@ -91,6 +91,27 @@ def test_mask_pre_start_when_no_day_reaches_start_yet():
     assert all(masked[d] == [] for d in masked)
 
 
+def test_parse_alert_overrides_extracts_hicks_specific_start_date():
+    text = (
+        "FACILITIES ALERT:\n"
+        "Hicks Pool will open for summer hours on Thursday, May 21, 2026, due to electrical work.\n"
+        "Summer Hours for the Recreation Center and Boyden Pool will begin on Wednesday, May 20, 2026.\n"
+        "Pools | Summer Hours:\n"
+        "Boyden Pool\n"
+        "Monday - Friday | 11:00am - 1:00pm\n"
+        "Hicks Pool - will open Thursday, May 21, 2026 for the summer - delay due to electrical work.\n"
+        "Monday - Friday | 7:00am - 9:00am & 5:00pm - 7:30pm\n"
+    )
+    ov = parse_alert_overrides(text)
+    # Hicks block matched the schedule heading (with dash), not the announcement.
+    assert ov["curry-hicks-pool"]["start_date"] == "2026-05-21"
+    assert [(i.open, i.close) for i in ov["curry-hicks-pool"]["hours"]["mon"]] == [
+        ("07:00", "09:00"), ("17:00", "19:30"),
+    ]
+    # Boyden falls back to general start_date.
+    assert ov["boyden-pool"]["start_date"] == "2026-05-20"
+
+
 def test_parse_alert_overrides_extracts_rockwell_schedule():
     text = (
         "FACILITIES ALERT:\n"

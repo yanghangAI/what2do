@@ -101,7 +101,9 @@ _MONTHS_NUM = {
 FACILITY_BLOCKS = [
     ("recreation-center", re.compile(r"^Recreation Center\b", re.I), "general"),
     ("boyden-pool",       re.compile(r"^Boyden Pool\b", re.I), "general"),
-    ("curry-hicks-pool",  re.compile(r"^Hicks Pool\b", re.I), "general"),
+    # Schedule heading reads either "Hicks Pool" or "Hicks Pool - will open ...";
+    # exclude the announcement sentence "Hicks Pool will open for summer ...".
+    ("curry-hicks-pool",  re.compile(r"^Hicks Pool(?!\s+will\b)", re.I), "hicks"),
     # Match the schedule heading "RockWell | Summer Hours:" — not the
     # announcement sentence "RockWell Summer Hours will begin on ...".
     ("rockwell-climbing", re.compile(r"^RockWell\s*\|", re.I), "rockwell"),
@@ -172,28 +174,37 @@ def _find_start_dates(text: str) -> dict[str, str]:
     """Return {key: ISO date} for the alert's start-date phrases.
 
     'general' = the main "Summer Hours will begin on <date>" sentence.
-    'rockwell' = the RockWell-specific override if present, else falls back
-    to general.
+    'rockwell', 'hicks' = facility-specific overrides if present, else fall
+    back to general.
     """
     out: dict[str, str] = {}
-    rockwell_re = re.compile(
-        r"RockWell[^.]{0,80}?begin\s+on\s+\w+,?\s*"
-        r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(20\d{2})",
-        re.I,
+    month_pat = (
+        r"(January|February|March|April|May|June|July|August|September|"
+        r"October|November|December)\s+(\d{1,2}),\s+(20\d{2})"
     )
-    general_re = re.compile(
-        r"Summer Hours[^.]{0,80}?begin\s+on\s+\w+,?\s*"
-        r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(20\d{2})",
-        re.I,
-    )
-    rm = rockwell_re.search(text)
-    if rm:
-        out["rockwell"] = f"{rm.group(3)}-{_MONTHS_NUM[rm.group(1).lower()]:02d}-{int(rm.group(2)):02d}"
+
+    def _iso(m: re.Match) -> str:
+        return f"{m.group(3)}-{_MONTHS_NUM[m.group(1).lower()]:02d}-{int(m.group(2)):02d}"
+
+    specific = {
+        "rockwell": re.compile(
+            rf"RockWell[^.]{{0,80}}?begin\s+on\s+\w+,?\s*{month_pat}", re.I,
+        ),
+        "hicks": re.compile(
+            rf"Hicks\s+Pool[^.]{{0,120}}?(?:open|begin)[^.]{{0,80}}?on\s+\w+,?\s*{month_pat}",
+            re.I,
+        ),
+    }
+    for key, pat in specific.items():
+        m = pat.search(text)
+        if m:
+            out[key] = _iso(m)
+    general_re = re.compile(rf"Summer Hours[^.]{{0,80}}?begin\s+on\s+\w+,?\s*{month_pat}", re.I)
     gm = general_re.search(text)
     if gm:
-        iso = f"{gm.group(3)}-{_MONTHS_NUM[gm.group(1).lower()]:02d}-{int(gm.group(2)):02d}"
-        out["general"] = iso
-        out.setdefault("rockwell", iso)
+        out["general"] = _iso(gm)
+        out.setdefault("rockwell", out["general"])
+        out.setdefault("hicks", out["general"])
     return out
 
 
