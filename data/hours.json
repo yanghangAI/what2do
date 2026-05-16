@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-16T06:10:50-04:00",
+  "last_updated": "2026-05-16T12:18:29-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -15,39 +15,31 @@
         "mon": [
           {
             "open": "11:00",
-            "close": "12:30"
+            "close": "13:00"
           }
         ],
         "tue": [
           {
             "open": "11:00",
-            "close": "12:30"
-          },
-          {
-            "open": "17:30",
-            "close": "20:00"
+            "close": "13:00"
           }
         ],
         "wed": [
           {
             "open": "11:00",
-            "close": "12:30"
+            "close": "13:00"
           }
         ],
         "thu": [
           {
             "open": "11:00",
-            "close": "12:30"
-          },
-          {
-            "open": "17:30",
-            "close": "20:00"
+            "close": "13:00"
           }
         ],
         "fri": [
           {
             "open": "11:00",
-            "close": "12:30"
+            "close": "13:00"
           }
         ],
         "sat": [],
@@ -55,7 +47,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T06:10:50-04:00"
+      "last_scraped": "2026-05-16T12:18:29-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -69,64 +61,42 @@
       "hours": {
         "mon": [
           {
-            "open": "11:00",
-            "close": "14:00"
-          },
-          {
-            "open": "17:00",
-            "close": "19:00"
+            "open": "07:00",
+            "close": "21:00"
           }
         ],
         "tue": [
           {
-            "open": "09:00",
-            "close": "12:00"
+            "open": "07:00",
+            "close": "21:00"
           }
         ],
         "wed": [
           {
             "open": "07:00",
-            "close": "14:00"
-          },
-          {
-            "open": "17:00",
-            "close": "19:00"
+            "close": "21:00"
           }
         ],
         "thu": [
           {
-            "open": "09:00",
-            "close": "12:00"
+            "open": "07:00",
+            "close": "21:00"
           }
         ],
         "fri": [
           {
             "open": "07:00",
-            "close": "09:00"
-          },
-          {
-            "open": "10:30",
-            "close": "18:00"
+            "close": "21:00"
           }
         ],
-        "sat": [
-          {
-            "open": "11:00",
-            "close": "19:30"
-          }
-        ],
-        "sun": [
-          {
-            "open": "11:00",
-            "close": "17:00"
-          }
-        ]
+        "sat": [],
+        "sun": []
       },
       "notes": [
-        "Please Note the Hicks Pool will be CLOSED on the following dates: Saturday, April 4, 2026; Saturday, April 11, 2026"
+        "Please Note the Hicks Pool will be CLOSED on the following dates: Wednesday, May 20, 2026 - For Electrical Work"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T06:10:50-04:00"
+      "last_scraped": "2026-05-16T12:18:29-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -140,50 +110,50 @@
       "hours": {
         "mon": [
           {
-            "open": "12:00",
-            "close": "22:00"
+            "open": "16:00",
+            "close": "20:00"
           }
         ],
         "tue": [
           {
-            "open": "12:00",
-            "close": "22:00"
+            "open": "16:00",
+            "close": "20:00"
           }
         ],
         "wed": [
           {
-            "open": "12:00",
-            "close": "22:00"
+            "open": "16:00",
+            "close": "20:00"
           }
         ],
         "thu": [
           {
-            "open": "12:00",
-            "close": "22:00"
+            "open": "16:00",
+            "close": "20:00"
           }
         ],
         "fri": [
           {
-            "open": "12:00",
+            "open": "16:00",
             "close": "20:00"
           }
         ],
         "sat": [
           {
-            "open": "12:00",
+            "open": "16:00",
             "close": "20:00"
           }
         ],
         "sun": [
           {
-            "open": "12:00",
+            "open": "16:00",
             "close": "20:00"
           }
         ]
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T06:10:50-04:00"
+      "last_scraped": "2026-05-16T12:18:29-04:00"
     },
     {
       "id": "recreation-center",
@@ -195,52 +165,17 @@
       },
       "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
       "hours": {
-        "mon": [
-          {
-            "open": "06:00",
-            "close": "23:00"
-          }
-        ],
-        "tue": [
-          {
-            "open": "06:00",
-            "close": "23:00"
-          }
-        ],
-        "wed": [
-          {
-            "open": "06:00",
-            "close": "23:00"
-          }
-        ],
-        "thu": [
-          {
-            "open": "06:00",
-            "close": "23:00"
-          }
-        ],
-        "fri": [
-          {
-            "open": "06:00",
-            "close": "22:00"
-          }
-        ],
-        "sat": [
-          {
-            "open": "10:00",
-            "close": "22:00"
-          }
-        ],
-        "sun": [
-          {
-            "open": "10:00",
-            "close": "22:00"
-          }
-        ]
+        "mon": [],
+        "tue": [],
+        "wed": [],
+        "thu": [],
+        "fri": [],
+        "sat": [],
+        "sun": []
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T06:10:50-04:00"
+      "last_scraped": "2026-05-16T12:18:29-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -264,7 +199,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T06:10:50-04:00"
+      "last_scraped": "2026-05-16T12:18:29-04:00"
     },
     {
       "id": "mullins-ice",
@@ -298,7 +233,7 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T06:10:50-04:00"
+      "last_scraped": "2026-05-16T12:18:29-04:00"
     }
   ],
   "programs": [
@@ -539,5 +474,15 @@
       "events": []
     }
   ],
-  "alert": "FACILITIES ALERT:\nSummer Hours will begin on Wednesday, May 20, 2026.\nRockWell Summer Hours will begin on Tuesday, May 26, 2026\nAll RecWell Facilities will be closed on the following Holidays:\nMonday, May 25, 2026 - Memorial Day\nFriday, June 19, 2026 - Juneteenth\nFriday, July 3, 2026 - Independence Day (observed)\nRecreation Center | Summer Hours:\nMonday\u2013Friday | 7:00am - 7:00pm\nSaturday\u2013Sunday |\nCLOSED\nPools | Summer Hours:\nBoyden Pool\nMonday - Friday | 11:00am - 1:00pm\nHicks Pool\nMonday - Friday | 7:00am - 9:00am & 5:00pm - 7:30pm\nRockWell | Summer Hours:\nMonday - Friday | 4:00pm - 8:00pm\nSaturday & Sunday | 4:00pm - 8:00pm\nRecreation Tennis and Outdoor Pickleball Courts\nare\nCLOSED\nuntil further notice."
+  "alert": "FACILITIES ALERT:\nHicks Pool will open for summer hours on Thursday, May 21, 2026, due to electrical work.\nSummer Hours for the Recreation Center and Boyden Pool will begin on Wednesday, May 20, 2026.\nRockWell Summer Hours will begin on Tuesday, May 26, 2026\nAll RecWell Facilities will be closed on the following Holidays:\nMonday, May 25, 2026 - Memorial Day\nFriday, June 19, 2026 - Juneteenth\nFriday, July 3, 2026 - Independence Day (observed)\nRecreation Center | Summer Hours:\nMonday\u2013Friday | 7:00am - 7:00pm\nSaturday\u2013Sunday |\nCLOSED\nPools | Summer Hours:\nBoyden Pool\nMonday - Friday | 11:00am - 1:00pm\nHicks Pool - will open Thursday, May 21, 2026 for the summer - delay due to electrical work.\nMonday - Friday | 7:00am - 9:00am & 5:00pm - 7:30pm\nRockWell | Summer Hours:\nMonday - Friday | 4:00pm - 8:00pm\nSaturday & Sunday | 4:00pm - 8:00pm\nRecreation Tennis and Outdoor Pickleball Courts\nare\nCLOSED\nuntil further notice.",
+  "alert_state": {
+    "recreation-center": {
+      "start_date": "2026-05-20",
+      "closed_from": null
+    },
+    "boyden-pool": {
+      "start_date": "2026-05-20",
+      "closed_from": null
+    }
+  }
 }
