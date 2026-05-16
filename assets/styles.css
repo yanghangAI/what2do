@@ -513,6 +513,34 @@ ul.open-now-list li.urgent .on-countdown { color: var(--closed); }
 .mpn-row.mpn-warn  .mpn-label { color: #b07a1a; }
 .mpn-row.mpn-bad   .mpn-label { color: var(--closed); }
 
+.wq-vote {
+  margin: 0.75rem 0 0;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--paper-dark);
+}
+.wq-vote-q {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  margin: 0 0 0.4rem;
+}
+.wq-vote-row { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.vote-btn {
+  font-family: "Karla", sans-serif;
+  font-size: 0.9rem;
+  padding: 0.45rem 0.8rem;
+  border: 1.5px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+}
+.vote-btn:hover:not(:disabled) { background: var(--ink); color: var(--paper); }
+.vote-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.wq-vote-tally  { font-size: 0.85rem; margin: 0.5rem 0 0; color: var(--ink-soft); font-family: "JetBrains Mono", monospace; }
+.wq-vote-status { font-size: 0.75rem; margin: 0.25rem 0 0; color: var(--muted); font-style: italic; }
+
 .stale-banner {
   background: var(--warn-bg);
   color: var(--warn-fg);

@@ -1,6 +1,10 @@
 (function () {
   "use strict";
 
+  // Cloudflare Worker that stores satisfied/unsatisfied vote counts.
+  // Set to "" to disable the vote UI entirely.
+  var PUFFER_VOTES_URL = "https://puffer-votes.yanghang.workers.dev";
+
   var TZ = "America/New_York";
   var DAYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
   var DAY_LABELS = {
@@ -254,7 +258,99 @@
       children.push(dateLine);
     }
     children.push(renderMpnScale());
+    children.push(renderVoteBlock());
     return children;
+  }
+
+  // ---- Satisfaction vote --------------------------------------------------
+
+  var VOTE_KEY = "puffer-vote-ts";
+  var VOTE_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
+
+  function lastVoteAge() {
+    try {
+      var ts = parseInt(localStorage.getItem(VOTE_KEY) || "0", 10);
+      if (!ts) return Infinity;
+      return Date.now() - ts;
+    } catch (_) { return Infinity; }
+  }
+
+  function recordVote() {
+    try { localStorage.setItem(VOTE_KEY, String(Date.now())); }
+    catch (_) {}
+  }
+
+  function renderVoteBlock() {
+    var wrap = el("div", { class: "wq-vote" }, []);
+    if (!PUFFER_VOTES_URL) { wrap.hidden = true; return wrap; }
+
+    var heading = el("p", { class: "wq-vote-q" }, ["Are you satisfied with the water quality?"]);
+    var btnYes = el("button", { type: "button", class: "vote-btn vote-yes" }, ["👍 Satisfied"]);
+    var btnNo  = el("button", { type: "button", class: "vote-btn vote-no"  }, ["👎 Not really"]);
+    var btnRow = el("div", { class: "wq-vote-row" }, [btnYes, btnNo]);
+    var tally = el("p", { class: "wq-vote-tally" }, ["Loading…"]);
+    var status = el("p", { class: "wq-vote-status" }, []);
+    wrap.appendChild(heading);
+    wrap.appendChild(btnRow);
+    wrap.appendChild(tally);
+    wrap.appendChild(status);
+
+    function showCounts(data) {
+      var s = data.satisfied || 0;
+      var u = data.unsatisfied || 0;
+      var total = s + u;
+      var pct = total ? Math.round((s / total) * 100) : 0;
+      tally.textContent = total === 0
+        ? "No votes yet — be the first."
+        : s + " satisfied · " + u + " not (" + pct + "% positive, " + total + " total)";
+    }
+
+    function disableButtons(msg) {
+      btnYes.disabled = true;
+      btnNo.disabled = true;
+      status.textContent = msg;
+    }
+
+    var age = lastVoteAge();
+    if (age < VOTE_COOLDOWN_MS) {
+      var daysLeft = Math.ceil((VOTE_COOLDOWN_MS - age) / 86400000);
+      disableButtons("Thanks for voting — you can vote again in " + daysLeft + " day" + (daysLeft === 1 ? "" : "s") + ".");
+    }
+
+    fetch(PUFFER_VOTES_URL, { cache: "no-store" })
+      .then(function (r) { return r.json(); })
+      .then(showCounts)
+      .catch(function () { tally.textContent = ""; });
+
+    function vote(kind) {
+      if (btnYes.disabled) return;
+      btnYes.disabled = true;
+      btnNo.disabled  = true;
+      status.textContent = "Submitting…";
+      fetch(PUFFER_VOTES_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ vote: kind }),
+      })
+        .then(function (r) {
+          if (!r.ok) throw new Error("vote failed");
+          return r.json();
+        })
+        .then(function (data) {
+          recordVote();
+          showCounts(data);
+          status.textContent = "Thanks — you can vote again next week.";
+        })
+        .catch(function () {
+          btnYes.disabled = false;
+          btnNo.disabled  = false;
+          status.textContent = "Couldn’t submit your vote. Try again in a moment.";
+        });
+    }
+
+    btnYes.addEventListener("click", function () { vote("satisfied"); });
+    btnNo.addEventListener( "click", function () { vote("unsatisfied"); });
+    return wrap;
   }
 
   function renderMpnScale() {
