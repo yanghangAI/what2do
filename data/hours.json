@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-16T16:34:01-04:00",
+  "last_updated": "2026-05-16T16:35:53-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -39,7 +39,7 @@
         "Closed for semester transition; summer hours begin 2026-05-20."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T16:34:01-04:00"
+      "last_scraped": "2026-05-16T16:35:53-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -82,7 +82,7 @@
         "Closed for semester transition; summer hours begin 2026-05-21."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T16:34:01-04:00"
+      "last_scraped": "2026-05-16T16:35:53-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -106,7 +106,7 @@
         "Closed for semester transition; summer hours begin 2026-05-26."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T16:34:01-04:00"
+      "last_scraped": "2026-05-16T16:35:53-04:00"
     },
     {
       "id": "recreation-center",
@@ -145,7 +145,7 @@
         "Closed for semester transition; summer hours begin 2026-05-20."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T16:34:01-04:00"
+      "last_scraped": "2026-05-16T16:35:53-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -169,7 +169,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T16:34:01-04:00"
+      "last_scraped": "2026-05-16T16:35:53-04:00"
     },
     {
       "id": "mullins-ice",
@@ -203,7 +203,7 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T16:34:01-04:00"
+      "last_scraped": "2026-05-16T16:35:53-04:00"
     },
     {
       "id": "puffer-pond",
@@ -225,7 +225,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T16:34:01-04:00",
+      "last_scraped": "2026-05-16T16:35:53-04:00",
       "water_quality": {
         "status": "allowed",
         "headline": "Swimming is allowed at Puffer's Pond.",
