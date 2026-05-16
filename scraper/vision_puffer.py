@@ -20,8 +20,18 @@ import zlib
 
 import requests
 
-GEMINI_MODEL = "gemini-2.0-flash"
-GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
+_MODEL_CANDIDATES = (
+    # In order of preference. Try each until one isn't rate-limited or
+    # quota-blocked — different models have different free-tier coverage
+    # and Google rotates which one is free-eligible.
+    "gemini-2.5-flash-lite",
+    "gemini-2.5-flash",
+    "gemini-2.0-flash-lite",
+    "gemini-2.0-flash",
+)
+_GEMINI_URL_TMPL = (
+    "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+)
 
 _PROMPT = (
     "This is a Puffer's Pond water quality test form (a chain-of-custody "
@@ -90,22 +100,28 @@ def extract_readings(pdf_bytes: bytes, api_key: str | None = None) -> dict | Non
             "temperature": 0.0,
         },
     }
-    # Free-tier rate limits occasionally produce transient 429s; back off
-    # and try once more before giving up. Also surface response bodies on
-    # any non-2xx so operators can see what the API actually said.
+    # Try each candidate model in turn. 429s with limit=0 mean the model
+    # isn't free-tier eligible for this project — move on; transient 429s
+    # / 5xx are retried with a short backoff.
     payload = None
-    for attempt in (1, 2, 3):
-        r = requests.post(f"{GEMINI_URL}?key={api_key}", json=body, timeout=60)
-        if r.status_code == 200:
-            payload = r.json()
+    last_err: str | None = None
+    for model in _MODEL_CANDIDATES:
+        url = _GEMINI_URL_TMPL.format(model=model) + f"?key={api_key}"
+        for attempt in (1, 2):
+            r = requests.post(url, json=body, timeout=60)
+            if r.status_code == 200:
+                payload = r.json()
+                break
+            last_err = f"{model} {r.status_code}: {r.text[:300]}"
+            if r.status_code == 429 and '"limit": 0' in r.text:
+                break  # not free-tier eligible — try next model
+            if r.status_code not in (429, 500, 502, 503, 504):
+                break  # non-retryable
+            time.sleep(2 ** attempt)
+        if payload is not None:
             break
-        retryable = r.status_code in (429, 500, 502, 503, 504)
-        if not retryable or attempt == 3:
-            raise RuntimeError(
-                f"Gemini {r.status_code}: {r.text[:400]}"
-            )
-        time.sleep(2 ** attempt)  # 2s, 4s
-    assert payload is not None
+    if payload is None:
+        raise RuntimeError(f"Gemini failed across all models: {last_err}")
     try:
         text = payload["candidates"][0]["content"]["parts"][0]["text"]
     except (KeyError, IndexError):
