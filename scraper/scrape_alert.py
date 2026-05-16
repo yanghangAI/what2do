@@ -275,3 +275,35 @@ def parse_alert_overrides(text: str) -> dict[str, dict]:
                 "hours": hours,
             }
     return out
+
+
+def merge_alert_state(
+    current_overrides: dict[str, dict],
+    prev_state: dict[str, dict] | None,
+) -> tuple[dict[str, dict], dict[str, dict]]:
+    """Carry forward ``closed_from`` from a previous run when the current alert
+    no longer mentions it.
+
+    UMass tends to edit the semester-close sentence out of the alert banner
+    once that date has passed, which makes ``closed_from`` unparseable during
+    the transition gap between the close date and the announced summer-start
+    date. As long as ``start_date`` for a given facility matches the previous
+    run, we trust the previously-parsed ``closed_from``.
+
+    Returns ``(resolved_overrides, new_state_to_persist)``.
+    """
+    prev_state = prev_state or {}
+    resolved: dict[str, dict] = {}
+    new_state: dict[str, dict] = {}
+    for fid, ov in current_overrides.items():
+        sd = ov.get("start_date")
+        cf = ov.get("closed_from")
+        prev = prev_state.get(fid) or {}
+        if cf is None and sd and prev.get("start_date") == sd and prev.get("closed_from"):
+            cf = prev["closed_from"]
+        new_ov = dict(ov)
+        new_ov["closed_from"] = cf
+        resolved[fid] = new_ov
+        if sd:
+            new_state[fid] = {"start_date": sd, "closed_from": cf}
+    return resolved, new_state

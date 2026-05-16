@@ -14,7 +14,7 @@ from scraper.scrape_recwell import SOURCE_URL as RECWELL_URL, scrape_recwell
 from scraper.scrape_mullins import scrape_mullins
 from scraper.scrape_programs import fetch_programs
 from scraper.scrape_schedule import fetch_schedule
-from scraper.scrape_alert import fetch_alert, parse_alert_overrides
+from scraper.scrape_alert import fetch_alert, merge_alert_state, parse_alert_overrides
 
 OUT_PATH = Path(__file__).resolve().parent.parent / "data" / "hours.json"
 TZ = ZoneInfo("America/New_York")
@@ -94,6 +94,16 @@ def main() -> int:
 
     today_iso = datetime.now(TZ).strftime("%Y-%m-%d")
     overrides = parse_alert_overrides(alert) if alert else {}
+    prev_state = prev_raw.get("alert_state")
+    if prev_state is None and prev_raw.get("alert"):
+        # Bootstrap from the previous alert text when alert_state hasn't been
+        # persisted yet (e.g. first run after this field was added).
+        prev_overrides = parse_alert_overrides(prev_raw["alert"])
+        prev_state = {
+            fid: {"start_date": ov.get("start_date"), "closed_from": ov.get("closed_from")}
+            for fid, ov in prev_overrides.items()
+        }
+    overrides, alert_state = merge_alert_state(overrides, prev_state)
     from scraper.models import DAYS as _DAYS
     overridden_ids: list[str] = []
     for facility in doc.facilities:
@@ -123,6 +133,7 @@ def main() -> int:
     out["programs"] = programs
     out["schedule"] = schedule
     out["alert"] = alert
+    out["alert_state"] = alert_state
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(json.dumps(out, indent=2) + "\n")
     print(f"wrote {OUT_PATH}")
