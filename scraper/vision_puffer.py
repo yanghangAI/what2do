@@ -14,6 +14,7 @@ from __future__ import annotations
 import base64
 import json
 import os
+import time
 
 import requests
 
@@ -50,9 +51,22 @@ def extract_readings(pdf_bytes: bytes, api_key: str | None = None) -> dict | Non
             "temperature": 0.0,
         },
     }
-    r = requests.post(f"{GEMINI_URL}?key={api_key}", json=body, timeout=60)
-    r.raise_for_status()
-    payload = r.json()
+    # Free-tier rate limits occasionally produce transient 429s; back off
+    # and try once more before giving up. Also surface response bodies on
+    # any non-2xx so operators can see what the API actually said.
+    payload = None
+    for attempt in (1, 2, 3):
+        r = requests.post(f"{GEMINI_URL}?key={api_key}", json=body, timeout=60)
+        if r.status_code == 200:
+            payload = r.json()
+            break
+        retryable = r.status_code in (429, 500, 502, 503, 504)
+        if not retryable or attempt == 3:
+            raise RuntimeError(
+                f"Gemini {r.status_code}: {r.text[:400]}"
+            )
+        time.sleep(2 ** attempt)  # 2s, 4s
+    assert payload is not None
     try:
         text = payload["candidates"][0]["content"]["parts"][0]["text"]
     except (KeyError, IndexError):
