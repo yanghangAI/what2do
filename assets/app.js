@@ -188,7 +188,7 @@
                     : "no data";
         var children2 = [k === "north" ? "North Beach: " : "South Beach: "];
         if (n != null) {
-          children2.push(el("strong", {}, [n + " MPN/100 ml"]));
+          children2.push(el("strong", {}, ["~" + n + " MPN/100 ml"]));
           children2.push(" — " + verdict);
         } else {
           children2.push(verdict);
@@ -205,7 +205,8 @@
       children.push(el("p", { class: "wq-detail" }, [wq.detail]));
     }
     children.push(el("p", { class: "wq-standard" }, [
-      "Standard: ≤235 MPN/100 ml E. coli (single sample); ≤126 MPN/100 ml (geomean).",
+      "Standard: ≤235 MPN/100 ml E. coli (single sample); ≤126 MPN/100 ml (geomean). " +
+      (readings ? "Numbers are OCR estimates from the scanned report — verify against the linked PDF." : ""),
     ]));
     if (testIso) {
       var heading = "Most recent test: " + formatDateHeading(testIso, weekdayOfIso(testIso));

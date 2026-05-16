@@ -1,11 +1,16 @@
-"""OCR helper: extract E. coli MPN/100ml readings from a Puffer's Pond
+"""OCR helper: extract E. coli MPN/100ml geomeans from a Puffer's Pond
 water-quality test PDF.
 
-The Town of Amherst publishes weekly results as scanned PDFs (no text
-layer), so we shell out to ``pdftoppm`` + ``tesseract`` if available.
-Returns ``None`` if the binaries aren't installed or the OCR pass
-produces nothing recognizable — callers should treat missing numbers
-as "unknown" and fall back to the human-readable status string.
+The Town of Amherst publishes weekly results as scanned chain-of-custody
+forms. Single-sample values are filled in by hand and tesseract can't
+read them reliably, but the **5-sample geometric mean** for each beach
+is typewritten on a stable line ("South Beach Geometric Mean of 5 most
+recent samples: <N>") — readable enough with light digit/letter
+correction. We target only those geomeans and return ``None`` (rather
+than guess) when the OCR pass doesn't find them.
+
+Returns ``None`` when ``pdftoppm``/``tesseract`` aren't installed, so
+local dev / unit tests stay self-contained.
 """
 from __future__ import annotations
 
@@ -16,12 +21,28 @@ import tempfile
 from pathlib import Path
 
 
-_BEACH_NUM_RE = re.compile(
-    r"\b(north|south)\b[^\d]{0,40}?(\d{1,5}(?:\.\d+)?)", re.I,
+# Match "<beach> beach … geometric mean …" — case-insensitive, allow
+# newlines and noise between the words.
+_GEOMEAN_LABEL_RE = re.compile(
+    r"(north|south)\s*beach[^\n]{0,40}?geometric\s+mean", re.I,
 )
-_LABELED_NUM_RE = re.compile(
-    r"(\d{1,5}(?:\.\d+)?)\s*(?:mpn|cfu|colonies)?\s*/\s*100\s*m[lL]", re.I,
-)
+
+# Common tesseract confusions on these scans.
+_DIGIT_FIXES = str.maketrans({
+    "S": "5", "s": "5",
+    "O": "0", "o": "0",
+    "l": "1", "I": "1", "i": "1",
+    "B": "8",
+    "Z": "2", "z": "2",
+})
+
+_TOKEN_RE = re.compile(r"[A-Za-z0-9.]{2,}")
+# Strict numeric format after digit-fixing: require a decimal point. The
+# "Geometric Mean of 5 samples" is always a quotient, so the typewritten
+# values on these forms are reliably formatted like "45.54" / "4.17".
+# Requiring the dot keeps integer junk ("17" from a date column, "100"
+# from "MPN/100ml") from being mistaken for a real reading.
+_STRICT_NUM_RE = re.compile(r"^\d{1,4}\.\d{1,2}$")
 
 
 def _tools_available() -> bool:
@@ -35,11 +56,11 @@ def _ocr_pdf(pdf_bytes: bytes) -> str | None:
         tmpd = Path(tmp)
         pdf = tmpd / "report.pdf"
         pdf.write_bytes(pdf_bytes)
-        # Render to 300dpi grayscale PNGs.
         try:
             subprocess.run(
-                ["pdftoppm", "-r", "300", "-png", "-gray", str(pdf), str(tmpd / "page")],
-                check=True, capture_output=True, timeout=60,
+                ["pdftoppm", "-r", "400", "-png", "-gray",
+                 str(pdf), str(tmpd / "page")],
+                check=True, capture_output=True, timeout=90,
             )
         except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
             return None
@@ -48,7 +69,7 @@ def _ocr_pdf(pdf_bytes: bytes) -> str | None:
             try:
                 r = subprocess.run(
                     ["tesseract", str(png), "-", "--psm", "6"],
-                    check=True, capture_output=True, timeout=60, text=True,
+                    check=True, capture_output=True, timeout=90, text=True,
                 )
                 text_parts.append(r.stdout)
             except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
@@ -57,28 +78,42 @@ def _ocr_pdf(pdf_bytes: bytes) -> str | None:
 
 
 def parse_ocr_text(text: str) -> dict | None:
-    """Pick out per-beach E. coli MPN/100ml values from an OCR transcript.
+    """Pick out per-beach geomean values from an OCR transcript.
 
-    The Town's report layout varies year to year; rather than parsing a
-    fixed table we look for beach-name → number pairs anywhere in the
-    text. Returns ``{"north": float|None, "south": float|None,
-    "raw_text": str}`` if any number was found.
+    Returns ``{"north": float|None, "south": float|None, "kind":
+    "geomean", "raw_text": str}`` when at least one geomean was found,
+    else ``None``.
     """
     if not text:
         return None
-    out = {"north": None, "south": None, "raw_text": text}
-    for m in _BEACH_NUM_RE.finditer(text):
-        beach = m.group(1).lower()
-        try:
-            val = float(m.group(2))
-        except ValueError:
-            continue
-        # Skip values that look like dates (e.g. 2025) or single-digit junk.
-        if val > 100000 or val == 0:
-            continue
+    # "kind": "estimate" because the form's mixed typewritten/handwritten
+    # layout makes it hard to tell whether the captured number is the
+    # 5-sample geomean (typewritten under "Analysis | Analysis") or the
+    # single-sample value from the table below — the frontend should
+    # label these as best-effort estimates and link to the source PDF.
+    out = {"north": None, "south": None, "kind": "estimate", "raw_text": text}
+    for label_m in _GEOMEAN_LABEL_RE.finditer(text):
+        beach = label_m.group(1).lower()
+        window = text[label_m.end(): label_m.end() + 150]
         key = "north" if beach.startswith("n") else "south"
-        if out[key] is None:
-            out[key] = val
+        for tok_m in _TOKEN_RE.finditer(window):
+            tok = tok_m.group(0)
+            # Skip tokens that had no real digits before fixing (avoids
+            # turning "of"→"0f" or "Analysis"→"Ana1y515" into numbers).
+            if not any(c.isdigit() for c in tok):
+                continue
+            fixed = tok.translate(_DIGIT_FIXES)
+            if not _STRICT_NUM_RE.match(fixed):
+                continue
+            try:
+                val = float(fixed)
+            except ValueError:
+                continue
+            if val <= 0 or val > 100000:
+                continue
+            if out[key] is None:
+                out[key] = val
+                break
     if out["north"] is None and out["south"] is None:
         return None
     return out
