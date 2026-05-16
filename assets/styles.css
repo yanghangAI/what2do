@@ -384,12 +384,11 @@ ul.open-now-list li.urgent .on-countdown { color: var(--closed); }
 .beach-num.beach-bad  { color: var(--closed); }
 .beach-num.beach-none { color: var(--muted); font-weight: 400; }
 .beach-unit { color: var(--muted); font-size: 0.8rem; }
-.beach-uncertain {
+.beaches-note {
+  font-size: 0.75rem;
   color: var(--muted);
-  font-size: 0.7em;
-  margin-left: 0.1em;
-  cursor: help;
-  text-decoration: underline dotted;
+  font-style: italic;
+  margin: -0.25rem 0 0.6rem;
 }
 
 .wq-detail {

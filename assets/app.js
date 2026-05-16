@@ -189,17 +189,10 @@
         if (n <= limit * 1.87) return "warn"; // up to single-sample cap
         return "bad";
       };
-      var numCell = function (n, limit, uncertain) {
+      var numCell = function (n, limit) {
         if (n == null) return el("span", { class: "beach-num beach-none" }, ["—"]);
-        var inner = [el("strong", { class: "beach-num beach-" + bandFor(n, limit) },
-                       [String(n)])];
-        if (uncertain) {
-          inner.push(el("sup", {
-            class: "beach-uncertain",
-            title: "Handwritten cell on the scanned form — OCR may be off by a digit. Verify against the linked PDF.",
-          }, ["?"]));
-        }
-        return el("span", {}, inner);
+        return el("strong", { class: "beach-num beach-" + bandFor(n, limit) },
+                  [String(n)]);
       };
       var beachLine = function (k) {
         var s = wq.beaches[k];
@@ -218,15 +211,20 @@
         return el("li", {}, [
           el("span", { class: "beach-name" }, [name]),
           document.createTextNode("  sample "),
-          numCell(sample, 235, true),   // handwritten — flag as uncertain
+          numCell(sample, 235),
           document.createTextNode("  ·  geomean "),
-          numCell(geomean, 126, false), // typed cell — reliable
+          numCell(geomean, 126),
           el("span", { class: "beach-unit" }, [" MPN/100 ml"]),
         ]);
       };
       children.push(el("ul", { class: "beaches" }, [
         beachLine("north"), beachLine("south"),
       ]));
+      if (readings && (readings.north_sample != null || readings.south_sample != null)) {
+        children.push(el("p", { class: "beaches-note" }, [
+          "Sample values are read from handwritten cells — may be off by a digit. See PDF to verify.",
+        ]));
+      }
     }
     if (testIso) {
       var dateLine = el("p", { class: "wq-testdate" }, [
