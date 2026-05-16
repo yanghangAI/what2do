@@ -21,9 +21,10 @@ import zlib
 import requests
 
 _MODEL_CANDIDATES = (
-    # In order of preference. Reading handwritten numbers off the
-    # chain-of-custody form needs the smarter model — 2.5-flash-lite
-    # tends to grab adjacent sample values instead of the geomean cell.
+    # 2.5-pro is the strongest reader (handles handwritten digits best —
+    # 2.5-flash occasionally confuses a sloppy "9" with "4"). Falls back
+    # to flash variants if pro is rate-limited or quota-blocked.
+    "gemini-2.5-pro",
     "gemini-2.5-flash",
     "gemini-2.5-flash-lite",
     "gemini-2.0-flash-lite",
