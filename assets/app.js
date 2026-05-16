@@ -672,10 +672,28 @@
     var lines = text.split("\n");
     var heading = lines.shift();
     inner.appendChild(el("p", { class: "alert-heading" }, [heading]));
+
+    // Pull a one-line summary out of the body — the first line that
+    // mentions a "begin/start on <date>" or "closed" phrase, otherwise
+    // just the first non-empty line.
+    var bodyLines = lines.filter(function (l) { return l.trim().length; });
+    var summary = "";
+    var summaryRe = /(begin|start|closed|will\s+open).{0,120}/i;
+    for (var i = 0; i < bodyLines.length; i++) {
+      if (summaryRe.test(bodyLines[i])) { summary = bodyLines[i].trim(); break; }
+    }
+    if (!summary && bodyLines.length) summary = bodyLines[0].trim();
+
     var bodyText = lines.join("\n").trim();
     if (bodyText) {
-      var pre = el("pre", { class: "alert-body" }, [bodyText]);
-      inner.appendChild(pre);
+      var details = el("details", { class: "alert-details" }, []);
+      var summaryEl = el("summary", { class: "alert-summary" }, [
+        el("span", { class: "alert-summary-text" }, [summary]),
+        el("span", { class: "alert-toggle-label" }, ["Show details"]),
+      ]);
+      details.appendChild(summaryEl);
+      details.appendChild(el("pre", { class: "alert-body" }, [bodyText]));
+      inner.appendChild(details);
     }
     inner.appendChild(el("p", { class: "alert-source" }, [
       el("a", { href: "https://www.umass.edu/recwell/", target: "_blank", rel: "noopener" },

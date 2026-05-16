@@ -208,11 +208,40 @@ main section h2::before {
   color: var(--mustard);
   line-height: 1;
 }
+.alert-details {
+  margin: 0;
+}
+.alert-summary {
+  font-family: "Karla", Georgia, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+  padding: 0.4rem 0;
+}
+.alert-summary::-webkit-details-marker { display: none; }
+.alert-summary-text { flex: 1 1 auto; }
+.alert-toggle-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--mustard);
+  text-decoration: underline;
+  white-space: nowrap;
+}
+.alert-details[open] .alert-toggle-label::after { content: "  ▾"; }
+.alert-details:not([open]) .alert-toggle-label::after { content: "  ▸"; }
+.alert-details[open] .alert-toggle-label { /* Hide after click */ }
 .alert-body {
   font-family: "Karla", Georgia, sans-serif;
   font-size: 0.95rem;
   line-height: 1.55;
-  margin: 0;
+  margin: 0.4rem 0 0;
   white-space: pre-wrap;
   background: rgba(0,0,0,0.18);
   padding: 0.85rem 1rem;
