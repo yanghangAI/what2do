@@ -189,10 +189,17 @@
         if (n <= limit * 1.87) return "warn"; // up to single-sample cap
         return "bad";
       };
-      var numCell = function (n, limit) {
+      var numCell = function (n, limit, uncertain) {
         if (n == null) return el("span", { class: "beach-num beach-none" }, ["—"]);
-        return el("strong", { class: "beach-num beach-" + bandFor(n, limit) },
-                  [String(n)]);
+        var inner = [el("strong", { class: "beach-num beach-" + bandFor(n, limit) },
+                       [String(n)])];
+        if (uncertain) {
+          inner.push(el("sup", {
+            class: "beach-uncertain",
+            title: "Handwritten cell on the scanned form — OCR may be off by a digit. Verify against the linked PDF.",
+          }, ["?"]));
+        }
+        return el("span", {}, inner);
       };
       var beachLine = function (k) {
         var s = wq.beaches[k];
@@ -211,9 +218,9 @@
         return el("li", {}, [
           el("span", { class: "beach-name" }, [name]),
           document.createTextNode("  sample "),
-          numCell(sample, 235),
+          numCell(sample, 235, true),   // handwritten — flag as uncertain
           document.createTextNode("  ·  geomean "),
-          numCell(geomean, 126),
+          numCell(geomean, 126, false), // typed cell — reliable
           el("span", { class: "beach-unit" }, [" MPN/100 ml"]),
         ]);
       };
