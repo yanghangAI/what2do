@@ -176,9 +176,21 @@ def fetch_puffer() -> PufferStatus | None:
         status.latest_report = parse_latest_report(idx.text)
     except Exception:
         pass
-    # We used to OCR the PDF here to surface per-beach MPN/100 ml values,
-    # but the form is a scanned chain-of-custody sheet with handwritten
-    # cells — tesseract can't read it reliably and the typewritten
-    # "geomean" cells weren't where the multi-column line-by-line OCR
-    # made them appear. We now link out to the PDF instead.
+    # Tesseract can't read the handwritten chain-of-custody form, so we
+    # hand the PDF to Gemini's vision API. Skips silently if GEMINI_API_KEY
+    # isn't set — local dev / tests don't need a key.
+    if status.latest_report and status.latest_report.get("url"):
+        try:
+            from scraper.vision_puffer import extract_readings
+            pdf = requests.get(
+                status.latest_report["url"],
+                headers={"User-Agent": "Mozilla/5.0"},
+                timeout=60,
+            )
+            pdf.raise_for_status()
+            readings = extract_readings(pdf.content)
+            if readings:
+                status.latest_report["readings"] = readings
+        except Exception:
+            pass
     return status

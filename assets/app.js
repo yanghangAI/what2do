@@ -178,20 +178,33 @@
       cls = "closed"; label = "STATUS UNKNOWN";
     }
     var children = [el("p", { class: "status " + cls }, [label])];
+    var readings = wq.latest_report && wq.latest_report.readings;
     if (wq.beaches) {
-      var beachLabel = function (k) {
+      var beachLine = function (k) {
         var s = wq.beaches[k];
-        var verdict = s === "ok" ? "meets standards"
-                    : s === "closed" ? "exceeds standards"
-                    : "no data";
-        return el("span", { class: "beach beach-" + s }, [
-          k === "north" ? "North Beach: " : "South Beach: ", verdict,
-        ]);
+        var n = readings && readings[k];
+        var band = n == null ? null
+                 : n <= 126   ? "ok"
+                 : n <= 235   ? "warn"
+                              : "bad";
+        var pieces = [el("span", { class: "beach-name" }, [
+          k === "north" ? "North Beach" : "South Beach",
+        ])];
+        if (n != null) {
+          pieces.push(document.createTextNode("  "));
+          pieces.push(el("strong", { class: "beach-num beach-" + band }, [
+            n + " MPN/100 ml",
+          ]));
+        } else {
+          var verdict = s === "ok" ? "meets standards"
+                      : s === "closed" ? "exceeds standards"
+                      : "no data";
+          pieces.push(document.createTextNode("  " + verdict));
+        }
+        return el("li", {}, pieces);
       };
-      children.push(el("p", { class: "beaches" }, [
-        beachLabel("north"),
-        document.createTextNode(" · "),
-        beachLabel("south"),
+      children.push(el("ul", { class: "beaches" }, [
+        beachLine("north"), beachLine("south"),
       ]));
     }
     if (testIso) {

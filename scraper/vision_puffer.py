@@ -1,0 +1,92 @@
+"""Use Gemini's vision API to read per-beach E. coli geomean values off
+a scanned Puffer's Pond water quality test PDF.
+
+Tesseract can't handle the handwritten chain-of-custody form, but
+Gemini 2.0 Flash reads it reliably and is free at the volumes we need
+(one call per workflow run).
+
+The caller must set ``GEMINI_API_KEY`` in the environment. If absent,
+``extract_readings`` returns ``None`` gracefully — production should
+treat a missing key as "skip, show no numbers" rather than failing.
+"""
+from __future__ import annotations
+
+import base64
+import json
+import os
+
+import requests
+
+GEMINI_MODEL = "gemini-2.0-flash"
+GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
+
+_PROMPT = (
+    "This is a Puffer's Pond water quality test form (a chain-of-custody "
+    "sheet from Amherst WWTP). Extract the two 'Geometric Mean of 5 most "
+    "recent samples' values — one for South Beach and one for North Beach "
+    "— in MPN/100 ml E. coli. Also extract the sample collection date if "
+    "you can read it. Return ONLY JSON in this exact shape:\n"
+    '{"south_geomean": <number or null>, '
+    '"north_geomean": <number or null>, '
+    '"test_date": "<YYYY-MM-DD or null>"}\n'
+    "If a value isn't clearly readable, use null. Do not guess."
+)
+
+
+def extract_readings(pdf_bytes: bytes, api_key: str | None = None) -> dict | None:
+    api_key = api_key or os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        return None
+    body = {
+        "contents": [{"parts": [
+            {"inline_data": {
+                "mime_type": "application/pdf",
+                "data": base64.b64encode(pdf_bytes).decode(),
+            }},
+            {"text": _PROMPT},
+        ]}],
+        "generationConfig": {
+            "responseMimeType": "application/json",
+            "temperature": 0.0,
+        },
+    }
+    r = requests.post(f"{GEMINI_URL}?key={api_key}", json=body, timeout=60)
+    r.raise_for_status()
+    payload = r.json()
+    try:
+        text = payload["candidates"][0]["content"]["parts"][0]["text"]
+    except (KeyError, IndexError):
+        return None
+    try:
+        parsed = json.loads(text)
+    except json.JSONDecodeError:
+        return None
+    return _normalize(parsed)
+
+
+def _normalize(parsed: dict) -> dict | None:
+    """Coerce types, validate ranges, and drop nonsense values."""
+    def _num(v):
+        if v is None:
+            return None
+        try:
+            n = float(v)
+        except (TypeError, ValueError):
+            return None
+        # E. coli readings are non-negative; cap at a sane upper bound to
+        # reject obviously wrong vision outputs.
+        if n < 0 or n > 100000:
+            return None
+        return n
+
+    out = {
+        "north": _num(parsed.get("north_geomean")),
+        "south": _num(parsed.get("south_geomean")),
+        "source": "gemini",
+    }
+    date = parsed.get("test_date")
+    if isinstance(date, str) and len(date) == 10 and date[4] == "-" and date[7] == "-":
+        out["test_date"] = date
+    if out["north"] is None and out["south"] is None:
+        return None
+    return out
