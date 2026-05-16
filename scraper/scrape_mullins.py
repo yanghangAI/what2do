@@ -11,8 +11,12 @@ from rendered HTML and is unit-tested against a fixture.
 """
 from __future__ import annotations
 import re
+from datetime import date
+from zoneinfo import ZoneInfo
 from bs4 import BeautifulSoup
 from scraper.models import Interval
+
+TZ = ZoneInfo("America/New_York")
 
 SOURCE_URL = "https://www.mullinscenter.com/mullins-community-ice-center/public-skating"
 SCHEDULE_URL = "https://mullinscenter.finnlyconnect.com/schedule/428"
@@ -34,6 +38,17 @@ ARIA_WEEKDAY_RE = re.compile(
     re.I,
 )
 PUBLIC_SKATE_TEXT_RE = re.compile(r"public\s*skat", re.I)
+
+# Matches the date portion of the aria-label, e.g. "May 13, 2026"
+ARIA_DATE_RE = re.compile(
+    r"(January|February|March|April|May|June|July|August|"
+    r"September|October|November|December)\s+(\d{1,2}),\s*(20\d{2})",
+    re.I,
+)
+_MONTHS = {
+    "january": 1, "february": 2, "march": 3, "april": 4, "may": 5, "june": 6,
+    "july": 7, "august": 8, "september": 9, "october": 10, "november": 11, "december": 12,
+}
 
 
 def _to_24h(hour: int, minute: int, ampm: str) -> str:
@@ -65,7 +80,7 @@ def _merge_close_intervals(intervals: list[Interval], gap_threshold_min: int) ->
     return merged
 
 
-def _parse_event(event_el) -> tuple[str, Interval] | None:
+def _parse_event(event_el) -> tuple[str, Interval, date | None] | None:
     aria = event_el.get("aria-label", "") or ""
     text = event_el.get_text(" ", strip=True)
     if not PUBLIC_SKATE_TEXT_RE.search(text):
@@ -79,10 +94,28 @@ def _parse_event(event_el) -> tuple[str, Interval] | None:
         open=_to_24h(int(rm.group(1)), int(rm.group(2)), rm.group(3)),
         close=_to_24h(int(rm.group(4)), int(rm.group(5)), rm.group(6)),
     )
-    return day, interval
+    event_date: date | None = None
+    datem = ARIA_DATE_RE.search(aria)
+    if datem:
+        event_date = date(
+            int(datem.group(3)),
+            _MONTHS[datem.group(1).lower()],
+            int(datem.group(2)),
+        )
+    return day, interval, event_date
 
 
-def parse_mullins_html(html: str) -> dict:
+def parse_mullins_html(html: str, today: date | None = None) -> dict:
+    """Parse Finnly Connect week-view HTML into a hours-by-weekday dict.
+
+    Events with a calendar date earlier than ``today`` are skipped so a
+    past Wednesday in the current week stops being rendered as "every
+    Wednesday" by the frontend. ``today`` defaults to today in
+    America/New_York.
+    """
+    from datetime import datetime
+    if today is None:
+        today = datetime.now(TZ).date()
     soup = BeautifulSoup(html, "html.parser")
     hours: dict[str, list[Interval]] = {d: [] for d in DAY_ORDER}
 
@@ -90,7 +123,12 @@ def parse_mullins_html(html: str) -> dict:
         parsed = _parse_event(event_el)
         if parsed is None:
             continue
-        day, interval = parsed
+        day, interval, event_date = parsed
+        # Drop events whose date has already passed this week — the
+        # Finnly week view shows the full calendar week, including days
+        # earlier in the week that have already happened.
+        if event_date is not None and event_date < today:
+            continue
         if interval not in hours[day]:
             hours[day].append(interval)
 
