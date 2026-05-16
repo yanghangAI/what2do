@@ -3,7 +3,7 @@
 
   // Cloudflare Worker that stores satisfied/unsatisfied vote counts.
   // Set to "" to disable the vote UI entirely.
-  var PUFFER_VOTES_URL = "https://puffer-votes.yanghang.workers.dev";
+  var PUFFER_VOTES_URL = "https://puffer-votes.hangyang.workers.dev";
 
   var TZ = "America/New_York";
   var DAYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
