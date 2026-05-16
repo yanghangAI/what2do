@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-16T12:18:29-04:00",
+  "last_updated": "2026-05-16T12:28:06-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -12,18 +12,8 @@
       },
       "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
       "hours": {
-        "mon": [
-          {
-            "open": "11:00",
-            "close": "13:00"
-          }
-        ],
-        "tue": [
-          {
-            "open": "11:00",
-            "close": "13:00"
-          }
-        ],
+        "mon": [],
+        "tue": [],
         "wed": [
           {
             "open": "11:00",
@@ -45,9 +35,11 @@
         "sat": [],
         "sun": []
       },
-      "notes": [],
+      "notes": [
+        "Closed for semester transition; summer hours begin 2026-05-20."
+      ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T12:18:29-04:00"
+      "last_scraped": "2026-05-16T12:28:06-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -96,69 +88,12 @@
         "Please Note the Hicks Pool will be CLOSED on the following dates: Wednesday, May 20, 2026 - For Electrical Work"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T12:18:29-04:00"
+      "last_scraped": "2026-05-16T12:28:06-04:00"
     },
     {
       "id": "rockwell-climbing",
       "name": "RockWell Climbing Gym",
       "category": "climbing",
-      "location": {
-        "label": "Recreation Center, UMass Amherst",
-        "maps_url": "https://www.google.com/maps/search/?api=1&query=UMass+Recreation+Center+Amherst"
-      },
-      "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
-      "hours": {
-        "mon": [
-          {
-            "open": "16:00",
-            "close": "20:00"
-          }
-        ],
-        "tue": [
-          {
-            "open": "16:00",
-            "close": "20:00"
-          }
-        ],
-        "wed": [
-          {
-            "open": "16:00",
-            "close": "20:00"
-          }
-        ],
-        "thu": [
-          {
-            "open": "16:00",
-            "close": "20:00"
-          }
-        ],
-        "fri": [
-          {
-            "open": "16:00",
-            "close": "20:00"
-          }
-        ],
-        "sat": [
-          {
-            "open": "16:00",
-            "close": "20:00"
-          }
-        ],
-        "sun": [
-          {
-            "open": "16:00",
-            "close": "20:00"
-          }
-        ]
-      },
-      "notes": [],
-      "scrape_status": "ok",
-      "last_scraped": "2026-05-16T12:18:29-04:00"
-    },
-    {
-      "id": "recreation-center",
-      "name": "Recreation Center",
-      "category": "fitness",
       "location": {
         "label": "Recreation Center, UMass Amherst",
         "maps_url": "https://www.google.com/maps/search/?api=1&query=UMass+Recreation+Center+Amherst"
@@ -173,9 +108,50 @@
         "sat": [],
         "sun": []
       },
-      "notes": [],
+      "notes": [
+        "Closed for semester transition; summer hours begin 2026-05-26."
+      ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T12:18:29-04:00"
+      "last_scraped": "2026-05-16T12:28:06-04:00"
+    },
+    {
+      "id": "recreation-center",
+      "name": "Recreation Center",
+      "category": "fitness",
+      "location": {
+        "label": "Recreation Center, UMass Amherst",
+        "maps_url": "https://www.google.com/maps/search/?api=1&query=UMass+Recreation+Center+Amherst"
+      },
+      "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
+      "hours": {
+        "mon": [],
+        "tue": [],
+        "wed": [
+          {
+            "open": "07:00",
+            "close": "19:00"
+          }
+        ],
+        "thu": [
+          {
+            "open": "07:00",
+            "close": "19:00"
+          }
+        ],
+        "fri": [
+          {
+            "open": "07:00",
+            "close": "19:00"
+          }
+        ],
+        "sat": [],
+        "sun": []
+      },
+      "notes": [
+        "Closed for semester transition; summer hours begin 2026-05-20."
+      ],
+      "scrape_status": "ok",
+      "last_scraped": "2026-05-16T12:28:06-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -199,7 +175,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T12:18:29-04:00"
+      "last_scraped": "2026-05-16T12:28:06-04:00"
     },
     {
       "id": "mullins-ice",
@@ -233,7 +209,7 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T12:18:29-04:00"
+      "last_scraped": "2026-05-16T12:28:06-04:00"
     }
   ],
   "programs": [
@@ -482,6 +458,10 @@
     },
     "boyden-pool": {
       "start_date": "2026-05-20",
+      "closed_from": null
+    },
+    "rockwell-climbing": {
+      "start_date": "2026-05-26",
       "closed_from": null
     }
   }
