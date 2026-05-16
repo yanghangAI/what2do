@@ -220,9 +220,15 @@
           ])]),
           el("tbody", {}, [beachRow("north"), beachRow("south")]),
         ]));
-        children.push(el("p", { class: "beaches-note" }, [
-          "Sample column OCR'd from a handwritten cell — verify with the PDF.",
-        ]));
+        var pdfHref = (wq.latest_report && wq.latest_report.url) || wq.report_url;
+        var noteChildren = ["Sample column OCR'd from a handwritten cell — verify with the "];
+        if (pdfHref) {
+          noteChildren.push(el("a", { href: pdfHref, target: "_blank", rel: "noopener" }, ["PDF"]));
+          noteChildren.push(".");
+        } else {
+          noteChildren.push("PDF.");
+        }
+        children.push(el("p", { class: "beaches-note" }, noteChildren));
       } else {
         // No numbers extracted — fall back to per-beach pass/fail verdict.
         var verdictLi = function (k) {
@@ -388,7 +394,7 @@
       ]);
     });
     return el("details", { class: "wq-scale" }, [
-      el("summary", {}, ["What do the MPN/100 ml numbers mean?"]),
+      el("summary", {}, ["What do the numbers mean?"]),
       el("p", { class: "wq-scale-intro" }, [
         "E. coli is counted in colonies (MPN = most probable number) per 100 ml of water. " +
         "Massachusetts requires every freshwater swim beach to stay at or below ",
