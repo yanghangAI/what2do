@@ -14,7 +14,9 @@ from __future__ import annotations
 import base64
 import json
 import os
+import re
 import time
+import zlib
 
 import requests
 
@@ -34,15 +36,52 @@ _PROMPT = (
 )
 
 
+def _pdf_first_image(pdf_bytes: bytes) -> tuple[str, bytes] | None:
+    """Return ``(mime_type, bytes)`` for the largest embedded image in the
+    PDF — the scanned page itself. We send the image directly because
+    inline image inputs are tokenized much more cheaply than a full
+    application/pdf payload under Gemini's free tier."""
+    streams = list(re.finditer(
+        rb"<<([^>]+)>>\s*stream\r?\n(.*?)\r?\nendstream", pdf_bytes, re.DOTALL,
+    ))
+    best: tuple[str, bytes] | None = None
+    best_size = 0
+    for m in streams:
+        header = m.group(1)
+        raw = m.group(2)
+        if b"/Subtype /Image" not in header:
+            continue
+        if b"/DCTDecode" not in header:
+            continue
+        # Pipeline /FlateDecode /DCTDecode → deflate first, then it's JPEG.
+        try:
+            data = zlib.decompress(raw) if b"/FlateDecode" in header else raw
+        except zlib.error:
+            continue
+        if not data.startswith(b"\xff\xd8"):
+            continue
+        if len(data) > best_size:
+            best = ("image/jpeg", data)
+            best_size = len(data)
+    return best
+
+
 def extract_readings(pdf_bytes: bytes, api_key: str | None = None) -> dict | None:
     api_key = api_key or os.environ.get("GEMINI_API_KEY")
     if not api_key:
         return None
+
+    img = _pdf_first_image(pdf_bytes)
+    if img:
+        mime, payload = img
+    else:
+        mime, payload = "application/pdf", pdf_bytes
+
     body = {
         "contents": [{"parts": [
             {"inline_data": {
-                "mime_type": "application/pdf",
-                "data": base64.b64encode(pdf_bytes).decode(),
+                "mime_type": mime,
+                "data": base64.b64encode(payload).decode(),
             }},
             {"text": _PROMPT},
         ]}],
