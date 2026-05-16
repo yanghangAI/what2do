@@ -379,6 +379,14 @@ ul.open-now-list li.urgent .on-countdown { color: var(--closed); }
   color: var(--ink-soft);
 }
 
+.wq-table-title {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  margin: 0.5rem 0 0.2rem;
+}
 .wq-table {
   width: 100%;
   border-collapse: collapse;

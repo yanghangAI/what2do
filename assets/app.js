@@ -207,6 +207,9 @@
             cell(readings[k + "_geomean"]),
           ]);
         };
+        children.push(el("p", { class: "wq-table-title" }, [
+          "E. coli levels (MPN/100 ml)",
+        ]));
         children.push(el("table", { class: "wq-table" }, [
           el("thead", {}, [el("tr", {}, [
             el("th", {}, [""]),
@@ -216,7 +219,7 @@
           el("tbody", {}, [beachRow("north"), beachRow("south")]),
         ]));
         children.push(el("p", { class: "beaches-note" }, [
-          "MPN/100 ml E. coli. ‘Latest sample’ is read from the handwritten cell on the scanned form — may be off by a digit; see PDF to verify.",
+          "‘Latest sample’ is read from the handwritten cell on the scanned form — may be off by a digit; see PDF to verify.",
         ]));
       } else {
         // No numbers extracted — fall back to per-beach pass/fail verdict.
