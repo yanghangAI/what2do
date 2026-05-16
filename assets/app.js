@@ -165,7 +165,8 @@
 
   function renderWaterQuality(wq) {
     var todayIso = todayIsoInTz();
-    var offSeason = !wq.last_updated || daysBetween(wq.last_updated, todayIso) > 21;
+    var testIso = (wq.latest_report && wq.latest_report.date) || wq.last_updated;
+    var offSeason = !testIso || daysBetween(testIso, todayIso) > 21;
     var cls, label;
     if (offSeason) {
       cls = "offseason"; label = "OFF-SEASON — no current testing";
@@ -180,7 +181,9 @@
     if (wq.beaches) {
       var beachLabel = function (k) {
         var s = wq.beaches[k];
-        var txt = s === "ok" ? "OK" : s === "closed" ? "closed" : "unknown";
+        var txt = s === "ok" ? "meets standards"
+              : s === "closed" ? "exceeds standards"
+              : "no data";
         return el("span", { class: "beach beach-" + s }, [
           k === "north" ? "North Beach: " : "South Beach: ", txt,
         ]);
@@ -194,10 +197,24 @@
     if (wq.detail) {
       children.push(el("p", { class: "wq-detail" }, [wq.detail]));
     }
-    if (wq.last_updated) {
-      children.push(el("p", { class: "wq-updated" }, [
-        "Last tested " + formatDateHeading(wq.last_updated, weekdayOfIso(wq.last_updated)),
-      ]));
+    children.push(el("p", { class: "wq-standard" }, [
+      "Standard: ≤235 MPN/100 ml E. coli (single sample); ≤126 MPN/100 ml (geomean).",
+    ]));
+    if (testIso) {
+      var heading = "Most recent test: " + formatDateHeading(testIso, weekdayOfIso(testIso));
+      var line = el("p", { class: "wq-updated" }, [heading]);
+      if (wq.latest_report && wq.latest_report.url) {
+        line.appendChild(document.createTextNode(" · "));
+        line.appendChild(el("a", {
+          href: wq.latest_report.url, target: "_blank", rel: "noopener",
+        }, ["View full report"]));
+      } else if (wq.report_url) {
+        line.appendChild(document.createTextNode(" · "));
+        line.appendChild(el("a", {
+          href: wq.report_url, target: "_blank", rel: "noopener",
+        }, ["All reports"]));
+      }
+      children.push(line);
     }
     return children;
   }

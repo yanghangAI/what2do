@@ -1,8 +1,9 @@
 from pathlib import Path
 
-from scraper.scrape_puffer import parse_puffer_html
+from scraper.scrape_puffer import parse_latest_report, parse_puffer_html
 
 FIXTURE = Path(__file__).parent / "fixtures" / "puffer.html"
+ARCHIVE_FIXTURE = Path(__file__).parent / "fixtures" / "puffer_archive.html"
 
 
 def test_parses_live_status_from_fixture():
@@ -34,3 +35,11 @@ def test_closed_status_synthetic():
 
 def test_returns_none_when_heading_absent():
     assert parse_puffer_html("<html><body><h1>not the right page</h1></body></html>") is None
+
+
+def test_parse_latest_report_picks_most_recent():
+    r = parse_latest_report(ARCHIVE_FIXTURE.read_text())
+    assert r is not None
+    assert r["date"] == "2025-08-26"
+    assert "ADID=18329" in r["url"]
+    assert "08-26-2025" in r["title"]

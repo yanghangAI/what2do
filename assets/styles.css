@@ -386,6 +386,12 @@ ul.open-now-list li.urgent .on-countdown { color: var(--closed); }
   margin: 0 0 0.75rem;
   font-family: "JetBrains Mono", monospace;
 }
+.wq-standard {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+  font-style: italic;
+}
 
 .stale-banner {
   background: var(--warn-bg);

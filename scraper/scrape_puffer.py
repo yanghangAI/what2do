@@ -17,6 +17,11 @@ from bs4 import BeautifulSoup
 
 SOURCE_URL = "https://www.amherstma.gov/1316/Puffers-Pond"
 REPORT_URL = "https://www.amherstma.gov/Archive.aspx?AMID=234"
+ARCHIVE_URL = "https://www.amherstma.gov/Archive.aspx?AMID=234"
+ARCHIVE_LINK_RE = re.compile(
+    r"Puffer.{0,3}s?\s*Pond[^<]{0,80}?(\d{2})-(\d{2})-(\d{4})",
+    re.I,
+)
 
 _MONTHS = {
     "january": 1, "february": 2, "march": 3, "april": 4, "may": 5, "june": 6,
@@ -29,9 +34,10 @@ class PufferStatus:
     status: str           # "allowed" | "closed" | "unknown"
     headline: str         # short status sentence
     detail: str           # supporting sentence(s)
-    last_updated: str | None  # ISO date
+    last_updated: str | None  # ISO date (page "Updated <date>")
     beaches: dict[str, str]   # {"north": ..., "south": ...} each "ok" | "closed" | "unknown"
-    report_url: str
+    report_url: str           # archive index URL
+    latest_report: dict | None = None  # {"date": ISO, "url": ..., "title": ...}
 
     def to_dict(self) -> dict:
         return {
@@ -41,6 +47,7 @@ class PufferStatus:
             "last_updated": self.last_updated,
             "beaches": self.beaches,
             "report_url": self.report_url,
+            "latest_report": self.latest_report,
         }
 
 
@@ -135,7 +142,38 @@ def parse_puffer_html(html: str) -> PufferStatus | None:
     )
 
 
+def parse_latest_report(html: str) -> dict | None:
+    """Find the most-recent test entry in the archive index page."""
+    soup = BeautifulSoup(html, "html.parser")
+    best = None
+    for a in soup.find_all("a", href=True):
+        title = a.get_text(" ", strip=True)
+        if "puffer" not in title.lower():
+            continue
+        m = ARCHIVE_LINK_RE.search(title)
+        if not m:
+            continue
+        mm, dd, yyyy = m.group(1), m.group(2), m.group(3)
+        iso = f"{yyyy}-{mm}-{dd}"
+        href = a["href"]
+        if not href.startswith("http"):
+            href = "https://www.amherstma.gov/" + href.lstrip("/")
+        cand = {"date": iso, "url": href, "title": title}
+        if best is None or cand["date"] > best["date"]:
+            best = cand
+    return best
+
+
 def fetch_puffer() -> PufferStatus | None:
     r = requests.get(SOURCE_URL, headers={"User-Agent": "Mozilla/5.0"}, timeout=30)
     r.raise_for_status()
-    return parse_puffer_html(r.text)
+    status = parse_puffer_html(r.text)
+    if status is None:
+        return None
+    try:
+        idx = requests.get(ARCHIVE_URL, headers={"User-Agent": "Mozilla/5.0"}, timeout=30)
+        idx.raise_for_status()
+        status.latest_report = parse_latest_report(idx.text)
+    except Exception:
+        pass
+    return status
