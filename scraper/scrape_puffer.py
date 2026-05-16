@@ -9,6 +9,7 @@ Day); outside that window the page shows the stale last-result.
 """
 from __future__ import annotations
 
+import os
 import re
 from dataclasses import dataclass
 
@@ -180,6 +181,7 @@ def fetch_puffer() -> PufferStatus | None:
     # hand the PDF to Gemini's vision API. Skips silently if GEMINI_API_KEY
     # isn't set — local dev / tests don't need a key.
     if status.latest_report and status.latest_report.get("url"):
+        import sys
         try:
             from scraper.vision_puffer import extract_readings
             pdf = requests.get(
@@ -191,6 +193,13 @@ def fetch_puffer() -> PufferStatus | None:
             readings = extract_readings(pdf.content)
             if readings:
                 status.latest_report["readings"] = readings
-        except Exception:
-            pass
+                print(f"puffer vision OK: {readings}", file=sys.stderr)
+            else:
+                key_set = bool(os.environ.get("GEMINI_API_KEY"))
+                print(
+                    f"puffer vision: no readings (GEMINI_API_KEY set={key_set})",
+                    file=sys.stderr,
+                )
+        except Exception as e:
+            print(f"puffer vision error: {type(e).__name__}: {e}", file=sys.stderr)
     return status
