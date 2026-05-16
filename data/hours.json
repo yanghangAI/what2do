@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-16T12:28:06-04:00",
+  "last_updated": "2026-05-16T12:31:04-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -39,7 +39,7 @@
         "Closed for semester transition; summer hours begin 2026-05-20."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T12:28:06-04:00"
+      "last_scraped": "2026-05-16T12:31:04-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -51,44 +51,38 @@
       },
       "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
       "hours": {
-        "mon": [
-          {
-            "open": "07:00",
-            "close": "21:00"
-          }
-        ],
-        "tue": [
-          {
-            "open": "07:00",
-            "close": "21:00"
-          }
-        ],
-        "wed": [
-          {
-            "open": "07:00",
-            "close": "21:00"
-          }
-        ],
+        "mon": [],
+        "tue": [],
+        "wed": [],
         "thu": [
           {
             "open": "07:00",
-            "close": "21:00"
+            "close": "09:00"
+          },
+          {
+            "open": "17:00",
+            "close": "19:30"
           }
         ],
         "fri": [
           {
             "open": "07:00",
-            "close": "21:00"
+            "close": "09:00"
+          },
+          {
+            "open": "17:00",
+            "close": "19:30"
           }
         ],
         "sat": [],
         "sun": []
       },
       "notes": [
-        "Please Note the Hicks Pool will be CLOSED on the following dates: Wednesday, May 20, 2026 - For Electrical Work"
+        "Please Note the Hicks Pool will be CLOSED on the following dates: Wednesday, May 20, 2026 - For Electrical Work",
+        "Closed for semester transition; summer hours begin 2026-05-21."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T12:28:06-04:00"
+      "last_scraped": "2026-05-16T12:31:04-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -112,7 +106,7 @@
         "Closed for semester transition; summer hours begin 2026-05-26."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T12:28:06-04:00"
+      "last_scraped": "2026-05-16T12:31:04-04:00"
     },
     {
       "id": "recreation-center",
@@ -151,7 +145,7 @@
         "Closed for semester transition; summer hours begin 2026-05-20."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T12:28:06-04:00"
+      "last_scraped": "2026-05-16T12:31:04-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -175,7 +169,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T12:28:06-04:00"
+      "last_scraped": "2026-05-16T12:31:04-04:00"
     },
     {
       "id": "mullins-ice",
@@ -209,7 +203,7 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T12:28:06-04:00"
+      "last_scraped": "2026-05-16T12:31:04-04:00"
     }
   ],
   "programs": [
@@ -458,6 +452,10 @@
     },
     "boyden-pool": {
       "start_date": "2026-05-20",
+      "closed_from": null
+    },
+    "curry-hicks-pool": {
+      "start_date": "2026-05-21",
       "closed_from": null
     },
     "rockwell-climbing": {
