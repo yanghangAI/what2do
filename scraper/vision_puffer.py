@@ -35,23 +35,27 @@ _GEMINI_URL_TMPL = (
 
 _PROMPT = (
     "You are reading a Puffer's Pond (Amherst, MA) water quality test "
-    "report — a scanned chain-of-custody form from Amherst WWTP.\n\n"
-    "Layout: the bottom-right of the form has two boxes, labeled "
-    "\"South Beach Geometric Mean of 5 most recent samples:\" and "
-    "\"North Beach Geometric Mean of 5 most recent samples:\". Each box "
-    "contains a single number (typed or handwritten) — that is the value "
-    "I want. Do NOT return any of the individual sample values from the "
-    "table above; only the 5-sample geomean from those two labeled "
-    "boxes.\n\n"
-    "Also extract the sample collection date (look for \"Date/Time of "
-    "Sample\" rows in the chain-of-custody table — should be the date "
-    "the samples were collected from the pond).\n\n"
+    "report — a scanned chain-of-custody form from Amherst WWTP. Two "
+    "kinds of numbers are present:\n\n"
+    "1. SINGLE-SAMPLE values (this week's reading). In the chain-of-"
+    "custody table at the top, look for the 'MPN/100 ml' column with "
+    "two handwritten rows next to 'South Beach' and 'North Beach'.\n"
+    "2. GEOMEAN values (5-sample running averages). In the bottom-"
+    "right of the form, two typed/printed boxes labeled \"South Beach "
+    "Geometric Mean of 5 most recent samples:\" and \"North Beach "
+    "Geometric Mean of 5 most recent samples:\".\n\n"
+    "Also read the sample collection date (\"Date/Time of Sample\" rows "
+    "in the chain-of-custody table).\n\n"
     "Return ONLY JSON in this exact shape:\n"
-    '{"south_geomean": <number or null>, '
-    '"north_geomean": <number or null>, '
-    '"test_date": "<YYYY-MM-DD or null>"}\n\n'
-    "If a value isn't clearly readable, use null — do not guess. Numbers "
-    "may have decimals (e.g. 9.8, 141.4)."
+    "{\n"
+    '  "south_sample": <number or null>, '
+    '"north_sample": <number or null>,\n'
+    '  "south_geomean": <number or null>, '
+    '"north_geomean": <number or null>,\n'
+    '  "test_date": "<YYYY-MM-DD or null>"\n'
+    "}\n\n"
+    "If any value isn't clearly readable, use null — do not guess. "
+    "Numbers may have decimals (e.g. 9.8, 141.4, 95.58)."
 )
 
 
@@ -159,13 +163,16 @@ def _normalize(parsed: dict) -> dict | None:
         return n
 
     out = {
-        "north": _num(parsed.get("north_geomean")),
-        "south": _num(parsed.get("south_geomean")),
+        "north_geomean": _num(parsed.get("north_geomean")),
+        "south_geomean": _num(parsed.get("south_geomean")),
+        "north_sample":  _num(parsed.get("north_sample")),
+        "south_sample":  _num(parsed.get("south_sample")),
         "source": "gemini",
     }
     date = parsed.get("test_date")
     if isinstance(date, str) and len(date) == 10 and date[4] == "-" and date[7] == "-":
         out["test_date"] = date
-    if out["north"] is None and out["south"] is None:
+    if all(out[k] is None for k in
+           ("north_geomean", "south_geomean", "north_sample", "south_sample")):
         return None
     return out

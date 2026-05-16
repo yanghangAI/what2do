@@ -382,6 +382,8 @@ ul.open-now-list li.urgent .on-countdown { color: var(--closed); }
 .beach-num.beach-ok   { color: var(--ok); }
 .beach-num.beach-warn { color: #b07a1a; }
 .beach-num.beach-bad  { color: var(--closed); }
+.beach-num.beach-none { color: var(--muted); font-weight: 400; }
+.beach-unit { color: var(--muted); font-size: 0.8rem; }
 
 .wq-detail {
   font-size: 0.9rem;

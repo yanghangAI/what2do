@@ -180,28 +180,42 @@
     var children = [el("p", { class: "status " + cls }, [label])];
     var readings = wq.latest_report && wq.latest_report.readings;
     if (wq.beaches) {
+      // Color band per E. coli value: single-sample threshold is 235,
+      // geomean threshold is 126.
+      var bandFor = function (n, limit) {
+        if (n == null) return null;
+        if (n <= limit * 0.5) return "ok";
+        if (n <= limit) return "ok";
+        if (n <= limit * 1.87) return "warn"; // up to single-sample cap
+        return "bad";
+      };
+      var numCell = function (n, limit) {
+        if (n == null) return el("span", { class: "beach-num beach-none" }, ["—"]);
+        return el("strong", { class: "beach-num beach-" + bandFor(n, limit) },
+                  [String(n)]);
+      };
       var beachLine = function (k) {
         var s = wq.beaches[k];
-        var n = readings && readings[k];
-        var band = n == null ? null
-                 : n <= 126   ? "ok"
-                 : n <= 235   ? "warn"
-                              : "bad";
-        var pieces = [el("span", { class: "beach-name" }, [
-          k === "north" ? "North Beach" : "South Beach",
-        ])];
-        if (n != null) {
-          pieces.push(document.createTextNode("  "));
-          pieces.push(el("strong", { class: "beach-num beach-" + band }, [
-            n + " MPN/100 ml",
-          ]));
-        } else {
+        var sample  = readings ? readings[k + "_sample"]  : null;
+        var geomean = readings ? readings[k + "_geomean"] : null;
+        var name = k === "north" ? "North Beach" : "South Beach";
+        if (sample == null && geomean == null) {
           var verdict = s === "ok" ? "meets standards"
                       : s === "closed" ? "exceeds standards"
                       : "no data";
-          pieces.push(document.createTextNode("  " + verdict));
+          return el("li", {}, [
+            el("span", { class: "beach-name" }, [name]),
+            document.createTextNode("  " + verdict),
+          ]);
         }
-        return el("li", {}, pieces);
+        return el("li", {}, [
+          el("span", { class: "beach-name" }, [name]),
+          document.createTextNode("  sample "),
+          numCell(sample, 235),
+          document.createTextNode("  ·  geomean "),
+          numCell(geomean, 126),
+          el("span", { class: "beach-unit" }, [" MPN/100 ml"]),
+        ]);
       };
       children.push(el("ul", { class: "beaches" }, [
         beachLine("north"), beachLine("south"),

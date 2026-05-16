@@ -39,20 +39,32 @@ def test_returns_none_when_heading_absent():
 
 def test_vision_normalize_keeps_valid_numbers():
     from scraper.vision_puffer import _normalize
-    r = _normalize({"north_geomean": 9.8, "south_geomean": 141.4, "test_date": "2025-08-26"})
-    assert r == {"north": 9.8, "south": 141.4, "source": "gemini", "test_date": "2025-08-26"}
+    r = _normalize({
+        "south_sample": 141.4, "north_sample": 9.8,
+        "south_geomean": 95.58, "north_geomean": 49.17,
+        "test_date": "2025-08-26",
+    })
+    assert r["south_sample"] == 141.4 and r["north_sample"] == 9.8
+    assert r["south_geomean"] == 95.58 and r["north_geomean"] == 49.17
+    assert r["test_date"] == "2025-08-26"
 
 
 def test_vision_normalize_drops_out_of_range_values():
     from scraper.vision_puffer import _normalize
-    r = _normalize({"north_geomean": -1, "south_geomean": 999999, "test_date": None})
-    assert r is None  # nothing valid → None
+    r = _normalize({
+        "south_sample": -1, "north_sample": 999999,
+        "south_geomean": None, "north_geomean": None, "test_date": None,
+    })
+    assert r is None
 
 
 def test_vision_normalize_keeps_partial_results():
     from scraper.vision_puffer import _normalize
-    r = _normalize({"north_geomean": None, "south_geomean": 141.4, "test_date": None})
-    assert r["north"] is None and r["south"] == 141.4
+    r = _normalize({
+        "south_sample": 141.4, "north_sample": None,
+        "south_geomean": None, "north_geomean": None, "test_date": None,
+    })
+    assert r["south_sample"] == 141.4 and r["north_sample"] is None
 
 
 def test_parse_latest_report_picks_most_recent():
