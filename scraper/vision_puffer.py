@@ -81,11 +81,12 @@ def extract_readings(pdf_bytes: bytes, api_key: str | None = None) -> dict | Non
     if not api_key:
         return None
 
-    img = _pdf_first_image(pdf_bytes)
-    if img:
-        mime, payload = img
-    else:
-        mime, payload = "application/pdf", pdf_bytes
+    # Send the full PDF: the form is rendered across several PDF layers
+    # (one bitmap for the printed template, a separate JBIG2 layer for
+    # the handwritten/typed entries). Extracting just one image strips
+    # away the actual data — Gemini then hallucinates plausible-looking
+    # numbers off a blank template.
+    mime, payload = "application/pdf", pdf_bytes
 
     body = {
         "contents": [{"parts": [
