@@ -176,4 +176,18 @@ def fetch_puffer() -> PufferStatus | None:
         status.latest_report = parse_latest_report(idx.text)
     except Exception:
         pass
+    if status.latest_report and status.latest_report.get("url"):
+        try:
+            from scraper.ocr_puffer import extract_puffer_results
+            pdf = requests.get(
+                status.latest_report["url"],
+                headers={"User-Agent": "Mozilla/5.0"},
+                timeout=60,
+            )
+            pdf.raise_for_status()
+            readings = extract_puffer_results(pdf.content)
+            if readings:
+                status.latest_report["readings"] = readings
+        except Exception:
+            pass
     return status

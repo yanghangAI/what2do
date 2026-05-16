@@ -178,15 +178,22 @@
       cls = "closed"; label = "STATUS UNKNOWN";
     }
     var children = [el("p", { class: "status " + cls }, [label])];
+    var readings = wq.latest_report && wq.latest_report.readings;
     if (wq.beaches) {
       var beachLabel = function (k) {
         var s = wq.beaches[k];
-        var txt = s === "ok" ? "meets standards"
-              : s === "closed" ? "exceeds standards"
-              : "no data";
-        return el("span", { class: "beach beach-" + s }, [
-          k === "north" ? "North Beach: " : "South Beach: ", txt,
-        ]);
+        var n = readings && readings[k];
+        var verdict = s === "ok" ? "meets standards"
+                    : s === "closed" ? "exceeds standards"
+                    : "no data";
+        var children2 = [k === "north" ? "North Beach: " : "South Beach: "];
+        if (n != null) {
+          children2.push(el("strong", {}, [n + " MPN/100 ml"]));
+          children2.push(" — " + verdict);
+        } else {
+          children2.push(verdict);
+        }
+        return el("span", { class: "beach beach-" + s }, children2);
       };
       children.push(el("p", { class: "beaches" }, [
         beachLabel("north"),

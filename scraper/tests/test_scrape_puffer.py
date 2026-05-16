@@ -37,6 +37,25 @@ def test_returns_none_when_heading_absent():
     assert parse_puffer_html("<html><body><h1>not the right page</h1></body></html>") is None
 
 
+def test_ocr_parse_text_extracts_per_beach_numbers():
+    from scraper.ocr_puffer import parse_ocr_text
+    sample = (
+        "Puffer's Pond Water Quality Test\n"
+        "Date: 08/26/2025\n"
+        "North Beach   45 MPN/100ml\n"
+        "South Beach   210 MPN/100ml\n"
+        "Standard: 235 MPN/100ml single sample\n"
+    )
+    r = parse_ocr_text(sample)
+    assert r["north"] == 45.0
+    assert r["south"] == 210.0
+
+
+def test_ocr_parse_text_returns_none_when_no_match():
+    from scraper.ocr_puffer import parse_ocr_text
+    assert parse_ocr_text("Lorem ipsum no beaches here") is None
+
+
 def test_parse_latest_report_picks_most_recent():
     r = parse_latest_report(ARCHIVE_FIXTURE.read_text())
     assert r is not None
