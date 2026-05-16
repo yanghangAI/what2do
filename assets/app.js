@@ -180,49 +180,57 @@
     var children = [el("p", { class: "status " + cls }, [label])];
     var readings = wq.latest_report && wq.latest_report.readings;
     if (wq.beaches) {
-      // Color band per E. coli value: single-sample threshold is 235,
-      // geomean threshold is 126.
+      // Color band per E. coli value: single-sample limit 235, 5-week mean limit 126.
       var bandFor = function (n, limit) {
-        if (n == null) return null;
-        if (n <= limit * 0.5) return "ok";
+        if (n == null) return "none";
         if (n <= limit) return "ok";
-        if (n <= limit * 1.87) return "warn"; // up to single-sample cap
+        if (n <= 235) return "warn";
         return "bad";
       };
-      var numCell = function (n, limit) {
-        if (n == null) return el("span", { class: "beach-num beach-none" }, ["—"]);
-        return el("strong", { class: "beach-num beach-" + bandFor(n, limit) },
-                  [String(n)]);
+      var cell = function (n, limit) {
+        if (n == null) return el("td", { class: "wq-cell wq-none" }, ["—"]);
+        return el("td", { class: "wq-cell wq-" + bandFor(n, limit) }, [String(n)]);
       };
-      var beachLine = function (k) {
-        var s = wq.beaches[k];
-        var sample  = readings ? readings[k + "_sample"]  : null;
-        var geomean = readings ? readings[k + "_geomean"] : null;
-        var name = k === "north" ? "North Beach" : "South Beach";
-        if (sample == null && geomean == null) {
+      var hasNumbers = readings && (
+        readings.north_sample != null || readings.south_sample != null ||
+        readings.north_geomean != null || readings.south_geomean != null
+      );
+      if (hasNumbers) {
+        var beachRow = function (k) {
+          var name = k === "north" ? "North Beach" : "South Beach";
+          return el("tr", {}, [
+            el("th", { scope: "row" }, [name]),
+            cell(readings[k + "_sample"], 235),
+            cell(readings[k + "_geomean"], 126),
+          ]);
+        };
+        children.push(el("table", { class: "wq-table" }, [
+          el("thead", {}, [el("tr", {}, [
+            el("th", {}, [""]),
+            el("th", {}, ["this week"]),
+            el("th", {}, ["5-week mean"]),
+          ])]),
+          el("tbody", {}, [beachRow("north"), beachRow("south")]),
+        ]));
+        children.push(el("p", { class: "beaches-note" }, [
+          "MPN/100 ml E. coli. ‘This week’ is read from the handwritten cell on the scanned form — may be off by a digit; see PDF to verify.",
+        ]));
+      } else {
+        // No numbers extracted — fall back to per-beach pass/fail verdict.
+        var verdictLi = function (k) {
+          var s = wq.beaches[k];
           var verdict = s === "ok" ? "meets standards"
                       : s === "closed" ? "exceeds standards"
                       : "no data";
           return el("li", {}, [
-            el("span", { class: "beach-name" }, [name]),
+            el("span", { class: "beach-name" }, [
+              k === "north" ? "North Beach" : "South Beach",
+            ]),
             document.createTextNode("  " + verdict),
           ]);
-        }
-        return el("li", {}, [
-          el("span", { class: "beach-name" }, [name]),
-          document.createTextNode("  sample "),
-          numCell(sample, 235),
-          document.createTextNode("  ·  5-week mean "),
-          numCell(geomean, 126),
-          el("span", { class: "beach-unit" }, [" MPN/100 ml"]),
-        ]);
-      };
-      children.push(el("ul", { class: "beaches" }, [
-        beachLine("north"), beachLine("south"),
-      ]));
-      if (readings && (readings.north_sample != null || readings.south_sample != null)) {
-        children.push(el("p", { class: "beaches-note" }, [
-          "Sample values are read from handwritten cells — may be off by a digit. See PDF to verify.",
+        };
+        children.push(el("ul", { class: "beaches" }, [
+          verdictLi("north"), verdictLi("south"),
         ]));
       }
     }
