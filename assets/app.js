@@ -248,15 +248,12 @@
         ]));
       }
     }
-    // Single compact line: test date · PDF · email · phone.
-    var pdfUrl = (wq.latest_report && wq.latest_report.url) || wq.report_url;
+    // Compact info line. PDF link is embedded in the caveat above; no
+    // need to duplicate it here.
     var infoBits = [];
     if (testIso) infoBits.push(el("span", {}, [
       "Tested ", el("strong", {}, [formatDateHeading(testIso, weekdayOfIso(testIso))]),
     ]));
-    if (pdfUrl) infoBits.push(el("a", {
-      href: pdfUrl, target: "_blank", rel: "noopener",
-    }, ["Report PDF"]));
     var infoLine = el("p", { class: "wq-info" }, []);
     infoBits.forEach(function (node, i) {
       if (i > 0) infoLine.appendChild(document.createTextNode(" · "));
@@ -336,7 +333,8 @@
     var age = prev ? Date.now() - prev.ts : Infinity;
     if (age < VOTE_COOLDOWN_MS) {
       var daysLeft = Math.ceil((VOTE_COOLDOWN_MS - age) / 86400000);
-      disableButtons("you voted — back in " + daysLeft + "d");
+      var dayStr = daysLeft === 1 ? "1 day" : daysLeft + " days";
+      disableButtons("You already voted this week. You can vote again in " + dayStr + ".");
       if (prev && prev.kind === "unsatisfied") contact.hidden = false;
     }
 
@@ -362,13 +360,13 @@
         .then(function (data) {
           recordVote(kind);
           showCounts(data);
-          status.textContent = "thanks — back in 7d";
+          status.textContent = "Thanks! Only one vote per week — you can vote again in 7 days.";
           if (kind === "unsatisfied") contact.hidden = false;
         })
         .catch(function () {
           btnYes.disabled = false;
           btnNo.disabled  = false;
-          status.textContent = "submit failed — retry";
+          status.textContent = "Couldn’t submit your vote. Please try again in a moment.";
         });
     }
 
