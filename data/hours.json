@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-16T15:04:00-04:00",
+  "last_updated": "2026-05-16T15:20:33-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -39,7 +39,7 @@
         "Closed for semester transition; summer hours begin 2026-05-20."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T15:04:00-04:00"
+      "last_scraped": "2026-05-16T15:20:33-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -82,7 +82,7 @@
         "Closed for semester transition; summer hours begin 2026-05-21."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T15:04:00-04:00"
+      "last_scraped": "2026-05-16T15:20:33-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -106,7 +106,7 @@
         "Closed for semester transition; summer hours begin 2026-05-26."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T15:04:00-04:00"
+      "last_scraped": "2026-05-16T15:20:33-04:00"
     },
     {
       "id": "recreation-center",
@@ -145,7 +145,7 @@
         "Closed for semester transition; summer hours begin 2026-05-20."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T15:04:00-04:00"
+      "last_scraped": "2026-05-16T15:20:33-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -169,7 +169,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T15:04:00-04:00"
+      "last_scraped": "2026-05-16T15:20:33-04:00"
     },
     {
       "id": "mullins-ice",
@@ -203,7 +203,7 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T15:04:00-04:00"
+      "last_scraped": "2026-05-16T15:20:33-04:00"
     },
     {
       "id": "puffer-pond",
@@ -225,7 +225,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T15:04:00-04:00",
+      "last_scraped": "2026-05-16T15:20:33-04:00",
       "water_quality": {
         "status": "allowed",
         "headline": "Swimming is allowed at Puffer's Pond.",
@@ -239,13 +239,7 @@
         "latest_report": {
           "date": "2025-08-26",
           "url": "https://www.amherstma.gov/Archive.aspx?ADID=18329",
-          "title": "Puffer's Pond Water Quality Test 08-26-2025",
-          "readings": {
-            "north": 44.7,
-            "south": 45.54,
-            "kind": "estimate",
-            "raw_text": "Amherst WWTP Laboratory Page of\n\n100 Mullins Way\n\nHadley, MA\n\nChain of Custody Record\n\nProject Name: Beach Sample City & State: Amherst, MA Report To: Amherst Conservation and Develop.\n\nFacility: Amherst Conservation Dept. Email to: malones@amherstma.gov Invoice To: millsa@amherstma.gov\n\nFacility Address: 4 Boitwood Ave Phone: 41 3-259-3181\n\nSample Types: G=Grab Container\n\nMatrix: DW=Drinking Preservative: 1=Na,S,03 2=HCI 3=H,SO, \u201d S =\n\nWater 4=HNO; 5=NaOH 6=Ascorbic Acid \u00a9 g elo} 2\n\nGW=Groundwater 7=Other = Oo a 2 |\u00b0\n\nSW=Surface Water 5 wn FE ~le |S].\n\nRCW=Reclaimed Water| 2 ial &|5 |B]\n\npa [rime _| 2] 3[ camper. ELSIE (S| 5 | 8S\n\nTime _ : oO t | tk %# | O oy] w\n\n26/4/2025] 10:57 |e [sw | South Beach NAT | Pat tw Txt PT TP ey\n12 41 \u00a3nakio'so le |sw_ North Beach | ta tw Ext Ty |\nRelinquished By: Date/T! me Received By: Date/Time || aboratory South Beach:\n\nA at ho nh V b, rez ix i 205 Remarks: () Exceeds \u2018Yf Acceptable\n\nty |\nRelinquished By: Date/Time |Received By (WWTP personnel): Date/Time eee North Beach:\n\u2018a \u00a9) Exceeds R Acceptable\n~A\\IA A\u2019 $\\auvlas\nResults Amherst WWTP Laboratory Use Only\n. . South Beach Geometric Mean of 5 most recent samples:\nAnalysis | Analysis 45.54\n\nSample |.D. | Date Time Method MPN/100 ml North Beach Geometric Mean of \u00a7 most recent samples:\nSwxhPecal davies [ee aes O\u2014~\u2014~SdYSCid 44.7\nNOMEN Beacn | Slav las DEK Co llav Phone Log Umass rep:\npat: Number(s) called\nrie:\n"
-          }
+          "title": "Puffer's Pond Water Quality Test 08-26-2025"
         }
       }
     }
