@@ -251,7 +251,6 @@
     if (pdfUrl) infoBits.push(el("a", {
       href: pdfUrl, target: "_blank", rel: "noopener",
     }, ["Report PDF"]));
-    infoBits.push(el("a", { href: "mailto:publichealth@amherstma.gov" }, ["publichealth@amherstma.gov"]));
     var infoLine = el("p", { class: "wq-info" }, []);
     infoBits.forEach(function (node, i) {
       if (i > 0) infoLine.appendChild(document.createTextNode(" · "));
@@ -265,20 +264,28 @@
 
   // ---- Satisfaction vote --------------------------------------------------
 
-  var VOTE_KEY = "puffer-vote-ts";
+  var VOTE_KEY = "puffer-vote";
   var VOTE_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
 
-  function lastVoteAge() {
+  function lastVote() {
     try {
-      var ts = parseInt(localStorage.getItem(VOTE_KEY) || "0", 10);
-      if (!ts) return Infinity;
-      return Date.now() - ts;
-    } catch (_) { return Infinity; }
+      var raw = localStorage.getItem(VOTE_KEY);
+      if (!raw) return null;
+      // Back-compat: older builds stored just a numeric timestamp.
+      if (/^\d+$/.test(raw)) return { ts: parseInt(raw, 10), kind: null };
+      return JSON.parse(raw);
+    } catch (_) { return null; }
   }
 
-  function recordVote() {
-    try { localStorage.setItem(VOTE_KEY, String(Date.now())); }
-    catch (_) {}
+  function lastVoteAge() {
+    var v = lastVote();
+    return v ? Date.now() - v.ts : Infinity;
+  }
+
+  function recordVote(kind) {
+    try {
+      localStorage.setItem(VOTE_KEY, JSON.stringify({ ts: Date.now(), kind: kind }));
+    } catch (_) {}
   }
 
   function renderVoteBlock() {
@@ -293,8 +300,16 @@
       btnYes, btnNo, tally,
     ]);
     var status = el("p", { class: "wq-vote-status" }, []);
+    var contact = el("p", { class: "wq-vote-contact", hidden: true }, [
+      "Have a complaint? Email ",
+      el("a", { href: "mailto:publichealth@amherstma.gov" }, ["publichealth@amherstma.gov"]),
+      " or call ",
+      el("a", { href: "tel:+14132593077" }, ["(413) 259-3077"]),
+      " (Amherst Dept. of Public Health).",
+    ]);
     wrap.appendChild(row);
     wrap.appendChild(status);
+    wrap.appendChild(contact);
 
     function showCounts(data) {
       var s = data.satisfied || 0;
@@ -311,10 +326,12 @@
       status.textContent = msg;
     }
 
-    var age = lastVoteAge();
+    var prev = lastVote();
+    var age = prev ? Date.now() - prev.ts : Infinity;
     if (age < VOTE_COOLDOWN_MS) {
       var daysLeft = Math.ceil((VOTE_COOLDOWN_MS - age) / 86400000);
       disableButtons("you voted — back in " + daysLeft + "d");
+      if (prev && prev.kind === "unsatisfied") contact.hidden = false;
     }
 
     fetch(PUFFER_VOTES_URL, { cache: "no-store" })
@@ -337,9 +354,10 @@
           return r.json();
         })
         .then(function (data) {
-          recordVote();
+          recordVote(kind);
           showCounts(data);
           status.textContent = "thanks — back in 7d";
+          if (kind === "unsatisfied") contact.hidden = false;
         })
         .catch(function () {
           btnYes.disabled = false;
