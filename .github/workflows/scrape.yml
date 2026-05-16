@@ -20,9 +20,6 @@ jobs:
           cache: "pip"
           cache-dependency-path: scraper/requirements.txt
 
-      - name: Install OCR binaries
-        run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends tesseract-ocr poppler-utils
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip

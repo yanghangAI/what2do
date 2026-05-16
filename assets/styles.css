@@ -392,6 +392,16 @@ ul.open-now-list li.urgent .on-countdown { color: var(--closed); }
   margin: 0 0 0.5rem;
   font-style: italic;
 }
+.wq-testdate {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.95rem;
+  margin: 0 0 0.6rem;
+  color: var(--ink);
+}
+.wq-testdate a {
+  color: var(--accent);
+  text-decoration: underline;
+}
 
 .stale-banner {
   background: var(--warn-bg);

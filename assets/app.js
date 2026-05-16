@@ -178,22 +178,33 @@
       cls = "closed"; label = "STATUS UNKNOWN";
     }
     var children = [el("p", { class: "status " + cls }, [label])];
-    var readings = wq.latest_report && wq.latest_report.readings;
+    // Prominent test-date line up top.
+    if (testIso) {
+      var dateLine = el("p", { class: "wq-testdate" }, [
+        "Tested ", el("strong", {}, [formatDateHeading(testIso, weekdayOfIso(testIso))]),
+      ]);
+      if (wq.latest_report && wq.latest_report.url) {
+        dateLine.appendChild(document.createTextNode(" · "));
+        dateLine.appendChild(el("a", {
+          href: wq.latest_report.url, target: "_blank", rel: "noopener",
+        }, ["View report PDF"]));
+      } else if (wq.report_url) {
+        dateLine.appendChild(document.createTextNode(" · "));
+        dateLine.appendChild(el("a", {
+          href: wq.report_url, target: "_blank", rel: "noopener",
+        }, ["All reports"]));
+      }
+      children.push(dateLine);
+    }
     if (wq.beaches) {
       var beachLabel = function (k) {
         var s = wq.beaches[k];
-        var n = readings && readings[k];
         var verdict = s === "ok" ? "meets standards"
                     : s === "closed" ? "exceeds standards"
                     : "no data";
-        var children2 = [k === "north" ? "North Beach: " : "South Beach: "];
-        if (n != null) {
-          children2.push(el("strong", {}, ["~" + n + " MPN/100 ml"]));
-          children2.push(" — " + verdict);
-        } else {
-          children2.push(verdict);
-        }
-        return el("span", { class: "beach beach-" + s }, children2);
+        return el("span", { class: "beach beach-" + s }, [
+          k === "north" ? "North Beach: " : "South Beach: ", verdict,
+        ]);
       };
       children.push(el("p", { class: "beaches" }, [
         beachLabel("north"),
@@ -206,24 +217,8 @@
     }
     children.push(el("p", { class: "wq-standard" }, [
       "Standard: ≤235 MPN/100 ml E. coli (single sample); ≤126 MPN/100 ml (geomean). " +
-      (readings ? "Numbers are OCR estimates from the scanned report — verify against the linked PDF." : ""),
+      "Click the report PDF for the actual MPN values — the form is a scanned, hand-filled sheet so we can't reliably extract numbers.",
     ]));
-    if (testIso) {
-      var heading = "Most recent test: " + formatDateHeading(testIso, weekdayOfIso(testIso));
-      var line = el("p", { class: "wq-updated" }, [heading]);
-      if (wq.latest_report && wq.latest_report.url) {
-        line.appendChild(document.createTextNode(" · "));
-        line.appendChild(el("a", {
-          href: wq.latest_report.url, target: "_blank", rel: "noopener",
-        }, ["View full report"]));
-      } else if (wq.report_url) {
-        line.appendChild(document.createTextNode(" · "));
-        line.appendChild(el("a", {
-          href: wq.report_url, target: "_blank", rel: "noopener",
-        }, ["All reports"]));
-      }
-      children.push(line);
-    }
     return children;
   }
 

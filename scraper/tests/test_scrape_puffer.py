@@ -37,40 +37,6 @@ def test_returns_none_when_heading_absent():
     assert parse_puffer_html("<html><body><h1>not the right page</h1></body></html>") is None
 
 
-def test_ocr_parse_text_extracts_geomeans_with_digit_fixes():
-    from scraper.ocr_puffer import parse_ocr_text
-    # Simulates an OCR pass with common letter/digit confusions and
-    # noisy table cells around the typewritten geomean line.
-    sample = (
-        "Results Amherst WWTP Laboratory Use Only\n"
-        "South Beach Geometric Mean of 5 most recent samples:\n"
-        "Analysis | Analysis 4S.54\n"
-        "\n"
-        "North Beach Geometric Mean of 5 most recent samples:\n"
-        "Norn ean| garbage | [4.3 |\n"
-    )
-    r = parse_ocr_text(sample)
-    assert r["south"] == 45.54
-    assert r["north"] == 4.3
-
-
-def test_ocr_parse_skips_integer_only_junk_near_label():
-    """When the only nearby number is an integer (e.g. '17' from a date
-    column or '100' from 'MPN/100ml'), don't claim it as a reading."""
-    from scraper.ocr_puffer import parse_ocr_text
-    sample = (
-        "North Beach Geometric Mean of 5 most recent samples:\n"
-        "SmthPeal deslas| OT pee er SOS 4a 17 MPN/100\n"
-    )
-    r = parse_ocr_text(sample)
-    assert r is None
-
-
-def test_ocr_parse_returns_none_when_no_geomean_label():
-    from scraper.ocr_puffer import parse_ocr_text
-    assert parse_ocr_text("Lorem ipsum no beaches here") is None
-
-
 def test_parse_latest_report_picks_most_recent():
     r = parse_latest_report(ARCHIVE_FIXTURE.read_text())
     assert r is not None
