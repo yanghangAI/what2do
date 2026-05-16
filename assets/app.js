@@ -658,11 +658,36 @@
     return matched.length === alertIntervals.length;
   }
 
-  function renderAlert(text, facilities) {
+  function alertOverlapsWithCards(facilities, alertState, todayIso) {
+    // If every facility named in alert_state has either already moved to
+    // its summer hours (today >= start) or is currently masked with the
+    // gap-closure note on its card, then the alert isn't telling the
+    // reader anything the cards don't already show.
+    if (!alertState) return false;
+    var ids = Object.keys(alertState);
+    if (!ids.length) return false;
+    for (var i = 0; i < ids.length; i++) {
+      var entry = alertState[ids[i]] || {};
+      var start = entry.start_date;
+      if (!start) return false;
+      if (todayIso >= start) continue;
+      var f = (facilities || []).filter(function (x) { return x.id === ids[i]; })[0];
+      if (!f) return false;
+      var gapNote = (f.notes || []).some(function (n) {
+        return /Closed for semester transition/.test(n);
+      });
+      if (!gapNote) return false;
+    }
+    return true;
+  }
+
+  function renderAlert(text, facilities, alertState) {
     var root = document.getElementById("alert-banner");
     if (!root) return;
     if (!text) { root.hidden = true; return; }
-    if (alertIsExpired(text, todayIsoInTz(), facilities)) {
+    var today = todayIsoInTz();
+    if (alertIsExpired(text, today, facilities)
+        || alertOverlapsWithCards(facilities, alertState, today)) {
       root.hidden = true;
       return;
     }
@@ -706,7 +731,7 @@
     var now = nowInTz();
     document.getElementById("updated").textContent =
       "Last updated " + formatRelative(doc.last_updated);
-    renderAlert(doc.alert, doc.facilities);
+    renderAlert(doc.alert, doc.facilities, doc.alert_state);
     renderOpenNow(doc.facilities, now);
     ["swim", "ice", "climbing", "fitness", "tennis"].forEach(function (cat) {
       var container = document.querySelector('[data-cards-for="' + cat + '"]');
