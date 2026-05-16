@@ -169,7 +169,7 @@
     var offSeason = !testIso || daysBetween(testIso, todayIso) > 21;
     var cls, label;
     if (offSeason) {
-      cls = "offseason"; label = "OFF-SEASON — no current testing";
+      cls = "offseason"; label = "OFF-SEASON";
     } else if (wq.status === "allowed") {
       cls = "open"; label = "SWIMMING ALLOWED";
     } else if (wq.status === "closed") {
@@ -178,24 +178,6 @@
       cls = "closed"; label = "STATUS UNKNOWN";
     }
     var children = [el("p", { class: "status " + cls }, [label])];
-    // Prominent test-date line up top.
-    if (testIso) {
-      var dateLine = el("p", { class: "wq-testdate" }, [
-        "Tested ", el("strong", {}, [formatDateHeading(testIso, weekdayOfIso(testIso))]),
-      ]);
-      if (wq.latest_report && wq.latest_report.url) {
-        dateLine.appendChild(document.createTextNode(" · "));
-        dateLine.appendChild(el("a", {
-          href: wq.latest_report.url, target: "_blank", rel: "noopener",
-        }, ["View report PDF"]));
-      } else if (wq.report_url) {
-        dateLine.appendChild(document.createTextNode(" · "));
-        dateLine.appendChild(el("a", {
-          href: wq.report_url, target: "_blank", rel: "noopener",
-        }, ["All reports"]));
-      }
-      children.push(dateLine);
-    }
     if (wq.beaches) {
       var beachLabel = function (k) {
         var s = wq.beaches[k];
@@ -212,12 +194,19 @@
         beachLabel("south"),
       ]));
     }
-    if (wq.detail) {
-      children.push(el("p", { class: "wq-detail" }, [wq.detail]));
+    if (testIso) {
+      var dateLine = el("p", { class: "wq-testdate" }, [
+        "Tested ", el("strong", {}, [formatDateHeading(testIso, weekdayOfIso(testIso))]),
+      ]);
+      var url = (wq.latest_report && wq.latest_report.url) || wq.report_url;
+      if (url) {
+        dateLine.appendChild(document.createTextNode(" · "));
+        dateLine.appendChild(el("a", {
+          href: url, target: "_blank", rel: "noopener",
+        }, ["Report PDF"]));
+      }
+      children.push(dateLine);
     }
-    children.push(el("p", { class: "wq-standard" }, [
-      "Click the report PDF for the actual MPN values — the form is a scanned, hand-filled sheet so we can't reliably extract numbers.",
-    ]));
     children.push(renderMpnScale());
     return children;
   }
