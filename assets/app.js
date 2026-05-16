@@ -251,7 +251,7 @@
     if (pdfUrl) infoBits.push(el("a", {
       href: pdfUrl, target: "_blank", rel: "noopener",
     }, ["Report PDF"]));
-    infoBits.push(el("a", { href: "mailto:publichealth@amherstma.gov" }, ["Report concern"]));
+    infoBits.push(el("a", { href: "mailto:publichealth@amherstma.gov" }, ["publichealth@amherstma.gov"]));
     var infoLine = el("p", { class: "wq-info" }, []);
     infoBits.forEach(function (node, i) {
       if (i > 0) infoLine.appendChild(document.createTextNode(" · "));
