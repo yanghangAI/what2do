@@ -2,7 +2,7 @@
 from __future__ import annotations
 import json
 import sys
-from datetime import datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -14,7 +14,12 @@ from scraper.scrape_recwell import SOURCE_URL as RECWELL_URL, scrape_recwell
 from scraper.scrape_mullins import scrape_mullins
 from scraper.scrape_programs import fetch_programs
 from scraper.scrape_schedule import fetch_schedule
-from scraper.scrape_alert import fetch_alert, merge_alert_state, parse_alert_overrides
+from scraper.scrape_alert import (
+    fetch_alert,
+    mask_pre_start_days,
+    merge_alert_state,
+    parse_alert_overrides,
+)
 
 OUT_PATH = Path(__file__).resolve().parent.parent / "data" / "hours.json"
 TZ = ZoneInfo("America/New_York")
@@ -92,7 +97,8 @@ def main() -> int:
         print(f"alert scrape failed: {e}", file=sys.stderr)
         alert = prev_raw.get("alert")
 
-    today_iso = datetime.now(TZ).strftime("%Y-%m-%d")
+    today_dt = datetime.now(TZ).date()
+    today_iso = today_dt.strftime("%Y-%m-%d")
     overrides = parse_alert_overrides(alert) if alert else {}
     prev_state = prev_raw.get("alert_state")
     if prev_state is None and prev_raw.get("alert"):
@@ -104,7 +110,7 @@ def main() -> int:
             for fid, ov in prev_overrides.items()
         }
     overrides, alert_state = merge_alert_state(overrides, prev_state)
-    from scraper.models import DAYS as _DAYS
+
     overridden_ids: list[str] = []
     for facility in doc.facilities:
         ov = overrides.get(facility.id)
@@ -112,18 +118,33 @@ def main() -> int:
             continue
         start = ov.get("start_date")
         closed_from = ov.get("closed_from")
+        # Gap window: today is before start_date AND at least one of the
+        # following is true:
+        #   * explicit closed_from (parsed from "will close at <date>") passed
+        #   * scraped hours == override hours (upstream has flipped to future
+        #     summer hours already — definitive evidence of the gap)
+        #   * within a 14-day fallback window before start_date (UMass often
+        #     deletes the explicit close-date sentence shortly after it
+        #     passes, leaving us only the start_date to reason from)
+        fallback_close = (
+            (date.fromisoformat(start) - timedelta(days=14)).isoformat()
+            if start else None
+        )
+        in_gap = bool(start and today_iso < start and (
+            (closed_from and today_iso >= closed_from)
+            or facility.hours == ov["hours"]
+            or (fallback_close and today_iso >= fallback_close)
+        ))
         if start and today_iso >= start:
-            # Summer hours in effect
             facility.hours = ov["hours"]
             facility.notes = list(facility.notes) + [
                 f"Summer hours from RecWell alert (effective {start})."
             ]
             overridden_ids.append(facility.id + " [summer]")
-        elif closed_from and today_iso >= closed_from and (not start or today_iso < start):
-            # Semester-end transition gap: facility closed
-            facility.hours = {d: [] for d in _DAYS}
+        elif in_gap:
+            facility.hours = mask_pre_start_days(today_dt, ov["hours"], start)
             facility.notes = list(facility.notes) + [
-                f"Closed for semester transition; summer hours begin {start or 'soon'}."
+                f"Closed for semester transition; summer hours begin {start}."
             ]
             overridden_ids.append(facility.id + " [closed-gap]")
     if overridden_ids:

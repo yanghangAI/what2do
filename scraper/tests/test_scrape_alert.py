@@ -1,5 +1,12 @@
 from pathlib import Path
-from scraper.scrape_alert import merge_alert_state, parse_alert_html
+from datetime import date
+
+from scraper.scrape_alert import (
+    mask_pre_start_days,
+    merge_alert_state,
+    parse_alert_html,
+    parse_alert_overrides,
+)
 
 FIXTURE = Path(__file__).parent / "fixtures" / "recwell_homepage.html"
 
@@ -53,3 +60,54 @@ def test_merge_alert_state_prefers_current_closed_from():
     prev = {"rec": {"start_date": "2026-05-20", "closed_from": "2026-05-14"}}
     resolved, _ = merge_alert_state(current, prev)
     assert resolved["rec"]["closed_from"] == "2026-05-15"
+
+
+def test_mask_pre_start_keeps_days_at_or_after_start():
+    # Today Sat 2026-05-16, start Wed 2026-05-20.
+    today = date(2026, 5, 16)
+    override = {d: [{"open": "11:00", "close": "13:00"}] for d in
+                ["mon", "tue", "wed", "thu", "fri"]}
+    override["sat"] = []
+    override["sun"] = []
+    masked = mask_pre_start_days(today, override, "2026-05-20")
+    # Sat (today), Sun (May 17), Mon (May 18), Tue (May 19) are all before
+    # start → empty. Wed (May 20), Thu, Fri are at/after start → keep.
+    assert masked["sat"] == []
+    assert masked["sun"] == []
+    assert masked["mon"] == []
+    assert masked["tue"] == []
+    assert masked["wed"] == [{"open": "11:00", "close": "13:00"}]
+    assert masked["thu"] == [{"open": "11:00", "close": "13:00"}]
+    assert masked["fri"] == [{"open": "11:00", "close": "13:00"}]
+
+
+def test_mask_pre_start_when_no_day_reaches_start_yet():
+    # Today Sat 2026-05-16, start Tue 2026-05-26 — no day-of-week in the
+    # next 7 days reaches start, so everything is masked.
+    today = date(2026, 5, 16)
+    override = {d: [{"open": "16:00", "close": "20:00"}] for d in
+                ["mon","tue","wed","thu","fri","sat","sun"]}
+    masked = mask_pre_start_days(today, override, "2026-05-26")
+    assert all(masked[d] == [] for d in masked)
+
+
+def test_parse_alert_overrides_extracts_rockwell_schedule():
+    text = (
+        "FACILITIES ALERT:\n"
+        "Summer Hours will begin on Wednesday, May 20, 2026.\n"
+        "RockWell Summer Hours will begin on Tuesday, May 26, 2026\n"
+        "Recreation Center | Summer Hours:\n"
+        "Monday-Friday | 7:00am - 7:00pm\n"
+        "Saturday-Sunday | CLOSED\n"
+        "RockWell | Summer Hours:\n"
+        "Monday - Friday | 4:00pm - 8:00pm\n"
+        "Saturday & Sunday | 4:00pm - 8:00pm\n"
+    )
+    ov = parse_alert_overrides(text)
+    rw = ov["rockwell-climbing"]
+    assert rw["start_date"] == "2026-05-26"
+    # 16:00-20:00 every day
+    assert all(
+        [(i.open, i.close) for i in rw["hours"][d]] == [("16:00", "20:00")]
+        for d in ["mon","tue","wed","thu","fri","sat","sun"]
+    )

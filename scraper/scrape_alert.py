@@ -8,6 +8,8 @@ hours data hasn't caught up to a schedule change.
 """
 from __future__ import annotations
 import re
+from datetime import date, timedelta
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -100,7 +102,9 @@ FACILITY_BLOCKS = [
     ("recreation-center", re.compile(r"^Recreation Center\b", re.I), "general"),
     ("boyden-pool",       re.compile(r"^Boyden Pool\b", re.I), "general"),
     ("curry-hicks-pool",  re.compile(r"^Hicks Pool\b", re.I), "general"),
-    ("rockwell-climbing", re.compile(r"^RockWell\b", re.I), "rockwell"),
+    # Match the schedule heading "RockWell | Summer Hours:" — not the
+    # announcement sentence "RockWell Summer Hours will begin on ...".
+    ("rockwell-climbing", re.compile(r"^RockWell\s*\|", re.I), "rockwell"),
 ]
 
 _TIME = r"(\d{1,2})(?::(\d{2}))?\s*(am|pm)"
@@ -274,6 +278,24 @@ def parse_alert_overrides(text: str) -> dict[str, dict]:
                 "closed_from": semester_close,
                 "hours": hours,
             }
+    return out
+
+
+def mask_pre_start_days(
+    today_dt: date, override_hours: dict, start_iso: str,
+) -> dict:
+    """Empty out day-of-week slots whose next calendar occurrence falls
+    before ``start_iso``. Slots at/after ``start_iso`` keep the override
+    hours, so the frontend can still walk forward to show
+    "opens <day-of-week>" for the first post-gap day.
+    """
+    start_d = date.fromisoformat(start_iso)
+    out: dict[str, list] = {}
+    today_idx = today_dt.weekday()  # Mon=0..Sun=6
+    for i, d in enumerate(DAY_ORDER):
+        delta = (i - today_idx) % 7
+        occurs = today_dt + timedelta(days=delta)
+        out[d] = [] if occurs < start_d else list(override_hours.get(d, []))
     return out
 
 
