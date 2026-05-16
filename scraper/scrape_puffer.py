@@ -165,7 +165,14 @@ def parse_latest_report(html: str) -> dict | None:
     return best
 
 
-def fetch_puffer() -> PufferStatus | None:
+def fetch_puffer(prev: dict | None = None) -> PufferStatus | None:
+    """Fetch Puffer's Pond status.
+
+    ``prev`` is the previous run's ``water_quality`` dict; when the new
+    report URL matches the one we OCR'd last time we reuse those
+    readings rather than re-calling Gemini. Costs zero on idle days
+    (the common case off-season, when the same PDF sits for months).
+    """
     r = requests.get(SOURCE_URL, headers={"User-Agent": "Mozilla/5.0"}, timeout=30)
     r.raise_for_status()
     status = parse_puffer_html(r.text)
@@ -177,29 +184,31 @@ def fetch_puffer() -> PufferStatus | None:
         status.latest_report = parse_latest_report(idx.text)
     except Exception:
         pass
-    # Tesseract can't read the handwritten chain-of-custody form, so we
-    # hand the PDF to Gemini's vision API. Skips silently if GEMINI_API_KEY
-    # isn't set — local dev / tests don't need a key.
-    if status.latest_report and status.latest_report.get("url"):
-        import sys
-        try:
-            from scraper.vision_puffer import extract_readings
-            pdf = requests.get(
-                status.latest_report["url"],
-                headers={"User-Agent": "Mozilla/5.0"},
-                timeout=60,
+    if not (status.latest_report and status.latest_report.get("url")):
+        return status
+    import sys
+    new_url = status.latest_report["url"]
+    prev_report = (prev or {}).get("latest_report") or {}
+    if prev_report.get("url") == new_url and prev_report.get("readings"):
+        status.latest_report["readings"] = prev_report["readings"]
+        print("puffer vision: cached (PDF unchanged)", file=sys.stderr)
+        return status
+    try:
+        from scraper.vision_puffer import extract_readings
+        pdf = requests.get(
+            new_url, headers={"User-Agent": "Mozilla/5.0"}, timeout=60,
+        )
+        pdf.raise_for_status()
+        readings = extract_readings(pdf.content)
+        if readings:
+            status.latest_report["readings"] = readings
+            print(f"puffer vision OK: {readings}", file=sys.stderr)
+        else:
+            key_set = bool(os.environ.get("GEMINI_API_KEY"))
+            print(
+                f"puffer vision: no readings (GEMINI_API_KEY set={key_set})",
+                file=sys.stderr,
             )
-            pdf.raise_for_status()
-            readings = extract_readings(pdf.content)
-            if readings:
-                status.latest_report["readings"] = readings
-                print(f"puffer vision OK: {readings}", file=sys.stderr)
-            else:
-                key_set = bool(os.environ.get("GEMINI_API_KEY"))
-                print(
-                    f"puffer vision: no readings (GEMINI_API_KEY set={key_set})",
-                    file=sys.stderr,
-                )
-        except Exception as e:
-            print(f"puffer vision error: {type(e).__name__}: {e}", file=sys.stderr)
+    except Exception as e:
+        print(f"puffer vision error: {type(e).__name__}: {e}", file=sys.stderr)
     return status

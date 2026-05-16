@@ -158,7 +158,7 @@ def main() -> int:
             prev_puffer_wq = f.get("water_quality")
             break
     try:
-        puffer = fetch_puffer()
+        puffer = fetch_puffer(prev=prev_puffer_wq)
         wq = puffer.to_dict() if puffer else prev_puffer_wq
         puffer_status = "ok" if puffer else ("stale" if prev_puffer_wq else "failed")
     except Exception as e:
