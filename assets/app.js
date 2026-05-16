@@ -212,7 +212,7 @@
           el("span", { class: "beach-name" }, [name]),
           document.createTextNode("  sample "),
           numCell(sample, 235),
-          document.createTextNode("  ·  geomean "),
+          document.createTextNode("  ·  5-week mean "),
           numCell(geomean, 126),
           el("span", { class: "beach-unit" }, [" MPN/100 ml"]),
         ]);
@@ -247,8 +247,8 @@
     // MA freshwater E. coli swim standards translated into a human-readable scale.
     var rows = [
       { range: "0 – 30",     band: "ok",     label: "Pristine",        note: "background levels; very clean" },
-      { range: "31 – 126",   band: "ok",     label: "Good",            note: "below the 5-sample geomean limit" },
-      { range: "127 – 235",  band: "warn",   label: "Caution",         note: "above geomean limit but single sample still legal" },
+      { range: "31 – 126",   band: "ok",     label: "Good",            note: "below the 5-week mean limit" },
+      { range: "127 – 235",  band: "warn",   label: "Caution",         note: "above 5-week mean limit but single sample still legal" },
       { range: "236 – 1,000", band: "bad",   label: "Posted closed",   note: "exceeds single-sample limit (235 MPN/100 ml)" },
       { range: "> 1,000",    band: "bad",    label: "Heavily contaminated", note: "avoid contact" },
     ];
@@ -265,7 +265,7 @@
         "E. coli is counted in colonies (MPN = most probable number) per 100 ml of water. " +
         "Massachusetts requires every freshwater swim beach to stay at or below ",
         el("strong", {}, ["235 MPN/100 ml"]),
-        " on any single sample, and a 5-sample geomean at or below ",
+        " on any single sample, and a 5-week running mean at or below ",
         el("strong", {}, ["126 MPN/100 ml"]),
         ". Rough guide:",
       ]),
@@ -274,7 +274,7 @@
         "Numbers tend to spike a day or two after heavy rain (runoff from upstream " +
         "septic systems, geese, livestock, etc.), then recover. A single ",
         el("em", {}, ["high"]), " sample doesn't necessarily mean the water is unsafe " +
-        "the next day — that's what the geomean is for.",
+        "the next day — that's what the 5-week mean is for.",
       ]),
     ]);
   }
