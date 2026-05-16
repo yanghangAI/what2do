@@ -212,7 +212,7 @@
           ]);
         };
         children.push(el("p", { class: "wq-table-title" }, [
-          "E. coli levels (MPN/100 ml)",
+          "Bacteria levels (E. coli)",
         ]));
         children.push(el("table", { class: "wq-table" }, [
           el("thead", {}, [el("tr", {}, [
