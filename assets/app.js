@@ -211,19 +211,17 @@
             cell(readings[k + "_geomean"]),
           ]);
         };
-        children.push(el("p", { class: "wq-table-title" }, [
-          "Bacteria levels (E. coli)",
-        ]));
         children.push(el("table", { class: "wq-table" }, [
+          el("caption", {}, ["Bacteria levels (E. coli)"]),
           el("thead", {}, [el("tr", {}, [
             el("th", {}, [""]),
-            el("th", {}, ["latest sample"]),
-            el("th", {}, ["5-week mean"]),
+            el("th", {}, ["latest"]),
+            el("th", {}, ["5-wk mean"]),
           ])]),
           el("tbody", {}, [beachRow("north"), beachRow("south")]),
         ]));
         children.push(el("p", { class: "beaches-note" }, [
-          "‘Latest sample’ is read from the handwritten cell on the scanned form — may be off by a digit; see PDF to verify.",
+          "Sample column OCR'd from a handwritten cell — verify with the PDF.",
         ]));
       } else {
         // No numbers extracted — fall back to per-beach pass/fail verdict.
@@ -244,27 +242,23 @@
         ]));
       }
     }
-    if (testIso) {
-      var dateLine = el("p", { class: "wq-testdate" }, [
-        "Tested ", el("strong", {}, [formatDateHeading(testIso, weekdayOfIso(testIso))]),
-      ]);
-      var url = (wq.latest_report && wq.latest_report.url) || wq.report_url;
-      if (url) {
-        dateLine.appendChild(document.createTextNode(" · "));
-        dateLine.appendChild(el("a", {
-          href: url, target: "_blank", rel: "noopener",
-        }, ["Report PDF"]));
-      }
-      children.push(dateLine);
-    }
-    children.push(renderMpnScale());
-    children.push(el("p", { class: "wq-contact" }, [
-      "Report a concern: ",
-      el("a", { href: "mailto:publichealth@amherstma.gov" }, ["publichealth@amherstma.gov"]),
-      " · ",
-      el("a", { href: "tel:+14132593077" }, ["(413) 259-3077"]),
-      " — Amherst Dept. of Public Health, which decides closures.",
+    // Single compact line: test date · PDF · email · phone.
+    var pdfUrl = (wq.latest_report && wq.latest_report.url) || wq.report_url;
+    var infoBits = [];
+    if (testIso) infoBits.push(el("span", {}, [
+      "Tested ", el("strong", {}, [formatDateHeading(testIso, weekdayOfIso(testIso))]),
     ]));
+    if (pdfUrl) infoBits.push(el("a", {
+      href: pdfUrl, target: "_blank", rel: "noopener",
+    }, ["Report PDF"]));
+    infoBits.push(el("a", { href: "mailto:publichealth@amherstma.gov" }, ["Report concern"]));
+    var infoLine = el("p", { class: "wq-info" }, []);
+    infoBits.forEach(function (node, i) {
+      if (i > 0) infoLine.appendChild(document.createTextNode(" · "));
+      infoLine.appendChild(node);
+    });
+    children.push(infoLine);
+    children.push(renderMpnScale());
     children.push(renderVoteBlock());
     return children;
   }
@@ -291,25 +285,24 @@
     var wrap = el("div", { class: "wq-vote" }, []);
     if (!PUFFER_VOTES_URL) { wrap.hidden = true; return wrap; }
 
-    var heading = el("p", { class: "wq-vote-q" }, ["Are you satisfied with the water quality?"]);
-    var btnYes = el("button", { type: "button", class: "vote-btn vote-yes" }, ["👍 Satisfied"]);
-    var btnNo  = el("button", { type: "button", class: "vote-btn vote-no"  }, ["👎 Not really"]);
-    var btnRow = el("div", { class: "wq-vote-row" }, [btnYes, btnNo]);
-    var tally = el("p", { class: "wq-vote-tally" }, ["Loading…"]);
+    var btnYes = el("button", { type: "button", class: "vote-btn vote-yes", title: "Satisfied with water quality" }, ["👍"]);
+    var btnNo  = el("button", { type: "button", class: "vote-btn vote-no",  title: "Not satisfied" }, ["👎"]);
+    var tally = el("span", { class: "wq-vote-tally" }, ["…"]);
+    var row = el("p", { class: "wq-vote-row" }, [
+      el("span", { class: "wq-vote-label" }, ["Water OK today?"]),
+      btnYes, btnNo, tally,
+    ]);
     var status = el("p", { class: "wq-vote-status" }, []);
-    wrap.appendChild(heading);
-    wrap.appendChild(btnRow);
-    wrap.appendChild(tally);
+    wrap.appendChild(row);
     wrap.appendChild(status);
 
     function showCounts(data) {
       var s = data.satisfied || 0;
       var u = data.unsatisfied || 0;
       var total = s + u;
-      var pct = total ? Math.round((s / total) * 100) : 0;
-      tally.textContent = total === 0
-        ? "No votes yet — be the first."
-        : s + " satisfied · " + u + " not (" + pct + "% positive, " + total + " total)";
+      if (total === 0) { tally.textContent = "no votes yet"; return; }
+      var pct = Math.round((s / total) * 100);
+      tally.textContent = "👍 " + s + "  👎 " + u + "  (" + pct + "% · " + total + ")";
     }
 
     function disableButtons(msg) {
@@ -321,7 +314,7 @@
     var age = lastVoteAge();
     if (age < VOTE_COOLDOWN_MS) {
       var daysLeft = Math.ceil((VOTE_COOLDOWN_MS - age) / 86400000);
-      disableButtons("Thanks for voting — you can vote again in " + daysLeft + " day" + (daysLeft === 1 ? "" : "s") + ".");
+      disableButtons("you voted — back in " + daysLeft + "d");
     }
 
     fetch(PUFFER_VOTES_URL, { cache: "no-store" })
@@ -346,12 +339,12 @@
         .then(function (data) {
           recordVote();
           showCounts(data);
-          status.textContent = "Thanks — you can vote again next week.";
+          status.textContent = "thanks — back in 7d";
         })
         .catch(function () {
           btnYes.disabled = false;
           btnNo.disabled  = false;
-          status.textContent = "Couldn’t submit your vote. Try again in a moment.";
+          status.textContent = "submit failed — retry";
         });
     }
 
