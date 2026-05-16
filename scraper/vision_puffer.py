@@ -21,11 +21,11 @@ import zlib
 import requests
 
 _MODEL_CANDIDATES = (
-    # In order of preference. Try each until one isn't rate-limited or
-    # quota-blocked — different models have different free-tier coverage
-    # and Google rotates which one is free-eligible.
-    "gemini-2.5-flash-lite",
+    # In order of preference. Reading handwritten numbers off the
+    # chain-of-custody form needs the smarter model — 2.5-flash-lite
+    # tends to grab adjacent sample values instead of the geomean cell.
     "gemini-2.5-flash",
+    "gemini-2.5-flash-lite",
     "gemini-2.0-flash-lite",
     "gemini-2.0-flash",
 )
@@ -34,15 +34,24 @@ _GEMINI_URL_TMPL = (
 )
 
 _PROMPT = (
-    "This is a Puffer's Pond water quality test form (a chain-of-custody "
-    "sheet from Amherst WWTP). Extract the two 'Geometric Mean of 5 most "
-    "recent samples' values — one for South Beach and one for North Beach "
-    "— in MPN/100 ml E. coli. Also extract the sample collection date if "
-    "you can read it. Return ONLY JSON in this exact shape:\n"
+    "You are reading a Puffer's Pond (Amherst, MA) water quality test "
+    "report — a scanned chain-of-custody form from Amherst WWTP.\n\n"
+    "Layout: the bottom-right of the form has two boxes, labeled "
+    "\"South Beach Geometric Mean of 5 most recent samples:\" and "
+    "\"North Beach Geometric Mean of 5 most recent samples:\". Each box "
+    "contains a single number (typed or handwritten) — that is the value "
+    "I want. Do NOT return any of the individual sample values from the "
+    "table above; only the 5-sample geomean from those two labeled "
+    "boxes.\n\n"
+    "Also extract the sample collection date (look for \"Date/Time of "
+    "Sample\" rows in the chain-of-custody table — should be the date "
+    "the samples were collected from the pond).\n\n"
+    "Return ONLY JSON in this exact shape:\n"
     '{"south_geomean": <number or null>, '
     '"north_geomean": <number or null>, '
-    '"test_date": "<YYYY-MM-DD or null>"}\n'
-    "If a value isn't clearly readable, use null. Do not guess."
+    '"test_date": "<YYYY-MM-DD or null>"}\n\n'
+    "If a value isn't clearly readable, use null — do not guess. Numbers "
+    "may have decimals (e.g. 9.8, 141.4)."
 )
 
 
