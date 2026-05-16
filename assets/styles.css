@@ -513,6 +513,16 @@ ul.open-now-list li.urgent .on-countdown { color: var(--closed); }
 .mpn-row.mpn-warn  .mpn-label { color: #b07a1a; }
 .mpn-row.mpn-bad   .mpn-label { color: var(--closed); }
 
+.wq-contact {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin: 0.6rem 0 0;
+}
+.wq-contact a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
 .wq-vote {
   margin: 0.75rem 0 0;
   padding-top: 0.6rem;

@@ -258,6 +258,13 @@
       children.push(dateLine);
     }
     children.push(renderMpnScale());
+    children.push(el("p", { class: "wq-contact" }, [
+      "Report a concern: ",
+      el("a", { href: "mailto:publichealth@amherstma.gov" }, ["publichealth@amherstma.gov"]),
+      " · ",
+      el("a", { href: "tel:+14132593077" }, ["(413) 259-3077"]),
+      " — Amherst Dept. of Public Health, which decides closures.",
+    ]));
     children.push(renderVoteBlock());
     return children;
   }
