@@ -408,10 +408,12 @@ ul.open-now-list li.urgent .on-countdown { color: var(--closed); }
   padding: 0.25rem 0.4rem;
   font-variant-numeric: tabular-nums;
 }
-.wq-cell.wq-ok   { color: var(--ok); }
-.wq-cell.wq-warn { color: #b07a1a; }
-.wq-cell.wq-bad  { color: var(--closed); }
-.wq-cell.wq-none { color: var(--muted); font-weight: 400; }
+.wq-cell.wq-pristine { color: #1f7a3a; } /* deep green: 0–30 */
+.wq-cell.wq-ok       { color: var(--ok); } /* 31–126 */
+.wq-cell.wq-warn     { color: #b07a1a; }   /* 127–235 amber */
+.wq-cell.wq-bad      { color: var(--closed); } /* 236–1000 */
+.wq-cell.wq-danger   { color: #7a1414; }   /* >1000 deep red */
+.wq-cell.wq-none     { color: var(--muted); font-weight: 400; }
 
 @media (max-width: 380px) {
   .wq-table { font-size: 0.85rem; }
