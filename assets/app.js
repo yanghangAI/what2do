@@ -216,10 +216,46 @@
       children.push(el("p", { class: "wq-detail" }, [wq.detail]));
     }
     children.push(el("p", { class: "wq-standard" }, [
-      "Standard: ≤235 MPN/100 ml E. coli (single sample); ≤126 MPN/100 ml (geomean). " +
       "Click the report PDF for the actual MPN values — the form is a scanned, hand-filled sheet so we can't reliably extract numbers.",
     ]));
+    children.push(renderMpnScale());
     return children;
+  }
+
+  function renderMpnScale() {
+    // MA freshwater E. coli swim standards translated into a human-readable scale.
+    var rows = [
+      { range: "0 – 30",     band: "ok",     label: "Pristine",        note: "background levels; very clean" },
+      { range: "31 – 126",   band: "ok",     label: "Good",            note: "below the 5-sample geomean limit" },
+      { range: "127 – 235",  band: "warn",   label: "Caution",         note: "above geomean limit but single sample still legal" },
+      { range: "236 – 1,000", band: "bad",   label: "Posted closed",   note: "exceeds single-sample limit (235 MPN/100 ml)" },
+      { range: "> 1,000",    band: "bad",    label: "Heavily contaminated", note: "avoid contact" },
+    ];
+    var rowEls = rows.map(function (r) {
+      return el("tr", { class: "mpn-row mpn-" + r.band }, [
+        el("td", { class: "mpn-range" }, [r.range]),
+        el("td", { class: "mpn-label" }, [r.label]),
+        el("td", { class: "mpn-note" }, [r.note]),
+      ]);
+    });
+    return el("details", { class: "wq-scale" }, [
+      el("summary", {}, ["What do the MPN/100 ml numbers mean?"]),
+      el("p", { class: "wq-scale-intro" }, [
+        "E. coli is counted in colonies (MPN = most probable number) per 100 ml of water. " +
+        "Massachusetts requires every freshwater swim beach to stay at or below ",
+        el("strong", {}, ["235 MPN/100 ml"]),
+        " on any single sample, and a 5-sample geomean at or below ",
+        el("strong", {}, ["126 MPN/100 ml"]),
+        ". Rough guide:",
+      ]),
+      el("table", { class: "mpn-table" }, [el("tbody", {}, rowEls)]),
+      el("p", { class: "wq-scale-foot" }, [
+        "Numbers tend to spike a day or two after heavy rain (runoff from upstream " +
+        "septic systems, geese, livestock, etc.), then recover. A single ",
+        el("em", {}, ["high"]), " sample doesn't necessarily mean the water is unsafe " +
+        "the next day — that's what the geomean is for.",
+      ]),
+    ]);
   }
 
   function daysBetween(isoA, isoB) {

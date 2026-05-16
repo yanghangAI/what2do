@@ -403,6 +403,55 @@ ul.open-now-list li.urgent .on-countdown { color: var(--closed); }
   text-decoration: underline;
 }
 
+.wq-scale {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+}
+.wq-scale summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0;
+}
+.wq-scale[open] summary {
+  margin-bottom: 0.4rem;
+}
+.wq-scale-intro,
+.wq-scale-foot {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin: 0.4rem 0;
+}
+.mpn-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  margin: 0.3rem 0;
+}
+.mpn-table td {
+  padding: 0.25rem 0.4rem;
+  border-bottom: 1px solid var(--paper-dark);
+  vertical-align: top;
+}
+.mpn-range {
+  white-space: nowrap;
+  font-weight: 700;
+  width: 5.5rem;
+}
+.mpn-label {
+  width: 8rem;
+}
+.mpn-note {
+  color: var(--ink-soft);
+}
+.mpn-row.mpn-ok    .mpn-label { color: var(--ok); }
+.mpn-row.mpn-warn  .mpn-label { color: #b07a1a; }
+.mpn-row.mpn-bad   .mpn-label { color: var(--closed); }
+
 .stale-banner {
   background: var(--warn-bg);
   color: var(--warn-fg);
