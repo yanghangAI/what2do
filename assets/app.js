@@ -373,7 +373,7 @@
           el("tbody", {}, [beachRow("north"), beachRow("south")]),
         ]));
         var pdfHref = (wq.latest_report && wq.latest_report.url) || wq.report_url;
-        var noteChildren = ["Sample column OCR'd from a handwritten cell — verify with the "];
+        var noteChildren = ["⚠ Latest-sample value is read from a handwritten cell — it may be wrong. Confirm with the "];
         if (pdfHref) {
           noteChildren.push(el("a", { href: pdfHref, target: "_blank", rel: "noopener" }, ["PDF"]));
           noteChildren.push(".");
