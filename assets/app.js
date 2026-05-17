@@ -194,9 +194,17 @@
         label = slots.map(function (iv) { return formatTime(iv.open) + " – " + formatTime(iv.close); }).join(", ");
       }
 
-      var dayName = offset === 0
-        ? "Today"
-        : DAY_LABELS[weekdayKey] + " " + SHORT_MONTHS[dt.getUTCMonth()] + " " + dt.getUTCDate();
+      // Compact label so the row never wraps on a narrow phone column.
+      // Include month only on day-1 of a new month within the window.
+      var includeMonth = dt.getUTCDate() === 1 || offset === 0;
+      var dayName;
+      if (offset === 0) {
+        dayName = "Today";
+      } else if (includeMonth) {
+        dayName = DAY_LABELS[weekdayKey] + " " + SHORT_MONTHS[dt.getUTCMonth()] + " " + dt.getUTCDate();
+      } else {
+        dayName = DAY_LABELS[weekdayKey] + " " + dt.getUTCDate();
+      }
 
       var attrs = {};
       if (offset === 0) attrs.class = "today";

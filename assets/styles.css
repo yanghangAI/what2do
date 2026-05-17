@@ -628,7 +628,8 @@ table.week th {
   font-weight: 700;
   letter-spacing: 0.06em;
   color: var(--ink-soft);
-  width: 60px;
+  width: 5.5rem;
+  white-space: nowrap;
 }
 table.week td {
   font-variant-numeric: tabular-nums;
