@@ -534,7 +534,7 @@
       { range: "31 – 126",   band: "ok",     label: "Good",            note: "below the 5-week mean limit" },
       { range: "127 – 235",  band: "warn",   label: "Caution",         note: "above 5-week mean limit but single sample still legal" },
       { range: "236 – 1,000", band: "bad",   label: "Posted closed",   note: "exceeds single-sample limit (235 MPN/100 ml)" },
-      { range: "> 1,000",    band: "bad",    label: "Heavily contaminated", note: "avoid contact" },
+      { range: "> 1,000",    band: "danger", label: "Heavily contaminated", note: "avoid contact" },
     ];
     var rowEls = rows.map(function (r) {
       return el("tr", { class: "mpn-row mpn-" + r.band }, [

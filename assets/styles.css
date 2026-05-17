@@ -448,22 +448,13 @@ ul.open-now-list li.urgent .on-countdown { color: var(--closed); }
   padding: 0.25rem 0.4rem;
   font-variant-numeric: tabular-nums;
 }
-/* 5-tier swim-safety scale. Anchored cool→hot per UX convention
- * (NOAA coastal, Carbon design, EPA AQI). Each tier shifts both hue
- * AND lightness so adjacent tiers stay distinct even for color-
- * deficient viewers; the deep-red "danger" tier sits darker than the
- * brand maroon (#881c1c) so it doesn't clash. */
-.wq-cell.wq-pristine { color: #0b6e99; font-weight: 800; } /* sky blue */
-.wq-cell.wq-ok       { color: var(--ok); }                 /* forest green */
-.wq-cell.wq-warn     { color: #b8860b; }                   /* dark goldenrod */
-.wq-cell.wq-bad      { color: var(--closed); }             /* red */
-.wq-cell.wq-danger   { color: #5c0a0a; }                   /* deep blood red */
+/* 5-tier swim-safety scale: traffic-light green→red gradient. */
+.wq-cell.wq-pristine { color: #44ce1b; font-weight: 800; } /* bright green */
+.wq-cell.wq-ok       { color: #bbdb44; }                   /* yellow-green */
+.wq-cell.wq-warn     { color: #f7e379; }                   /* yellow */
+.wq-cell.wq-bad      { color: #f2a134; }                   /* orange */
+.wq-cell.wq-danger   { color: #e51f1f; }                   /* red */
 .wq-cell.wq-none     { color: var(--muted); font-weight: 400; }
-@media (prefers-color-scheme: dark) {
-  .wq-cell.wq-pristine { color: #3ba3cc; }
-  .wq-cell.wq-warn     { color: #e6b04a; }
-  .wq-cell.wq-danger   { color: #a33333; }
-}
 
 @media (max-width: 380px) {
   .wq-table { font-size: 0.85rem; }
@@ -551,14 +542,11 @@ ul.open-now-list li.urgent .on-countdown { color: var(--closed); }
 .mpn-note {
   color: var(--ink-soft);
 }
-.mpn-row.mpn-pristine .mpn-label { color: #0b6e99; font-weight: 700; }
-.mpn-row.mpn-ok    .mpn-label { color: var(--ok); }
-.mpn-row.mpn-warn  .mpn-label { color: #b8860b; }
-.mpn-row.mpn-bad   .mpn-label { color: var(--closed); }
-@media (prefers-color-scheme: dark) {
-  .mpn-row.mpn-pristine .mpn-label { color: #3ba3cc; }
-  .mpn-row.mpn-warn .mpn-label { color: #e6b04a; }
-}
+.mpn-row.mpn-pristine .mpn-label { color: #44ce1b; font-weight: 700; }
+.mpn-row.mpn-ok    .mpn-label { color: #bbdb44; }
+.mpn-row.mpn-warn  .mpn-label { color: #f7e379; }
+.mpn-row.mpn-bad   .mpn-label { color: #f2a134; }
+.mpn-row.mpn-danger .mpn-label { color: #e51f1f; font-weight: 700; }
 
 .wq-info {
   font-size: 0.82rem;
