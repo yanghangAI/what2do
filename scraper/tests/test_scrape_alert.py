@@ -6,6 +6,7 @@ from scraper.scrape_alert import (
     merge_alert_state,
     parse_alert_html,
     parse_alert_overrides,
+    parse_holidays,
 )
 
 FIXTURE = Path(__file__).parent / "fixtures" / "recwell_homepage.html"
@@ -132,3 +133,34 @@ def test_parse_alert_overrides_extracts_rockwell_schedule():
         [(i.open, i.close) for i in rw["hours"][d]] == [("16:00", "20:00")]
         for d in ["mon","tue","wed","thu","fri","sat","sun"]
     )
+
+
+def test_parse_holidays_extracts_dated_closures():
+    text = (
+        "FACILITIES ALERT:\n"
+        "Summer Hours will begin on Wednesday, May 20, 2026.\n"
+        "All RecWell Facilities will be closed on the following Holidays:\n"
+        "Monday, May 25, 2026 - Memorial Day\n"
+        "Friday, June 19, 2026 - Juneteenth\n"
+        "Friday, July 3, 2026 - Independence Day (observed)\n"
+    )
+    hs = parse_holidays(text)
+    assert {"date": "2026-05-25", "name": "Memorial Day"} in hs
+    assert {"date": "2026-06-19", "name": "Juneteenth"} in hs
+    assert {"date": "2026-07-03", "name": "Independence Day (observed)"} in hs
+    assert len(hs) == 3
+
+
+def test_parse_holidays_ignores_non_holiday_dates():
+    text = (
+        "FACILITIES ALERT:\n"
+        "Summer Hours will begin on Wednesday, May 20, 2026.\n"
+        "Hicks Pool opens Thursday, May 21, 2026.\n"
+        # No 'Holiday' header — should return empty
+    )
+    assert parse_holidays(text) == []
+
+
+def test_parse_holidays_handles_empty_input():
+    assert parse_holidays(None) == []
+    assert parse_holidays("") == []

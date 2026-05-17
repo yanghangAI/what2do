@@ -20,6 +20,7 @@ from scraper.scrape_alert import (
     mask_pre_start_days,
     merge_alert_state,
     parse_alert_overrides,
+    parse_holidays,
 )
 
 OUT_PATH = Path(__file__).resolve().parent.parent / "data" / "hours.json"
@@ -186,6 +187,7 @@ def main() -> int:
     out["schedule"] = schedule
     out["alert"] = alert
     out["alert_state"] = alert_state
+    out["holidays"] = parse_holidays(alert)
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(json.dumps(out, indent=2) + "\n")
     print(f"wrote {OUT_PATH}")

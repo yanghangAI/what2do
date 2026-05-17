@@ -111,7 +111,25 @@
     return node;
   }
 
+  // Facilities operated by UMass RecWell — affected by RecWell holiday
+  // closures listed in the alert banner. Mullins (ice) and Puffer's
+  // Pond are run by different orgs and aren't affected.
+  var RECWELL_IDS = {
+    "boyden-pool": 1, "curry-hicks-pool": 1, "recreation-center": 1,
+    "rockwell-climbing": 1, "mullins-tennis": 1,
+  };
+  var TODAY_HOLIDAY = null; // {date, name} or null — set during render()
+
+  function holidayForFacility(facility) {
+    if (!TODAY_HOLIDAY) return null;
+    return RECWELL_IDS[facility.id] ? TODAY_HOLIDAY : null;
+  }
+
   function renderStatus(facility, now) {
+    var holiday = holidayForFacility(facility);
+    if (holiday) {
+      return el("p", { class: "status closed" }, ["CLOSED — " + holiday.name]);
+    }
     var s = computeStatus(facility.hours, now);
     if (s.open) {
       return el("p", { class: "status open" }, ["OPEN until " + formatTime(s.until)]);
@@ -569,6 +587,7 @@
     root.innerHTML = "";
     var openItems = [];
     facilities.forEach(function (f) {
+      if (holidayForFacility(f)) return; // closed for holiday — skip
       var status = computeStatus(f.hours, now);
       if (!status.open) return;
       var minutesLeft = toMinutes(status.until) - now.minutes;
@@ -729,6 +748,11 @@
 
   function render(doc) {
     var now = nowInTz();
+    var todayIso = todayIsoInTz();
+    TODAY_HOLIDAY = null;
+    (doc.holidays || []).forEach(function (h) {
+      if (h.date === todayIso) TODAY_HOLIDAY = h;
+    });
     document.getElementById("updated").textContent =
       "Last updated " + formatRelative(doc.last_updated);
     renderAlert(doc.alert, doc.facilities, doc.alert_state);

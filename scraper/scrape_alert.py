@@ -310,6 +310,38 @@ def mask_pre_start_days(
     return out
 
 
+_HOLIDAY_RE = re.compile(
+    r"(?:Mon|Tues?|Wed(?:nes)?|Thurs?|Fri|Sat(?:ur)?|Sun)(?:day)?,?\s+"
+    r"(January|February|March|April|May|June|July|August|September|"
+    r"October|November|December)\s+(\d{1,2}),\s+(20\d{2})"
+    r"\s*[-–]\s*([^\n]+)",
+    re.I,
+)
+
+
+def parse_holidays(text: str | None) -> list[dict]:
+    """Pull dated holiday closures from the alert.
+
+    Matches lines like 'Monday, May 25, 2026 - Memorial Day'. Returns
+    ``[{"date": ISO, "name": str}, ...]``. Limits the search to the
+    region after a 'Holiday' header so unrelated dated lines (e.g. the
+    semester-close announcement) don't get picked up.
+    """
+    if not text:
+        return []
+    lower = text.lower()
+    idx = lower.find("holiday")
+    region = text[idx:] if idx >= 0 else text
+    out: list[dict] = []
+    for m in _HOLIDAY_RE.finditer(region):
+        month = _MONTHS_NUM[m.group(1).lower()]
+        iso = f"{m.group(3)}-{month:02d}-{int(m.group(2)):02d}"
+        name = m.group(4).strip().rstrip(".").strip()
+        if iso not in [h["date"] for h in out]:
+            out.append({"date": iso, "name": name})
+    return out
+
+
 def merge_alert_state(
     current_overrides: dict[str, dict],
     prev_state: dict[str, dict] | None,
