@@ -173,26 +173,40 @@
   }
 
   function renderWeekTable(facility, now) {
-    var tbody = el("tbody", {}, DAYS.map(function (d, i) {
-      var holiday = holidayLabelForWeekday(facility, i);
-      var slots = facility.hours[d] || [];
+    var todayIso = todayIsoInTz();
+    var parts = todayIso.split("-").map(Number);
+    var rows = [];
+    var SHORT_MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    for (var offset = 0; offset < 7; offset++) {
+      var dt = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2] + offset));
+      var weekdayIdx = (dt.getUTCDay() + 6) % 7; // shift Sun=0 → Mon=0
+      var weekdayKey = DAYS[weekdayIdx];
+      var iso = dt.toISOString().slice(0, 10);
+      var holiday = RECWELL_IDS[facility.id] ? HOLIDAYS_BY_DATE[iso] : null;
+      var slots = facility.hours[weekdayKey] || [];
+
       var label;
       if (holiday) {
         label = "Closed — " + holiday;
+      } else if (slots.length === 0) {
+        label = "Closed";
       } else {
-        label = slots.length === 0
-          ? "Closed"
-          : slots.map(function (iv) { return formatTime(iv.open) + " – " + formatTime(iv.close); }).join(", ");
+        label = slots.map(function (iv) { return formatTime(iv.open) + " – " + formatTime(iv.close); }).join(", ");
       }
+
+      var dayName = offset === 0
+        ? "Today"
+        : DAY_LABELS[weekdayKey] + " " + SHORT_MONTHS[dt.getUTCMonth()] + " " + dt.getUTCDate();
+
       var attrs = {};
-      if (d === now.day) attrs.class = "today";
+      if (offset === 0) attrs.class = "today";
       if (holiday) attrs.class = (attrs.class || "") + " holiday";
-      return el("tr", attrs, [
-        el("th", {}, [DAY_LABELS[d]]),
+      rows.push(el("tr", attrs, [
+        el("th", {}, [dayName]),
         el("td", {}, [label]),
-      ]);
-    }));
-    return el("table", { class: "week" }, [tbody]);
+      ]));
+    }
+    return el("table", { class: "week" }, [el("tbody", {}, rows)]);
   }
 
   function filterPastDateNote(note, todayIso) {
