@@ -449,8 +449,8 @@ ul.open-now-list li.urgent .on-countdown { color: var(--closed); }
   font-variant-numeric: tabular-nums;
 }
 /* 5-tier swim-safety scale: traffic-light green→red gradient. */
-.wq-cell.wq-pristine { color: #44ce1b; font-weight: 800; } /* bright green */
-.wq-cell.wq-ok       { color: #bbdb44; }                   /* yellow-green */
+.wq-cell.wq-pristine { color: #2ea600; font-weight: 800; } /* deep green */
+.wq-cell.wq-ok       { color: #7d9722; }                   /* olive yellow-green */
 .wq-cell.wq-warn     { color: #c9a227; }                   /* darkened yellow for cream-bg readability */
 .wq-cell.wq-bad      { color: #f2a134; }                   /* orange */
 .wq-cell.wq-danger   { color: #e51f1f; }                   /* red */
@@ -542,8 +542,8 @@ ul.open-now-list li.urgent .on-countdown { color: var(--closed); }
 .mpn-note {
   color: var(--ink-soft);
 }
-.mpn-row.mpn-pristine .mpn-label { color: #44ce1b; font-weight: 700; }
-.mpn-row.mpn-ok    .mpn-label { color: #bbdb44; }
+.mpn-row.mpn-pristine .mpn-label { color: #2ea600; font-weight: 700; }
+.mpn-row.mpn-ok    .mpn-label { color: #7d9722; }
 .mpn-row.mpn-warn  .mpn-label { color: #c9a227; }
 .mpn-row.mpn-bad   .mpn-label { color: #f2a134; }
 .mpn-row.mpn-danger .mpn-label { color: #e51f1f; font-weight: 700; }
