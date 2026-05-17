@@ -49,6 +49,10 @@ class Facility:
     # changes week-to-week (e.g. Mullins ice). Each entry: {date: ISO,
     # open: HH:MM, close: HH:MM}.
     events: list[dict] | None = None
+    # Per-facility dated closures (announced one-offs scraped from
+    # facility notes). Each entry: {date: ISO}. Used by the frontend
+    # to flip the card status on that specific date.
+    closed_dates: list[dict] | None = None
 
     def __post_init__(self) -> None:
         self.hours = {d: list(self.hours.get(d, [])) for d in DAYS}
@@ -70,6 +74,8 @@ class Facility:
             out["water_quality"] = self.water_quality
         if self.events is not None:
             out["events"] = list(self.events)
+        if self.closed_dates is not None:
+            out["closed_dates"] = list(self.closed_dates)
         return out
 
     @classmethod
@@ -86,6 +92,7 @@ class Facility:
             last_scraped=d["last_scraped"],
             water_quality=d.get("water_quality"),
             events=d.get("events"),
+            closed_dates=d.get("closed_dates"),
         )
 
 

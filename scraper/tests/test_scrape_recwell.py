@@ -51,3 +51,26 @@ def test_curry_hicks_closure_note_includes_dates():
     notes = results["curry-hicks-pool"]["notes"]
     assert any("April 4" in n and "April 11" in n for n in notes), \
         f"Expected closure dates merged into a single note; got {notes!r}"
+
+
+def test_parse_closed_dates_from_notes_picks_up_dated_closures():
+    from scraper.scrape_recwell import parse_closed_dates_from_notes
+    notes = [
+        "Please Note the Hicks Pool will be CLOSED on the following dates: "
+        "Saturday, April 4, 2026; Saturday, April 11, 2026",
+    ]
+    cd = parse_closed_dates_from_notes(notes)
+    assert {"date": "2026-04-04"} in cd
+    assert {"date": "2026-04-11"} in cd
+    assert len(cd) == 2
+
+
+def test_parse_closed_dates_ignores_notes_without_closed_word():
+    from scraper.scrape_recwell import parse_closed_dates_from_notes
+    notes = ["Open from Saturday, April 4, 2026 onward."]
+    assert parse_closed_dates_from_notes(notes) == []
+
+
+def test_parse_closed_dates_handles_empty():
+    from scraper.scrape_recwell import parse_closed_dates_from_notes
+    assert parse_closed_dates_from_notes([]) == []

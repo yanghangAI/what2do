@@ -135,8 +135,20 @@
   var HOLIDAYS_BY_DATE = {}; // iso → name, used to mark upcoming weekday rows
 
   function holidayForFacility(facility) {
-    if (!TODAY_HOLIDAY) return null;
-    return RECWELL_IDS[facility.id] ? TODAY_HOLIDAY : null;
+    if (TODAY_HOLIDAY && RECWELL_IDS[facility.id]) return TODAY_HOLIDAY;
+    // Per-facility one-off closure scraped from notes.
+    var today = todayIsoInTz();
+    var fc = (facility.closed_dates || []).filter(function (c) { return c.date === today; })[0];
+    if (fc) return { date: fc.date, name: "Closed today" };
+    return null;
+  }
+
+  function closureForFacilityOnDate(facility, iso) {
+    // Returns a string label if the facility is closed on `iso`, else null.
+    // Combines RecWell-wide holidays and per-facility closed_dates.
+    if (RECWELL_IDS[facility.id] && HOLIDAYS_BY_DATE[iso]) return HOLIDAYS_BY_DATE[iso];
+    var fc = (facility.closed_dates || []).filter(function (c) { return c.date === iso; })[0];
+    return fc ? "Closed" : null;
   }
 
   function dateForUpcomingWeekday(weekdayIdx) {
@@ -153,20 +165,19 @@
 
   function effectiveHours(facility) {
     // Blank out hours for the next-occurrence date of each weekday
-    // when that date is a RecWell holiday closure.
-    if (!RECWELL_IDS[facility.id]) return facility.hours;
+    // when that date is closed (RecWell holiday OR facility-specific
+    // dated closure scraped from notes).
+    if (!RECWELL_IDS[facility.id] && !(facility.closed_dates || []).length) {
+      return facility.hours;
+    }
     var out = {};
     DAYS.forEach(function (d, i) {
       var occursOn = dateForUpcomingWeekday(i);
-      out[d] = HOLIDAYS_BY_DATE[occursOn] ? [] : (facility.hours[d] || []);
+      out[d] = closureForFacilityOnDate(facility, occursOn)
+        ? []
+        : (facility.hours[d] || []);
     });
     return out;
-  }
-
-  function holidayLabelForWeekday(facility, weekdayIdx) {
-    if (!RECWELL_IDS[facility.id]) return null;
-    var date = dateForUpcomingWeekday(weekdayIdx);
-    return HOLIDAYS_BY_DATE[date] || null;
   }
 
   function statusFromEvents(facility, now) {
@@ -236,15 +247,15 @@
       var weekdayIdx = (dt.getUTCDay() + 6) % 7; // shift Sun=0 → Mon=0
       var weekdayKey = DAYS[weekdayIdx];
       var iso = dt.toISOString().slice(0, 10);
-      var holiday = RECWELL_IDS[facility.id] ? HOLIDAYS_BY_DATE[iso] : null;
+      var closureLabel = closureForFacilityOnDate(facility, iso);
       // Prefer dated events if the facility uses them.
       var slots = facility.events
         ? (intervalsForDate(facility, iso) || [])
         : (facility.hours[weekdayKey] || []);
 
       var label;
-      if (holiday) {
-        label = "Closed — " + holiday;
+      if (closureLabel) {
+        label = "Closed — " + closureLabel;
       } else if (slots.length === 0) {
         label = "Closed";
       } else {
@@ -265,7 +276,7 @@
 
       var attrs = {};
       if (offset === 0) attrs.class = "today";
-      if (holiday) attrs.class = (attrs.class || "") + " holiday";
+      if (closureLabel) attrs.class = (attrs.class || "") + " holiday";
       rows.push(el("tr", attrs, [
         el("th", {}, [dayName]),
         el("td", {}, [label]),

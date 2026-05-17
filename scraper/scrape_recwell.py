@@ -240,6 +240,45 @@ def _extract_notes(section_text: str) -> list[str]:
     return notes
 
 
+_MONTHS_NUM = {
+    "january": 1, "february": 2, "march": 3, "april": 4, "may": 5, "june": 6,
+    "july": 7, "august": 8, "september": 9, "october": 10, "november": 11,
+    "december": 12,
+}
+_DAY_DATE_RE = re.compile(
+    r"(?:Mon|Tues?|Wed(?:nes)?|Thurs?|Fri|Sat(?:ur)?|Sun)(?:day)?,?\s+"
+    r"(January|February|March|April|May|June|July|August|September|"
+    r"October|November|December)\s+(\d{1,2}),?\s+(20\d{2})",
+    re.I,
+)
+
+
+def parse_closed_dates_from_notes(notes: list[str]) -> list[dict]:
+    """Extract per-facility dated closures from human-readable notes.
+
+    Matches patterns like:
+        'Hicks Pool will be CLOSED on the following dates:
+         Saturday, April 4, 2026; Saturday, April 11, 2026'
+    Each note must contain a "closed" word AND one or more
+    "<Weekday>, <Month> <Day>, <Year>" date references; we then map
+    each date to ``{"date": ISO}``. The original note text remains in
+    the notes list — this is purely a status-flip side channel.
+    """
+    out: list[dict] = []
+    seen: set[str] = set()
+    for note in notes:
+        if not re.search(r"\bclosed?\b", note, re.I):
+            continue
+        for m in _DAY_DATE_RE.finditer(note):
+            month = _MONTHS_NUM[m.group(1).lower()]
+            iso = f"{m.group(3)}-{month:02d}-{int(m.group(2)):02d}"
+            if iso in seen:
+                continue
+            seen.add(iso)
+            out.append({"date": iso})
+    return out
+
+
 def scrape_recwell(html: str) -> list[dict]:
     soup = BeautifulSoup(html, "html.parser")
     results: list[dict] = []
@@ -251,7 +290,8 @@ def scrape_recwell(html: str) -> list[dict]:
             days, intervals = _parse_schedule_line(line)
             for d in days:
                 hours[d].extend(intervals)
-        results.append({
+        notes = _extract_notes(text)
+        record = {
             "id": fac["id"],
             "name": fac["name"],
             "category": fac["category"],
@@ -259,6 +299,10 @@ def scrape_recwell(html: str) -> list[dict]:
             "maps_url": fac["maps_url"],
             "source_url": SOURCE_URL,
             "hours": hours,
-            "notes": _extract_notes(text),
-        })
+            "notes": notes,
+        }
+        closed = parse_closed_dates_from_notes(notes)
+        if closed:
+            record["closed_dates"] = closed
+        results.append(record)
     return results
