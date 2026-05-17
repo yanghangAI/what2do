@@ -20,6 +20,7 @@ def _facility_from_result(result: dict, now_iso: str) -> Facility:
         notes=list(result.get("notes", [])),
         scrape_status="ok",
         last_scraped=now_iso,
+        events=list(result["events"]) if result.get("events") is not None else None,
     )
 
 
@@ -34,6 +35,7 @@ def _stale_from_previous(prev_facility: Facility) -> Facility:
         notes=list(prev_facility.notes),
         scrape_status="stale",
         last_scraped=prev_facility.last_scraped,
+        events=list(prev_facility.events) if prev_facility.events is not None else None,
     )
 
 

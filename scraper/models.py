@@ -45,6 +45,10 @@ class Facility:
     scrape_status: ScrapeStatus
     last_scraped: str
     water_quality: dict | None = None
+    # Dated events override `hours` for facilities whose schedule
+    # changes week-to-week (e.g. Mullins ice). Each entry: {date: ISO,
+    # open: HH:MM, close: HH:MM}.
+    events: list[dict] | None = None
 
     def __post_init__(self) -> None:
         self.hours = {d: list(self.hours.get(d, [])) for d in DAYS}
@@ -64,6 +68,8 @@ class Facility:
         }
         if self.water_quality is not None:
             out["water_quality"] = self.water_quality
+        if self.events is not None:
+            out["events"] = list(self.events)
         return out
 
     @classmethod
@@ -79,6 +85,7 @@ class Facility:
             scrape_status=d["scrape_status"],
             last_scraped=d["last_scraped"],
             water_quality=d.get("water_quality"),
+            events=d.get("events"),
         )
 
 

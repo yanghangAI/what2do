@@ -17,50 +17,49 @@ def test_returns_facility_record():
     result = _parse(FIXTURE.read_text())
     assert result["id"] == "mullins-ice"
     assert result["category"] == "ice"
-    assert set(result["hours"].keys()) == {"mon", "tue", "wed", "thu", "fri", "sat", "sun"}
+    # New dated-events model — hours is always emitted as empty for
+    # frontend backward compat; real schedule lives under "events".
+    assert "events" in result
+    assert all(v == [] for v in result["hours"].values())
 
 
 def test_finds_at_least_one_public_skate_slot():
     result = _parse(FIXTURE.read_text())
-    total_intervals = sum(len(v) for v in result["hours"].values())
-    assert total_intervals >= 1, "Expected at least one Public Skate slot in the fixture"
+    assert len(result["events"]) >= 1
 
 
 def test_time_format_is_24h_hhmm():
     import re
     result = _parse(FIXTURE.read_text())
-    for intervals in result["hours"].values():
-        for iv in intervals:
-            assert re.fullmatch(r"\d{2}:\d{2}", iv.open)
-            assert re.fullmatch(r"\d{2}:\d{2}", iv.close)
+    for ev in result["events"]:
+        assert re.fullmatch(r"\d{2}:\d{2}", ev["open"])
+        assert re.fullmatch(r"\d{2}:\d{2}", ev["close"])
 
 
 def test_parses_specific_events_from_week_fixture():
-    """The committed fixture has 3 Public Skating events: Wed 12:10-1:50,
-    Thu 18:30-19:20, Thu 19:30-20:20. The two Thu events have a 10-min gap
-    so they get merged into one 18:30-20:20 interval."""
+    """Fixture has 3 Public Skating events: Wed 12:10-1:50 (May 13),
+    Thu 18:30-19:20 + 19:30-20:20 (May 14). The two Thu events have a
+    10-min gap so they merge into one 18:30-20:20 interval."""
     result = _parse(FIXTURE.read_text())
-    assert Interval("12:10", "13:50") in result["hours"]["wed"]
-    assert Interval("18:30", "20:20") in result["hours"]["thu"]
+    evs = result["events"]
+    assert {"date": "2026-05-13", "open": "12:10", "close": "13:50"} in evs
+    assert {"date": "2026-05-14", "open": "18:30", "close": "20:20"} in evs
 
 
 def test_ignores_grid_axis_labels():
-    """Times like 12:00 AM, 1:00 AM appear as Kendo scheduler axis labels but are
-    NOT events. The parser must only emit intervals from .k-event elements."""
+    """Kendo grid axis labels like 12:00 AM, 1:00 AM are not events."""
     result = _parse(FIXTURE.read_text())
-    for intervals in result["hours"].values():
-        for iv in intervals:
-            assert iv != Interval("00:00", "01:00"), "Picked up grid axis label as event"
+    for ev in result["events"]:
+        assert not (ev["open"] == "00:00" and ev["close"] == "01:00")
 
 
 def test_merges_close_intervals():
     """6:30-7:20 + 7:30-8:20 (10-min gap) should collapse to 6:30-8:20."""
     result = _parse(FIXTURE.read_text())
-    thu = result["hours"]["thu"]
-    assert Interval("18:30", "20:20") in thu
-    # The two original intervals should be gone
-    assert Interval("18:30", "19:20") not in thu
-    assert Interval("19:30", "20:20") not in thu
+    thu_events = [e for e in result["events"] if e["date"] == "2026-05-14"]
+    # Expect one merged interval rather than two.
+    assert {"date": "2026-05-14", "open": "18:30", "close": "20:20"} in thu_events
+    assert {"date": "2026-05-14", "open": "18:30", "close": "19:20"} not in thu_events
 
 
 def test_does_not_merge_far_intervals():
@@ -71,10 +70,7 @@ def test_does_not_merge_far_intervals():
 
 
 def test_drops_events_whose_date_has_passed():
-    """The Finnly week view includes earlier days of the current week.
-    When today is past those days, their events should not leak into
-    next-week's <day-of-week> slot."""
+    """Events on dates before `today` should not be returned."""
     result = parse_mullins_html(FIXTURE.read_text(), today=date(2026, 5, 15))
-    # Wed May 13 and Thu May 14 are both before today — both should be filtered.
-    assert result["hours"]["wed"] == []
-    assert result["hours"]["thu"] == []
+    # Wed May 13 and Thu May 14 are both before today.
+    assert result["events"] == []

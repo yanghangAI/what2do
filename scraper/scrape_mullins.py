@@ -80,16 +80,14 @@ def _merge_close_intervals(intervals: list[Interval], gap_threshold_min: int) ->
     return merged
 
 
-def _parse_event(event_el) -> tuple[str, Interval, date | None] | None:
+def _parse_event(event_el) -> tuple[Interval, date | None] | None:
     aria = event_el.get("aria-label", "") or ""
     text = event_el.get_text(" ", strip=True)
     if not PUBLIC_SKATE_TEXT_RE.search(text):
         return None
     rm = ARIA_RANGE_RE.search(aria)
-    dm = ARIA_WEEKDAY_RE.search(aria)
-    if not rm or not dm:
+    if not rm:
         return None
-    day = WEEKDAY_TO_KEY[dm.group(1).lower()]
     interval = Interval(
         open=_to_24h(int(rm.group(1)), int(rm.group(2)), rm.group(3)),
         close=_to_24h(int(rm.group(4)), int(rm.group(5)), rm.group(6)),
@@ -102,39 +100,52 @@ def _parse_event(event_el) -> tuple[str, Interval, date | None] | None:
             _MONTHS[datem.group(1).lower()],
             int(datem.group(2)),
         )
-    return day, interval, event_date
+    return interval, event_date
+
+
+def _merge_close_dated(events: list[dict], gap_threshold_min: int = 15) -> list[dict]:
+    if not events:
+        return events
+    by_date: dict[str, list[Interval]] = {}
+    for ev in events:
+        by_date.setdefault(ev["date"], []).append(Interval(ev["open"], ev["close"]))
+    out: list[dict] = []
+    for d in sorted(by_date):
+        ivs = sorted(by_date[d], key=lambda iv: iv.open)
+        merged = _merge_close_intervals(ivs, gap_threshold_min)
+        for iv in merged:
+            out.append({"date": d, "open": iv.open, "close": iv.close})
+    return out
 
 
 def parse_mullins_html(html: str, today: date | None = None) -> dict:
-    """Parse Finnly Connect week-view HTML into a hours-by-weekday dict.
+    """Parse Finnly Connect week-view HTML into a list of dated events.
 
-    Events with a calendar date earlier than ``today`` are skipped so a
-    past Wednesday in the current week stops being rendered as "every
-    Wednesday" by the frontend. ``today`` defaults to today in
-    America/New_York.
+    Returns a facility record with an ``events`` list of
+    ``{date, open, close}`` rather than a weekday-keyed ``hours`` dict
+    — the Mullins schedule changes week-to-week, so day-of-week labels
+    would conflate "this Sat" with "next Sat" once the Finnly view
+    rolls over to the following week. ``hours`` is emitted as empty
+    for backward compatibility with the frontend's fallback path.
     """
     from datetime import datetime
     if today is None:
         today = datetime.now(TZ).date()
     soup = BeautifulSoup(html, "html.parser")
-    hours: dict[str, list[Interval]] = {d: [] for d in DAY_ORDER}
-
+    raw: list[dict] = []
     for event_el in soup.find_all(class_="k-event"):
         parsed = _parse_event(event_el)
         if parsed is None:
             continue
-        day, interval, event_date = parsed
-        # Drop events whose date has already passed this week — the
-        # Finnly week view shows the full calendar week, including days
-        # earlier in the week that have already happened.
-        if event_date is not None and event_date < today:
+        interval, event_date = parsed
+        if event_date is None or event_date < today:
             continue
-        if interval not in hours[day]:
-            hours[day].append(interval)
-
-    for day in DAY_ORDER:
-        hours[day].sort(key=lambda iv: iv.open)
-        hours[day] = _merge_close_intervals(hours[day], gap_threshold_min=15)
+        raw.append({
+            "date": event_date.isoformat(),
+            "open": interval.open,
+            "close": interval.close,
+        })
+    events = _merge_close_dated(raw, gap_threshold_min=15)
 
     return {
         "id": "mullins-ice",
@@ -143,7 +154,8 @@ def parse_mullins_html(html: str, today: date | None = None) -> dict:
         "location_label": "Mullins Center, UMass Amherst",
         "maps_url": "https://www.google.com/maps/search/?api=1&query=Mullins+Center+UMass+Amherst",
         "source_url": SOURCE_URL,
-        "hours": hours,
+        "hours": {d: [] for d in DAY_ORDER},
+        "events": events,
         "notes": ["Schedule changes weekly — see source link for the latest week."],
     }
 

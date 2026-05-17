@@ -56,6 +56,19 @@
     return DAYS[(DAYS.indexOf(d) + 1) % 7];
   }
 
+  function intervalsForDate(facility, iso) {
+    // Pull intervals out of an events-based schedule for a specific
+    // calendar date. Returns [] when no events match.
+    if (!facility.events) return null;
+    var out = [];
+    for (var i = 0; i < facility.events.length; i++) {
+      var ev = facility.events[i];
+      if (ev.date === iso) out.push({ open: ev.open, close: ev.close });
+    }
+    out.sort(function (a, b) { return toMinutes(a.open) - toMinutes(b.open); });
+    return out;
+  }
+
   function computeStatus(hours, now) {
     var today = hours[now.day] || [];
     for (var i = 0; i < today.length; i++) {
@@ -156,10 +169,51 @@
     return HOLIDAYS_BY_DATE[date] || null;
   }
 
+  function statusFromEvents(facility, now) {
+    // Walk events sorted by (date, open). First event today and not
+    // yet ended → open. Otherwise the next future event → "opens …".
+    var todayIso = todayIsoInTz();
+    var todayEvents = (intervalsForDate(facility, todayIso) || []);
+    for (var i = 0; i < todayEvents.length; i++) {
+      var iv = todayEvents[i];
+      if (now.minutes >= toMinutes(iv.open) && now.minutes < toMinutes(iv.close)) {
+        return { open: true, until: iv.close };
+      }
+    }
+    var pending = (facility.events || []).filter(function (ev) {
+      if (ev.date < todayIso) return false;
+      if (ev.date === todayIso) return toMinutes(ev.open) > now.minutes;
+      return true;
+    }).sort(function (a, b) {
+      if (a.date !== b.date) return a.date < b.date ? -1 : 1;
+      return toMinutes(a.open) - toMinutes(b.open);
+    });
+    if (!pending.length) return { open: false, nextDate: null, nextTime: null };
+    return { open: false, nextDate: pending[0].date, nextTime: pending[0].open };
+  }
+
   function renderStatus(facility, now) {
     var holiday = holidayForFacility(facility);
     if (holiday) {
       return el("p", { class: "status closed" }, ["CLOSED — " + holiday.name]);
+    }
+    if (facility.events) {
+      var es = statusFromEvents(facility, now);
+      if (es.open) {
+        return el("p", { class: "status open" }, ["OPEN until " + formatTime(es.until)]);
+      }
+      if (!es.nextDate) {
+        return el("p", { class: "status closed" }, ["CLOSED — no upcoming sessions"]);
+      }
+      var todayIso2 = todayIsoInTz();
+      var label;
+      if (es.nextDate === todayIso2) label = "today";
+      else {
+        var dt2 = new Date(Date.UTC.apply(null, es.nextDate.split("-").map(Number).map(function (v, i) { return i === 1 ? v - 1 : v; })));
+        var wkIdx = (dt2.getUTCDay() + 6) % 7;
+        label = DAY_FULL[DAYS[wkIdx]];
+      }
+      return el("p", { class: "status closed" }, ["CLOSED — opens " + label + " at " + formatTime(es.nextTime)]);
     }
     var s = computeStatus(effectiveHours(facility), now);
     if (s.open) {
@@ -183,7 +237,10 @@
       var weekdayKey = DAYS[weekdayIdx];
       var iso = dt.toISOString().slice(0, 10);
       var holiday = RECWELL_IDS[facility.id] ? HOLIDAYS_BY_DATE[iso] : null;
-      var slots = facility.hours[weekdayKey] || [];
+      // Prefer dated events if the facility uses them.
+      var slots = facility.events
+        ? (intervalsForDate(facility, iso) || [])
+        : (facility.hours[weekdayKey] || []);
 
       var label;
       if (holiday) {
@@ -650,7 +707,9 @@
     var openItems = [];
     facilities.forEach(function (f) {
       if (holidayForFacility(f)) return; // closed for today's holiday
-      var status = computeStatus(effectiveHours(f), now);
+      var status = f.events
+        ? statusFromEvents(f, now)
+        : computeStatus(effectiveHours(f), now);
       if (!status.open) return;
       var minutesLeft = toMinutes(status.until) - now.minutes;
       openItems.push({ facility: f, until: status.until, minutesLeft: minutesLeft });
