@@ -652,6 +652,8 @@ table.week tr.today th::after {
   right: 4px;
   color: var(--mustard);
 }
+table.week tr.holiday td { color: var(--closed); font-style: italic; }
+table.week tr.holiday.today td { color: var(--paper); }
 
 .meta {
   font-family: "JetBrains Mono", monospace;

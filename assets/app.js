@@ -118,11 +118,42 @@
     "boyden-pool": 1, "curry-hicks-pool": 1, "recreation-center": 1,
     "rockwell-climbing": 1, "mullins-tennis": 1,
   };
-  var TODAY_HOLIDAY = null; // {date, name} or null — set during render()
+  var TODAY_HOLIDAY = null; // {date, name} or null
+  var HOLIDAYS_BY_DATE = {}; // iso → name, used to mark upcoming weekday rows
 
   function holidayForFacility(facility) {
     if (!TODAY_HOLIDAY) return null;
     return RECWELL_IDS[facility.id] ? TODAY_HOLIDAY : null;
+  }
+
+  function dateForUpcomingWeekday(weekdayIdx) {
+    // weekdayIdx: 0=mon..6=sun (matches DAYS order). Returns the ISO
+    // date of the next occurrence (today if it matches), in ET.
+    var iso = todayIsoInTz();
+    var parts = iso.split("-").map(Number);
+    var dt = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
+    var todayIdx = (dt.getUTCDay() + 6) % 7; // shift Sun=0 → Mon=0
+    var delta = (weekdayIdx - todayIdx + 7) % 7;
+    dt.setUTCDate(dt.getUTCDate() + delta);
+    return dt.toISOString().slice(0, 10);
+  }
+
+  function effectiveHours(facility) {
+    // Blank out hours for the next-occurrence date of each weekday
+    // when that date is a RecWell holiday closure.
+    if (!RECWELL_IDS[facility.id]) return facility.hours;
+    var out = {};
+    DAYS.forEach(function (d, i) {
+      var occursOn = dateForUpcomingWeekday(i);
+      out[d] = HOLIDAYS_BY_DATE[occursOn] ? [] : (facility.hours[d] || []);
+    });
+    return out;
+  }
+
+  function holidayLabelForWeekday(facility, weekdayIdx) {
+    if (!RECWELL_IDS[facility.id]) return null;
+    var date = dateForUpcomingWeekday(weekdayIdx);
+    return HOLIDAYS_BY_DATE[date] || null;
   }
 
   function renderStatus(facility, now) {
@@ -130,7 +161,7 @@
     if (holiday) {
       return el("p", { class: "status closed" }, ["CLOSED — " + holiday.name]);
     }
-    var s = computeStatus(facility.hours, now);
+    var s = computeStatus(effectiveHours(facility), now);
     if (s.open) {
       return el("p", { class: "status open" }, ["OPEN until " + formatTime(s.until)]);
     }
@@ -142,12 +173,21 @@
   }
 
   function renderWeekTable(facility, now) {
-    var tbody = el("tbody", {}, DAYS.map(function (d) {
+    var tbody = el("tbody", {}, DAYS.map(function (d, i) {
+      var holiday = holidayLabelForWeekday(facility, i);
       var slots = facility.hours[d] || [];
-      var label = slots.length === 0
-        ? "Closed"
-        : slots.map(function (iv) { return formatTime(iv.open) + " – " + formatTime(iv.close); }).join(", ");
-      return el("tr", d === now.day ? { class: "today" } : {}, [
+      var label;
+      if (holiday) {
+        label = "Closed — " + holiday;
+      } else {
+        label = slots.length === 0
+          ? "Closed"
+          : slots.map(function (iv) { return formatTime(iv.open) + " – " + formatTime(iv.close); }).join(", ");
+      }
+      var attrs = {};
+      if (d === now.day) attrs.class = "today";
+      if (holiday) attrs.class = (attrs.class || "") + " holiday";
+      return el("tr", attrs, [
         el("th", {}, [DAY_LABELS[d]]),
         el("td", {}, [label]),
       ]);
@@ -587,8 +627,8 @@
     root.innerHTML = "";
     var openItems = [];
     facilities.forEach(function (f) {
-      if (holidayForFacility(f)) return; // closed for holiday — skip
-      var status = computeStatus(f.hours, now);
+      if (holidayForFacility(f)) return; // closed for today's holiday
+      var status = computeStatus(effectiveHours(f), now);
       if (!status.open) return;
       var minutesLeft = toMinutes(status.until) - now.minutes;
       openItems.push({ facility: f, until: status.until, minutesLeft: minutesLeft });
@@ -750,7 +790,9 @@
     var now = nowInTz();
     var todayIso = todayIsoInTz();
     TODAY_HOLIDAY = null;
+    HOLIDAYS_BY_DATE = {};
     (doc.holidays || []).forEach(function (h) {
+      HOLIDAYS_BY_DATE[h.date] = h.name;
       if (h.date === todayIso) TODAY_HOLIDAY = h;
     });
     document.getElementById("updated").textContent =
