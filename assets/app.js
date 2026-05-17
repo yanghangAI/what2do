@@ -136,19 +136,22 @@
 
   function holidayForFacility(facility) {
     if (TODAY_HOLIDAY && RECWELL_IDS[facility.id]) return TODAY_HOLIDAY;
-    // Per-facility one-off closure scraped from notes.
     var today = todayIsoInTz();
     var fc = (facility.closed_dates || []).filter(function (c) { return c.date === today; })[0];
-    if (fc) return { date: fc.date, name: "Closed today" };
+    // Per-facility one-off closure — leave name null so renderStatus
+    // shows a plain "CLOSED" badge (the underlying note explains why).
+    if (fc) return { date: fc.date, name: null };
     return null;
   }
 
   function closureForFacilityOnDate(facility, iso) {
     // Returns a string label if the facility is closed on `iso`, else null.
-    // Combines RecWell-wide holidays and per-facility closed_dates.
+    // Holidays carry their name (e.g. "Memorial Day"); per-facility
+    // closures return an empty string so callers can render a plain
+    // "Closed" with no redundant suffix.
     if (RECWELL_IDS[facility.id] && HOLIDAYS_BY_DATE[iso]) return HOLIDAYS_BY_DATE[iso];
     var fc = (facility.closed_dates || []).filter(function (c) { return c.date === iso; })[0];
-    return fc ? "Closed" : null;
+    return fc ? "" : null;
   }
 
   function dateForUpcomingWeekday(weekdayIdx) {
@@ -206,7 +209,8 @@
   function renderStatus(facility, now) {
     var holiday = holidayForFacility(facility);
     if (holiday) {
-      return el("p", { class: "status closed" }, ["CLOSED — " + holiday.name]);
+      var label = holiday.name ? "CLOSED — " + holiday.name : "CLOSED today";
+      return el("p", { class: "status closed" }, [label]);
     }
     if (facility.events) {
       var es = statusFromEvents(facility, now);
@@ -254,8 +258,8 @@
         : (facility.hours[weekdayKey] || []);
 
       var label;
-      if (closureLabel) {
-        label = "Closed — " + closureLabel;
+      if (closureLabel != null) {
+        label = closureLabel ? "Closed — " + closureLabel : "Closed";
       } else if (slots.length === 0) {
         label = "Closed";
       } else {
@@ -276,7 +280,7 @@
 
       var attrs = {};
       if (offset === 0) attrs.class = "today";
-      if (closureLabel) attrs.class = (attrs.class || "") + " holiday";
+      if (closureLabel != null) attrs.class = (attrs.class || "") + " holiday";
       rows.push(el("tr", attrs, [
         el("th", {}, [dayName]),
         el("td", {}, [label]),
