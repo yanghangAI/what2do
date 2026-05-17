@@ -16,7 +16,7 @@
   --maroon: #881c1c;
   --mustard: #d4a309;
   --moss: #4a5d3a;
-  --grass: #2d8a3f;
+  --grass: #2f7d32;
   --rust: #c44536;
   --bg: var(--paper);
   --fg: var(--ink);
@@ -448,15 +448,22 @@ ul.open-now-list li.urgent .on-countdown { color: var(--closed); }
   padding: 0.25rem 0.4rem;
   font-variant-numeric: tabular-nums;
 }
-.wq-cell.wq-pristine { color: #0369a1; font-weight: 800; } /* sky blue: 0–30 */
-.wq-cell.wq-ok       { color: var(--ok); } /* grass green: 31–126 */
-@media (prefers-color-scheme: dark) {
-  .wq-cell.wq-pristine { color: #7dd3fc; }
-}
-.wq-cell.wq-warn     { color: #b07a1a; }   /* 127–235 amber */
-.wq-cell.wq-bad      { color: var(--closed); } /* 236–1000 */
-.wq-cell.wq-danger   { color: #7a1414; }   /* >1000 deep red */
+/* 5-tier swim-safety scale. Anchored cool→hot per UX convention
+ * (NOAA coastal, Carbon design, EPA AQI). Each tier shifts both hue
+ * AND lightness so adjacent tiers stay distinct even for color-
+ * deficient viewers; the deep-red "danger" tier sits darker than the
+ * brand maroon (#881c1c) so it doesn't clash. */
+.wq-cell.wq-pristine { color: #0b6e99; font-weight: 800; } /* sky blue */
+.wq-cell.wq-ok       { color: var(--ok); }                 /* forest green */
+.wq-cell.wq-warn     { color: #b8860b; }                   /* dark goldenrod */
+.wq-cell.wq-bad      { color: var(--closed); }             /* red */
+.wq-cell.wq-danger   { color: #5c0a0a; }                   /* deep blood red */
 .wq-cell.wq-none     { color: var(--muted); font-weight: 400; }
+@media (prefers-color-scheme: dark) {
+  .wq-cell.wq-pristine { color: #3ba3cc; }
+  .wq-cell.wq-warn     { color: #e6b04a; }
+  .wq-cell.wq-danger   { color: #a33333; }
+}
 
 @media (max-width: 380px) {
   .wq-table { font-size: 0.85rem; }
@@ -544,12 +551,13 @@ ul.open-now-list li.urgent .on-countdown { color: var(--closed); }
 .mpn-note {
   color: var(--ink-soft);
 }
-.mpn-row.mpn-pristine .mpn-label { color: #0369a1; font-weight: 700; }
+.mpn-row.mpn-pristine .mpn-label { color: #0b6e99; font-weight: 700; }
 .mpn-row.mpn-ok    .mpn-label { color: var(--ok); }
-.mpn-row.mpn-warn  .mpn-label { color: #b07a1a; }
+.mpn-row.mpn-warn  .mpn-label { color: #b8860b; }
 .mpn-row.mpn-bad   .mpn-label { color: var(--closed); }
 @media (prefers-color-scheme: dark) {
-  .mpn-row.mpn-pristine .mpn-label { color: #7dd3fc; }
+  .mpn-row.mpn-pristine .mpn-label { color: #3ba3cc; }
+  .mpn-row.mpn-warn .mpn-label { color: #e6b04a; }
 }
 
 .wq-info {
