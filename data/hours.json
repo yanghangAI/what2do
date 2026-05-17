@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-16T18:55:07-04:00",
+  "last_updated": "2026-05-16T23:22:01-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -39,7 +39,7 @@
         "Closed for semester transition; summer hours begin 2026-05-20."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T18:55:07-04:00"
+      "last_scraped": "2026-05-16T23:22:01-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -82,7 +82,7 @@
         "Closed for semester transition; summer hours begin 2026-05-21."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T18:55:07-04:00"
+      "last_scraped": "2026-05-16T23:22:01-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -106,7 +106,7 @@
         "Closed for semester transition; summer hours begin 2026-05-26."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T18:55:07-04:00"
+      "last_scraped": "2026-05-16T23:22:01-04:00"
     },
     {
       "id": "recreation-center",
@@ -145,7 +145,7 @@
         "Closed for semester transition; summer hours begin 2026-05-20."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T18:55:07-04:00"
+      "last_scraped": "2026-05-16T23:22:01-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -169,7 +169,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T18:55:07-04:00"
+      "last_scraped": "2026-05-16T23:22:01-04:00"
     },
     {
       "id": "mullins-ice",
@@ -181,19 +181,52 @@
       },
       "source_url": "https://www.mullinscenter.com/mullins-community-ice-center/public-skating",
       "hours": {
-        "mon": [],
+        "mon": [
+          {
+            "open": "14:20",
+            "close": "15:40"
+          }
+        ],
         "tue": [],
-        "wed": [],
-        "thu": [],
-        "fri": [],
-        "sat": [],
+        "wed": [
+          {
+            "open": "12:10",
+            "close": "13:50"
+          }
+        ],
+        "thu": [
+          {
+            "open": "18:30",
+            "close": "20:20"
+          }
+        ],
+        "fri": [
+          {
+            "open": "12:10",
+            "close": "13:30"
+          },
+          {
+            "open": "17:00",
+            "close": "18:50"
+          }
+        ],
+        "sat": [
+          {
+            "open": "13:00",
+            "close": "14:20"
+          },
+          {
+            "open": "16:00",
+            "close": "17:50"
+          }
+        ],
         "sun": []
       },
       "notes": [
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T18:55:07-04:00"
+      "last_scraped": "2026-05-16T23:22:01-04:00"
     },
     {
       "id": "puffer-pond",
@@ -215,7 +248,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-16T18:55:07-04:00",
+      "last_scraped": "2026-05-16T23:22:01-04:00",
       "water_quality": {
         "status": "allowed",
         "headline": "Swimming is allowed at Puffer's Pond.",
@@ -498,5 +531,19 @@
       "start_date": "2026-05-26",
       "closed_from": null
     }
-  }
+  },
+  "holidays": [
+    {
+      "date": "2026-05-25",
+      "name": "Memorial Day"
+    },
+    {
+      "date": "2026-06-19",
+      "name": "Juneteenth"
+    },
+    {
+      "date": "2026-07-03",
+      "name": "Independence Day (observed)"
+    }
+  ]
 }
