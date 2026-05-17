@@ -16,13 +16,14 @@
   --maroon: #881c1c;
   --mustard: #d4a309;
   --moss: #4a5d3a;
+  --grass: #2d8a3f;
   --rust: #c44536;
   --bg: var(--paper);
   --fg: var(--ink);
   --card-bg: #fbf6ec;
   --border: var(--rule);
   --accent: var(--maroon);
-  --ok: var(--moss);
+  --ok: var(--grass);
   --closed: var(--rust);
   --warn-bg: #f6e4a3;
   --warn-fg: #6b4d00;
