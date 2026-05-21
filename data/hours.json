@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-20T07:48:20-04:00",
+  "last_updated": "2026-05-21T08:10:54-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -12,12 +12,7 @@
       },
       "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
       "hours": {
-        "mon": [
-          {
-            "open": "11:00",
-            "close": "13:00"
-          }
-        ],
+        "mon": [],
         "tue": [
           {
             "open": "11:00",
@@ -30,27 +25,17 @@
             "close": "13:00"
           }
         ],
-        "thu": [
-          {
-            "open": "11:00",
-            "close": "13:00"
-          }
-        ],
-        "fri": [
-          {
-            "open": "11:00",
-            "close": "13:00"
-          }
-        ],
+        "thu": [],
+        "fri": [],
         "sat": [],
         "sun": []
       },
       "notes": [
         "Saturday & Sunday: CLOSED",
-        "Summer hours from RecWell alert (effective 2026-05-20)."
+        "Closed for semester transition; summer hours begin 2026-05-26."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-20T07:48:20-04:00"
+      "last_scraped": "2026-05-21T08:10:54-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -62,57 +47,21 @@
       },
       "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
       "hours": {
-        "mon": [
-          {
-            "open": "07:00",
-            "close": "09:00"
-          },
-          {
-            "open": "17:00",
-            "close": "19:30"
-          }
-        ],
-        "tue": [
-          {
-            "open": "07:00",
-            "close": "09:00"
-          },
-          {
-            "open": "17:00",
-            "close": "19:30"
-          }
-        ],
+        "mon": [],
+        "tue": [],
         "wed": [],
-        "thu": [
-          {
-            "open": "07:00",
-            "close": "09:00"
-          },
-          {
-            "open": "17:00",
-            "close": "19:30"
-          }
-        ],
-        "fri": [
-          {
-            "open": "07:00",
-            "close": "09:00"
-          },
-          {
-            "open": "17:00",
-            "close": "19:30"
-          }
-        ],
+        "thu": [],
+        "fri": [],
         "sat": [],
         "sun": []
       },
       "notes": [
         "Saturday & Sunday: CLOSED",
         "Please Note the Hicks Pool will be CLOSED on the following dates: Wednesday, May 20, 2026 - For Electrical Work",
-        "Closed for semester transition; summer hours begin 2026-05-21."
+        "Closed for semester transition; summer hours begin 2026-05-26."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-20T07:48:20-04:00",
+      "last_scraped": "2026-05-21T08:10:54-04:00",
       "closed_dates": [
         {
           "date": "2026-05-20"
@@ -136,7 +85,12 @@
             "close": "20:00"
           }
         ],
-        "wed": [],
+        "wed": [
+          {
+            "open": "16:00",
+            "close": "20:00"
+          }
+        ],
         "thu": [],
         "fri": [],
         "sat": [],
@@ -146,7 +100,7 @@
         "Closed for semester transition; summer hours begin 2026-05-26."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-20T07:48:20-04:00"
+      "last_scraped": "2026-05-21T08:10:54-04:00"
     },
     {
       "id": "recreation-center",
@@ -158,12 +112,7 @@
       },
       "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
       "hours": {
-        "mon": [
-          {
-            "open": "07:00",
-            "close": "19:00"
-          }
-        ],
+        "mon": [],
         "tue": [
           {
             "open": "07:00",
@@ -176,26 +125,16 @@
             "close": "19:00"
           }
         ],
-        "thu": [
-          {
-            "open": "07:00",
-            "close": "19:00"
-          }
-        ],
-        "fri": [
-          {
-            "open": "07:00",
-            "close": "19:00"
-          }
-        ],
+        "thu": [],
+        "fri": [],
         "sat": [],
         "sun": []
       },
       "notes": [
-        "Summer hours from RecWell alert (effective 2026-05-20)."
+        "Closed for semester transition; summer hours begin 2026-05-26."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-20T07:48:20-04:00"
+      "last_scraped": "2026-05-21T08:10:54-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -219,7 +158,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-20T07:48:20-04:00"
+      "last_scraped": "2026-05-21T08:10:54-04:00"
     },
     {
       "id": "mullins-ice",
@@ -243,13 +182,8 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-20T07:48:20-04:00",
+      "last_scraped": "2026-05-21T08:10:54-04:00",
       "events": [
-        {
-          "date": "2026-05-20",
-          "open": "12:10",
-          "close": "13:50"
-        },
         {
           "date": "2026-05-21",
           "open": "18:30",
@@ -302,7 +236,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-20T07:48:20-04:00",
+      "last_scraped": "2026-05-21T08:10:54-04:00",
       "water_quality": {
         "status": "allowed",
         "headline": "Swimming is allowed at Puffer's Pond.",
@@ -578,18 +512,18 @@
       ]
     }
   ],
-  "alert": "FACILITIES ALERT:\nHicks Pool will open for summer hours on Thursday, May 21, 2026, due to electrical work.\nSummer Hours for the Recreation Center and Boyden Pool will begin on Wednesday, May 20, 2026.\nRockWell Summer Hours will begin on Tuesday, May 26, 2026\nAll RecWell Facilities will be closed on the following Holidays:\nMonday, May 25, 2026 - Memorial Day\nFriday, June 19, 2026 - Juneteenth\nFriday, July 3, 2026 - Independence Day (observed)\nRecreation Center | Summer Hours:\nMonday\u2013Friday | 7:00am - 7:00pm\nSaturday\u2013Sunday |\nCLOSED\nPools | Summer Hours:\nBoyden Pool\nMonday - Friday | 11:00am - 1:00pm\nSaturday & Friday |\nCLOSED\nHicks Pool - will open Thursday, May 21, 2026 for the summer - delay due to electrical work.\nMonday - Friday | 7:00am - 9:00am & 5:00pm - 7:30pm\nSaturday & Sunday |\nCLOSED\nRockWell | Summer Hours:\nMonday - Friday | 4:00pm - 8:00pm\nSaturday & Sunday | 4:00pm - 8:00pm\nRecreation Tennis and Outdoor Pickleball Courts\nare\nCLOSED\nuntil further notice.",
+  "alert": "FACILITIES ALERT:\nHicks Pool hours for Thursday & Friday May 21 & 22, 2026 (7:00am - 9:00am, and 5:00pm - 7:30pm):\nWILL BE MOVED TO BOYDEN POOL.\nSummer Hours - Check below for updated hours of operations in the RecWell Facilities.\nRockWell Summer Hours will begin on Tuesday, May 26, 2026\nAll RecWell Facilities will be closed on the following Holidays:\nMonday, May 25, 2026 - Memorial Day\nFriday, June 19, 2026 - Juneteenth\nFriday, July 3, 2026 - Independence Day (observed)\nRecreation Center | Summer Hours:\nMonday\u2013Friday | 7:00am - 7:00pm\nSaturday\u2013Sunday |\nCLOSED\nPools | Summer Hours:\nBoyden Pool\nMonday - Friday | 11:00am - 1:00pm\nSaturday & Friday |\nCLOSED\nHicks Pool - hours will be moved to Boyden Pool on Thursday & Friday, May 21-22, 2026 - due to electrical and pump repair / work.\nMonday - Friday | 7:00am - 9:00am & 5:00pm - 7:30pm\nSaturday & Sunday |\nCLOSED\nRockWell | Summer Hours:\nMonday - Friday | 4:00pm - 8:00pm\nSaturday & Sunday | 4:00pm - 8:00pm\nRecreation Tennis and Outdoor Pickleball Courts\nare\nCLOSED\nuntil further notice.",
   "alert_state": {
     "recreation-center": {
-      "start_date": "2026-05-20",
+      "start_date": "2026-05-26",
       "closed_from": null
     },
     "boyden-pool": {
-      "start_date": "2026-05-20",
+      "start_date": "2026-05-26",
       "closed_from": null
     },
     "curry-hicks-pool": {
-      "start_date": "2026-05-21",
+      "start_date": "2026-05-26",
       "closed_from": null
     },
     "rockwell-climbing": {
