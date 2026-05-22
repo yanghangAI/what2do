@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-21T08:10:54-04:00",
+  "last_updated": "2026-05-22T07:41:23-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -25,7 +25,12 @@
             "close": "13:00"
           }
         ],
-        "thu": [],
+        "thu": [
+          {
+            "open": "11:00",
+            "close": "13:00"
+          }
+        ],
         "fri": [],
         "sat": [],
         "sun": []
@@ -35,7 +40,7 @@
         "Closed for semester transition; summer hours begin 2026-05-26."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-21T08:10:54-04:00"
+      "last_scraped": "2026-05-22T07:41:23-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -50,7 +55,16 @@
         "mon": [],
         "tue": [],
         "wed": [],
-        "thu": [],
+        "thu": [
+          {
+            "open": "07:00",
+            "close": "09:00"
+          },
+          {
+            "open": "17:00",
+            "close": "19:30"
+          }
+        ],
         "fri": [],
         "sat": [],
         "sun": []
@@ -61,7 +75,7 @@
         "Closed for semester transition; summer hours begin 2026-05-26."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-21T08:10:54-04:00",
+      "last_scraped": "2026-05-22T07:41:23-04:00",
       "closed_dates": [
         {
           "date": "2026-05-20"
@@ -91,7 +105,12 @@
             "close": "20:00"
           }
         ],
-        "thu": [],
+        "thu": [
+          {
+            "open": "16:00",
+            "close": "20:00"
+          }
+        ],
         "fri": [],
         "sat": [],
         "sun": []
@@ -100,7 +119,7 @@
         "Closed for semester transition; summer hours begin 2026-05-26."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-21T08:10:54-04:00"
+      "last_scraped": "2026-05-22T07:41:23-04:00"
     },
     {
       "id": "recreation-center",
@@ -125,7 +144,12 @@
             "close": "19:00"
           }
         ],
-        "thu": [],
+        "thu": [
+          {
+            "open": "07:00",
+            "close": "19:00"
+          }
+        ],
         "fri": [],
         "sat": [],
         "sun": []
@@ -134,7 +158,7 @@
         "Closed for semester transition; summer hours begin 2026-05-26."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-21T08:10:54-04:00"
+      "last_scraped": "2026-05-22T07:41:23-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -158,7 +182,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-21T08:10:54-04:00"
+      "last_scraped": "2026-05-22T07:41:23-04:00"
     },
     {
       "id": "mullins-ice",
@@ -182,13 +206,8 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-21T08:10:54-04:00",
+      "last_scraped": "2026-05-22T07:41:23-04:00",
       "events": [
-        {
-          "date": "2026-05-21",
-          "open": "18:30",
-          "close": "20:20"
-        },
         {
           "date": "2026-05-22",
           "open": "12:10",
@@ -236,7 +255,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-21T08:10:54-04:00",
+      "last_scraped": "2026-05-22T07:41:23-04:00",
       "water_quality": {
         "status": "allowed",
         "headline": "Swimming is allowed at Puffer's Pond.",
