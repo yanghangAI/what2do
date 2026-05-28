@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-27T08:15:58-04:00",
+  "last_updated": "2026-05-28T08:22:30-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -46,11 +46,10 @@
         "sun": []
       },
       "notes": [
-        "Saturday & Sunday: CLOSED",
-        "Summer hours from RecWell alert (effective 2026-05-26)."
+        "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-27T08:15:58-04:00"
+      "last_scraped": "2026-05-28T08:22:30-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -62,44 +61,44 @@
       },
       "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
       "hours": {
-        "mon": [],
-        "tue": [],
-        "wed": [],
+        "mon": [
+          {
+            "open": "07:00",
+            "close": "09:00"
+          }
+        ],
+        "tue": [
+          {
+            "open": "07:00",
+            "close": "09:00"
+          }
+        ],
+        "wed": [
+          {
+            "open": "07:00",
+            "close": "09:00"
+          }
+        ],
         "thu": [
           {
             "open": "07:00",
             "close": "09:00"
-          },
-          {
-            "open": "17:00",
-            "close": "19:30"
           }
         ],
         "fri": [
           {
             "open": "07:00",
             "close": "09:00"
-          },
-          {
-            "open": "17:00",
-            "close": "19:30"
           }
         ],
         "sat": [],
         "sun": []
       },
       "notes": [
-        "Saturday & Sunday: CLOSED",
-        "Please Note the Hicks Pool will be CLOSED on the following dates: Wednesday, May 20, 2026 - For Electrical Work",
-        "Summer hours from RecWell alert (effective 2026-05-26)."
+        "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-27T08:15:58-04:00",
-      "closed_dates": [
-        {
-          "date": "2026-05-20"
-        }
-      ]
+      "last_scraped": "2026-05-28T08:22:30-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -111,54 +110,17 @@
       },
       "source_url": "https://www.umass.edu/recwell/facilities/hours-operation",
       "hours": {
-        "mon": [
-          {
-            "open": "16:00",
-            "close": "20:00"
-          }
-        ],
-        "tue": [
-          {
-            "open": "16:00",
-            "close": "20:00"
-          }
-        ],
-        "wed": [
-          {
-            "open": "16:00",
-            "close": "20:00"
-          }
-        ],
-        "thu": [
-          {
-            "open": "16:00",
-            "close": "20:00"
-          }
-        ],
-        "fri": [
-          {
-            "open": "16:00",
-            "close": "20:00"
-          }
-        ],
-        "sat": [
-          {
-            "open": "16:00",
-            "close": "20:00"
-          }
-        ],
-        "sun": [
-          {
-            "open": "16:00",
-            "close": "20:00"
-          }
-        ]
+        "mon": [],
+        "tue": [],
+        "wed": [],
+        "thu": [],
+        "fri": [],
+        "sat": [],
+        "sun": []
       },
-      "notes": [
-        "Summer hours from RecWell alert (effective 2026-05-26)."
-      ],
+      "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-27T08:15:58-04:00"
+      "last_scraped": "2026-05-28T08:22:30-04:00"
     },
     {
       "id": "recreation-center",
@@ -204,10 +166,10 @@
         "sun": []
       },
       "notes": [
-        "Summer hours from RecWell alert (effective 2026-05-26)."
+        "Saturday - Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-27T08:15:58-04:00"
+      "last_scraped": "2026-05-28T08:22:30-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -231,7 +193,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-27T08:15:58-04:00"
+      "last_scraped": "2026-05-28T08:22:30-04:00"
     },
     {
       "id": "mullins-ice",
@@ -255,13 +217,8 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-27T08:15:58-04:00",
+      "last_scraped": "2026-05-28T08:22:30-04:00",
       "events": [
-        {
-          "date": "2026-05-27",
-          "open": "12:10",
-          "close": "13:50"
-        },
         {
           "date": "2026-05-28",
           "open": "17:30",
@@ -309,28 +266,28 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-27T08:15:58-04:00",
+      "last_scraped": "2026-05-28T08:22:30-04:00",
       "water_quality": {
         "status": "allowed",
-        "headline": "Swimming is allowed at Puffer's Pond.",
+        "headline": "Last Test of 2025: Swimming is allowed at Puffer's Pond.",
         "detail": "The latest water quality test results show that both South Beach and North Beach meet state standards for safe swimming conditions.",
-        "last_updated": "2025-08-27",
+        "last_updated": "2026-05-27",
         "beaches": {
           "north": "ok",
           "south": "ok"
         },
         "report_url": "https://www.amherstma.gov/Archive.aspx?AMID=234",
         "latest_report": {
-          "date": "2025-08-26",
-          "url": "https://www.amherstma.gov/Archive.aspx?ADID=18329",
-          "title": "Puffer's Pond Water Quality Test 08-26-2025",
+          "date": "2026-05-26",
+          "url": "https://www.amherstma.gov/Archive.aspx?ADID=19103",
+          "title": "Puffer's Pond Water Quality Test 05-26-2026",
           "readings": {
-            "north_geomean": 49.17,
-            "south_geomean": 95.58,
-            "north_sample": 4.8,
-            "south_sample": 141.4,
+            "north_geomean": null,
+            "south_geomean": null,
+            "north_sample": 28.5,
+            "south_sample": 48.8,
             "source": "gemini",
-            "test_date": "2025-08-26"
+            "test_date": "2020-05-20"
           }
         }
       }
@@ -571,6 +528,50 @@
   ],
   "schedule": [
     {
+      "date": "2026-05-28",
+      "weekday": "Thu",
+      "events": [
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        }
+      ]
+    },
+    {
+      "date": "2026-05-29",
+      "weekday": "Fri",
+      "events": [
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        }
+      ]
+    },
+    {
       "date": "2026-05-30",
       "weekday": "Sat",
       "events": [
@@ -581,41 +582,75 @@
         {
           "time": "12:00",
           "name": "Club Ballroom Dance"
+        },
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        }
+      ]
+    },
+    {
+      "date": "2026-05-31",
+      "weekday": "Sun",
+      "events": [
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-01",
+      "weekday": "Mon",
+      "events": [
+        {
+          "time": "10:00",
+          "name": "jason vs slacey"
+        },
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
         }
       ]
     }
   ],
-  "alert": "FACILITIES ALERT:\nHicks Pool hours for Thursday & Friday May 21 & 22, 2026 (7:00am - 9:00am, and 5:00pm - 7:30pm):\nWILL BE MOVED TO BOYDEN POOL.\nSummer Hours - Check below for updated hours of operations in the RecWell Facilities.\nRockWell Summer Hours will begin on Tuesday, May 26, 2026\nAll RecWell Facilities will be closed on the following Holidays:\nMonday, May 25, 2026 - Memorial Day\nFriday, June 19, 2026 - Juneteenth\nFriday, July 3, 2026 - Independence Day (observed)\nRecreation Center | Summer Hours:\nMonday\u2013Friday | 7:00am - 7:00pm\nSaturday\u2013Sunday |\nCLOSED\nPools | Summer Hours:\nBoyden Pool\nMonday - Friday | 11:00am - 1:00pm\nSaturday & Friday |\nCLOSED\nHicks Pool - hours will be moved to Boyden Pool on Thursday & Friday, May 21-22, 2026 - due to electrical and pump repair / work.\nMonday - Friday | 7:00am - 9:00am & 5:00pm - 7:30pm\nSaturday & Sunday |\nCLOSED\nRockWell | Summer Hours:\nMonday - Friday | 4:00pm - 8:00pm\nSaturday & Sunday | 4:00pm - 8:00pm\nRecreation Tennis and Outdoor Pickleball Courts\nare\nCLOSED\nuntil further notice.",
-  "alert_state": {
-    "recreation-center": {
-      "start_date": "2026-05-26",
-      "closed_from": null
-    },
-    "boyden-pool": {
-      "start_date": "2026-05-26",
-      "closed_from": null
-    },
-    "curry-hicks-pool": {
-      "start_date": "2026-05-26",
-      "closed_from": null
-    },
-    "rockwell-climbing": {
-      "start_date": "2026-05-26",
-      "closed_from": null
-    }
-  },
-  "holidays": [
-    {
-      "date": "2026-05-25",
-      "name": "Memorial Day"
-    },
-    {
-      "date": "2026-06-19",
-      "name": "Juneteenth"
-    },
-    {
-      "date": "2026-07-03",
-      "name": "Independence Day (observed)"
-    }
-  ]
+  "alert": null,
+  "alert_state": {},
+  "holidays": []
 }
