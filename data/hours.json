@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-29T14:17:11-04:00",
+  "last_updated": "2026-05-29T14:30:22-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -49,7 +49,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-29T14:17:11-04:00"
+      "last_scraped": "2026-05-29T14:30:22-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -65,30 +65,50 @@
           {
             "open": "07:00",
             "close": "09:00"
+          },
+          {
+            "open": "17:00",
+            "close": "19:30"
           }
         ],
         "tue": [
           {
             "open": "07:00",
             "close": "09:00"
+          },
+          {
+            "open": "17:00",
+            "close": "19:30"
           }
         ],
         "wed": [
           {
             "open": "07:00",
             "close": "09:00"
+          },
+          {
+            "open": "17:00",
+            "close": "19:30"
           }
         ],
         "thu": [
           {
             "open": "07:00",
             "close": "09:00"
+          },
+          {
+            "open": "17:00",
+            "close": "19:30"
           }
         ],
         "fri": [
           {
             "open": "07:00",
             "close": "09:00"
+          },
+          {
+            "open": "17:00",
+            "close": "19:30"
           }
         ],
         "sat": [],
@@ -98,7 +118,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-29T14:17:11-04:00"
+      "last_scraped": "2026-05-29T14:30:22-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -155,7 +175,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-29T14:17:11-04:00"
+      "last_scraped": "2026-05-29T14:30:22-04:00"
     },
     {
       "id": "recreation-center",
@@ -204,7 +224,7 @@
         "Saturday - Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-29T14:17:11-04:00"
+      "last_scraped": "2026-05-29T14:30:22-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -228,7 +248,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-29T14:17:11-04:00"
+      "last_scraped": "2026-05-29T14:30:22-04:00"
     },
     {
       "id": "mullins-ice",
@@ -252,7 +272,7 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-29T14:17:11-04:00",
+      "last_scraped": "2026-05-29T14:30:22-04:00",
       "events": [
         {
           "date": "2026-05-29",
@@ -296,7 +316,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-29T14:17:11-04:00",
+      "last_scraped": "2026-05-29T14:30:22-04:00",
       "water_quality": {
         "status": "allowed",
         "headline": "Last Test of 2025: Swimming is allowed at Puffer's Pond.",
@@ -778,7 +798,7 @@
           }
         ]
       },
-      "divergence": true
+      "divergence": false
     },
     "rockwell-climbing": {
       "input_sha": "6b75ed2f9bf67b959a29f1b786ffc79ea5ed33053a53df4bf4f78d186ccdfe9c",
@@ -826,7 +846,7 @@
           }
         ]
       },
-      "divergence": true
+      "divergence": false
     },
     "recreation-center": {
       "input_sha": "ca99ec5a622d55e1b2e1f3ee33a43289c84221ffe1158667bc737cfe682f45ac",
@@ -880,7 +900,7 @@
       "divergence": false
     },
     "mullins-ice": {
-      "input_sha": "8ace8d2e53d506917043ff95fcaf3f8809597df7c694891d50bc416bef073ef7",
+      "input_sha": "dabff9f8f701333cc2b94216d1469b9c7d90294f253c02a7a1a866b347507801",
       "gemini": [
         {
           "date": "2026-05-22",
