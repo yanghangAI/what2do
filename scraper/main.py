@@ -1,6 +1,7 @@
 """Entry point: run all scrapers, merge with previous JSON, write data/hours.json."""
 from __future__ import annotations
 import json
+import os
 import sys
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -9,12 +10,15 @@ from zoneinfo import ZoneInfo
 import requests
 
 from scraper.merge import merge_results
-from scraper.models import Facility, HoursDoc, Location
+from scraper.models import Facility, HoursDoc, Location, DAYS as DAYS_TUPLE
+from bs4 import BeautifulSoup
+from scraper import gemini_sources
 from scraper.scrape_recwell import SOURCE_URL as RECWELL_URL, scrape_recwell
-from scraper.scrape_mullins import scrape_mullins
+from scraper.scrape_recwell import FACILITIES as RECWELL_FACILITIES, _section_text_after
+from scraper.watchdog import apply_hours_watchdog, run_source, schedule_empty, schedule_equal, mullins_empty, mullins_equal, overrides_empty, overrides_equal
 from scraper.scrape_programs import fetch_programs
 from scraper.scrape_puffer import SOURCE_URL as PUFFER_URL, fetch_puffer
-from scraper.scrape_schedule import fetch_schedule
+from scraper.scrape_schedule import fetch_schedule_text, parse_schedule_text
 from scraper.scrape_alert import (
     fetch_alert,
     mask_pre_start_days,
@@ -42,44 +46,79 @@ def _fetch_recwell_html() -> str:
     return r.text
 
 
-def _run_recwell() -> list[tuple[str, dict | None, Exception | None]]:
+def _run_recwell() -> tuple[list[tuple[str, dict | None, Exception | None]], str | None]:
     try:
         html = _fetch_recwell_html()
         records = scrape_recwell(html)
-        return [(r["id"], r, None) for r in records]
+        return [(r["id"], r, None) for r in records], html
     except Exception as e:
         print(f"recwell scrape failed: {e}", file=sys.stderr)
-        # Mark all three RecWell facilities as failed
         return [
             ("boyden-pool", None, e),
             ("curry-hicks-pool", None, e),
             ("rockwell-climbing", None, e),
-        ]
+        ], None
 
 
-def _run_mullins() -> tuple[str, dict | None, Exception | None]:
+def _run_mullins() -> tuple[tuple[str, dict | None, Exception | None], str | None]:
+    from scraper.scrape_mullins import fetch_mullins_html, parse_mullins_html
     try:
-        return ("mullins-ice", scrape_mullins(), None)
+        html = fetch_mullins_html()
+        return ("mullins-ice", parse_mullins_html(html), None), html
     except Exception as e:
         print(f"mullins scrape failed: {e}", file=sys.stderr)
-        return ("mullins-ice", None, e)
+        return ("mullins-ice", None, e), None
 
 
 def main() -> int:
     now_iso = datetime.now(TZ).isoformat(timespec="seconds")
     prev = _load_previous()
 
-    results: list[tuple[str, dict | None, Exception | None]] = []
-    results.extend(_run_recwell())
-    results.append(_run_mullins())
-
-    doc = merge_results(results, prev, now_iso=now_iso)
-
     try:
         prev_raw = json.loads(OUT_PATH.read_text()) if OUT_PATH.exists() else {}
     except Exception as e:
         print(f"warning: could not parse previous hours.json: {e}", file=sys.stderr)
         prev_raw = {}
+
+    results: list[tuple[str, dict | None, Exception | None]] = []
+    recwell_results, recwell_html = _run_recwell()
+    results.extend(recwell_results)
+    mullins_result, mullins_html = _run_mullins()
+    results.append(mullins_result)
+
+    doc = merge_results(results, prev, now_iso=now_iso)
+
+    divergences = []
+    extract_meta = {}
+    if recwell_html:
+        soup = BeautifulSoup(recwell_html, "html.parser")
+        section_texts = {
+            fac["id"]: _section_text_after(soup, fac["match"])
+            for fac in RECWELL_FACILITIES
+        }
+        divs, meta = apply_hours_watchdog(
+            doc.facilities, section_texts,
+            prev_meta=prev_raw.get("extract_meta") or {},
+            gemini_fn=gemini_sources.gemini_facility_hours,
+        )
+        divergences.extend(divs)
+        extract_meta.update(meta)
+
+    if mullins_html:
+        mfac = next((f for f in doc.facilities if f.id == "mullins-ice"), None)
+        if mfac is not None:
+            dec, meta, _ = run_source(
+                "mullins-ice", parser_value=mfac.events or [],
+                fetched_text=mullins_html,
+                prev_meta=(prev_raw.get("extract_meta") or {}).get("mullins-ice"),
+                gemini_fn=gemini_sources.gemini_mullins,
+                is_empty=mullins_empty, equals=mullins_equal,
+            )
+            if dec.used_backup:
+                mfac.events = dec.shipped
+            if dec.divergence is not None:
+                divergences.append(dec.divergence)
+            extract_meta["mullins-ice"] = meta
 
     try:
         programs = fetch_programs()
@@ -88,7 +127,19 @@ def main() -> int:
         programs = prev_raw.get("programs", [])
 
     try:
-        schedule = fetch_schedule()
+        schedule_text = fetch_schedule_text()
+        schedule = parse_schedule_text(schedule_text)
+        dec, meta, _ = run_source(
+            "schedule", parser_value=schedule, fetched_text=schedule_text,
+            prev_meta=(prev_raw.get("extract_meta") or {}).get("schedule"),
+            gemini_fn=gemini_sources.gemini_schedule,
+            is_empty=schedule_empty, equals=schedule_equal,
+        )
+        if dec.used_backup:
+            schedule = dec.shipped
+        if dec.divergence is not None:
+            divergences.append(dec.divergence)
+        extract_meta["schedule"] = meta
     except Exception as e:
         print(f"schedule scrape failed: {e}", file=sys.stderr)
         schedule = prev_raw.get("schedule", [])
@@ -98,6 +149,24 @@ def main() -> int:
     except Exception as e:
         print(f"alert scrape failed: {e}", file=sys.stderr)
         alert = prev_raw.get("alert")
+
+    if alert:
+        det = {"overrides": {fid: {"start_date": ov.get("start_date"),
+                                    "closed_from": ov.get("closed_from"),
+                                    "hours": {d: [iv.to_dict() for iv in ov["hours"].get(d, [])]
+                                              for d in DAYS_TUPLE}}
+                              for fid, ov in parse_alert_overrides(alert).items()},
+               "holidays": parse_holidays(alert)}
+        dec, meta, _ = run_source(
+            "alert-overrides", parser_value=det, fetched_text=alert,
+            prev_meta=(prev_raw.get("extract_meta") or {}).get("alert-overrides"),
+            gemini_fn=gemini_sources.gemini_overrides,
+            is_empty=overrides_empty, equals=overrides_equal,
+        )
+        # REVIEW-ONLY: never apply dec.shipped — record divergence only.
+        if dec.divergence is not None:
+            divergences.append(dec.divergence)
+        extract_meta["alert-overrides"] = meta
 
     today_dt = datetime.now(TZ).date()
     today_iso = today_dt.strftime("%Y-%m-%d")
@@ -188,9 +257,21 @@ def main() -> int:
     out["alert"] = alert
     out["alert_state"] = alert_state
     out["holidays"] = parse_holidays(alert)
+    out["extract_meta"] = {**(prev_raw.get("extract_meta") or {}), **extract_meta}
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(json.dumps(out, indent=2) + "\n")
     print(f"wrote {OUT_PATH}")
+
+    from scraper.watchdog import format_divergence_report
+    md, warnings = format_divergence_report(divergences)
+    for w in warnings:
+        print(w)  # GitHub Actions ::warning:: annotations
+    summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+    if md and summary_path:
+        with open(summary_path, "a") as fh:
+            fh.write(md)
+    # Drop a machine-readable signal for the workflow gate step.
+    Path(OUT_PATH.parent.parent / ".divergences").write_text(str(len(divergences)))
     return 0
 
 

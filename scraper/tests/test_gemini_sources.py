@@ -1,0 +1,43 @@
+import scraper.gemini_sources as gs
+
+
+def test_gemini_facility_hours_passes_through_extract(monkeypatch):
+    captured = {}
+
+    def fake_extract(text, *, schema, instructions, **kw):
+        captured["schema"] = schema
+        captured["text"] = text
+        return {"mon": [{"open": "16:00", "close": "20:00"}]}
+
+    monkeypatch.setattr(gs.gemini_extract, "extract", fake_extract)
+    out = gs.gemini_facility_hours("Monday 4pm - 8pm")
+    assert out == {"mon": [{"open": "16:00", "close": "20:00"}]}
+    assert captured["text"] == "Monday 4pm - 8pm"
+    assert "mon" in captured["schema"]["properties"]
+
+
+def test_gemini_facility_hours_returns_none_when_extract_none(monkeypatch):
+    monkeypatch.setattr(gs.gemini_extract, "extract", lambda *a, **k: None)
+    assert gs.gemini_facility_hours("whatever") is None
+
+
+def test_gemini_schedule_passthrough(monkeypatch):
+    monkeypatch.setattr(gs.gemini_extract, "extract",
+                        lambda *a, **k: [{"date": "2026-05-30", "weekday": "Sat",
+                                          "events": [{"time": "12:00", "name": "X"}]}])
+    out = gs.gemini_schedule("Sat, May 30 2026\n12:00 PM X")
+    assert out[0]["events"][0]["name"] == "X"
+
+
+def test_gemini_mullins_passthrough(monkeypatch):
+    monkeypatch.setattr(gs.gemini_extract, "extract",
+                        lambda *a, **k: [{"date": "2026-05-30", "open": "12:10", "close": "13:50"}])
+    out = gs.gemini_mullins("<rendered week view text>")
+    assert out[0]["open"] == "12:10"
+
+
+def test_gemini_overrides_passthrough(monkeypatch):
+    monkeypatch.setattr(gs.gemini_extract, "extract",
+                        lambda *a, **k: {"overrides": {}, "holidays": []})
+    out = gs.gemini_overrides("FACILITIES ALERT: ...")
+    assert out == {"overrides": {}, "holidays": []}
