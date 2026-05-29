@@ -87,3 +87,26 @@ def intervals_from_dict(hours: dict) -> dict:
         d: [Interval(open=i["open"], close=i["close"]) for i in hours.get(d, [])]
         for d in DAYS
     }
+
+
+def run_source(
+    source, *, parser_value, fetched_text, prev_meta, gemini_fn, is_empty, equals,
+):
+    """Run the watchdog for one source with content-hash caching.
+
+    Returns ``(Decision, new_meta, cached)``. ``new_meta`` is
+    ``{"input_sha": str, "divergence": bool}`` for persistence in extract_meta.
+    When the input hash matches ``prev_meta``, skips the Gemini call and ships
+    the parser value, carrying the previous divergence flag forward.
+    """
+    h = content_hash(fetched_text)
+    if prev_meta and prev_meta.get("input_sha") == h:
+        return (
+            Decision(parser_value, False, None),
+            {"input_sha": h, "divergence": bool(prev_meta.get("divergence", False))},
+            True,
+        )
+    gemini_value = gemini_fn(fetched_text)
+    dec = decide(source, parser_value, gemini_value, is_empty=is_empty, equals=equals)
+    meta = {"input_sha": h, "divergence": dec.divergence is not None}
+    return dec, meta, False

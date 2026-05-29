@@ -81,3 +81,43 @@ def test_intervals_from_dict_converts_to_interval_objects():
     out = intervals_from_dict({"mon": [{"open": "16:00", "close": "20:00"}]})
     assert out["mon"] == [Interval("16:00", "20:00")]
     assert out["sun"] == []
+
+
+# --- run_source caching ---
+from scraper.watchdog import run_source
+
+
+def test_run_source_calls_gemini_when_hash_differs():
+    calls = []
+
+    def fake_gemini(text):
+        calls.append(text)
+        return ["a"]
+
+    dec, meta, cached = run_source(
+        "src", parser_value=["a"], fetched_text="T1", prev_meta=None,
+        gemini_fn=fake_gemini, is_empty=lambda v: not v, equals=lambda a, b: a == b,
+    )
+    assert cached is False
+    assert calls == ["T1"]
+    assert dec.divergence is None
+    assert meta["divergence"] is False
+    assert meta["input_sha"] == content_hash("T1")
+
+
+def test_run_source_skips_gemini_when_hash_matches():
+    calls = []
+
+    def fake_gemini(text):
+        calls.append(text)
+        return ["a"]
+
+    prev = {"input_sha": content_hash("T1"), "divergence": True}
+    dec, meta, cached = run_source(
+        "src", parser_value=["a"], fetched_text="T1", prev_meta=prev,
+        gemini_fn=fake_gemini, is_empty=lambda v: not v, equals=lambda a, b: a == b,
+    )
+    assert cached is True
+    assert calls == []                      # Gemini NOT called
+    assert dec.shipped == ["a"]
+    assert meta["divergence"] is True        # carried forward
