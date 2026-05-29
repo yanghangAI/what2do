@@ -49,3 +49,35 @@ def test_gemini_unavailable_ships_parser_no_divergence():
 def test_content_hash_is_stable_and_input_sensitive():
     assert content_hash("abc") == content_hash("abc")
     assert content_hash("abc") != content_hash("abd")
+
+
+# --- hours helpers ---
+from scraper.models import Interval
+from scraper.watchdog import (
+    normalize_hours, hours_equal, hours_empty, intervals_from_dict,
+)
+
+_EMPTY = {d: [] for d in ("mon", "tue", "wed", "thu", "fri", "sat", "sun")}
+
+
+def test_hours_equal_interval_vs_dict_order_independent():
+    parser = dict(_EMPTY, mon=[Interval("16:00", "20:00")])
+    gemini = dict(_EMPTY, mon=[{"open": "16:00", "close": "20:00"}])
+    assert hours_equal(parser, gemini)
+
+
+def test_hours_equal_detects_real_difference():
+    parser = dict(_EMPTY, mon=[Interval("16:00", "20:00")])
+    gemini = dict(_EMPTY, mon=[{"open": "16:00", "close": "18:00"}])
+    assert not hours_equal(parser, gemini)
+
+
+def test_hours_empty_true_for_all_closed():
+    assert hours_empty(_EMPTY)
+    assert not hours_empty(dict(_EMPTY, fri=[Interval("16:00", "20:00")]))
+
+
+def test_intervals_from_dict_converts_to_interval_objects():
+    out = intervals_from_dict({"mon": [{"open": "16:00", "close": "20:00"}]})
+    assert out["mon"] == [Interval("16:00", "20:00")]
+    assert out["sun"] == []

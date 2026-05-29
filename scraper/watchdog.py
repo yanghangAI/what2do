@@ -57,3 +57,33 @@ def decide(
             Divergence(source, "parser empty; gemini found data", parser_value, gemini_value),
         )
     return Decision(parser_value, False, None)  # both empty → genuinely closed
+
+
+from scraper.models import DAYS, Interval
+
+
+def _pair(iv):
+    if isinstance(iv, dict):
+        return (iv["open"], iv["close"])
+    return (iv.open, iv.close)
+
+
+def normalize_hours(hours: dict) -> dict:
+    """{day: [Interval|{open,close}]} -> {day: sorted list of (open, close)}."""
+    return {d: sorted({_pair(i) for i in hours.get(d, [])}) for d in DAYS}
+
+
+def hours_equal(a: dict, b: dict) -> bool:
+    return normalize_hours(a) == normalize_hours(b)
+
+
+def hours_empty(hours: dict) -> bool:
+    return all(len(hours.get(d, [])) == 0 for d in DAYS)
+
+
+def intervals_from_dict(hours: dict) -> dict:
+    """Gemini hours dict ({day:[{open,close}]}) -> {day:[Interval]} for all 7 days."""
+    return {
+        d: [Interval(open=i["open"], close=i["close"]) for i in hours.get(d, [])]
+        for d in DAYS
+    }
