@@ -15,7 +15,7 @@ from bs4 import BeautifulSoup
 from scraper import gemini_sources
 from scraper.scrape_recwell import SOURCE_URL as RECWELL_URL, scrape_recwell
 from scraper.scrape_recwell import FACILITIES as RECWELL_FACILITIES, _section_text_after
-from scraper.watchdog import apply_hours_watchdog, run_source, schedule_empty, schedule_equal, mullins_empty, mullins_equal, Divergence, content_hash, overrides_empty, overrides_equal
+from scraper.watchdog import apply_hours_watchdog, run_source, schedule_empty, schedule_equal, mullins_empty, mullins_equal, overrides_empty, overrides_equal
 from scraper.scrape_programs import fetch_programs
 from scraper.scrape_puffer import SOURCE_URL as PUFFER_URL, fetch_puffer
 from scraper.scrape_schedule import fetch_schedule_text, parse_schedule_text
