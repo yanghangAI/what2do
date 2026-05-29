@@ -107,15 +107,19 @@ def main() -> int:
     if mullins_html:
         mfac = next((f for f in doc.facilities if f.id == "mullins-ice"), None)
         if mfac is not None:
+            mtoday = datetime.now(TZ).date().strftime("%Y-%m-%d")
             dec, meta, _ = run_source(
                 "mullins-ice", parser_value=mfac.events or [],
                 fetched_text=mullins_html,
                 prev_meta=(prev_raw.get("extract_meta") or {}).get("mullins-ice"),
                 gemini_fn=gemini_sources.gemini_mullins,
-                is_empty=mullins_empty, equals=mullins_equal,
+                is_empty=lambda evs: mullins_empty(evs, mtoday),
+                equals=lambda a, b: mullins_equal(a, b, mtoday),
             )
             if dec.used_backup:
-                mfac.events = dec.shipped
+                # Only ship upcoming sessions — Gemini reads the whole visible
+                # week including past days.
+                mfac.events = [e for e in dec.shipped if e.get("date", "") >= mtoday]
             if dec.divergence is not None:
                 divergences.append(dec.divergence)
             extract_meta["mullins-ice"] = meta

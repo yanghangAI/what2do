@@ -133,16 +133,27 @@ def schedule_empty(days) -> bool:
     return len(_schedule_key(days)) == 0
 
 
-def _mullins_key(events):
-    return {(e.get("date"), e.get("open"), e.get("close")) for e in (events or [])}
+def _mullins_dates(events, today=None):
+    """Set of session dates, restricted to ``today`` onward when given."""
+    return {
+        e.get("date")
+        for e in (events or [])
+        if e.get("date") and (today is None or e.get("date") >= today)
+    }
 
 
-def mullins_equal(a, b) -> bool:
-    return _mullins_key(a) == _mullins_key(b)
+def mullins_equal(a, b, today=None) -> bool:
+    # Compare today-onward DATE COVERAGE rather than exact slots. The parser
+    # reads structured aria-labels, merges adjacent sessions, and drops past
+    # dates; Gemini reads rendered text (raw slots + the whole visible week,
+    # including past days). Comparing date coverage flags a genuinely missing or
+    # extra skate day without false-alarming on slot granularity or past-week
+    # noise — and the parser (structured source) stays authoritative on times.
+    return _mullins_dates(a, today) == _mullins_dates(b, today)
 
 
-def mullins_empty(events) -> bool:
-    return len(events or []) == 0
+def mullins_empty(events, today=None) -> bool:
+    return len(_mullins_dates(events, today)) == 0
 
 
 def _ov_is_empty(ov):

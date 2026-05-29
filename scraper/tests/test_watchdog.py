@@ -224,22 +224,46 @@ def test_schedule_empty():
 
 from scraper.watchdog import mullins_equal, mullins_empty
 
-_EV = [{"date": "2026-05-30", "open": "12:10", "close": "13:50"}]
+# Mullins is compared on today-onward DATE COVERAGE, not exact slots: the parser
+# reads structured aria-labels and merges adjacent sessions, while Gemini reads
+# rendered text (raw slots + the whole visible week incl. past days).
 
 
 def test_mullins_equal_order_independent():
-    b = [{"date": "2026-05-30", "open": "12:10", "close": "13:50"}]
-    assert mullins_equal(_EV, b)
+    a = [{"date": "2026-05-30", "open": "12:10", "close": "13:50"},
+         {"date": "2026-05-31", "open": "09:00", "close": "10:00"}]
+    b = list(reversed(a))
+    assert mullins_equal(a, b)
 
 
-def test_mullins_equal_detects_difference():
-    b = [{"date": "2026-05-30", "open": "12:10", "close": "14:00"}]
-    assert not mullins_equal(_EV, b)
+def test_mullins_equal_detects_missing_day():
+    a = [{"date": "2026-05-30", "open": "12:10", "close": "13:50"}]
+    assert not mullins_equal(a, [])
+
+
+def test_mullins_equal_ignores_slot_times_same_day():
+    a = [{"date": "2026-05-30", "open": "12:10", "close": "13:50"}]
+    b = [{"date": "2026-05-30", "open": "09:00", "close": "10:00"}]  # diff times, same day
+    assert mullins_equal(a, b)
+
+
+def test_mullins_equal_ignores_past_gemini_events():
+    today = "2026-05-29"
+    parser = [{"date": "2026-05-30", "open": "13:00", "close": "14:00"}]
+    gemini = [{"date": "2026-05-22", "open": "12:00", "close": "13:00"},   # past — ignored
+              {"date": "2026-05-30", "open": "09:00", "close": "10:00"}]   # upcoming, same day
+    assert mullins_equal(parser, gemini, today)
 
 
 def test_mullins_empty():
     assert mullins_empty([])
-    assert not mullins_empty(_EV)
+    assert not mullins_empty([{"date": "2026-05-30", "open": "12:10", "close": "13:50"}])
+
+
+def test_mullins_empty_respects_today():
+    today = "2026-05-29"
+    # only a past-dated session -> no upcoming coverage -> empty
+    assert mullins_empty([{"date": "2026-05-22", "open": "12:00", "close": "13:00"}], today)
 
 
 from scraper.watchdog import overrides_equal, overrides_empty

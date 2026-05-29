@@ -109,29 +109,31 @@ def _expand_day_token(token: str) -> list[str]:
 
 
 def _parse_schedule_line(line: str) -> tuple[list[str], list[Interval]]:
-    """Parse a line like 'Monday-Friday: 11:00am - 12:30pm, 5:00pm - 8:00pm'."""
-    if ":" not in line:
+    """Parse a line like 'Monday-Friday: 11:00am - 12:30pm, 5:00pm - 8:00pm'.
+
+    Handles three real-world shapes:
+      * colon-delimited label  -> 'Monday - Friday: 11:00am - 1:00pm'
+      * colon-less per-day line -> 'Monday 4pm - 8pm' (RockWell format)
+      * '&' as an interval separator -> '7:00am - 9:00am & 5:00pm - 7:30pm'
+    """
+    # The day label is whatever precedes the first time token. This works
+    # whether or not a colon separates the label from the times.
+    tm = TIME_RE.search(line)
+    if tm:
+        head, rest = line[: tm.start()], line[tm.start():]
+    elif ":" in line:
+        # No times on the line (e.g. 'Saturday & Sunday: CLOSED') — the label
+        # is everything before the colon.
+        head, rest = line.split(":", 1)
+    else:
         return [], []
-    # Split on first colon that's not within a time (i.e., first colon overall before any digit-colon-digit pattern)
-    # Find first colon position that separates head from times
-    # Heuristic: find the first colon that isn't immediately surrounded by digits.
-    idx = -1
-    for i, ch in enumerate(line):
-        if ch == ":":
-            left_digit = i > 0 and line[i - 1].isdigit()
-            right_digit = i + 1 < len(line) and line[i + 1].isdigit()
-            if not (left_digit and right_digit):
-                idx = i
-                break
-    if idx == -1:
-        return [], []
-    head = line[:idx]
-    rest = line[idx + 1 :]
+    head = head.rstrip().rstrip(":").strip()
     days = _expand_day_token(head)
     if not days:
         return [], []
     intervals: list[Interval] = []
-    for chunk in re.split(r",", rest):
+    # Intervals may be separated by commas or ampersands.
+    for chunk in re.split(r"[,&]", rest):
         iv = _parse_time_range(chunk)
         if iv:
             intervals.append(iv)
