@@ -9,12 +9,12 @@ from zoneinfo import ZoneInfo
 import requests
 
 from scraper.merge import merge_results
-from scraper.models import Facility, HoursDoc, Location
+from scraper.models import Facility, HoursDoc, Location, DAYS as DAYS_TUPLE
 from bs4 import BeautifulSoup
 from scraper import gemini_sources
 from scraper.scrape_recwell import SOURCE_URL as RECWELL_URL, scrape_recwell
 from scraper.scrape_recwell import FACILITIES as RECWELL_FACILITIES, _section_text_after
-from scraper.watchdog import apply_hours_watchdog, run_source, schedule_empty, schedule_equal, mullins_empty, mullins_equal
+from scraper.watchdog import apply_hours_watchdog, run_source, schedule_empty, schedule_equal, mullins_empty, mullins_equal, Divergence, content_hash, overrides_empty, overrides_equal
 from scraper.scrape_programs import fetch_programs
 from scraper.scrape_puffer import SOURCE_URL as PUFFER_URL, fetch_puffer
 from scraper.scrape_schedule import fetch_schedule_text, parse_schedule_text
@@ -148,6 +148,24 @@ def main() -> int:
     except Exception as e:
         print(f"alert scrape failed: {e}", file=sys.stderr)
         alert = prev_raw.get("alert")
+
+    if alert:
+        det = {"overrides": {fid: {"start_date": ov.get("start_date"),
+                                    "closed_from": ov.get("closed_from"),
+                                    "hours": {d: [iv.to_dict() for iv in ov["hours"].get(d, [])]
+                                              for d in DAYS_TUPLE}}
+                              for fid, ov in parse_alert_overrides(alert).items()},
+               "holidays": parse_holidays(alert)}
+        g = gemini_sources.gemini_overrides(alert)
+        disagree = g is not None and not overrides_empty(det) and not overrides_equal(det, g)
+        if disagree:
+            divergences.append(
+                Divergence("alert-overrides", "parser and gemini disagree", det, g)
+            )
+        extract_meta["alert-overrides"] = {
+            "input_sha": content_hash(alert),
+            "divergence": bool(disagree),
+        }
 
     today_dt = datetime.now(TZ).date()
     today_iso = today_dt.strftime("%Y-%m-%d")

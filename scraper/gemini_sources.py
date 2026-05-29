@@ -91,3 +91,46 @@ def gemini_mullins(text):
     return gemini_extract.extract(
         text, schema=_MULLINS_SCHEMA, instructions=_MULLINS_PROMPT,
     )
+
+
+_OVERRIDE_OBJ = {
+    "type": "object",
+    "properties": {
+        "start_date": {"type": "string"},
+        "closed_from": {"type": "string"},
+        "hours": {"type": "object",
+                  "properties": {d: {"type": "array", "items": _INTERVAL} for d in DAYS}},
+    },
+}
+_OVERRIDE_FIDS = ("recreation-center", "boyden-pool", "curry-hicks-pool", "rockwell-climbing")
+_OVERRIDES_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "overrides": {
+            "type": "object",
+            "properties": {fid: _OVERRIDE_OBJ for fid in _OVERRIDE_FIDS},
+        },
+        "holidays": {
+            "type": "array",
+            "items": {"type": "object",
+                      "properties": {"date": {"type": "string"}, "name": {"type": "string"}},
+                      "required": ["date", "name"]},
+        },
+    },
+}
+_OVERRIDES_PROMPT = (
+    "You are reading the UMass RecWell 'FACILITIES ALERT' banner. Produce "
+    "structured summer-hours overrides keyed by facility id (recreation-center, "
+    "boyden-pool, curry-hicks-pool, rockwell-climbing). For each facility the "
+    "banner gives a summer schedule, set its start_date (ISO YYYY-MM-DD), an "
+    "optional closed_from ISO date if it says it will close for the semester, "
+    "and per-weekday hours (24-hour HH:MM; closed days empty). Omit / leave "
+    "empty any facility the banner does not mention. Also list dated holiday "
+    "closures as {date, name}. Use null/empty when not stated."
+)
+
+
+def gemini_overrides(text):
+    return gemini_extract.extract(
+        text, schema=_OVERRIDES_SCHEMA, instructions=_OVERRIDES_PROMPT,
+    )

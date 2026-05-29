@@ -141,6 +141,46 @@ def mullins_empty(events) -> bool:
     return len(events or []) == 0
 
 
+def _ov_is_empty(ov):
+    ov = ov or {}
+    return (
+        not ov.get("start_date")
+        and not ov.get("closed_from")
+        and all(not (ov.get("hours", {}) or {}).get(d) for d in DAYS)
+    )
+
+
+def _overrides_key(obj):
+    obj = obj or {}
+    ovs = obj.get("overrides", {}) or {}
+    norm_ovs = {}
+    for fid, ov in ovs.items():
+        if _ov_is_empty(ov):
+            continue  # drop all-empty facility entries so a fixed-property
+                      # Gemini schema that fills blanks doesn't false-alarm
+        norm_ovs[fid] = (
+            ov.get("start_date"),
+            ov.get("closed_from"),
+            tuple(sorted(
+                (d, tuple(sorted(_pair(i) for i in (ov.get("hours", {}) or {}).get(d, []))))
+                for d in DAYS
+            )),
+        )
+    holidays = frozenset(
+        (h.get("date"), h.get("name")) for h in (obj.get("holidays") or [])
+    )
+    return (tuple(sorted(norm_ovs.items())), holidays)
+
+
+def overrides_equal(a, b) -> bool:
+    return _overrides_key(a) == _overrides_key(b)
+
+
+def overrides_empty(obj) -> bool:
+    obj = obj or {}
+    return not (obj.get("overrides") or {}) and not (obj.get("holidays") or [])
+
+
 def apply_hours_watchdog(facilities, section_texts, prev_meta, gemini_fn):
     """Run the hours watchdog over RecWell facilities, mutating hours in place.
 

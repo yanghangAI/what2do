@@ -34,3 +34,10 @@ def test_gemini_mullins_passthrough(monkeypatch):
                         lambda *a, **k: [{"date": "2026-05-30", "open": "12:10", "close": "13:50"}])
     out = gs.gemini_mullins("<rendered week view text>")
     assert out[0]["open"] == "12:10"
+
+
+def test_gemini_overrides_passthrough(monkeypatch):
+    monkeypatch.setattr(gs.gemini_extract, "extract",
+                        lambda *a, **k: {"overrides": {}, "holidays": []})
+    out = gs.gemini_overrides("FACILITIES ALERT: ...")
+    assert out == {"overrides": {}, "holidays": []}

@@ -211,3 +211,33 @@ def test_mullins_equal_detects_difference():
 def test_mullins_empty():
     assert mullins_empty([])
     assert not mullins_empty(_EV)
+
+
+from scraper.watchdog import overrides_equal, overrides_empty
+
+_OV_A = {
+    "overrides": {"rockwell-climbing": {
+        "start_date": "2026-05-26", "closed_from": None,
+        "hours": {d: ([{"open": "16:00", "close": "20:00"}] if d != "sun" else [])
+                  for d in ("mon","tue","wed","thu","fri","sat","sun")}}},
+    "holidays": [{"date": "2026-05-25", "name": "Memorial Day"}],
+}
+
+
+def test_overrides_equal_ignores_hours_order_and_holiday_order():
+    import copy
+    b = copy.deepcopy(_OV_A)
+    b["holidays"] = list(reversed(b["holidays"]))  # same set
+    assert overrides_equal(_OV_A, b)
+
+
+def test_overrides_equal_detects_start_date_change():
+    import copy
+    b = copy.deepcopy(_OV_A)
+    b["overrides"]["rockwell-climbing"]["start_date"] = "2026-06-01"
+    assert not overrides_equal(_OV_A, b)
+
+
+def test_overrides_empty():
+    assert overrides_empty({"overrides": {}, "holidays": []})
+    assert not overrides_empty(_OV_A)
