@@ -13,11 +13,12 @@ import time
 
 import requests
 
+# Public override knob; everything else in this module is internal.
 MODEL_CANDIDATES = ("gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash")
 _URL_TMPL = (
     "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 )
-ANTI_HALLUCINATION = (
+_ANTI_HALLUCINATION = (
     "Extract only what is explicitly present in the text. If a day or field is "
     "not listed, return it as closed/empty/null. Never guess or invent values."
 )
@@ -27,7 +28,7 @@ def extract(text, *, schema, instructions, api_key=None, models=MODEL_CANDIDATES
     api_key = api_key or os.environ.get("GEMINI_API_KEY")
     if not api_key:
         return None
-    prompt = f"{instructions}\n\n{ANTI_HALLUCINATION}\n\nTEXT:\n{text}"
+    prompt = f"{instructions}\n\n{_ANTI_HALLUCINATION}\n\nTEXT:\n{text}"
     body = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
@@ -39,7 +40,7 @@ def extract(text, *, schema, instructions, api_key=None, models=MODEL_CANDIDATES
     payload = None
     for model in models:
         url = _URL_TMPL.format(model=model) + f"?key={api_key}"
-        for attempt in (1, 2):
+        for i, attempt in enumerate((1, 2)):
             r = requests.post(url, json=body, timeout=60)
             if r.status_code == 200:
                 payload = r.json()
@@ -48,7 +49,8 @@ def extract(text, *, schema, instructions, api_key=None, models=MODEL_CANDIDATES
                 break  # model not free-tier eligible — try next
             if r.status_code not in (429, 500, 502, 503, 504):
                 break  # non-retryable
-            time.sleep(2 ** attempt)
+            if i == 0:
+                time.sleep(2 ** attempt)  # only sleep between attempts
         if payload is not None:
             break
     if payload is None:
