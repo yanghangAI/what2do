@@ -222,37 +222,20 @@ def test_schedule_empty():
     assert not schedule_empty(_SCHED_A)
 
 
-from scraper.watchdog import mullins_equal, mullins_empty
+from scraper.watchdog import decide, mullins_equal, mullins_empty
 
-# Mullins is compared on today-onward DATE COVERAGE, not exact slots: the parser
-# reads structured aria-labels and merges adjacent sessions, while Gemini reads
-# rendered text (raw slots + the whole visible week incl. past days).
-
-
-def test_mullins_equal_order_independent():
-    a = [{"date": "2026-05-30", "open": "12:10", "close": "13:50"},
-         {"date": "2026-05-31", "open": "09:00", "close": "10:00"}]
-    b = list(reversed(a))
-    assert mullins_equal(a, b)
+# Mullins is BACKUP-ONLY: the parser reads the displayed Finnly week from
+# structured aria-labels; Gemini reads the whole multi-week dataset embedded in
+# the raw HTML. A review cross-check is pure noise, so mullins_equal always
+# "agrees" — Gemini only contributes via the empty-parser backup path.
 
 
-def test_mullins_equal_detects_missing_day():
+def test_mullins_equal_always_agrees_review_is_disabled():
+    # Even wildly different event sets never flag a review divergence.
     a = [{"date": "2026-05-30", "open": "12:10", "close": "13:50"}]
-    assert not mullins_equal(a, [])
-
-
-def test_mullins_equal_ignores_slot_times_same_day():
-    a = [{"date": "2026-05-30", "open": "12:10", "close": "13:50"}]
-    b = [{"date": "2026-05-30", "open": "09:00", "close": "10:00"}]  # diff times, same day
+    b = [{"date": "2026-07-02", "open": "09:00", "close": "10:00"}]
     assert mullins_equal(a, b)
-
-
-def test_mullins_equal_ignores_past_gemini_events():
-    today = "2026-05-29"
-    parser = [{"date": "2026-05-30", "open": "13:00", "close": "14:00"}]
-    gemini = [{"date": "2026-05-22", "open": "12:00", "close": "13:00"},   # past — ignored
-              {"date": "2026-05-30", "open": "09:00", "close": "10:00"}]   # upcoming, same day
-    assert mullins_equal(parser, gemini, today)
+    assert mullins_equal(a, [])
 
 
 def test_mullins_empty():
@@ -264,6 +247,30 @@ def test_mullins_empty_respects_today():
     today = "2026-05-29"
     # only a past-dated session -> no upcoming coverage -> empty
     assert mullins_empty([{"date": "2026-05-22", "open": "12:00", "close": "13:00"}], today)
+
+
+def test_mullins_no_divergence_when_parser_has_data():
+    # The whole point: parser has upcoming sessions, Gemini over-reads the HTML,
+    # but no divergence is flagged (parser authoritative).
+    today = "2026-05-29"
+    parser = [{"date": "2026-05-30", "open": "13:00", "close": "14:00"}]
+    gemini = [{"date": d, "open": "09:00", "close": "10:00"}
+              for d in ("2026-05-22", "2026-05-30", "2026-06-15", "2026-07-02")]
+    dec = decide("mullins-ice", parser, gemini,
+                 is_empty=lambda v: mullins_empty(v, today),
+                 equals=lambda x, y: mullins_equal(x, y, today))
+    assert dec.divergence is None
+    assert dec.used_backup is False
+
+
+def test_mullins_backup_fires_only_when_parser_empty():
+    today = "2026-05-29"
+    gemini = [{"date": "2026-05-30", "open": "13:00", "close": "14:00"}]
+    dec = decide("mullins-ice", [], gemini,
+                 is_empty=lambda v: mullins_empty(v, today),
+                 equals=lambda x, y: mullins_equal(x, y, today))
+    assert dec.used_backup is True
+    assert dec.divergence is not None
 
 
 from scraper.watchdog import overrides_equal, overrides_empty
