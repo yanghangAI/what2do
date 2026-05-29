@@ -14,8 +14,7 @@ from bs4 import BeautifulSoup
 from scraper import gemini_sources
 from scraper.scrape_recwell import SOURCE_URL as RECWELL_URL, scrape_recwell
 from scraper.scrape_recwell import FACILITIES as RECWELL_FACILITIES, _section_text_after
-from scraper.watchdog import apply_hours_watchdog, run_source, schedule_empty, schedule_equal
-from scraper.scrape_mullins import scrape_mullins
+from scraper.watchdog import apply_hours_watchdog, run_source, schedule_empty, schedule_equal, mullins_empty, mullins_equal
 from scraper.scrape_programs import fetch_programs
 from scraper.scrape_puffer import SOURCE_URL as PUFFER_URL, fetch_puffer
 from scraper.scrape_schedule import fetch_schedule_text, parse_schedule_text
@@ -60,12 +59,14 @@ def _run_recwell() -> tuple[list[tuple[str, dict | None, Exception | None]], str
         ], None
 
 
-def _run_mullins() -> tuple[str, dict | None, Exception | None]:
+def _run_mullins() -> tuple[tuple[str, dict | None, Exception | None], str | None]:
+    from scraper.scrape_mullins import fetch_mullins_html, parse_mullins_html
     try:
-        return ("mullins-ice", scrape_mullins(), None)
+        html = fetch_mullins_html()
+        return ("mullins-ice", parse_mullins_html(html), None), html
     except Exception as e:
         print(f"mullins scrape failed: {e}", file=sys.stderr)
-        return ("mullins-ice", None, e)
+        return ("mullins-ice", None, e), None
 
 
 def main() -> int:
@@ -81,7 +82,8 @@ def main() -> int:
     results: list[tuple[str, dict | None, Exception | None]] = []
     recwell_results, recwell_html = _run_recwell()
     results.extend(recwell_results)
-    results.append(_run_mullins())
+    mullins_result, mullins_html = _run_mullins()
+    results.append(mullins_result)
 
     doc = merge_results(results, prev, now_iso=now_iso)
 
@@ -100,6 +102,22 @@ def main() -> int:
         )
         divergences.extend(divs)
         extract_meta.update(meta)
+
+    if mullins_html:
+        mfac = next((f for f in doc.facilities if f.id == "mullins-ice"), None)
+        if mfac is not None:
+            dec, meta, _ = run_source(
+                "mullins-ice", parser_value=mfac.events or [],
+                fetched_text=mullins_html,
+                prev_meta=(prev_raw.get("extract_meta") or {}).get("mullins-ice"),
+                gemini_fn=gemini_sources.gemini_mullins,
+                is_empty=mullins_empty, equals=mullins_equal,
+            )
+            if dec.used_backup:
+                mfac.events = dec.shipped
+            if dec.divergence is not None:
+                divergences.append(dec.divergence)
+            extract_meta["mullins-ice"] = meta
 
     try:
         programs = fetch_programs()

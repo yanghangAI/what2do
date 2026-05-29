@@ -66,3 +66,28 @@ def gemini_schedule(text):
     return gemini_extract.extract(
         text, schema=_SCHEDULE_SCHEMA, instructions=_SCHEDULE_PROMPT,
     )
+
+
+_MULLINS_SCHEMA = {
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "date": {"type": "string"},
+            "open": {"type": "string"},
+            "close": {"type": "string"},
+        },
+        "required": ["date", "open", "close"],
+    },
+}
+_MULLINS_PROMPT = (
+    "You are reading the Mullins Community Ice Center weekly schedule. Return "
+    "only PUBLIC SKATING sessions as a list of {date (YYYY-MM-DD), open, close} "
+    "using 24-hour HH:MM times. Ignore non-public-skate events."
+)
+
+
+def gemini_mullins(text):
+    return gemini_extract.extract(
+        text, schema=_MULLINS_SCHEMA, instructions=_MULLINS_PROMPT,
+    )

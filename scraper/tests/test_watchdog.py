@@ -191,3 +191,23 @@ def test_schedule_empty():
     assert schedule_empty([])
     assert schedule_empty([{"date": "x", "weekday": "y", "events": []}])
     assert not schedule_empty(_SCHED_A)
+
+
+from scraper.watchdog import mullins_equal, mullins_empty
+
+_EV = [{"date": "2026-05-30", "open": "12:10", "close": "13:50"}]
+
+
+def test_mullins_equal_order_independent():
+    b = [{"date": "2026-05-30", "open": "12:10", "close": "13:50"}]
+    assert mullins_equal(_EV, b)
+
+
+def test_mullins_equal_detects_difference():
+    b = [{"date": "2026-05-30", "open": "12:10", "close": "14:00"}]
+    assert not mullins_equal(_EV, b)
+
+
+def test_mullins_empty():
+    assert mullins_empty([])
+    assert not mullins_empty(_EV)

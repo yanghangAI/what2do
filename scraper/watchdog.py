@@ -129,6 +129,18 @@ def schedule_empty(days) -> bool:
     return len(_schedule_key(days)) == 0
 
 
+def _mullins_key(events):
+    return {(e.get("date"), e.get("open"), e.get("close")) for e in (events or [])}
+
+
+def mullins_equal(a, b) -> bool:
+    return _mullins_key(a) == _mullins_key(b)
+
+
+def mullins_empty(events) -> bool:
+    return len(events or []) == 0
+
+
 def apply_hours_watchdog(facilities, section_texts, prev_meta, gemini_fn):
     """Run the hours watchdog over RecWell facilities, mutating hours in place.
 

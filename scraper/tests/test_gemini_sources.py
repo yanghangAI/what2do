@@ -27,3 +27,10 @@ def test_gemini_schedule_passthrough(monkeypatch):
                                           "events": [{"time": "12:00", "name": "X"}]}])
     out = gs.gemini_schedule("Sat, May 30 2026\n12:00 PM X")
     assert out[0]["events"][0]["name"] == "X"
+
+
+def test_gemini_mullins_passthrough(monkeypatch):
+    monkeypatch.setattr(gs.gemini_extract, "extract",
+                        lambda *a, **k: [{"date": "2026-05-30", "open": "12:10", "close": "13:50"}])
+    out = gs.gemini_mullins("<rendered week view text>")
+    assert out[0]["open"] == "12:10"
