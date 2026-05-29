@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-29T14:30:22-04:00",
+  "last_updated": "2026-05-29T14:36:23-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -49,7 +49,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-29T14:30:22-04:00"
+      "last_scraped": "2026-05-29T14:36:23-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -118,7 +118,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-29T14:30:22-04:00"
+      "last_scraped": "2026-05-29T14:36:23-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -175,7 +175,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-29T14:30:22-04:00"
+      "last_scraped": "2026-05-29T14:36:23-04:00"
     },
     {
       "id": "recreation-center",
@@ -224,7 +224,7 @@
         "Saturday - Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-29T14:30:22-04:00"
+      "last_scraped": "2026-05-29T14:36:23-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -248,7 +248,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-29T14:30:22-04:00"
+      "last_scraped": "2026-05-29T14:36:23-04:00"
     },
     {
       "id": "mullins-ice",
@@ -272,7 +272,7 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-29T14:30:22-04:00",
+      "last_scraped": "2026-05-29T14:36:23-04:00",
       "events": [
         {
           "date": "2026-05-29",
@@ -316,7 +316,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-29T14:30:22-04:00",
+      "last_scraped": "2026-05-29T14:36:23-04:00",
       "water_quality": {
         "status": "allowed",
         "headline": "Last Test of 2025: Swimming is allowed at Puffer's Pond.",
@@ -900,7 +900,7 @@
       "divergence": false
     },
     "mullins-ice": {
-      "input_sha": "dabff9f8f701333cc2b94216d1469b9c7d90294f253c02a7a1a866b347507801",
+      "input_sha": "683a56928a1c24aadb65adf7717685311ebb3804a474573f8e5f00f9373d0238",
       "gemini": [
         {
           "date": "2026-05-22",
@@ -1118,7 +1118,7 @@
           "close": "19:20"
         }
       ],
-      "divergence": true
+      "divergence": false
     },
     "schedule": {
       "input_sha": "bd50964fdd18b93a12a052bcd016cea8a17fb8fa20bfc5cae150b1d80d4b59f7",
