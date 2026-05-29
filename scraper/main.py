@@ -1,6 +1,7 @@
 """Entry point: run all scrapers, merge with previous JSON, write data/hours.json."""
 from __future__ import annotations
 import json
+import os
 import sys
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -260,6 +261,17 @@ def main() -> int:
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(json.dumps(out, indent=2) + "\n")
     print(f"wrote {OUT_PATH}")
+
+    from scraper.watchdog import format_divergence_report
+    md, warnings = format_divergence_report(divergences)
+    for w in warnings:
+        print(w)  # GitHub Actions ::warning:: annotations
+    summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+    if md and summary_path:
+        with open(summary_path, "a") as fh:
+            fh.write(md)
+    # Drop a machine-readable signal for the workflow gate step.
+    Path(OUT_PATH.parent.parent / ".divergences").write_text(str(len(divergences)))
     return 0
 
 

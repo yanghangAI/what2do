@@ -181,6 +181,21 @@ def overrides_empty(obj) -> bool:
     return not (obj.get("overrides") or {}) and not (obj.get("holidays") or [])
 
 
+def format_divergence_report(divergences):
+    """Return ``(markdown_summary, [github_warning_lines])`` for CI.
+
+    Empty input yields ``("", [])``.
+    """
+    if not divergences:
+        return "", []
+    lines = ["### Scraper divergences", "", "| source | detail |", "|---|---|"]
+    warnings = []
+    for d in divergences:
+        lines.append(f"| {d.source} | {d.detail} |")
+        warnings.append(f"::warning::watchdog divergence in {d.source}: {d.detail}")
+    return "\n".join(lines) + "\n", warnings
+
+
 def apply_hours_watchdog(facilities, section_texts, prev_meta, gemini_fn):
     """Run the hours watchdog over RecWell facilities, mutating hours in place.
 

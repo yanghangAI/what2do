@@ -241,3 +241,13 @@ def test_overrides_equal_detects_start_date_change():
 def test_overrides_empty():
     assert overrides_empty({"overrides": {}, "holidays": []})
     assert not overrides_empty(_OV_A)
+
+
+def test_format_divergence_report_lists_each():
+    from scraper.watchdog import Divergence, format_divergence_report
+    divs = [Divergence("rockwell-climbing", "parser empty; gemini found data",
+                       {"mon": []}, {"mon": [{"open": "16:00", "close": "20:00"}]})]
+    md, warnings = format_divergence_report(divs)
+    assert "rockwell-climbing" in md
+    assert any("rockwell-climbing" in w for w in warnings)
+    assert format_divergence_report([]) == ("", [])
