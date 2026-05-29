@@ -112,6 +112,23 @@ def run_source(
     return dec, meta, False
 
 
+def _schedule_key(days):
+    out = set()
+    for day in days or []:
+        for e in day.get("events", []):
+            name = " ".join(str(e.get("name", "")).split()).lower()
+            out.add((day.get("date"), e.get("time"), name))
+    return out
+
+
+def schedule_equal(a, b) -> bool:
+    return _schedule_key(a) == _schedule_key(b)
+
+
+def schedule_empty(days) -> bool:
+    return len(_schedule_key(days)) == 0
+
+
 def apply_hours_watchdog(facilities, section_texts, prev_meta, gemini_fn):
     """Run the hours watchdog over RecWell facilities, mutating hours in place.
 

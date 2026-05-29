@@ -33,3 +33,36 @@ def gemini_facility_hours(section_text):
     return gemini_extract.extract(
         section_text, schema=HOURS_SCHEMA, instructions=_HOURS_PROMPT,
     )
+
+
+_SCHEDULE_SCHEMA = {
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "date": {"type": "string"},
+            "weekday": {"type": "string"},
+            "events": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {"time": {"type": "string"}, "name": {"type": "string"}},
+                    "required": ["time", "name"],
+                },
+            },
+        },
+        "required": ["date", "weekday", "events"],
+    },
+}
+_SCHEDULE_PROMPT = (
+    "You are reading the UMass RecWell daily 'Upcoming Classes' widget. Return a "
+    "list of days, each with an ISO date (YYYY-MM-DD), a 3-letter weekday "
+    "(Mon..Sun), and its events. Each event has a 24-hour HH:MM time and the "
+    "class name exactly as shown. Keep every event, including orientations."
+)
+
+
+def gemini_schedule(text):
+    return gemini_extract.extract(
+        text, schema=_SCHEDULE_SCHEMA, instructions=_SCHEDULE_PROMPT,
+    )

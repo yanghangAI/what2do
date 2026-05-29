@@ -19,3 +19,11 @@ def test_gemini_facility_hours_passes_through_extract(monkeypatch):
 def test_gemini_facility_hours_returns_none_when_extract_none(monkeypatch):
     monkeypatch.setattr(gs.gemini_extract, "extract", lambda *a, **k: None)
     assert gs.gemini_facility_hours("whatever") is None
+
+
+def test_gemini_schedule_passthrough(monkeypatch):
+    monkeypatch.setattr(gs.gemini_extract, "extract",
+                        lambda *a, **k: [{"date": "2026-05-30", "weekday": "Sat",
+                                          "events": [{"time": "12:00", "name": "X"}]}])
+    out = gs.gemini_schedule("Sat, May 30 2026\n12:00 PM X")
+    assert out[0]["events"][0]["name"] == "X"

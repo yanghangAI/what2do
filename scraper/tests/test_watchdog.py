@@ -167,3 +167,27 @@ def test_apply_hours_watchdog_leaves_matching_facility_untouched():
     )
     assert fac.hours["mon"] == [_I("16:00", "20:00")]
     assert divs == []
+
+
+# --- schedule helpers ---
+from scraper.watchdog import schedule_equal, schedule_empty
+
+_SCHED_A = [{"date": "2026-05-30", "weekday": "Sat",
+             "events": [{"time": "12:00", "name": "Club Ballroom Dance"}]}]
+
+
+def test_schedule_equal_normalizes_name_whitespace_case():
+    b = [{"date": "2026-05-30", "weekday": "Sat",
+          "events": [{"time": "12:00", "name": "  club   BALLROOM dance "}]}]
+    assert schedule_equal(_SCHED_A, b)
+
+
+def test_schedule_equal_detects_missing_event():
+    b = [{"date": "2026-05-30", "weekday": "Sat", "events": []}]
+    assert not schedule_equal(_SCHED_A, b)
+
+
+def test_schedule_empty():
+    assert schedule_empty([])
+    assert schedule_empty([{"date": "x", "weekday": "y", "events": []}])
+    assert not schedule_empty(_SCHED_A)

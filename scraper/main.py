@@ -14,11 +14,11 @@ from bs4 import BeautifulSoup
 from scraper import gemini_sources
 from scraper.scrape_recwell import SOURCE_URL as RECWELL_URL, scrape_recwell
 from scraper.scrape_recwell import FACILITIES as RECWELL_FACILITIES, _section_text_after
-from scraper.watchdog import apply_hours_watchdog
+from scraper.watchdog import apply_hours_watchdog, run_source, schedule_empty, schedule_equal
 from scraper.scrape_mullins import scrape_mullins
 from scraper.scrape_programs import fetch_programs
 from scraper.scrape_puffer import SOURCE_URL as PUFFER_URL, fetch_puffer
-from scraper.scrape_schedule import fetch_schedule
+from scraper.scrape_schedule import fetch_schedule_text, parse_schedule_text
 from scraper.scrape_alert import (
     fetch_alert,
     mask_pre_start_days,
@@ -108,7 +108,19 @@ def main() -> int:
         programs = prev_raw.get("programs", [])
 
     try:
-        schedule = fetch_schedule()
+        schedule_text = fetch_schedule_text()
+        schedule = parse_schedule_text(schedule_text)
+        dec, meta, _ = run_source(
+            "schedule", parser_value=schedule, fetched_text=schedule_text,
+            prev_meta=(prev_raw.get("extract_meta") or {}).get("schedule"),
+            gemini_fn=gemini_sources.gemini_schedule,
+            is_empty=schedule_empty, equals=schedule_equal,
+        )
+        if dec.used_backup:
+            schedule = dec.shipped
+        if dec.divergence is not None:
+            divergences.append(dec.divergence)
+        extract_meta["schedule"] = meta
     except Exception as e:
         print(f"schedule scrape failed: {e}", file=sys.stderr)
         schedule = prev_raw.get("schedule", [])

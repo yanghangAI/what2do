@@ -82,16 +82,22 @@ def parse_schedule_text(body_text: str) -> list[dict]:
     return out
 
 
-def fetch_schedule(timeout_ms: int = 60_000) -> list[dict]:
+def fetch_schedule_text(timeout_ms: int = 60_000) -> str:
     from playwright.sync_api import sync_playwright
-
     with sync_playwright() as p:
         browser = p.chromium.launch()
         try:
             page = browser.new_page()
             page.goto(HOME_URL, wait_until="networkidle", timeout=timeout_ms)
             page.wait_for_timeout(4000)
-            text = page.inner_text("body")
+            return page.inner_text("body")
         finally:
             browser.close()
-    return parse_schedule_text(text)
+
+
+def fetch_schedule(timeout_ms: int = 60_000) -> list[dict]:
+    """Fetch and parse the daily class schedule from recwell.umass.edu/.
+
+    Returns a list of {date, weekday, events: [{time, name}]} sorted by date.
+    """
+    return parse_schedule_text(fetch_schedule_text(timeout_ms))
