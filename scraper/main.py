@@ -157,16 +157,16 @@ def main() -> int:
                                               for d in DAYS_TUPLE}}
                               for fid, ov in parse_alert_overrides(alert).items()},
                "holidays": parse_holidays(alert)}
-        g = gemini_sources.gemini_overrides(alert)
-        disagree = g is not None and not overrides_empty(det) and not overrides_equal(det, g)
-        if disagree:
-            divergences.append(
-                Divergence("alert-overrides", "parser and gemini disagree", det, g)
-            )
-        extract_meta["alert-overrides"] = {
-            "input_sha": content_hash(alert),
-            "divergence": bool(disagree),
-        }
+        dec, meta, _ = run_source(
+            "alert-overrides", parser_value=det, fetched_text=alert,
+            prev_meta=(prev_raw.get("extract_meta") or {}).get("alert-overrides"),
+            gemini_fn=gemini_sources.gemini_overrides,
+            is_empty=overrides_empty, equals=overrides_equal,
+        )
+        # REVIEW-ONLY: never apply dec.shipped — record divergence only.
+        if dec.divergence is not None:
+            divergences.append(dec.divergence)
+        extract_meta["alert-overrides"] = meta
 
     today_dt = datetime.now(TZ).date()
     today_iso = today_dt.strftime("%Y-%m-%d")

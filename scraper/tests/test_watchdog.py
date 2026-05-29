@@ -105,22 +105,51 @@ def test_run_source_calls_gemini_when_hash_differs():
     assert meta["input_sha"] == content_hash("T1")
 
 
-def test_run_source_skips_gemini_when_hash_matches():
+def test_run_source_replays_cached_gemini_on_hash_match():
+    calls = []
+
+    def fake_gemini(text):
+        calls.append(text)
+        return ["X"]
+
+    # prev run cached gemini=["b"]; parser is empty now -> backfill must replay
+    prev = {"input_sha": content_hash("T1"), "gemini": ["b"], "divergence": True}
+    dec, meta, cached = run_source(
+        "src", parser_value=[], fetched_text="T1", prev_meta=prev,
+        gemini_fn=fake_gemini, is_empty=lambda v: not v, equals=lambda a, b: a == b,
+    )
+    assert cached is True
+    assert calls == []                  # Gemini NOT called
+    assert dec.used_backup is True      # cached gemini replayed -> backfill
+    assert dec.shipped == ["b"]
+    assert dec.divergence is not None   # divergence re-derived (reaches CI)
+    assert meta["gemini"] == ["b"]
+
+
+def test_run_source_recalls_when_cached_gemini_is_none():
     calls = []
 
     def fake_gemini(text):
         calls.append(text)
         return ["a"]
 
-    prev = {"input_sha": content_hash("T1"), "divergence": True}
+    prev = {"input_sha": content_hash("T1"), "gemini": None}
     dec, meta, cached = run_source(
-        "src", parser_value=["a"], fetched_text="T1", prev_meta=prev,
+        "src", parser_value=[], fetched_text="T1", prev_meta=prev,
         gemini_fn=fake_gemini, is_empty=lambda v: not v, equals=lambda a, b: a == b,
     )
-    assert cached is True
-    assert calls == []                      # Gemini NOT called
-    assert dec.shipped == ["a"]
-    assert meta["divergence"] is True        # carried forward
+    assert cached is False
+    assert calls == ["T1"]              # cached None is a miss -> retry
+
+
+def test_run_source_persists_gemini_for_caching():
+    dec, meta, cached = run_source(
+        "src", parser_value=["a"], fetched_text="T2", prev_meta=None,
+        gemini_fn=lambda t: ["a"], is_empty=lambda v: not v, equals=lambda a, b: a == b,
+    )
+    assert cached is False
+    assert meta["gemini"] == ["a"]
+    assert meta["input_sha"] == content_hash("T2")
 
 
 # --- apply_hours_watchdog ---
@@ -251,3 +280,27 @@ def test_format_divergence_report_lists_each():
     assert "rockwell-climbing" in md
     assert any("rockwell-climbing" in w for w in warnings)
     assert format_divergence_report([]) == ("", [])
+
+
+def test_apply_hours_watchdog_replays_backfill_on_cache_hit():
+    days = ("mon", "tue", "wed", "thu", "fri", "sat", "sun")
+    fac = _fac("rockwell-climbing", {d: [] for d in days})   # parser empty again
+    section_texts = {"rockwell-climbing": "Monday 4pm - 8pm"}
+    gemini_hours = {d: [{"open": "16:00", "close": "20:00"}] for d in days}
+    prev_meta = {"rockwell-climbing": {
+        "input_sha": content_hash("Monday 4pm - 8pm"),
+        "gemini": gemini_hours, "divergence": True,
+    }}
+    called = []
+
+    def gemini_fn(text):
+        called.append(text)
+        return gemini_hours
+
+    divs, meta = apply_hours_watchdog(
+        [fac], section_texts, prev_meta=prev_meta, gemini_fn=gemini_fn,
+    )
+    assert called == []                                   # cache hit: no Gemini call
+    assert fac.hours["mon"] == [_I("16:00", "20:00")]     # backfill REPLAYED (was the bug)
+    assert fac.hours["sun"] == [_I("16:00", "20:00")]
+    assert len(divs) == 1                                 # divergence re-surfaced to CI

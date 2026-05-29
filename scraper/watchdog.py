@@ -95,21 +95,25 @@ def run_source(
     """Run the watchdog for one source with content-hash caching.
 
     Returns ``(Decision, new_meta, cached)``. ``new_meta`` is
-    ``{"input_sha": str, "divergence": bool}`` for persistence in extract_meta.
-    When the input hash matches ``prev_meta``, skips the Gemini call and ships
-    the parser value, carrying the previous divergence flag forward.
+    ``{"input_sha": str, "gemini": <cached gemini output>, "divergence": bool}``
+    for persistence in extract_meta.
+
+    On a cache hit (same input hash AND a non-null cached Gemini result) the
+    Gemini CALL is skipped, but the cached result is replayed through ``decide``
+    so a prior backfill is re-applied and the divergence is re-derived — rather
+    than silently reverting to the (still-wrong) parser value. A cached ``None``
+    result is treated as a miss so a prior Gemini outage is retried.
     """
     h = content_hash(fetched_text)
-    if prev_meta and prev_meta.get("input_sha") == h:
-        return (
-            Decision(parser_value, False, None),
-            {"input_sha": h, "divergence": bool(prev_meta.get("divergence", False))},
-            True,
-        )
-    gemini_value = gemini_fn(fetched_text)
+    if prev_meta and prev_meta.get("input_sha") == h and prev_meta.get("gemini") is not None:
+        gemini_value = prev_meta.get("gemini")
+        cached = True
+    else:
+        gemini_value = gemini_fn(fetched_text)
+        cached = False
     dec = decide(source, parser_value, gemini_value, is_empty=is_empty, equals=equals)
-    meta = {"input_sha": h, "divergence": dec.divergence is not None}
-    return dec, meta, False
+    meta = {"input_sha": h, "gemini": gemini_value, "divergence": dec.divergence is not None}
+    return dec, meta, cached
 
 
 def _schedule_key(days):
