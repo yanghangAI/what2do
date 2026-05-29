@@ -110,3 +110,32 @@ def run_source(
     dec = decide(source, parser_value, gemini_value, is_empty=is_empty, equals=equals)
     meta = {"input_sha": h, "divergence": dec.divergence is not None}
     return dec, meta, False
+
+
+def apply_hours_watchdog(facilities, section_texts, prev_meta, gemini_fn):
+    """Run the hours watchdog over RecWell facilities, mutating hours in place.
+
+    ``facilities``    : list of Facility objects (have .id, .hours).
+    ``section_texts`` : {facility_id: section_text from the live page}.
+    ``prev_meta``     : {facility_id: {input_sha, divergence}} from extract_meta.
+    ``gemini_fn``     : section_text -> hours dict | None.
+
+    Returns ``(divergences, new_meta)``.
+    """
+    divergences = []
+    new_meta = {}
+    for fac in facilities:
+        text = section_texts.get(fac.id)
+        if not text:
+            continue  # no section to compare against; leave parser value as-is
+        dec, meta, _cached = run_source(
+            fac.id, parser_value=fac.hours, fetched_text=text,
+            prev_meta=prev_meta.get(fac.id), gemini_fn=gemini_fn,
+            is_empty=hours_empty, equals=hours_equal,
+        )
+        if dec.used_backup:
+            fac.hours = intervals_from_dict(dec.shipped)
+        if dec.divergence is not None:
+            divergences.append(dec.divergence)
+        new_meta[fac.id] = meta
+    return divergences, new_meta

@@ -121,3 +121,49 @@ def test_run_source_skips_gemini_when_hash_matches():
     assert calls == []                      # Gemini NOT called
     assert dec.shipped == ["a"]
     assert meta["divergence"] is True        # carried forward
+
+
+# --- apply_hours_watchdog ---
+from scraper.watchdog import apply_hours_watchdog
+from scraper.models import Interval as _I
+
+def _fac(fid, hours):
+    # minimal stand-in matching the attributes apply_hours_watchdog touches
+    class F:
+        pass
+    f = F()
+    f.id = fid
+    f.hours = hours
+    f.scrape_status = "ok"
+    return f
+
+
+def test_apply_hours_watchdog_backfills_empty_facility():
+    empty = {d: [] for d in ("mon","tue","wed","thu","fri","sat","sun")}
+    fac = _fac("rockwell-climbing", dict(empty))
+    section_texts = {"rockwell-climbing": "Monday 4pm - 8pm"}
+    gemini = {d: [{"open": "16:00", "close": "20:00"}] for d in
+              ("mon","tue","wed","thu","fri","sat","sun")}
+
+    divs, meta = apply_hours_watchdog(
+        [fac], section_texts, prev_meta={},
+        gemini_fn=lambda text: gemini,
+    )
+    assert fac.hours["mon"] == [_I("16:00", "20:00")]   # backfilled in place
+    assert len(divs) == 1 and divs[0].source == "rockwell-climbing"
+    assert meta["rockwell-climbing"]["divergence"] is True
+
+
+def test_apply_hours_watchdog_leaves_matching_facility_untouched():
+    hours = {d: [] for d in ("mon","tue","wed","thu","fri","sat","sun")}
+    hours["mon"] = [_I("16:00", "20:00")]
+    fac = _fac("x", dict(hours))
+    section_texts = {"x": "Monday 4pm - 8pm"}
+    gemini = {d: [] for d in ("mon","tue","wed","thu","fri","sat","sun")}
+    gemini["mon"] = [{"open": "16:00", "close": "20:00"}]
+
+    divs, meta = apply_hours_watchdog(
+        [fac], section_texts, prev_meta={}, gemini_fn=lambda text: gemini,
+    )
+    assert fac.hours["mon"] == [_I("16:00", "20:00")]
+    assert divs == []

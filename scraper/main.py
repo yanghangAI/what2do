@@ -10,7 +10,11 @@ import requests
 
 from scraper.merge import merge_results
 from scraper.models import Facility, HoursDoc, Location
+from bs4 import BeautifulSoup
+from scraper import gemini_sources
 from scraper.scrape_recwell import SOURCE_URL as RECWELL_URL, scrape_recwell
+from scraper.scrape_recwell import FACILITIES as RECWELL_FACILITIES, _section_text_after
+from scraper.watchdog import apply_hours_watchdog
 from scraper.scrape_mullins import scrape_mullins
 from scraper.scrape_programs import fetch_programs
 from scraper.scrape_puffer import SOURCE_URL as PUFFER_URL, fetch_puffer
@@ -42,19 +46,18 @@ def _fetch_recwell_html() -> str:
     return r.text
 
 
-def _run_recwell() -> list[tuple[str, dict | None, Exception | None]]:
+def _run_recwell() -> tuple[list[tuple[str, dict | None, Exception | None]], str | None]:
     try:
         html = _fetch_recwell_html()
         records = scrape_recwell(html)
-        return [(r["id"], r, None) for r in records]
+        return [(r["id"], r, None) for r in records], html
     except Exception as e:
         print(f"recwell scrape failed: {e}", file=sys.stderr)
-        # Mark all three RecWell facilities as failed
         return [
             ("boyden-pool", None, e),
             ("curry-hicks-pool", None, e),
             ("rockwell-climbing", None, e),
-        ]
+        ], None
 
 
 def _run_mullins() -> tuple[str, dict | None, Exception | None]:
@@ -69,17 +72,34 @@ def main() -> int:
     now_iso = datetime.now(TZ).isoformat(timespec="seconds")
     prev = _load_previous()
 
-    results: list[tuple[str, dict | None, Exception | None]] = []
-    results.extend(_run_recwell())
-    results.append(_run_mullins())
-
-    doc = merge_results(results, prev, now_iso=now_iso)
-
     try:
         prev_raw = json.loads(OUT_PATH.read_text()) if OUT_PATH.exists() else {}
     except Exception as e:
         print(f"warning: could not parse previous hours.json: {e}", file=sys.stderr)
         prev_raw = {}
+
+    results: list[tuple[str, dict | None, Exception | None]] = []
+    recwell_results, recwell_html = _run_recwell()
+    results.extend(recwell_results)
+    results.append(_run_mullins())
+
+    doc = merge_results(results, prev, now_iso=now_iso)
+
+    divergences = []
+    extract_meta = {}
+    if recwell_html:
+        soup = BeautifulSoup(recwell_html, "html.parser")
+        section_texts = {
+            fac["id"]: _section_text_after(soup, fac["match"])
+            for fac in RECWELL_FACILITIES
+        }
+        divs, meta = apply_hours_watchdog(
+            doc.facilities, section_texts,
+            prev_meta=prev_raw.get("extract_meta") or {},
+            gemini_fn=gemini_sources.gemini_facility_hours,
+        )
+        divergences.extend(divs)
+        extract_meta.update(meta)
 
     try:
         programs = fetch_programs()
@@ -188,6 +208,7 @@ def main() -> int:
     out["alert"] = alert
     out["alert_state"] = alert_state
     out["holidays"] = parse_holidays(alert)
+    out["extract_meta"] = {**(prev_raw.get("extract_meta") or {}), **extract_meta}
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(json.dumps(out, indent=2) + "\n")
     print(f"wrote {OUT_PATH}")
