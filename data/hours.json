@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-28T08:22:30-04:00",
+  "last_updated": "2026-05-29T08:11:23-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -49,7 +49,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-28T08:22:30-04:00"
+      "last_scraped": "2026-05-29T08:11:23-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -98,7 +98,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-28T08:22:30-04:00"
+      "last_scraped": "2026-05-29T08:11:23-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -120,7 +120,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-28T08:22:30-04:00"
+      "last_scraped": "2026-05-29T08:11:23-04:00"
     },
     {
       "id": "recreation-center",
@@ -169,7 +169,7 @@
         "Saturday - Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-28T08:22:30-04:00"
+      "last_scraped": "2026-05-29T08:11:23-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -193,7 +193,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-28T08:22:30-04:00"
+      "last_scraped": "2026-05-29T08:11:23-04:00"
     },
     {
       "id": "mullins-ice",
@@ -217,13 +217,8 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-28T08:22:30-04:00",
+      "last_scraped": "2026-05-29T08:11:23-04:00",
       "events": [
-        {
-          "date": "2026-05-28",
-          "open": "17:30",
-          "close": "19:20"
-        },
         {
           "date": "2026-05-29",
           "open": "12:10",
@@ -266,7 +261,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-05-28T08:22:30-04:00",
+      "last_scraped": "2026-05-29T08:11:23-04:00",
       "water_quality": {
         "status": "allowed",
         "headline": "Last Test of 2025: Swimming is allowed at Puffer's Pond.",
@@ -528,28 +523,6 @@
   ],
   "schedule": [
     {
-      "date": "2026-05-28",
-      "weekday": "Thu",
-      "events": [
-        {
-          "time": "16:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "17:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "18:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "19:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        }
-      ]
-    },
-    {
       "date": "2026-05-29",
       "weekday": "Fri",
       "events": [
@@ -631,6 +604,28 @@
           "time": "10:00",
           "name": "jason vs slacey"
         },
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-02",
+      "weekday": "Tue",
+      "events": [
         {
           "time": "16:00",
           "name": "15 minute Climbing Orientation Offered Every Hour"
