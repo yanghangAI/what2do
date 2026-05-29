@@ -74,3 +74,42 @@ def test_parse_closed_dates_ignores_notes_without_closed_word():
 def test_parse_closed_dates_handles_empty():
     from scraper.scrape_recwell import parse_closed_dates_from_notes
     assert parse_closed_dates_from_notes([]) == []
+
+
+# --- root-cause parser fixes: colon-less days and '&' interval separator ---
+from scraper.scrape_recwell import _parse_schedule_line
+
+
+def test_parse_schedule_line_colonless_single_day():
+    days, ivals = _parse_schedule_line("Monday 4pm - 8pm")
+    assert days == ["mon"]
+    assert ivals == [Interval("16:00", "20:00")]
+
+
+def test_parse_schedule_line_ampersand_two_intervals():
+    days, ivals = _parse_schedule_line(
+        "Monday - Friday: 7:00am - 9:00am & 5:00pm - 7:30pm"
+    )
+    assert days == ["mon", "tue", "wed", "thu", "fri"]
+    assert Interval("07:00", "09:00") in ivals
+    assert Interval("17:00", "19:30") in ivals
+    assert len(ivals) == 2
+
+
+def test_parse_schedule_line_comma_still_works():
+    days, ivals = _parse_schedule_line("Saturday: 11:00am - 1:00pm, 3:00pm - 5:00pm")
+    assert days == ["sat"]
+    assert ivals == [Interval("11:00", "13:00"), Interval("15:00", "17:00")]
+
+
+def test_parse_schedule_line_closed_line_still_parses_days():
+    days, ivals = _parse_schedule_line("Saturday & Sunday: CLOSED")
+    assert set(days) == {"sat", "sun"}
+    assert ivals == []
+
+
+def test_parse_schedule_line_note_returns_empty():
+    days, ivals = _parse_schedule_line(
+        "Please note the pool will be CLOSED on the following dates:"
+    )
+    assert days == [] and ivals == []
