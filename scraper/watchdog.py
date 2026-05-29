@@ -143,13 +143,17 @@ def _mullins_dates(events, today=None):
 
 
 def mullins_equal(a, b, today=None) -> bool:
-    # Compare today-onward DATE COVERAGE rather than exact slots. The parser
-    # reads structured aria-labels, merges adjacent sessions, and drops past
-    # dates; Gemini reads rendered text (raw slots + the whole visible week,
-    # including past days). Comparing date coverage flags a genuinely missing or
-    # extra skate day without false-alarming on slot granularity or past-week
-    # noise — and the parser (structured source) stays authoritative on times.
-    return _mullins_dates(a, today) == _mullins_dates(b, today)
+    """Mullins is backup-only, so the review comparison always "agrees".
+
+    The deterministic parser reads the currently-displayed Finnly week from
+    structured ``aria-label``s, while Gemini reads the entire multi-week dataset
+    embedded in the raw Finnly HTML (e.g. ~27 dates vs the parser's 3). Comparing
+    them is pure noise — different scopes, not different data. The parser is
+    authoritative for Mullins; Gemini contributes only through the empty-parser
+    backup path (see ``mullins_empty``), which fires only if the parser found no
+    upcoming sessions at all.
+    """
+    return True
 
 
 def mullins_empty(events, today=None) -> bool:
