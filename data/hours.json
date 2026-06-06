@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-05T07:58:47-04:00",
+  "last_updated": "2026-06-06T06:51:28-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -49,7 +49,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-05T07:58:47-04:00"
+      "last_scraped": "2026-06-06T06:51:28-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -118,7 +118,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-05T07:58:47-04:00"
+      "last_scraped": "2026-06-06T06:51:28-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -175,7 +175,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-05T07:58:47-04:00"
+      "last_scraped": "2026-06-06T06:51:28-04:00"
     },
     {
       "id": "recreation-center",
@@ -224,7 +224,7 @@
         "Saturday - Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-05T07:58:47-04:00"
+      "last_scraped": "2026-06-06T06:51:28-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -248,7 +248,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-05T07:58:47-04:00"
+      "last_scraped": "2026-06-06T06:51:28-04:00"
     },
     {
       "id": "mullins-ice",
@@ -272,13 +272,8 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-05T07:58:47-04:00",
+      "last_scraped": "2026-06-06T06:51:28-04:00",
       "events": [
-        {
-          "date": "2026-06-05",
-          "open": "18:00",
-          "close": "19:50"
-        },
         {
           "date": "2026-06-06",
           "open": "16:00",
@@ -311,28 +306,28 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-05T07:58:47-04:00",
+      "last_scraped": "2026-06-06T06:51:28-04:00",
       "water_quality": {
-        "status": "allowed",
-        "headline": "Last Test of 2025: Swimming is allowed at Puffer's Pond.",
-        "detail": "The latest water quality test results show that both South Beach and North Beach meet state standards for safe swimming conditions.",
-        "last_updated": "2026-05-27",
+        "status": "unknown",
+        "headline": "The latest water quality test results show that both South Beach and North Beach meet state standards for safe swimming conditions.",
+        "detail": "",
+        "last_updated": "2026-06-05",
         "beaches": {
           "north": "ok",
           "south": "ok"
         },
         "report_url": "https://www.amherstma.gov/Archive.aspx?AMID=234",
         "latest_report": {
-          "date": "2026-05-26",
-          "url": "https://www.amherstma.gov/Archive.aspx?ADID=19103",
-          "title": "Puffer's Pond Water Quality Test 05-26-2026",
+          "date": "2026-06-04",
+          "url": "https://www.amherstma.gov/Archive.aspx?ADID=19131",
+          "title": "Puffer's Pond Water Quality Test 06-04-2026",
           "readings": {
             "north_geomean": null,
             "south_geomean": null,
-            "north_sample": 28.5,
-            "south_sample": 48.8,
+            "north_sample": 295.0,
+            "south_sample": 4.1,
             "source": "gemini",
-            "test_date": "2020-05-20"
+            "test_date": "2026-06-04"
           }
         }
       }
@@ -580,32 +575,6 @@
   ],
   "schedule": [
     {
-      "date": "2026-06-05",
-      "weekday": "Fri",
-      "events": [
-        {
-          "time": "06:00",
-          "name": "Pickle ball-Faculty Staff"
-        },
-        {
-          "time": "16:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "17:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "18:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "19:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        }
-      ]
-    },
-    {
       "date": "2026-06-06",
       "weekday": "Sat",
       "events": [
@@ -702,6 +671,44 @@
         {
           "time": "16:30",
           "name": "Pilates 60"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-10",
+      "weekday": "Wed",
+      "events": [
+        {
+          "time": "10:15",
+          "name": "Arms & Core 45"
+        },
+        {
+          "time": "15:45",
+          "name": "Summer Pickleball League"
+        },
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "16:15",
+          "name": "Yin Yoga 60"
+        },
+        {
+          "time": "17:00",
+          "name": "Strength 60"
         },
         {
           "time": "17:00",
@@ -918,38 +925,8 @@
       "divergence": false
     },
     "mullins-ice": {
-      "input_sha": "8f0db649af57e5c1e2dbaab4d971f432c7d1dc0c6f0ff9d20fb57ac944e953ec",
+      "input_sha": "cc0b3eb8ce161160f19580090fbb3dc96ce9a7dde8ce3e24950b0b85fe24185a",
       "gemini": [
-        {
-          "date": "2026-05-29",
-          "open": "12:10",
-          "close": "13:30"
-        },
-        {
-          "date": "2026-05-30",
-          "open": "13:00",
-          "close": "14:20"
-        },
-        {
-          "date": "2026-05-30",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2026-05-30",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2026-05-31",
-          "open": "14:30",
-          "close": "15:20"
-        },
-        {
-          "date": "2026-05-31",
-          "open": "15:30",
-          "close": "16:20"
-        },
         {
           "date": "2026-06-01",
           "open": "15:00",
@@ -1004,319 +981,13 @@
           "date": "2026-06-07",
           "open": "15:30",
           "close": "16:20"
-        },
-        {
-          "date": "2026-06-08",
-          "open": "14:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2026-06-09",
-          "open": "14:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2026-06-10",
-          "open": "12:10",
-          "close": "14:00"
-        },
-        {
-          "date": "2026-06-12",
-          "open": "15:00",
-          "close": "15:50"
-        },
-        {
-          "date": "2026-06-12",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2026-06-13",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2026-06-13",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2026-06-14",
-          "open": "14:30",
-          "close": "15:20"
-        },
-        {
-          "date": "2026-06-14",
-          "open": "15:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2026-06-17",
-          "open": "12:10",
-          "close": "13:50"
-        },
-        {
-          "date": "2026-06-18",
-          "open": "15:30",
-          "close": "16:50"
-        },
-        {
-          "date": "2026-06-19",
-          "open": "15:30",
-          "close": "17:20"
-        },
-        {
-          "date": "2026-06-20",
-          "open": "16:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2026-06-21",
-          "open": "14:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2026-07-02",
-          "open": "18:00",
-          "close": "19:20"
-        },
-        {
-          "date": "2026-09-12",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2026-09-12",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2026-09-13",
-          "open": "14:30",
-          "close": "15:20"
-        },
-        {
-          "date": "2026-09-13",
-          "open": "15:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2026-09-16",
-          "open": "11:10",
-          "close": "12:40"
-        },
-        {
-          "date": "2026-09-23",
-          "open": "11:10",
-          "close": "12:40"
-        },
-        {
-          "date": "2026-09-30",
-          "open": "11:10",
-          "close": "12:40"
-        },
-        {
-          "date": "2026-10-07",
-          "open": "11:10",
-          "close": "12:40"
-        },
-        {
-          "date": "2026-10-10",
-          "open": "13:30",
-          "close": "14:20"
-        },
-        {
-          "date": "2026-10-10",
-          "open": "14:30",
-          "close": "15:20"
-        },
-        {
-          "date": "2026-10-11",
-          "open": "14:30",
-          "close": "15:20"
-        },
-        {
-          "date": "2026-10-11",
-          "open": "15:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2026-10-17",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2026-10-17",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2026-10-18",
-          "open": "14:30",
-          "close": "15:20"
-        },
-        {
-          "date": "2026-10-18",
-          "open": "15:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2026-10-24",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2026-10-24",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2026-10-25",
-          "open": "14:30",
-          "close": "15:20"
-        },
-        {
-          "date": "2026-10-25",
-          "open": "15:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2026-10-31",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2026-10-31",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2026-11-01",
-          "open": "14:30",
-          "close": "15:20"
-        },
-        {
-          "date": "2026-11-01",
-          "open": "15:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2026-11-07",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2026-11-07",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2026-11-08",
-          "open": "14:30",
-          "close": "15:20"
-        },
-        {
-          "date": "2026-11-08",
-          "open": "15:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2026-11-14",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2026-11-14",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2026-11-15",
-          "open": "14:30",
-          "close": "15:20"
-        },
-        {
-          "date": "2026-11-15",
-          "open": "15:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2026-11-21",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2026-11-21",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2026-11-22",
-          "open": "15:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2026-11-28",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2026-11-28",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2026-11-29",
-          "open": "14:30",
-          "close": "15:20"
-        },
-        {
-          "date": "2026-11-29",
-          "open": "15:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2026-12-05",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2026-12-05",
-          "open": "17:00",
-          "close": "17:50"
         }
       ],
       "divergence": false
     },
     "schedule": {
-      "input_sha": "ad5b04edf094b32848ab41d82dd413c3d776a2c0c2922313d46d50c5be6f4481",
+      "input_sha": "aa1a6140d754c16800ab2ea8993667b285e7c0ca29e5c2f55e4bcfba6efa9a9d",
       "gemini": [
-        {
-          "date": "2026-06-05",
-          "weekday": "Fri",
-          "events": [
-            {
-              "time": "06:00",
-              "name": "Pickle ball-Faculty Staff"
-            },
-            {
-              "time": "16:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "17:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "18:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "19:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            }
-          ]
-        },
         {
           "date": "2026-06-06",
           "weekday": "Sat",
@@ -1414,6 +1085,44 @@
             {
               "time": "16:30",
               "name": "Pilates 60"
+            },
+            {
+              "time": "17:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "18:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "19:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            }
+          ]
+        },
+        {
+          "date": "2026-06-10",
+          "weekday": "Wed",
+          "events": [
+            {
+              "time": "10:15",
+              "name": "Arms & Core 45"
+            },
+            {
+              "time": "15:45",
+              "name": "Summer Pickleball League"
+            },
+            {
+              "time": "16:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "16:15",
+              "name": "Yin Yoga 60"
+            },
+            {
+              "time": "17:00",
+              "name": "Strength 60"
             },
             {
               "time": "17:00",
