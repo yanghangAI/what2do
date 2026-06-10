@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-07T07:04:49-04:00",
+  "last_updated": "2026-06-10T08:16:45-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -49,7 +49,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-07T07:04:49-04:00"
+      "last_scraped": "2026-06-10T08:16:45-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -118,7 +118,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-07T07:04:49-04:00"
+      "last_scraped": "2026-06-10T08:16:45-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -175,7 +175,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-07T07:04:49-04:00"
+      "last_scraped": "2026-06-10T08:16:45-04:00"
     },
     {
       "id": "recreation-center",
@@ -224,7 +224,7 @@
         "Saturday - Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-07T07:04:49-04:00"
+      "last_scraped": "2026-06-10T08:16:45-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -248,7 +248,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-07T07:04:49-04:00"
+      "last_scraped": "2026-06-10T08:16:45-04:00"
     },
     {
       "id": "mullins-ice",
@@ -272,23 +272,8 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-07T07:04:49-04:00",
+      "last_scraped": "2026-06-10T08:16:45-04:00",
       "events": [
-        {
-          "date": "2026-06-07",
-          "open": "14:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2026-06-08",
-          "open": "14:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2026-06-09",
-          "open": "14:30",
-          "close": "16:20"
-        },
         {
           "date": "2026-06-10",
           "open": "12:10",
@@ -303,6 +288,11 @@
           "date": "2026-06-13",
           "open": "16:00",
           "close": "17:50"
+        },
+        {
+          "date": "2026-06-14",
+          "open": "14:30",
+          "close": "16:20"
         }
       ]
     },
@@ -326,28 +316,28 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-07T07:04:49-04:00",
+      "last_scraped": "2026-06-10T08:16:45-04:00",
       "water_quality": {
         "status": "unknown",
         "headline": "The latest water quality test results show that both South Beach and North Beach meet state standards for safe swimming conditions.",
         "detail": "",
-        "last_updated": "2026-06-05",
+        "last_updated": "2026-06-09",
         "beaches": {
           "north": "ok",
           "south": "ok"
         },
         "report_url": "https://www.amherstma.gov/Archive.aspx?AMID=234",
         "latest_report": {
-          "date": "2026-06-04",
-          "url": "https://www.amherstma.gov/Archive.aspx?ADID=19131",
-          "title": "Puffer's Pond Water Quality Test 06-04-2026",
+          "date": "2027-06-08",
+          "url": "https://www.amherstma.gov/Archive.aspx?ADID=19140",
+          "title": "Puffer's Pond Water Quality Test 06-08-2027",
           "readings": {
-            "north_geomean": null,
-            "south_geomean": null,
-            "north_sample": 295.0,
-            "south_sample": 4.1,
+            "north_geomean": 20.3,
+            "south_geomean": 14.8,
+            "north_sample": 14.8,
+            "south_sample": 20.3,
             "source": "gemini",
-            "test_date": "2026-06-04"
+            "test_date": "2026-06-08"
           }
         }
       }
@@ -595,88 +585,6 @@
   ],
   "schedule": [
     {
-      "date": "2026-06-07",
-      "weekday": "Sun",
-      "events": [
-        {
-          "time": "16:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "17:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "18:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "19:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        }
-      ]
-    },
-    {
-      "date": "2026-06-08",
-      "weekday": "Mon",
-      "events": [
-        {
-          "time": "10:15",
-          "name": "Sculpt 60"
-        },
-        {
-          "time": "16:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "17:00",
-          "name": "Pilates 60"
-        },
-        {
-          "time": "17:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "18:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "19:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        }
-      ]
-    },
-    {
-      "date": "2026-06-09",
-      "weekday": "Tue",
-      "events": [
-        {
-          "time": "16:00",
-          "name": "Rhythm Ride 60"
-        },
-        {
-          "time": "16:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "16:30",
-          "name": "Pilates 60"
-        },
-        {
-          "time": "17:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "18:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "19:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        }
-      ]
-    },
-    {
       "date": "2026-06-10",
       "weekday": "Wed",
       "events": [
@@ -759,6 +667,94 @@
         {
           "time": "06:00",
           "name": "Pickle ball-Faculty Staff"
+        },
+        {
+          "time": "10:15",
+          "name": "Strength & Stretch 60"
+        },
+        {
+          "time": "12:15",
+          "name": "Meditation & Movement 60"
+        },
+        {
+          "time": "14:30",
+          "name": "Athletics Primetime Lacrosse Tourney"
+        },
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-13",
+      "weekday": "Sat",
+      "events": [
+        {
+          "time": "12:00",
+          "name": "Club Ballroom Dance"
+        },
+        {
+          "time": "12:00",
+          "name": "Club Sports Ballroom Dance"
+        },
+        {
+          "time": "14:30",
+          "name": "Athletics Primetime Lacrosse Tourney"
+        },
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-14",
+      "weekday": "Sun",
+      "events": [
+        {
+          "time": "14:30",
+          "name": "Athletics Primetime Lacrosse Tourney"
+        },
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
         }
       ]
     }
@@ -963,28 +959,8 @@
       "divergence": false
     },
     "mullins-ice": {
-      "input_sha": "d2c355248da5b5c3b8e1f07f601fb3d9f5c82a0ff2e1c317081feb0becbb4bcb",
+      "input_sha": "870e9606dd531641a07262a9674a0dff8248e1e65dafbd22f2e13b6fe843b6d8",
       "gemini": [
-        {
-          "date": "2026-05-31",
-          "open": "14:30",
-          "close": "15:20"
-        },
-        {
-          "date": "2026-05-31",
-          "open": "15:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2026-06-01",
-          "open": "15:00",
-          "close": "16:20"
-        },
-        {
-          "date": "2026-06-02",
-          "open": "16:30",
-          "close": "17:50"
-        },
         {
           "date": "2026-06-03",
           "open": "15:00",
@@ -1077,8 +1053,8 @@
         },
         {
           "date": "2026-06-17",
-          "open": "11:10",
-          "close": "12:40"
+          "open": "12:10",
+          "close": "13:50"
         },
         {
           "date": "2026-06-18",
@@ -1104,6 +1080,46 @@
           "date": "2026-07-02",
           "open": "18:00",
           "close": "19:20"
+        },
+        {
+          "date": "2026-07-05",
+          "open": "14:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-07-06",
+          "open": "15:30",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-07-08",
+          "open": "15:30",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-07-09",
+          "open": "15:30",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-07-10",
+          "open": "14:00",
+          "close": "15:20"
+        },
+        {
+          "date": "2026-07-10",
+          "open": "17:00",
+          "close": "18:20"
+        },
+        {
+          "date": "2026-07-11",
+          "open": "16:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-07-17",
+          "open": "16:30",
+          "close": "18:20"
         },
         {
           "date": "2026-09-12",
@@ -1324,90 +1340,8 @@
       "divergence": false
     },
     "schedule": {
-      "input_sha": "59f51b9e87656dfe2c3247bd00a20bba805e80f361fa8624c1eafaf174f78d55",
+      "input_sha": "4db6794369ab5aef1b15487fdf5d13f46f0ca264a092e0186471d052f462592a",
       "gemini": [
-        {
-          "date": "2026-06-07",
-          "weekday": "Sun",
-          "events": [
-            {
-              "time": "16:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "17:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "18:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "19:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            }
-          ]
-        },
-        {
-          "date": "2026-06-08",
-          "weekday": "Mon",
-          "events": [
-            {
-              "time": "10:15",
-              "name": "Sculpt 60"
-            },
-            {
-              "time": "16:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "17:00",
-              "name": "Pilates 60"
-            },
-            {
-              "time": "17:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "18:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "19:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            }
-          ]
-        },
-        {
-          "date": "2026-06-09",
-          "weekday": "Tue",
-          "events": [
-            {
-              "time": "16:00",
-              "name": "Rhythm Ride 60"
-            },
-            {
-              "time": "16:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "16:30",
-              "name": "Pilates 60"
-            },
-            {
-              "time": "17:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "18:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "19:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            }
-          ]
-        },
         {
           "date": "2026-06-10",
           "weekday": "Wed",
@@ -1491,6 +1425,94 @@
             {
               "time": "06:00",
               "name": "Pickle ball-Faculty Staff"
+            },
+            {
+              "time": "10:15",
+              "name": "Strength & Stretch 60"
+            },
+            {
+              "time": "12:15",
+              "name": "Meditation & Movement 60"
+            },
+            {
+              "time": "14:30",
+              "name": "Athletics Primetime Lacrosse Tourney"
+            },
+            {
+              "time": "16:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "17:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "18:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "19:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            }
+          ]
+        },
+        {
+          "date": "2026-06-13",
+          "weekday": "Sat",
+          "events": [
+            {
+              "time": "12:00",
+              "name": "Club Ballroom Dance"
+            },
+            {
+              "time": "12:00",
+              "name": "Club Sports Ballroom Dance"
+            },
+            {
+              "time": "14:30",
+              "name": "Athletics Primetime Lacrosse Tourney"
+            },
+            {
+              "time": "16:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "17:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "18:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "19:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            }
+          ]
+        },
+        {
+          "date": "2026-06-14",
+          "weekday": "Sun",
+          "events": [
+            {
+              "time": "14:30",
+              "name": "Athletics Primetime Lacrosse Tourney"
+            },
+            {
+              "time": "16:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "17:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "18:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "19:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
             }
           ]
         }
