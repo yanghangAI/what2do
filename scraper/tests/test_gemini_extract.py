@@ -33,6 +33,15 @@ def test_returns_none_on_persistent_error(monkeypatch):
     assert out is None
 
 
+def test_returns_none_on_request_exception(monkeypatch):
+    def boom(*args, **kwargs):
+        raise gx.requests.ReadTimeout("slow")
+
+    monkeypatch.setattr(gx.requests, "post", boom)
+    out = gx.extract("hello", schema=SCHEMA, instructions="do it", api_key="k", models=("m",))
+    assert out is None
+
+
 def test_returns_none_on_bad_json(monkeypatch):
     payload = {"candidates": [{"content": {"parts": [{"text": "not json"}]}}]}
     monkeypatch.setattr(gx.requests, "post", lambda *a, **k: _fake_response(200, payload))

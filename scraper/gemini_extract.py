@@ -41,7 +41,10 @@ def extract(text, *, schema, instructions, api_key=None, models=MODEL_CANDIDATES
     for model in models:
         url = _URL_TMPL.format(model=model) + f"?key={api_key}"
         for i, attempt in enumerate((1, 2)):
-            r = requests.post(url, json=body, timeout=60)
+            try:
+                r = requests.post(url, json=body, timeout=60)
+            except requests.RequestException:
+                break
             if r.status_code == 200:
                 payload = r.json()
                 break
