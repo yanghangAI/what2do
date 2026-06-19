@@ -22,6 +22,26 @@ def test_extracts_alert_with_summer_hours():
     assert "RockWell" in text
 
 
+def test_extracts_alert_when_old_memorial_day_text_is_gone():
+    html = """
+    <div>
+      <p>Check out our new <a>YouTube Channel!</a></p>
+      <h4><u>FACILITIES ALERT:</u> Summer Hours - Check below for updated hours.</h4>
+      <p>
+        All RecWell Facilities will be closed on the following Holidays:<br>
+        Friday, June 19, 2026 – Juneteenth<br>
+        Friday, July 3, 2026 – Independence Day (observed)<br>
+        <strong>Recreation Center | Summer Hours:</strong><br>
+        Monday–Friday | 7:00am–7:00pm<br>
+      </p>
+    </div>
+    """
+    text = parse_alert_html(html)
+    assert text is not None
+    assert "Juneteenth" in text
+    assert {"date": "2026-06-19", "name": "Juneteenth"} in parse_holidays(text)
+
+
 def test_excludes_unrelated_chrome():
     text = parse_alert_html(FIXTURE.read_text())
     assert "YouTube" not in text

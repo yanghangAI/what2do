@@ -30,18 +30,29 @@ def parse_alert_html(html: str) -> str | None:
     node = soup.find(string=ALERT_HEADING_RE)
     if node is None:
         return None
-    # Walk up until we find an ancestor that has BOTH the holiday list and
-    # per-facility hours — the headline-only h2 doesn't qualify.
+    # Walk up until we find the smallest ancestor with actionable alert
+    # content. The homepage has put a summary-only heading in the alert
+    # element and the holiday/facility details in its parent; older markup
+    # had everything in one block.
     container = node
+    detail_re = re.compile(r"\b(holiday|Recreation Center|Boyden|Hicks|Pools)\b", re.I)
+    fallback_re = re.compile(r"\b(closed|closure|hours)\b", re.I)
+    fallback = None
     for _ in range(15):
         container = container.parent
         if container is None:
             return None
         text = container.get_text("\n", strip=True)
-        if "Memorial Day" in text and "Boyden" in text:
+        start = text.find("FACILITIES ALERT")
+        body = text[start + len("FACILITIES ALERT"):] if start >= 0 else text
+        if detail_re.search(body):
             break
+        if fallback is None and fallback_re.search(body):
+            fallback = container
     else:
-        return None
+        container = fallback
+        if container is None:
+            return None
 
     # Slice from "FACILITIES ALERT" onward; trim trailing chrome.
     full = container.get_text("\n", strip=True)
