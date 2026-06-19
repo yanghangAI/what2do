@@ -291,6 +291,17 @@ def test_overrides_equal_ignores_hours_order_and_holiday_order():
     assert overrides_equal(_OV_A, b)
 
 
+def test_overrides_equal_treats_string_null_as_absent():
+    import copy
+    a = copy.deepcopy(_OV_A)
+    b = copy.deepcopy(_OV_A)
+    a["overrides"]["rockwell-climbing"]["start_date"] = None
+    a["overrides"]["rockwell-climbing"]["closed_from"] = None
+    b["overrides"]["rockwell-climbing"]["start_date"] = "null"
+    b["overrides"]["rockwell-climbing"]["closed_from"] = "null"
+    assert overrides_equal(a, b)
+
+
 def test_overrides_equal_detects_start_date_change():
     import copy
     b = copy.deepcopy(_OV_A)

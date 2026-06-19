@@ -163,10 +163,18 @@ def mullins_empty(events, today=None) -> bool:
 def _ov_is_empty(ov):
     ov = ov or {}
     return (
-        not ov.get("start_date")
-        and not ov.get("closed_from")
+        _nullable(ov.get("start_date")) is None
+        and _nullable(ov.get("closed_from")) is None
         and all(not (ov.get("hours", {}) or {}).get(d) for d in DAYS)
     )
+
+
+def _nullable(value):
+    if value is None:
+        return None
+    if isinstance(value, str) and value.strip().lower() in ("", "null", "none"):
+        return None
+    return value
 
 
 def _overrides_key(obj):
@@ -178,8 +186,8 @@ def _overrides_key(obj):
             continue  # drop all-empty facility entries so a fixed-property
                       # Gemini schema that fills blanks doesn't false-alarm
         norm_ovs[fid] = (
-            ov.get("start_date"),
-            ov.get("closed_from"),
+            _nullable(ov.get("start_date")),
+            _nullable(ov.get("closed_from")),
             tuple(sorted(
                 (d, tuple(sorted(_pair(i) for i in (ov.get("hours", {}) or {}).get(d, []))))
                 for d in DAYS
