@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-30T07:41:06-04:00",
+  "last_updated": "2026-07-01T07:56:04-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -49,7 +49,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-30T07:41:06-04:00"
+      "last_scraped": "2026-07-01T07:56:04-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -118,7 +118,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-30T07:41:06-04:00"
+      "last_scraped": "2026-07-01T07:56:04-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -175,7 +175,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-30T07:41:06-04:00"
+      "last_scraped": "2026-07-01T07:56:04-04:00"
     },
     {
       "id": "recreation-center",
@@ -224,7 +224,7 @@
         "Saturday - Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-30T07:41:06-04:00"
+      "last_scraped": "2026-07-01T07:56:04-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -248,7 +248,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-30T07:41:06-04:00"
+      "last_scraped": "2026-07-01T07:56:04-04:00"
     },
     {
       "id": "mullins-ice",
@@ -272,7 +272,7 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-30T07:41:06-04:00",
+      "last_scraped": "2026-07-01T07:56:04-04:00",
       "events": [
         {
           "date": "2026-07-02",
@@ -301,7 +301,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-06-30T07:41:06-04:00",
+      "last_scraped": "2026-07-01T07:56:04-04:00",
       "water_quality": {
         "status": "unknown",
         "headline": "The latest water quality test results show that both South Beach and North Beach meet state standards for safe swimming conditions.",
@@ -577,44 +577,6 @@
   ],
   "schedule": [
     {
-      "date": "2026-06-30",
-      "weekday": "Tue",
-      "events": [
-        {
-          "time": "08:30",
-          "name": "Pilates 60"
-        },
-        {
-          "time": "10:00",
-          "name": "Rec Cycle 45"
-        },
-        {
-          "time": "16:00",
-          "name": "Rhythm Ride 60"
-        },
-        {
-          "time": "16:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "16:30",
-          "name": "Pilates 60"
-        },
-        {
-          "time": "17:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "18:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "19:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        }
-      ]
-    },
-    {
       "date": "2026-07-01",
       "weekday": "Wed",
       "events": [
@@ -733,15 +695,33 @@
           "name": "15 minute Climbing Orientation Offered Every Hour"
         }
       ]
+    },
+    {
+      "date": "2026-07-05",
+      "weekday": "Sun",
+      "events": [
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        }
+      ]
     }
   ],
-  "alert": "FACILITIES ALERT:\nSummer Hours - Check below for updated hours of operations in the RecWell Facilities.\nAll RecWell Facilities will be closed on the following Holidays:\nFriday, June 19, 2026 \u2013 Juneteenth\nFriday, July 3, 2026 \u2013 Independence Day (observed)\nRecreation Center | Summer Hours:\nMonday\u2013Friday | 7:00am\u20137:00pm\nSaturday & Sunday |\nCLOSED\nPools | Summer Hours:\nBoyden Pool\nMonday\u2013Friday | 11:00am \u20131:00pm\nSaturday & Sunday |\nCLOSED\nHicks Pool\nMonday\u2013Friday | 7:00am\u20139:00am & 5:00pm\u20137:30pm\nSaturday & Sunday |\nCLOSED\nRockWell | Summer Hours:\nMonday - Friday | 4:00pm\u20138:00pm\nSaturday & Sunday | 4:00pm\u20138:00pm\nRecreation Tennis and Outdoor Pickleball Courts\nare\nCLOSED\nuntil further notice.",
+  "alert": "FACILITIES ALERT:\nReminder: All RecWell Facilities will be closed on Friday, July 3, 2026, in Observance of Independence Day.\nSummer Hours - Check below for updated hours of operations in the RecWell Facilities.\nAll RecWell Facilities will be closed on the following Holidays:\nFriday, July 3, 2026 \u2013 Independence Day (observed)\nRecreation Center | Summer Hours:\nMonday\u2013Friday | 7:00am\u20137:00pm\nSaturday & Sunday |\nCLOSED\nPools | Summer Hours:\nBoyden Pool\nMonday\u2013Friday | 11:00am \u20131:00pm\nSaturday & Sunday |\nCLOSED\nHicks Pool\nMonday\u2013Friday | 7:00am\u20139:00am & 5:00pm\u20137:30pm\nSaturday & Sunday |\nCLOSED\nRockWell | Summer Hours:\nMonday - Friday | 4:00pm\u20138:00pm\nSaturday & Sunday | 4:00pm\u20138:00pm\nRecreation Tennis and Outdoor Pickleball Courts\nare\nCLOSED\nuntil further notice.",
   "alert_state": {},
   "holidays": [
-    {
-      "date": "2026-06-19",
-      "name": "Juneteenth"
-    },
     {
       "date": "2026-07-03",
       "name": "Independence Day (observed)"
@@ -944,7 +924,7 @@
       "divergence": false
     },
     "mullins-ice": {
-      "input_sha": "fde8c212aaa90187e87a3097e751f7bb75426038d2b84d305262a14824467de5",
+      "input_sha": "a735e787f816928d35262d124a4680d2c38c04c508388ae1acad6c1d0902a0a3",
       "gemini": [
         {
           "date": "2026-07-02",
@@ -1765,51 +1745,53 @@
           "date": "2026-12-30",
           "open": "16:00",
           "close": "16:50"
+        },
+        {
+          "date": "2026-12-31",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-12-31",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-31",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-31",
+          "open": "18:00",
+          "close": "18:50"
+        },
+        {
+          "date": "2027-01-01",
+          "open": "13:00",
+          "close": "13:50"
+        },
+        {
+          "date": "2027-01-01",
+          "open": "14:00",
+          "close": "14:50"
+        },
+        {
+          "date": "2027-01-01",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2027-01-01",
+          "open": "16:00",
+          "close": "16:50"
         }
       ],
       "divergence": false
     },
     "schedule": {
-      "input_sha": "e057c85f2a43ebb6b1d8386f513fdb5a2cd13ec6aa0f9c202bef7869c76bbed9",
+      "input_sha": "2c50563a1dce6c818c38cdd84e8cf52e52eb2e29ab99d5b80054dc498406814c",
       "gemini": [
-        {
-          "date": "2026-06-30",
-          "weekday": "Tue",
-          "events": [
-            {
-              "time": "08:30",
-              "name": "Pilates 60"
-            },
-            {
-              "time": "10:00",
-              "name": "Rec Cycle 45"
-            },
-            {
-              "time": "16:00",
-              "name": "Rhythm Ride 60"
-            },
-            {
-              "time": "16:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "16:30",
-              "name": "Pilates 60"
-            },
-            {
-              "time": "17:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "18:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "19:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            }
-          ]
-        },
         {
           "date": "2026-07-01",
           "weekday": "Wed",
@@ -1929,18 +1911,36 @@
               "name": "15 minute Climbing Orientation Offered Every Hour"
             }
           ]
+        },
+        {
+          "date": "2026-07-05",
+          "weekday": "Sun",
+          "events": [
+            {
+              "time": "16:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "17:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "18:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "19:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            }
+          ]
         }
       ],
       "divergence": false
     },
     "alert-overrides": {
-      "input_sha": "69721342c5f63a07931bc7c2dfb7168f8c6aaf6392ca3b11c6bf719f7ca5b9d4",
+      "input_sha": "5e8aea164f34f8fad45d62ad79a00fe611c18a8e049bc3081dbeafac1c4afa4c",
       "gemini": {
         "holidays": [
-          {
-            "date": "2026-06-19",
-            "name": "Juneteenth"
-          },
           {
             "date": "2026-07-03",
             "name": "Independence Day (observed)"
