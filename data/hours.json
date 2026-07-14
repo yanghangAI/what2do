@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-13T07:56:07-04:00",
+  "last_updated": "2026-07-14T06:40:26-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -49,7 +49,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-07-13T07:56:07-04:00"
+      "last_scraped": "2026-07-14T06:40:26-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -118,7 +118,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-07-13T07:56:07-04:00"
+      "last_scraped": "2026-07-14T06:40:26-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -175,7 +175,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-07-13T07:56:07-04:00"
+      "last_scraped": "2026-07-14T06:40:26-04:00"
     },
     {
       "id": "recreation-center",
@@ -224,7 +224,7 @@
         "Saturday - Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-07-13T07:56:07-04:00"
+      "last_scraped": "2026-07-14T06:40:26-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -248,7 +248,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-07-13T07:56:07-04:00"
+      "last_scraped": "2026-07-14T06:40:26-04:00"
     },
     {
       "id": "mullins-ice",
@@ -272,7 +272,7 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-07-13T07:56:07-04:00",
+      "last_scraped": "2026-07-14T06:40:26-04:00",
       "events": [
         {
           "date": "2026-07-14",
@@ -331,7 +331,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-07-13T07:56:07-04:00",
+      "last_scraped": "2026-07-14T06:40:26-04:00",
       "water_quality": {
         "status": "unknown",
         "headline": "The latest water quality test results show that both South Beach and North Beach meet state standards for safe swimming conditions.",
@@ -600,64 +600,6 @@
   ],
   "schedule": [
     {
-      "date": "2026-07-13",
-      "weekday": "Mon",
-      "events": [
-        {
-          "time": "09:00",
-          "name": "Pilates 60"
-        },
-        {
-          "time": "10:30",
-          "name": "Rec Cycle 45"
-        },
-        {
-          "time": "11:00",
-          "name": "UMass Women's Basketball Summer Camp"
-        },
-        {
-          "time": "11:00",
-          "name": "UMass Women's Basketball Summer Camp"
-        },
-        {
-          "time": "13:00",
-          "name": "Eureka! ABC's 60"
-        },
-        {
-          "time": "14:00",
-          "name": "UMass Women's Basketball Summer Camp"
-        },
-        {
-          "time": "14:00",
-          "name": "UMass Women's Basketball Summer Camp"
-        },
-        {
-          "time": "16:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "16:15",
-          "name": "Barre 45"
-        },
-        {
-          "time": "17:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "17:15",
-          "name": "Pilates 60"
-        },
-        {
-          "time": "18:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "19:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        }
-      ]
-    },
-    {
       "date": "2026-07-14",
       "weekday": "Tue",
       "events": [
@@ -815,6 +757,28 @@
           "time": "14:00",
           "name": "UMass Women's Basketball Summer Camp"
         },
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        }
+      ]
+    },
+    {
+      "date": "2026-07-18",
+      "weekday": "Sat",
+      "events": [
         {
           "time": "16:00",
           "name": "15 minute Climbing Orientation Offered Every Hour"
@@ -1034,7 +998,7 @@
       "divergence": false
     },
     "mullins-ice": {
-      "input_sha": "efb22218d4b0400fc77c6fd88de5b3f5c9a97ad3726f7058f221040dd44bca73",
+      "input_sha": "0984da75ee9cda5919f2e7cb4edf90a5df13ef31299aa384a3d91a39f959b3fa",
       "gemini": [
         {
           "date": "2026-07-14",
@@ -1075,66 +1039,8 @@
       "divergence": false
     },
     "schedule": {
-      "input_sha": "21a4d50a08452d3ccb82d0b663132d98492e1ce29e58517b9b7b5dc1c9b1c2db",
+      "input_sha": "5e7767d33234f9e55f8b140169e4fe50dad8ed5911c8ef3e14abc6bca9cdb4c8",
       "gemini": [
-        {
-          "date": "2026-07-13",
-          "weekday": "Mon",
-          "events": [
-            {
-              "time": "09:00",
-              "name": "Pilates 60"
-            },
-            {
-              "time": "10:30",
-              "name": "Rec Cycle 45"
-            },
-            {
-              "time": "11:00",
-              "name": "UMass Women's Basketball Summer Camp"
-            },
-            {
-              "time": "11:00",
-              "name": "UMass Women's Basketball Summer Camp"
-            },
-            {
-              "time": "13:00",
-              "name": "Eureka! ABC's 60"
-            },
-            {
-              "time": "14:00",
-              "name": "UMass Women's Basketball Summer Camp"
-            },
-            {
-              "time": "14:00",
-              "name": "UMass Women's Basketball Summer Camp"
-            },
-            {
-              "time": "16:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "16:15",
-              "name": "Barre 45"
-            },
-            {
-              "time": "17:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "17:15",
-              "name": "Pilates 60"
-            },
-            {
-              "time": "18:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "19:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            }
-          ]
-        },
         {
           "date": "2026-07-14",
           "weekday": "Tue",
@@ -1293,6 +1199,28 @@
               "time": "14:00",
               "name": "UMass Women's Basketball Summer Camp"
             },
+            {
+              "time": "16:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "17:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "18:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "19:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            }
+          ]
+        },
+        {
+          "date": "2026-07-18",
+          "weekday": "Sat",
+          "events": [
             {
               "time": "16:00",
               "name": "15 minute Climbing Orientation Offered Every Hour"
