@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-22T07:02:32-04:00",
+  "last_updated": "2026-07-23T07:04:29-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -49,7 +49,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-07-22T07:02:32-04:00"
+      "last_scraped": "2026-07-23T07:04:29-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -118,7 +118,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-07-22T07:02:32-04:00"
+      "last_scraped": "2026-07-23T07:04:29-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -175,7 +175,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-07-22T07:02:32-04:00"
+      "last_scraped": "2026-07-23T07:04:29-04:00"
     },
     {
       "id": "recreation-center",
@@ -224,7 +224,7 @@
         "Saturday - Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-07-22T07:02:32-04:00"
+      "last_scraped": "2026-07-23T07:04:29-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -248,7 +248,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-07-22T07:02:32-04:00"
+      "last_scraped": "2026-07-23T07:04:29-04:00"
     },
     {
       "id": "mullins-ice",
@@ -272,13 +272,8 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-07-22T07:02:32-04:00",
+      "last_scraped": "2026-07-23T07:04:29-04:00",
       "events": [
-        {
-          "date": "2026-07-22",
-          "open": "16:00",
-          "close": "17:20"
-        },
         {
           "date": "2026-07-24",
           "open": "17:30",
@@ -306,15 +301,15 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-07-22T07:02:32-04:00",
+      "last_scraped": "2026-07-23T07:04:29-04:00",
       "water_quality": {
-        "status": "unknown",
-        "headline": "Swimming is not recommended at Puffer's Pond due to high levels of E.",
-        "detail": "coli bacteria. The latest water quality test results show that the water does not meet state standards for safe swimming conditions. Signs will be posted at both beaches.",
-        "last_updated": "2026-07-15",
+        "status": "allowed",
+        "headline": "Swimming is allowed at Puffer's Pond.",
+        "detail": "The latest water quality test results show that both South Beach and North Beach meet state standards for safe swimming conditions.",
+        "last_updated": "2026-07-22",
         "beaches": {
-          "north": "unknown",
-          "south": "unknown"
+          "north": "ok",
+          "south": "ok"
         },
         "report_url": "https://www.amherstma.gov/Archive.aspx?AMID=234",
         "latest_report": {
@@ -575,48 +570,6 @@
   ],
   "schedule": [
     {
-      "date": "2026-07-22",
-      "weekday": "Wed",
-      "events": [
-        {
-          "time": "09:00",
-          "name": "ATHLETICS Men's Soccer Clinic (rain site HOLD)"
-        },
-        {
-          "time": "09:00",
-          "name": "ATHLETICS Men's Soccer Clinic (rain site HOLD)"
-        },
-        {
-          "time": "09:30",
-          "name": "Sculpt 60"
-        },
-        {
-          "time": "16:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "17:00",
-          "name": "Pilates 60"
-        },
-        {
-          "time": "17:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "17:30",
-          "name": "Strength 60"
-        },
-        {
-          "time": "18:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "19:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        }
-      ]
-    },
-    {
       "date": "2026-07-23",
       "weekday": "Thu",
       "events": [
@@ -741,6 +694,52 @@
         {
           "time": "17:00",
           "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        }
+      ]
+    },
+    {
+      "date": "2026-07-27",
+      "weekday": "Mon",
+      "events": [
+        {
+          "time": "08:00",
+          "name": "UMPD Camp (Rainy Day Hold)"
+        },
+        {
+          "time": "09:00",
+          "name": "ATHLETICS Men's Soccer Clinic (rain site HOLD)"
+        },
+        {
+          "time": "09:00",
+          "name": "ATHLETICS Men's Soccer Clinic (rain site HOLD)"
+        },
+        {
+          "time": "09:00",
+          "name": "Pilates 60"
+        },
+        {
+          "time": "10:30",
+          "name": "Rec Cycle 45"
+        },
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:15",
+          "name": "Pilates 60"
         },
         {
           "time": "18:00",
@@ -953,7 +952,7 @@
       "divergence": false
     },
     "mullins-ice": {
-      "input_sha": "0068554a1890941f58c234a629bbd68e73e308ad848ff18a2efe46ead2f77f01",
+      "input_sha": "32e72fde270cf462556fad177b23ed5afbec1f050c0a8e7ef987cefdf819013a",
       "gemini": [
         {
           "date": "2026-07-16",
@@ -2099,55 +2098,33 @@
           "date": "2027-01-17",
           "open": "15:30",
           "close": "16:20"
+        },
+        {
+          "date": "2027-01-23",
+          "open": "11:40",
+          "close": "12:30"
+        },
+        {
+          "date": "2027-01-23",
+          "open": "12:40",
+          "close": "13:30"
+        },
+        {
+          "date": "2027-01-23",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-23",
+          "open": "17:00",
+          "close": "17:50"
         }
       ],
       "divergence": false
     },
     "schedule": {
-      "input_sha": "da4024bcdbcb312e25319f7320b2a43017ff66f9b51582f4a82db06a84d5663d",
+      "input_sha": "eea74d8098bfbf9554e32fbdab5243e486682264a9045d10a6ef702314468168",
       "gemini": [
-        {
-          "date": "2026-07-22",
-          "weekday": "Wed",
-          "events": [
-            {
-              "time": "09:00",
-              "name": "ATHLETICS Men's Soccer Clinic (rain site HOLD)"
-            },
-            {
-              "time": "09:00",
-              "name": "ATHLETICS Men's Soccer Clinic (rain site HOLD)"
-            },
-            {
-              "time": "09:30",
-              "name": "Sculpt 60"
-            },
-            {
-              "time": "16:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "17:00",
-              "name": "Pilates 60"
-            },
-            {
-              "time": "17:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "17:30",
-              "name": "Strength 60"
-            },
-            {
-              "time": "18:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "19:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            }
-          ]
-        },
         {
           "date": "2026-07-23",
           "weekday": "Thu",
@@ -2273,6 +2250,52 @@
             {
               "time": "17:00",
               "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "18:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "19:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            }
+          ]
+        },
+        {
+          "date": "2026-07-27",
+          "weekday": "Mon",
+          "events": [
+            {
+              "time": "08:00",
+              "name": "UMPD Camp (Rainy Day Hold)"
+            },
+            {
+              "time": "09:00",
+              "name": "ATHLETICS Men's Soccer Clinic (rain site HOLD)"
+            },
+            {
+              "time": "09:00",
+              "name": "ATHLETICS Men's Soccer Clinic (rain site HOLD)"
+            },
+            {
+              "time": "09:00",
+              "name": "Pilates 60"
+            },
+            {
+              "time": "10:30",
+              "name": "Rec Cycle 45"
+            },
+            {
+              "time": "16:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "17:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "17:15",
+              "name": "Pilates 60"
             },
             {
               "time": "18:00",
