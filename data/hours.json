@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-03T08:16:04-04:00",
+  "last_updated": "2026-08-04T07:18:56-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -49,7 +49,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-03T08:16:04-04:00"
+      "last_scraped": "2026-08-04T07:18:56-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -118,7 +118,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-03T08:16:04-04:00"
+      "last_scraped": "2026-08-04T07:18:56-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -175,7 +175,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-03T08:16:04-04:00"
+      "last_scraped": "2026-08-04T07:18:56-04:00"
     },
     {
       "id": "recreation-center",
@@ -224,7 +224,7 @@
         "Saturday - Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-03T08:16:04-04:00"
+      "last_scraped": "2026-08-04T07:18:56-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -248,7 +248,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-03T08:16:04-04:00"
+      "last_scraped": "2026-08-04T07:18:56-04:00"
     },
     {
       "id": "mullins-ice",
@@ -272,13 +272,8 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-03T08:16:04-04:00",
+      "last_scraped": "2026-08-04T07:18:56-04:00",
       "events": [
-        {
-          "date": "2026-08-03",
-          "open": "14:30",
-          "close": "15:50"
-        },
         {
           "date": "2026-08-04",
           "open": "14:30",
@@ -346,7 +341,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-03T08:16:04-04:00",
+      "last_scraped": "2026-08-04T07:18:56-04:00",
       "water_quality": {
         "status": "unknown",
         "headline": "Swimming is not recommended at Puffer's Pond due to high levels of E.",
@@ -601,44 +596,6 @@
   ],
   "schedule": [
     {
-      "date": "2026-08-03",
-      "weekday": "Mon",
-      "events": [
-        {
-          "time": "08:00",
-          "name": "UMass Discovery Camp (Rainy Day Hold)"
-        },
-        {
-          "time": "08:00",
-          "name": "UMass Discovery Camp (Rainy Day Hold)"
-        },
-        {
-          "time": "10:00",
-          "name": "Discovery Camp"
-        },
-        {
-          "time": "16:00",
-          "name": "Sculpt 60"
-        },
-        {
-          "time": "16:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "17:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "18:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "19:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        }
-      ]
-    },
-    {
       "date": "2026-08-04",
       "weekday": "Tue",
       "events": [
@@ -768,6 +725,28 @@
           "time": "08:00",
           "name": "UMass Discovery Camp (Rainy Day Hold)"
         },
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-08",
+      "weekday": "Sat",
+      "events": [
         {
           "time": "16:00",
           "name": "15 minute Climbing Orientation Offered Every Hour"
@@ -987,8 +966,33 @@
       "divergence": false
     },
     "mullins-ice": {
-      "input_sha": "d244ea3564693ed88317cf6f177f29ba5be32a66b521dd57d5978550f25fc47d",
+      "input_sha": "e7d4d90e58eefd6e7329d31f314dc66fe7c8a01d101c38642a18096abda4842f",
       "gemini": [
+        {
+          "date": "2026-07-30",
+          "open": "16:00",
+          "close": "17:20"
+        },
+        {
+          "date": "2026-07-31",
+          "open": "17:30",
+          "close": "18:50"
+        },
+        {
+          "date": "2026-08-01",
+          "open": "13:00",
+          "close": "14:20"
+        },
+        {
+          "date": "2026-08-01",
+          "open": "16:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-08-02",
+          "open": "14:30",
+          "close": "16:20"
+        },
         {
           "date": "2026-08-03",
           "open": "14:30",
@@ -1038,91 +1042,1197 @@
           "date": "2026-08-09",
           "open": "14:30",
           "close": "16:20"
+        },
+        {
+          "date": "2026-08-10",
+          "open": "13:30",
+          "close": "15:10"
+        },
+        {
+          "date": "2026-08-10",
+          "open": "19:30",
+          "close": "20:50"
+        },
+        {
+          "date": "2026-08-11",
+          "open": "14:50",
+          "close": "16:10"
+        },
+        {
+          "date": "2026-08-12",
+          "open": "13:30",
+          "close": "15:10"
+        },
+        {
+          "date": "2026-08-12",
+          "open": "19:30",
+          "close": "20:50"
+        },
+        {
+          "date": "2026-08-13",
+          "open": "13:30",
+          "close": "15:10"
+        },
+        {
+          "date": "2026-08-13",
+          "open": "19:30",
+          "close": "20:50"
+        },
+        {
+          "date": "2026-08-14",
+          "open": "13:00",
+          "close": "14:50"
+        },
+        {
+          "date": "2026-08-14",
+          "open": "16:30",
+          "close": "18:20"
+        },
+        {
+          "date": "2026-08-15",
+          "open": "12:30",
+          "close": "14:20"
+        },
+        {
+          "date": "2026-08-15",
+          "open": "16:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-08-16",
+          "open": "14:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-08-17",
+          "open": "19:30",
+          "close": "20:50"
+        },
+        {
+          "date": "2026-08-18",
+          "open": "14:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-08-19",
+          "open": "13:20",
+          "close": "15:10"
+        },
+        {
+          "date": "2026-08-19",
+          "open": "19:30",
+          "close": "20:50"
+        },
+        {
+          "date": "2026-08-20",
+          "open": "16:50",
+          "close": "18:10"
+        },
+        {
+          "date": "2026-08-21",
+          "open": "12:30",
+          "close": "14:20"
+        },
+        {
+          "date": "2026-08-21",
+          "open": "16:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-08-21",
+          "open": "19:30",
+          "close": "20:50"
+        },
+        {
+          "date": "2026-08-22",
+          "open": "12:30",
+          "close": "14:20"
+        },
+        {
+          "date": "2026-08-22",
+          "open": "16:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-08-23",
+          "open": "14:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-08-24",
+          "open": "15:30",
+          "close": "17:20"
+        },
+        {
+          "date": "2026-08-26",
+          "open": "15:30",
+          "close": "17:20"
+        },
+        {
+          "date": "2026-08-27",
+          "open": "18:00",
+          "close": "19:20"
+        },
+        {
+          "date": "2026-08-28",
+          "open": "16:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-08-28",
+          "open": "19:30",
+          "close": "20:50"
+        },
+        {
+          "date": "2026-08-29",
+          "open": "16:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-08-30",
+          "open": "14:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-08-31",
+          "open": "19:30",
+          "close": "20:50"
+        },
+        {
+          "date": "2026-09-01",
+          "open": "15:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-09-02",
+          "open": "13:30",
+          "close": "14:50"
+        },
+        {
+          "date": "2026-09-02",
+          "open": "19:30",
+          "close": "20:50"
+        },
+        {
+          "date": "2026-09-04",
+          "open": "16:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-09-05",
+          "open": "13:00",
+          "close": "14:20"
+        },
+        {
+          "date": "2026-09-05",
+          "open": "16:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-09-12",
+          "open": "12:30",
+          "close": "13:20"
+        },
+        {
+          "date": "2026-09-12",
+          "open": "13:30",
+          "close": "14:20"
+        },
+        {
+          "date": "2026-09-12",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-09-12",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-09-13",
+          "open": "14:50",
+          "close": "15:40"
+        },
+        {
+          "date": "2026-09-13",
+          "open": "15:50",
+          "close": "16:40"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "11:10",
+          "close": "12:40"
+        },
+        {
+          "date": "2026-09-20",
+          "open": "14:50",
+          "close": "15:40"
+        },
+        {
+          "date": "2026-09-20",
+          "open": "15:50",
+          "close": "16:40"
+        },
+        {
+          "date": "2026-09-23",
+          "open": "11:10",
+          "close": "12:40"
+        },
+        {
+          "date": "2026-09-26",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-09-26",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-09-30",
+          "open": "11:10",
+          "close": "12:40"
+        },
+        {
+          "date": "2026-10-03",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-10-03",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-10-04",
+          "open": "14:50",
+          "close": "15:40"
+        },
+        {
+          "date": "2026-10-04",
+          "open": "15:50",
+          "close": "16:40"
+        },
+        {
+          "date": "2026-10-07",
+          "open": "11:10",
+          "close": "12:40"
+        },
+        {
+          "date": "2026-10-09",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-10-09",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-10-10",
+          "open": "11:30",
+          "close": "12:20"
+        },
+        {
+          "date": "2026-10-10",
+          "open": "12:30",
+          "close": "13:20"
+        },
+        {
+          "date": "2026-10-11",
+          "open": "14:50",
+          "close": "15:40"
+        },
+        {
+          "date": "2026-10-11",
+          "open": "15:50",
+          "close": "16:40"
+        },
+        {
+          "date": "2026-10-16",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-10-16",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-10-18",
+          "open": "14:50",
+          "close": "15:40"
+        },
+        {
+          "date": "2026-10-18",
+          "open": "15:50",
+          "close": "16:40"
+        },
+        {
+          "date": "2026-10-23",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-10-23",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-10-25",
+          "open": "14:50",
+          "close": "15:40"
+        },
+        {
+          "date": "2026-10-25",
+          "open": "15:50",
+          "close": "16:40"
+        },
+        {
+          "date": "2026-10-29",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-10-29",
+          "open": "18:00",
+          "close": "18:50"
+        },
+        {
+          "date": "2026-10-30",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-10-30",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-10-31",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-10-31",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-10-31",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-11-01",
+          "open": "14:50",
+          "close": "15:40"
+        },
+        {
+          "date": "2026-11-01",
+          "open": "15:50",
+          "close": "16:40"
+        },
+        {
+          "date": "2026-11-05",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2026-11-05",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-11-06",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-11-06",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-07",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-07",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-11-08",
+          "open": "14:50",
+          "close": "15:40"
+        },
+        {
+          "date": "2026-11-08",
+          "open": "15:50",
+          "close": "16:40"
+        },
+        {
+          "date": "2026-11-12",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-11-12",
+          "open": "16:30",
+          "close": "17:20"
+        },
+        {
+          "date": "2026-11-13",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-11-13",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-14",
+          "open": "11:40",
+          "close": "12:30"
+        },
+        {
+          "date": "2026-11-14",
+          "open": "12:40",
+          "close": "13:30"
+        },
+        {
+          "date": "2026-11-14",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-14",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-11-15",
+          "open": "14:50",
+          "close": "15:40"
+        },
+        {
+          "date": "2026-11-15",
+          "open": "15:50",
+          "close": "16:40"
+        },
+        {
+          "date": "2026-11-19",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-11-19",
+          "open": "16:30",
+          "close": "17:20"
+        },
+        {
+          "date": "2026-11-20",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-11-20",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-21",
+          "open": "11:40",
+          "close": "12:30"
+        },
+        {
+          "date": "2026-11-21",
+          "open": "12:40",
+          "close": "13:30"
+        },
+        {
+          "date": "2026-11-21",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-21",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-11-22",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2026-11-22",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-11-27",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-11-27",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-27",
+          "open": "20:00",
+          "close": "20:50"
+        },
+        {
+          "date": "2026-11-27",
+          "open": "21:00",
+          "close": "21:50"
+        },
+        {
+          "date": "2026-11-28",
+          "open": "12:00",
+          "close": "13:30"
+        },
+        {
+          "date": "2026-11-28",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-28",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-11-28",
+          "open": "18:30",
+          "close": "19:20"
+        },
+        {
+          "date": "2026-11-28",
+          "open": "19:30",
+          "close": "20:20"
+        },
+        {
+          "date": "2026-11-29",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2026-11-29",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-12-03",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-12-03",
+          "open": "16:30",
+          "close": "17:20"
+        },
+        {
+          "date": "2026-12-04",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-12-04",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-05",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-05",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-06",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2026-12-06",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-12-11",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-12-11",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-12",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-12",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-13",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2026-12-13",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-12-14",
+          "open": "11:00",
+          "close": "12:20"
+        },
+        {
+          "date": "2026-12-15",
+          "open": "11:00",
+          "close": "12:20"
+        },
+        {
+          "date": "2026-12-16",
+          "open": "12:10",
+          "close": "13:00"
+        },
+        {
+          "date": "2026-12-16",
+          "open": "13:10",
+          "close": "14:00"
+        },
+        {
+          "date": "2026-12-16",
+          "open": "14:50",
+          "close": "15:40"
+        },
+        {
+          "date": "2026-12-16",
+          "open": "15:50",
+          "close": "16:40"
+        },
+        {
+          "date": "2026-12-17",
+          "open": "12:10",
+          "close": "13:00"
+        },
+        {
+          "date": "2026-12-17",
+          "open": "13:10",
+          "close": "14:00"
+        },
+        {
+          "date": "2026-12-17",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-12-17",
+          "open": "16:30",
+          "close": "17:20"
+        },
+        {
+          "date": "2026-12-18",
+          "open": "12:10",
+          "close": "13:00"
+        },
+        {
+          "date": "2026-12-18",
+          "open": "13:10",
+          "close": "14:00"
+        },
+        {
+          "date": "2026-12-18",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-12-18",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-19",
+          "open": "11:30",
+          "close": "12:20"
+        },
+        {
+          "date": "2026-12-19",
+          "open": "12:30",
+          "close": "13:20"
+        },
+        {
+          "date": "2026-12-19",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-19",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-20",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2026-12-20",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-12-21",
+          "open": "12:30",
+          "close": "13:20"
+        },
+        {
+          "date": "2026-12-21",
+          "open": "13:30",
+          "close": "14:20"
+        },
+        {
+          "date": "2026-12-21",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-21",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-22",
+          "open": "12:30",
+          "close": "13:20"
+        },
+        {
+          "date": "2026-12-22",
+          "open": "13:30",
+          "close": "14:20"
+        },
+        {
+          "date": "2026-12-22",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-22",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-23",
+          "open": "12:30",
+          "close": "13:20"
+        },
+        {
+          "date": "2026-12-23",
+          "open": "13:30",
+          "close": "14:20"
+        },
+        {
+          "date": "2026-12-23",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-12-23",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-26",
+          "open": "11:40",
+          "close": "12:30"
+        },
+        {
+          "date": "2026-12-26",
+          "open": "12:40",
+          "close": "13:30"
+        },
+        {
+          "date": "2026-12-26",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-26",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-27",
+          "open": "12:30",
+          "close": "13:20"
+        },
+        {
+          "date": "2026-12-27",
+          "open": "13:30",
+          "close": "14:20"
+        },
+        {
+          "date": "2026-12-27",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2026-12-27",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-12-28",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-28",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-29",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-29",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-30",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-12-30",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-31",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-12-31",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-31",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-31",
+          "open": "18:00",
+          "close": "18:50"
+        },
+        {
+          "date": "2027-01-01",
+          "open": "13:00",
+          "close": "13:50"
+        },
+        {
+          "date": "2027-01-01",
+          "open": "14:00",
+          "close": "14:50"
+        },
+        {
+          "date": "2027-01-01",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2027-01-01",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-02",
+          "open": "11:40",
+          "close": "12:30"
+        },
+        {
+          "date": "2027-01-02",
+          "open": "12:40",
+          "close": "13:30"
+        },
+        {
+          "date": "2027-01-02",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-02",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-02",
+          "open": "18:00",
+          "close": "18:50"
+        },
+        {
+          "date": "2027-01-02",
+          "open": "19:00",
+          "close": "19:50"
+        },
+        {
+          "date": "2027-01-03",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2027-01-03",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2027-01-04",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-04",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-05",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-05",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-06",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-06",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-07",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-07",
+          "open": "18:00",
+          "close": "18:50"
+        },
+        {
+          "date": "2027-01-07",
+          "open": "19:00",
+          "close": "19:50"
+        },
+        {
+          "date": "2027-01-08",
+          "open": "12:30",
+          "close": "13:20"
+        },
+        {
+          "date": "2027-01-08",
+          "open": "13:30",
+          "close": "14:20"
+        },
+        {
+          "date": "2027-01-08",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-08",
+          "open": "18:00",
+          "close": "18:50"
+        },
+        {
+          "date": "2027-01-08",
+          "open": "20:30",
+          "close": "21:20"
+        },
+        {
+          "date": "2027-01-08",
+          "open": "21:30",
+          "close": "22:20"
+        },
+        {
+          "date": "2027-01-09",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-09",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-10",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2027-01-10",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2027-01-17",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2027-01-17",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2027-01-23",
+          "open": "11:40",
+          "close": "12:30"
+        },
+        {
+          "date": "2027-01-23",
+          "open": "12:40",
+          "close": "13:30"
+        },
+        {
+          "date": "2027-01-23",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-23",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-24",
+          "open": "13:30",
+          "close": "14:20"
+        },
+        {
+          "date": "2027-01-24",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2027-01-24",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2027-01-25",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-25",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-26",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-26",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-27",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2027-01-27",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-28",
+          "open": "16:30",
+          "close": "17:20"
+        },
+        {
+          "date": "2027-01-29",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2027-01-29",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-30",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-30",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-31",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2027-01-31",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2027-02-02",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-02-02",
+          "open": "17:00",
+          "close": "17:50"
         }
       ],
       "divergence": false
     },
     "schedule": {
-      "input_sha": "fbe8de9a67af4d73cd720f623fd2cdba814525670fbb5c227ca6128a934378f9",
+      "input_sha": "e687393220acc1ae3c0984b6fd33583a5d66485cf760e1bba5eba08f0a024679",
       "gemini": [
-        {
-          "date": "2026-08-03",
-          "weekday": "Mon",
-          "events": [
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "08:00",
-              "name": "UMass Discovery Camp (Rainy Day Hold)"
-            },
-            {
-              "time": "08:00",
-              "name": "UMass Discovery Camp (Rainy Day Hold)"
-            },
-            {
-              "time": "10:00",
-              "name": "Discovery Camp"
-            },
-            {
-              "time": "16:00",
-              "name": "Sculpt 60"
-            },
-            {
-              "time": "16:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "17:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "18:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "19:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            }
-          ]
-        },
         {
           "date": "2026-08-04",
           "weekday": "Tue",
           "events": [
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "08:00",
-              "name": "UMass Discovery Camp (Rainy Day Hold)"
-            },
             {
               "time": "08:00",
               "name": "UMass Discovery Camp (Rainy Day Hold)"
@@ -1157,26 +2267,6 @@
           "date": "2026-08-05",
           "weekday": "Wed",
           "events": [
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "08:00",
-              "name": "UMass Discovery Camp (Rainy Day Hold)"
-            },
             {
               "time": "08:00",
               "name": "UMass Discovery Camp (Rainy Day Hold)"
@@ -1216,26 +2306,6 @@
           "weekday": "Thu",
           "events": [
             {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "08:00",
-              "name": "UMass Discovery Camp (Rainy Day Hold)"
-            },
-            {
               "time": "08:00",
               "name": "UMass Discovery Camp (Rainy Day Hold)"
             },
@@ -1266,28 +2336,8 @@
           "weekday": "Fri",
           "events": [
             {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "All Day RecWell Summer Camp"
-            },
-            {
               "time": "06:00",
               "name": "Pickle ball-Faculty Staff"
-            },
-            {
-              "time": "08:00",
-              "name": "UMass Discovery Camp (Rainy Day Hold)"
             },
             {
               "time": "08:00",
@@ -1310,9 +2360,31 @@
               "name": "15 minute Climbing Orientation Offered Every Hour"
             }
           ]
+        },
+        {
+          "date": "2026-08-08",
+          "weekday": "Sat",
+          "events": [
+            {
+              "time": "16:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "17:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "18:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "19:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            }
+          ]
         }
       ],
-      "divergence": true
+      "divergence": false
     },
     "alert-overrides": {
       "input_sha": "9a70c408db280da4aa92e136891b3f88153debab55c4ebcd3cc2563be671aaea",
