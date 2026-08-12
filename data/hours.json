@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-11T05:54:35-04:00",
+  "last_updated": "2026-08-12T05:55:14-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -49,7 +49,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-11T05:54:35-04:00"
+      "last_scraped": "2026-08-12T05:55:14-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -118,7 +118,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-11T05:54:35-04:00"
+      "last_scraped": "2026-08-12T05:55:14-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -175,7 +175,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-11T05:54:35-04:00"
+      "last_scraped": "2026-08-12T05:55:14-04:00"
     },
     {
       "id": "recreation-center",
@@ -224,7 +224,7 @@
         "Saturday - Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-11T05:54:35-04:00"
+      "last_scraped": "2026-08-12T05:55:14-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -248,7 +248,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-11T05:54:35-04:00"
+      "last_scraped": "2026-08-12T05:55:14-04:00"
     },
     {
       "id": "mullins-ice",
@@ -272,13 +272,8 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-11T05:54:35-04:00",
+      "last_scraped": "2026-08-12T05:55:14-04:00",
       "events": [
-        {
-          "date": "2026-08-11",
-          "open": "14:50",
-          "close": "16:10"
-        },
         {
           "date": "2026-08-12",
           "open": "13:30",
@@ -346,7 +341,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-11T05:54:35-04:00",
+      "last_scraped": "2026-08-12T05:55:14-04:00",
       "water_quality": {
         "status": "unknown",
         "headline": "Swimming is not recommended at Puffer's Pond due to high levels of E.",
@@ -594,48 +589,6 @@
   ],
   "schedule": [
     {
-      "date": "2026-08-11",
-      "weekday": "Tue",
-      "events": [
-        {
-          "time": "08:00",
-          "name": "UMass Discovery Camp (Rainy Day Hold)"
-        },
-        {
-          "time": "11:30",
-          "name": "Pilates 60"
-        },
-        {
-          "time": "15:30",
-          "name": "UMass Discovery Camp (Rainy Day Hold)"
-        },
-        {
-          "time": "15:30",
-          "name": "UMass Discovery Camp (Rainy Day Hold)"
-        },
-        {
-          "time": "16:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "17:00",
-          "name": "Strength 60"
-        },
-        {
-          "time": "17:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "18:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "19:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        }
-      ]
-    },
-    {
       "date": "2026-08-12",
       "weekday": "Wed",
       "events": [
@@ -768,6 +721,28 @@
     {
       "date": "2026-08-15",
       "weekday": "Sat",
+      "events": [
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-16",
+      "weekday": "Sun",
       "events": [
         {
           "time": "16:00",
@@ -988,7 +963,7 @@
       "divergence": false
     },
     "mullins-ice": {
-      "input_sha": "10020d1780a23ddc4f086d1fdbdf9de5da2bd3b47167636959d0079b3ca4d9cd",
+      "input_sha": "973e769de193a4cadc5afb855f22c55945c9dde51299cf34d910b36dec277a10",
       "gemini": [
         {
           "date": "2026-08-10",
@@ -1054,86 +1029,12 @@
       "divergence": false
     },
     "schedule": {
-      "input_sha": "7e955425b8090570ede1f685aaf2ef6b19ce91d2f30d237948dd362cb77b2bc0",
+      "input_sha": "9dfd1fcdc24ba1b4888305c7caa9f0ce73fc9fa4d6ecc574fa8dd2ff63d6cf74",
       "gemini": [
-        {
-          "date": "2026-08-11",
-          "weekday": "Tue",
-          "events": [
-            {
-              "time": "00:00",
-              "name": "RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "RecWell Summer Camp"
-            },
-            {
-              "time": "08:00",
-              "name": "UMass Discovery Camp (Rainy Day Hold)"
-            },
-            {
-              "time": "11:30",
-              "name": "Pilates 60"
-            },
-            {
-              "time": "15:30",
-              "name": "UMass Discovery Camp (Rainy Day Hold)"
-            },
-            {
-              "time": "15:30",
-              "name": "UMass Discovery Camp (Rainy Day Hold)"
-            },
-            {
-              "time": "16:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "17:00",
-              "name": "Strength 60"
-            },
-            {
-              "time": "17:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "18:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "19:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            }
-          ]
-        },
         {
           "date": "2026-08-12",
           "weekday": "Wed",
           "events": [
-            {
-              "time": "00:00",
-              "name": "RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "RecWell Summer Camp"
-            },
             {
               "time": "08:00",
               "name": "UMass Discovery Camp (Rainy Day Hold)"
@@ -1172,22 +1073,6 @@
           "date": "2026-08-13",
           "weekday": "Thu",
           "events": [
-            {
-              "time": "00:00",
-              "name": "RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "RecWell Summer Camp"
-            },
             {
               "time": "08:00",
               "name": "UMass Discovery Camp (Rainy Day Hold)"
@@ -1235,22 +1120,6 @@
           "weekday": "Fri",
           "events": [
             {
-              "time": "00:00",
-              "name": "RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "RecWell Summer Camp"
-            },
-            {
-              "time": "00:00",
-              "name": "RecWell Summer Camp"
-            },
-            {
               "time": "06:00",
               "name": "Pickle ball-Faculty Staff"
             },
@@ -1297,9 +1166,27 @@
           "weekday": "Sat",
           "events": [
             {
-              "time": "00:00",
-              "name": "RecWell Summer Camp"
+              "time": "16:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
             },
+            {
+              "time": "17:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "18:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "19:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            }
+          ]
+        },
+        {
+          "date": "2026-08-16",
+          "weekday": "Sun",
+          "events": [
             {
               "time": "16:00",
               "name": "15 minute Climbing Orientation Offered Every Hour"
@@ -1319,7 +1206,7 @@
           ]
         }
       ],
-      "divergence": true
+      "divergence": false
     },
     "alert-overrides": {
       "input_sha": "9a70c408db280da4aa92e136891b3f88153debab55c4ebcd3cc2563be671aaea",
