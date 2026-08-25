@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-24T05:39:44-04:00",
+  "last_updated": "2026-08-25T05:28:25-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -49,7 +49,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-24T05:39:44-04:00"
+      "last_scraped": "2026-08-25T05:28:25-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -118,7 +118,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-24T05:39:44-04:00"
+      "last_scraped": "2026-08-25T05:28:25-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -175,7 +175,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-24T05:39:44-04:00"
+      "last_scraped": "2026-08-25T05:28:25-04:00"
     },
     {
       "id": "recreation-center",
@@ -224,7 +224,7 @@
         "Saturday - Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-24T05:39:44-04:00"
+      "last_scraped": "2026-08-25T05:28:25-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -248,7 +248,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-24T05:39:44-04:00"
+      "last_scraped": "2026-08-25T05:28:25-04:00"
     },
     {
       "id": "mullins-ice",
@@ -272,13 +272,8 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-24T05:39:44-04:00",
+      "last_scraped": "2026-08-25T05:28:25-04:00",
       "events": [
-        {
-          "date": "2026-08-24",
-          "open": "15:30",
-          "close": "17:20"
-        },
         {
           "date": "2026-08-26",
           "open": "15:30",
@@ -331,7 +326,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-24T05:39:44-04:00",
+      "last_scraped": "2026-08-25T05:28:25-04:00",
       "water_quality": {
         "status": "allowed",
         "headline": "Swimming is allowed at Puffer's Pond.",
@@ -583,44 +578,12 @@
       "weekday": "Mon",
       "events": [
         {
-          "time": "07:30",
-          "name": "Athletics: XC/Track Practice"
-        },
-        {
           "time": "09:00",
           "name": "Audio Install"
         },
         {
           "time": "09:00",
           "name": "Audio Install"
-        },
-        {
-          "time": "16:00",
-          "name": "Strength & Stretch 60"
-        },
-        {
-          "time": "16:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "17:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "17:30",
-          "name": "Vinyasa Yoga 60"
-        },
-        {
-          "time": "17:45",
-          "name": "Step 45"
-        },
-        {
-          "time": "18:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "19:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
         }
       ]
     },
@@ -973,7 +936,7 @@
       "divergence": false
     },
     "mullins-ice": {
-      "input_sha": "552d248718949a2552b5bf0055f433b150d917efd35238b8a061b08b168ea267",
+      "input_sha": "4eb8b0a0e104134dd63ed53dc008fd7d4849bd420a929dfaecbdbb7a04c74361",
       "gemini": [
         {
           "date": "2026-08-24",
@@ -1014,51 +977,19 @@
       "divergence": false
     },
     "schedule": {
-      "input_sha": "6526f739a4dbe8a8a2f92eed363b632a0b836c2a608807abea3446d44011d312",
+      "input_sha": "ab5a96d203b5137772e29a6fe68d1b6bfb767072598b480d3d9937fca389d16d",
       "gemini": [
         {
           "date": "2026-08-24",
           "weekday": "Mon",
           "events": [
             {
-              "time": "07:30",
-              "name": "Athletics: XC/Track Practice"
-            },
-            {
               "time": "09:00",
               "name": "Audio Install"
             },
             {
               "time": "09:00",
               "name": "Audio Install"
-            },
-            {
-              "time": "16:00",
-              "name": "Strength & Stretch 60"
-            },
-            {
-              "time": "16:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "17:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "17:30",
-              "name": "Vinyasa Yoga 60"
-            },
-            {
-              "time": "17:45",
-              "name": "Step 45"
-            },
-            {
-              "time": "18:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "19:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
             }
           ]
         },
