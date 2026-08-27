@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-26T05:34:27-04:00",
+  "last_updated": "2026-08-27T15:23:07-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -49,7 +49,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-26T05:34:27-04:00"
+      "last_scraped": "2026-08-27T15:23:07-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -118,7 +118,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-26T05:34:27-04:00"
+      "last_scraped": "2026-08-27T15:23:07-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -175,7 +175,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-26T05:34:27-04:00"
+      "last_scraped": "2026-08-27T15:23:07-04:00"
     },
     {
       "id": "recreation-center",
@@ -224,7 +224,7 @@
         "Saturday - Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-26T05:34:27-04:00"
+      "last_scraped": "2026-08-27T15:23:07-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -248,7 +248,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-26T05:34:27-04:00"
+      "last_scraped": "2026-08-27T15:23:07-04:00"
     },
     {
       "id": "mullins-ice",
@@ -272,13 +272,8 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-26T05:34:27-04:00",
+      "last_scraped": "2026-08-27T15:23:07-04:00",
       "events": [
-        {
-          "date": "2026-08-26",
-          "open": "15:30",
-          "close": "17:20"
-        },
         {
           "date": "2026-08-27",
           "open": "18:00",
@@ -326,12 +321,12 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-08-26T05:34:27-04:00",
+      "last_scraped": "2026-08-27T15:23:07-04:00",
       "water_quality": {
         "status": "allowed",
         "headline": "Swimming is allowed at Puffer's Pond.",
         "detail": "The latest water quality test results show that both South Beach and North Beach meet state standards for safe swimming conditions.",
-        "last_updated": "2026-08-18",
+        "last_updated": "2026-08-26",
         "beaches": {
           "north": "ok",
           "south": "ok"
@@ -488,6 +483,13 @@
       "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=0ec08b3a-41c3-4f05-b210-203fe9e7ca84"
     },
     {
+      "id": "fitness-rhythm-ride-60",
+      "name": "Rhythm Ride 60",
+      "category": "fitness",
+      "signup_required": true,
+      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=0fb7e2a4-2846-4a40-a76f-ed0f694b1596"
+    },
+    {
       "id": "fitness-sculpt-45",
       "name": "Sculpt 45",
       "category": "fitness",
@@ -516,13 +518,6 @@
       "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=4e5b7d85-5d08-483c-bcc2-1978b1068b46"
     },
     {
-      "id": "fitness-strength-stretch-60",
-      "name": "Strength & Stretch 60",
-      "category": "fitness",
-      "signup_required": true,
-      "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=5bfd55ae-d052-4a84-96d3-8d7d56f2ea82"
-    },
-    {
       "id": "fitness-strength-60",
       "name": "Strength 60",
       "category": "fitness",
@@ -537,8 +532,8 @@
       "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=c8ac169c-2f52-4d2f-916d-3df3425ae171"
     },
     {
-      "id": "fitness-thrive-at-five-yoga-at-the-pavilion",
-      "name": "Thrive at Five: Yoga at the Pavilion",
+      "id": "fitness-thrive-at-five-september-series",
+      "name": "Thrive at Five: September Series",
       "category": "fitness",
       "signup_required": true,
       "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=7a5f4d8f-9622-4d68-8f03-1c0c271f4ed7"
@@ -580,52 +575,6 @@
         {
           "time": "09:00",
           "name": "Audio Install"
-        },
-        {
-          "time": "09:00",
-          "name": "Audio Install"
-        }
-      ]
-    },
-    {
-      "date": "2026-08-26",
-      "weekday": "Wed",
-      "events": [
-        {
-          "time": "07:30",
-          "name": "Athletics: XC/Track Practice"
-        },
-        {
-          "time": "10:30",
-          "name": "Arms & Core 45"
-        },
-        {
-          "time": "15:00",
-          "name": "Pop-Up Fitness: XC Men/Women Yoga Class"
-        },
-        {
-          "time": "16:00",
-          "name": "Sculpt 60"
-        },
-        {
-          "time": "16:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "17:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "17:30",
-          "name": "Vinyasa Yoga 60"
-        },
-        {
-          "time": "18:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "19:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
         }
       ]
     },
@@ -633,10 +582,6 @@
       "date": "2026-08-27",
       "weekday": "Thu",
       "events": [
-        {
-          "time": "07:30",
-          "name": "Athletics: XC/Track Practice"
-        },
         {
           "time": "16:00",
           "name": "15 minute Climbing Orientation Offered Every Hour"
@@ -690,6 +635,30 @@
         {
           "time": "19:00",
           "name": "15 minute Climbing Orientation Offered Every Hour"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-31",
+      "weekday": "Mon",
+      "events": [
+        {
+          "time": "07:30",
+          "name": "Athletics: XC/Track Practice"
+        },
+        {
+          "time": "14:00",
+          "name": "Club Sports CPR Training"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-01",
+      "weekday": "Tue",
+      "events": [
+        {
+          "time": "07:30",
+          "name": "Athletics: XC/Track Practice"
         }
       ]
     }
@@ -894,7 +863,7 @@
       "divergence": false
     },
     "mullins-ice": {
-      "input_sha": "089dd2a3cbede76ef72c871cdb7d84724e2a15f58c227783525d76678858f2e6",
+      "input_sha": "ee971d4980210e1f0a55b4f489da535628f75efc5f9ac6afe379f746319dea83",
       "gemini": [
         {
           "date": "2026-08-24",
@@ -1023,7 +992,7 @@
         },
         {
           "date": "2026-10-01",
-          "open": "15:30",
+          "open": "15:40",
           "close": "16:20"
         },
         {
@@ -1078,13 +1047,13 @@
         },
         {
           "date": "2026-10-10",
-          "open": "11:30",
-          "close": "12:20"
+          "open": "11:40",
+          "close": "12:30"
         },
         {
           "date": "2026-10-10",
-          "open": "12:30",
-          "close": "13:20"
+          "open": "12:40",
+          "close": "13:30"
         },
         {
           "date": "2026-10-10",
@@ -1113,11 +1082,21 @@
         },
         {
           "date": "2026-10-16",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-10-16",
+          "open": "16:30",
+          "close": "17:20"
+        },
+        {
+          "date": "2026-10-17",
           "open": "15:00",
           "close": "15:50"
         },
         {
-          "date": "2026-10-16",
+          "date": "2026-10-17",
           "open": "16:00",
           "close": "16:50"
         },
@@ -1172,49 +1151,39 @@
           "close": "17:50"
         },
         {
-          "date": "2026-10-26",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2026-10-26",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
           "date": "2026-10-27",
-          "open": "15:00",
-          "close": "15:50"
+          "open": "11:10",
+          "close": "12:40"
         },
         {
-          "date": "2026-10-27",
+          "date": "2026-10-28",
           "open": "16:00",
           "close": "16:50"
         },
         {
           "date": "2026-10-28",
-          "open": "16:30",
-          "close": "17:20"
+          "open": "17:00",
+          "close": "17:50"
         },
         {
           "date": "2026-10-29",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-10-29",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-10-30",
           "open": "15:00",
           "close": "15:50"
         },
         {
-          "date": "2026-10-29",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
           "date": "2026-10-30",
           "open": "16:00",
           "close": "16:50"
-        },
-        {
-          "date": "2026-10-30",
-          "open": "17:00",
-          "close": "17:50"
         },
         {
           "date": "2026-10-31",
@@ -1355,212 +1324,12 @@
           "date": "2027-01-10",
           "open": "15:30",
           "close": "16:20"
-        },
-        {
-          "date": "2027-01-23",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2027-01-23",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2027-01-24",
-          "open": "13:30",
-          "close": "14:20"
-        },
-        {
-          "date": "2027-01-24",
-          "open": "14:30",
-          "close": "15:20"
-        },
-        {
-          "date": "2027-01-24",
-          "open": "15:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2027-01-25",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2027-01-25",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2027-01-26",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2027-01-26",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2027-01-27",
-          "open": "15:00",
-          "close": "15:50"
-        },
-        {
-          "date": "2027-01-27",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2027-01-28",
-          "open": "16:30",
-          "close": "17:20"
-        },
-        {
-          "date": "2027-01-29",
-          "open": "15:00",
-          "close": "15:50"
-        },
-        {
-          "date": "2027-01-29",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2027-01-30",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2027-01-30",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2027-01-31",
-          "open": "14:30",
-          "close": "15:20"
-        },
-        {
-          "date": "2027-01-31",
-          "open": "15:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2027-02-06",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2027-02-06",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2027-02-07",
-          "open": "14:30",
-          "close": "15:20"
-        },
-        {
-          "date": "2027-02-07",
-          "open": "15:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2027-02-12",
-          "open": "15:00",
-          "close": "15:50"
-        },
-        {
-          "date": "2027-02-12",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2027-02-14",
-          "open": "14:30",
-          "close": "15:20"
-        },
-        {
-          "date": "2027-02-14",
-          "open": "15:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2027-02-19",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2027-02-19",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2027-02-20",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2027-02-20",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2027-02-21",
-          "open": "14:30",
-          "close": "15:20"
-        },
-        {
-          "date": "2027-02-21",
-          "open": "15:30",
-          "close": "16:20"
-        },
-        {
-          "date": "2027-02-25",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2027-02-25",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2027-02-26",
-          "open": "15:00",
-          "close": "15:50"
-        },
-        {
-          "date": "2027-02-26",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2027-02-27",
-          "open": "16:00",
-          "close": "16:50"
-        },
-        {
-          "date": "2027-02-27",
-          "open": "17:00",
-          "close": "17:50"
-        },
-        {
-          "date": "2027-02-28",
-          "open": "14:50",
-          "close": "15:40"
-        },
-        {
-          "date": "2027-02-28",
-          "open": "15:50",
-          "close": "16:40"
         }
       ],
       "divergence": false
     },
     "schedule": {
-      "input_sha": "2c5bac0d0207dd9b5362ad584bfe53837742e165180d02ef355a5cb3b0a7384c",
+      "input_sha": "78f317d498eae499b5056dffff4a0b7b22b62f18b0e2052081db3f4c1348de6a",
       "gemini": [
         {
           "date": "2026-08-24",
@@ -1569,52 +1338,6 @@
             {
               "time": "09:00",
               "name": "Audio Install"
-            },
-            {
-              "time": "09:00",
-              "name": "Audio Install"
-            }
-          ]
-        },
-        {
-          "date": "2026-08-26",
-          "weekday": "Wed",
-          "events": [
-            {
-              "time": "07:30",
-              "name": "Athletics: XC/Track Practice"
-            },
-            {
-              "time": "10:30",
-              "name": "Arms & Core 45"
-            },
-            {
-              "time": "15:00",
-              "name": "Pop-Up Fitness: XC Men/Women Yoga Class"
-            },
-            {
-              "time": "16:00",
-              "name": "Sculpt 60"
-            },
-            {
-              "time": "16:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "17:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "17:30",
-              "name": "Vinyasa Yoga 60"
-            },
-            {
-              "time": "18:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "19:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
             }
           ]
         },
@@ -1622,10 +1345,6 @@
           "date": "2026-08-27",
           "weekday": "Thu",
           "events": [
-            {
-              "time": "07:30",
-              "name": "Athletics: XC/Track Practice"
-            },
             {
               "time": "16:00",
               "name": "15 minute Climbing Orientation Offered Every Hour"
@@ -1679,6 +1398,30 @@
             {
               "time": "19:00",
               "name": "15 minute Climbing Orientation Offered Every Hour"
+            }
+          ]
+        },
+        {
+          "date": "2026-08-31",
+          "weekday": "Mon",
+          "events": [
+            {
+              "time": "07:30",
+              "name": "Athletics: XC/Track Practice"
+            },
+            {
+              "time": "14:00",
+              "name": "Club Sports CPR Training"
+            }
+          ]
+        },
+        {
+          "date": "2026-09-01",
+          "weekday": "Tue",
+          "events": [
+            {
+              "time": "07:30",
+              "name": "Athletics: XC/Track Practice"
             }
           ]
         }
