@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-02T09:09:06-04:00",
+  "last_updated": "2026-09-03T09:10:32-04:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -49,7 +49,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-09-02T09:09:06-04:00"
+      "last_scraped": "2026-09-03T09:10:32-04:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -118,7 +118,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-09-02T09:09:06-04:00"
+      "last_scraped": "2026-09-03T09:10:32-04:00"
     },
     {
       "id": "rockwell-climbing",
@@ -175,7 +175,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-09-02T09:09:06-04:00"
+      "last_scraped": "2026-09-03T09:10:32-04:00"
     },
     {
       "id": "recreation-center",
@@ -224,7 +224,7 @@
         "Saturday - Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-09-02T09:09:06-04:00"
+      "last_scraped": "2026-09-03T09:10:32-04:00"
     },
     {
       "id": "mullins-tennis",
@@ -248,7 +248,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-09-02T09:09:06-04:00"
+      "last_scraped": "2026-09-03T09:10:32-04:00"
     },
     {
       "id": "mullins-ice",
@@ -272,13 +272,8 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-09-02T09:09:06-04:00",
+      "last_scraped": "2026-09-03T09:10:32-04:00",
       "events": [
-        {
-          "date": "2026-09-02",
-          "open": "19:00",
-          "close": "20:20"
-        },
         {
           "date": "2026-09-05",
           "open": "13:00",
@@ -311,7 +306,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-09-02T09:09:06-04:00",
+      "last_scraped": "2026-09-03T09:10:32-04:00",
       "water_quality": {
         "status": "unknown",
         "headline": "Swimming is not recommended at Puffer's Pond due to high levels of E.",
@@ -557,7 +552,100 @@
       "url": "https://recwell.umass.edu/Program/GetProgramDetails?courseId=5f1c880c-f517-4eaa-887f-c99c7dc7e9f4"
     }
   ],
-  "schedule": [],
+  "schedule": [
+    {
+      "date": "2026-09-03",
+      "weekday": "Thu",
+      "events": [
+        {
+          "time": "07:30",
+          "name": "Athletics: XC/Track Practice"
+        },
+        {
+          "time": "09:00",
+          "name": "Group Fitness Training"
+        },
+        {
+          "time": "10:00",
+          "name": "Personal Training Meeting"
+        },
+        {
+          "time": "14:00",
+          "name": "Fitness Floor and Club Sports CPR/First Aid/AED Class"
+        },
+        {
+          "time": "16:00",
+          "name": "UPlay 2026"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-04",
+      "weekday": "Fri",
+      "events": [
+        {
+          "time": "07:30",
+          "name": "Athletics: XC/Track Practice"
+        },
+        {
+          "time": "10:00",
+          "name": "RECWELL First Aid/CPR/AED"
+        },
+        {
+          "time": "14:00",
+          "name": "RECWELL CPR/AED/FIRST AID"
+        },
+        {
+          "time": "17:00",
+          "name": "RECWELL FIRST AID/CPR/AED"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-07",
+      "weekday": "Mon",
+      "events": [
+        {
+          "time": "07:30",
+          "name": "Athletics: XC/Track Practice"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-08",
+      "weekday": "Tue",
+      "events": [
+        {
+          "time": "06:00",
+          "name": "Club Sports Equestrian Team"
+        },
+        {
+          "time": "07:00",
+          "name": "Rhythm Ride 60"
+        },
+        {
+          "time": "07:30",
+          "name": "Athletics: XC/Track Practice"
+        },
+        {
+          "time": "08:00",
+          "name": "Pilates 60"
+        },
+        {
+          "time": "08:00",
+          "name": "Vinyasa Yoga 60"
+        },
+        {
+          "time": "08:00",
+          "name": "ABC 60 (Abs/Booty/Cardio)"
+        },
+        {
+          "time": "08:15",
+          "name": "Rec Cycle 45"
+        }
+      ]
+    }
+  ],
   "alert": null,
   "alert_state": {},
   "holidays": [],
@@ -758,13 +846,8 @@
       "divergence": false
     },
     "mullins-ice": {
-      "input_sha": "ea48dbcb1737107c127962b3d32d1b526b1ee192eacbcefb5ba42d0e41835e5e",
+      "input_sha": "21b1f2a5c89d10a01e7b65e51247bacf94327786ac1111596a780ae72d779bef",
       "gemini": [
-        {
-          "date": "2026-08-26",
-          "open": "15:30",
-          "close": "17:20"
-        },
         {
           "date": "2026-08-27",
           "open": "18:00",
@@ -1904,8 +1987,101 @@
       "divergence": false
     },
     "schedule": {
-      "input_sha": "8fde47bbd2f686a20ed7b5724ad53e269da874d40e5e8328f6daadf06f1d8b35",
-      "gemini": [],
+      "input_sha": "84d5d41f0078431d999381038497b8c44c4056c465306b54da80d38a8b994bd1",
+      "gemini": [
+        {
+          "date": "2026-09-03",
+          "weekday": "Thu",
+          "events": [
+            {
+              "time": "07:30",
+              "name": "Athletics: XC/Track Practice"
+            },
+            {
+              "time": "09:00",
+              "name": "Group Fitness Training"
+            },
+            {
+              "time": "10:00",
+              "name": "Personal Training Meeting"
+            },
+            {
+              "time": "14:00",
+              "name": "Fitness Floor and Club Sports CPR/First Aid/AED Class"
+            },
+            {
+              "time": "16:00",
+              "name": "UPlay 2026"
+            }
+          ]
+        },
+        {
+          "date": "2026-09-04",
+          "weekday": "Fri",
+          "events": [
+            {
+              "time": "07:30",
+              "name": "Athletics: XC/Track Practice"
+            },
+            {
+              "time": "10:00",
+              "name": "RECWELL First Aid/CPR/AED"
+            },
+            {
+              "time": "14:00",
+              "name": "RECWELL CPR/AED/FIRST AID"
+            },
+            {
+              "time": "17:00",
+              "name": "RECWELL FIRST AID/CPR/AED"
+            }
+          ]
+        },
+        {
+          "date": "2026-09-07",
+          "weekday": "Mon",
+          "events": [
+            {
+              "time": "07:30",
+              "name": "Athletics: XC/Track Practice"
+            }
+          ]
+        },
+        {
+          "date": "2026-09-08",
+          "weekday": "Tue",
+          "events": [
+            {
+              "time": "06:00",
+              "name": "Club Sports Equestrian Team"
+            },
+            {
+              "time": "07:00",
+              "name": "Rhythm Ride 60"
+            },
+            {
+              "time": "07:30",
+              "name": "Athletics: XC/Track Practice"
+            },
+            {
+              "time": "08:00",
+              "name": "Pilates 60"
+            },
+            {
+              "time": "08:00",
+              "name": "Vinyasa Yoga 60"
+            },
+            {
+              "time": "08:00",
+              "name": "ABC 60 (Abs/Booty/Cardio)"
+            },
+            {
+              "time": "08:15",
+              "name": "Rec Cycle 45"
+            }
+          ]
+        }
+      ],
       "divergence": false
     },
     "alert-overrides": {
