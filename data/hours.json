@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-31T10:56:46-04:00",
+  "last_updated": "2026-11-01T10:40:24-05:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -49,7 +49,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-10-31T10:56:46-04:00"
+      "last_scraped": "2026-11-01T10:40:24-05:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -131,7 +131,7 @@
         "Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-10-31T10:56:46-04:00"
+      "last_scraped": "2026-11-01T10:40:24-05:00"
     },
     {
       "id": "rockwell-climbing",
@@ -188,7 +188,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-10-31T10:56:46-04:00"
+      "last_scraped": "2026-11-01T10:40:24-05:00"
     },
     {
       "id": "recreation-center",
@@ -245,7 +245,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-10-31T10:56:46-04:00"
+      "last_scraped": "2026-11-01T10:40:24-05:00"
     },
     {
       "id": "mullins-tennis",
@@ -269,7 +269,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-10-31T10:56:46-04:00"
+      "last_scraped": "2026-11-01T10:40:24-05:00"
     },
     {
       "id": "mullins-ice",
@@ -293,17 +293,42 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-10-31T10:56:46-04:00",
+      "last_scraped": "2026-11-01T10:40:24-05:00",
       "events": [
-        {
-          "date": "2026-10-31",
-          "open": "15:00",
-          "close": "17:50"
-        },
         {
           "date": "2026-11-01",
           "open": "14:50",
           "close": "16:40"
+        },
+        {
+          "date": "2026-11-03",
+          "open": "12:30",
+          "close": "14:20"
+        },
+        {
+          "date": "2026-11-05",
+          "open": "11:30",
+          "close": "12:50"
+        },
+        {
+          "date": "2026-11-05",
+          "open": "14:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-11-06",
+          "open": "11:00",
+          "close": "12:50"
+        },
+        {
+          "date": "2026-11-06",
+          "open": "15:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-07",
+          "open": "16:00",
+          "close": "17:50"
         }
       ]
     },
@@ -327,7 +352,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-10-31T10:56:46-04:00",
+      "last_scraped": "2026-11-01T10:40:24-05:00",
       "water_quality": {
         "status": "unknown",
         "headline": "Swimming is not recommended at Puffer's Pond due to high levels of E.",
@@ -574,96 +599,6 @@
     }
   ],
   "schedule": [
-    {
-      "date": "2026-10-31",
-      "weekday": "Sat",
-      "events": [
-        {
-          "time": "10:15",
-          "name": "RSO K-pop Dance Club"
-        },
-        {
-          "time": "10:45",
-          "name": "Pilates 60"
-        },
-        {
-          "time": "11:00",
-          "name": "Rhythm Ride 60"
-        },
-        {
-          "time": "12:00",
-          "name": "Club Sports Ballroom Dance"
-        },
-        {
-          "time": "12:00",
-          "name": "Club Sports Ballroom Dance"
-        },
-        {
-          "time": "12:00",
-          "name": "RSO Project UBallet"
-        },
-        {
-          "time": "12:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "12:15",
-          "name": "Club Triathlon"
-        },
-        {
-          "time": "13:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "13:45",
-          "name": "RSO UMass Belly Dance Club"
-        },
-        {
-          "time": "14:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "15:00",
-          "name": "Pilates 60"
-        },
-        {
-          "time": "15:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "15:30",
-          "name": "RSO UMass ALTITUDE"
-        },
-        {
-          "time": "16:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "16:15",
-          "name": "RSO Vietnamese Dance Movement (VDM)"
-        },
-        {
-          "time": "17:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "17:30",
-          "name": "RSO UMass Boxing Club"
-        },
-        {
-          "time": "18:00",
-          "name": "RSO Minutemen Dancers Dance Club"
-        },
-        {
-          "time": "18:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "19:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        }
-      ]
-    },
     {
       "date": "2026-11-01",
       "weekday": "Sun",
@@ -1287,6 +1222,160 @@
         {
           "time": "09:30",
           "name": "Barre 45"
+        },
+        {
+          "time": "11:00",
+          "name": "RSO UMass Dance Team"
+        },
+        {
+          "time": "12:00",
+          "name": "Core 30"
+        },
+        {
+          "time": "12:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "13:00",
+          "name": "Wrestling Club"
+        },
+        {
+          "time": "13:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "14:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "15:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "15:30",
+          "name": "Pilates 60"
+        },
+        {
+          "time": "16:00",
+          "name": "Slow Flow Yoga 60"
+        },
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "16:15",
+          "name": "Rec Cycle 45"
+        },
+        {
+          "time": "16:30",
+          "name": "ABC 60 (Abs/Booty/Cardio)"
+        },
+        {
+          "time": "16:45",
+          "name": "Sculpt 60"
+        },
+        {
+          "time": "17:00",
+          "name": "Intramural Flag Football"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "17:15",
+          "name": "Rhythm Ride 60"
+        },
+        {
+          "time": "17:15",
+          "name": "Barre 45"
+        },
+        {
+          "time": "17:45",
+          "name": "Zumba 60"
+        },
+        {
+          "time": "18:00",
+          "name": "Pilates 60"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:15",
+          "name": "Step 45"
+        },
+        {
+          "time": "18:30",
+          "name": "Rhythm Ride 45"
+        },
+        {
+          "time": "19:00",
+          "name": "Legs & Core 45"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:15",
+          "name": "RSO Pulse Dance Company"
+        },
+        {
+          "time": "19:15",
+          "name": "Arms & Core 45"
+        },
+        {
+          "time": "20:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "20:30",
+          "name": "Ballroom Dance"
+        },
+        {
+          "time": "21:00",
+          "name": "RSO UMass Dance Company"
+        },
+        {
+          "time": "21:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-06",
+      "weekday": "Fri",
+      "events": [
+        {
+          "time": "06:00",
+          "name": "Faculty/Staff Pickleball"
+        },
+        {
+          "time": "07:30",
+          "name": "Athletics: XC/Track Practice"
+        },
+        {
+          "time": "08:00",
+          "name": "Vinyasa Yoga 60"
+        },
+        {
+          "time": "08:15",
+          "name": "Pilates 60"
+        },
+        {
+          "time": "09:30",
+          "name": "Sculpt 60"
+        },
+        {
+          "time": "09:30",
+          "name": "Rec Cycle 45"
+        },
+        {
+          "time": "10:00",
+          "name": "Slow Flow Yoga 60"
         }
       ]
     }
@@ -1514,8 +1603,18 @@
       "divergence": false
     },
     "mullins-ice": {
-      "input_sha": "45af8ce7739ace0223a92637ab0de90fe1d452768a775c432fcf9f725fa57dfa",
+      "input_sha": "4809e0c440ba6fe733b7ddee479920411712aa656605dff6ddf5184d50dd2574",
       "gemini": [
+        {
+          "date": "2026-10-25",
+          "open": "14:50",
+          "close": "15:40"
+        },
+        {
+          "date": "2026-10-25",
+          "open": "15:50",
+          "close": "16:40"
+        },
         {
           "date": "2026-10-27",
           "open": "11:10",
@@ -1580,115 +1679,957 @@
           "date": "2026-11-01",
           "open": "15:50",
           "close": "16:40"
+        },
+        {
+          "date": "2026-11-03",
+          "open": "12:30",
+          "close": "14:20"
+        },
+        {
+          "date": "2026-11-05",
+          "open": "11:30",
+          "close": "12:50"
+        },
+        {
+          "date": "2026-11-05",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2026-11-05",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-11-06",
+          "open": "11:00",
+          "close": "12:50"
+        },
+        {
+          "date": "2026-11-06",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-11-06",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-07",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-07",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-11-08",
+          "open": "14:50",
+          "close": "15:40"
+        },
+        {
+          "date": "2026-11-08",
+          "open": "15:50",
+          "close": "16:40"
+        },
+        {
+          "date": "2026-11-10",
+          "open": "11:10",
+          "close": "12:30"
+        },
+        {
+          "date": "2026-11-11",
+          "open": "13:30",
+          "close": "14:20"
+        },
+        {
+          "date": "2026-11-11",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2026-11-13",
+          "open": "11:00",
+          "close": "12:30"
+        },
+        {
+          "date": "2026-11-13",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-11-13",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-14",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-14",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-11-15",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2026-11-15",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-11-17",
+          "open": "11:10",
+          "close": "12:30"
+        },
+        {
+          "date": "2026-11-20",
+          "open": "11:30",
+          "close": "13:20"
+        },
+        {
+          "date": "2026-11-20",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-11-20",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-21",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-21",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-11-22",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2026-11-22",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-11-25",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-11-25",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-27",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-11-27",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-27",
+          "open": "18:00",
+          "close": "18:50"
+        },
+        {
+          "date": "2026-11-27",
+          "open": "19:00",
+          "close": "19:50"
+        },
+        {
+          "date": "2026-11-28",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-11-28",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-11-28",
+          "open": "18:30",
+          "close": "19:20"
+        },
+        {
+          "date": "2026-11-28",
+          "open": "19:30",
+          "close": "20:20"
+        },
+        {
+          "date": "2026-11-29",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2026-11-29",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-12-01",
+          "open": "11:10",
+          "close": "12:30"
+        },
+        {
+          "date": "2026-12-03",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-12-03",
+          "open": "16:30",
+          "close": "17:20"
+        },
+        {
+          "date": "2026-12-04",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-12-04",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-05",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-05",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-06",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2026-12-06",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-12-11",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-11",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-12",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-12",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-13",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2026-12-13",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-12-16",
+          "open": "12:10",
+          "close": "13:00"
+        },
+        {
+          "date": "2026-12-16",
+          "open": "13:10",
+          "close": "14:00"
+        },
+        {
+          "date": "2026-12-16",
+          "open": "14:50",
+          "close": "15:40"
+        },
+        {
+          "date": "2026-12-16",
+          "open": "15:50",
+          "close": "16:40"
+        },
+        {
+          "date": "2026-12-17",
+          "open": "12:10",
+          "close": "13:00"
+        },
+        {
+          "date": "2026-12-17",
+          "open": "13:10",
+          "close": "14:00"
+        },
+        {
+          "date": "2026-12-17",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-12-17",
+          "open": "16:30",
+          "close": "17:20"
+        },
+        {
+          "date": "2026-12-18",
+          "open": "12:10",
+          "close": "13:00"
+        },
+        {
+          "date": "2026-12-18",
+          "open": "13:10",
+          "close": "14:00"
+        },
+        {
+          "date": "2026-12-18",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-12-18",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-19",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-19",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-20",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2026-12-20",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-12-21",
+          "open": "12:30",
+          "close": "13:20"
+        },
+        {
+          "date": "2026-12-21",
+          "open": "13:30",
+          "close": "14:20"
+        },
+        {
+          "date": "2026-12-21",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-21",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-22",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-22",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-23",
+          "open": "12:30",
+          "close": "13:20"
+        },
+        {
+          "date": "2026-12-23",
+          "open": "13:30",
+          "close": "14:20"
+        },
+        {
+          "date": "2026-12-23",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-12-23",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-26",
+          "open": "12:30",
+          "close": "13:20"
+        },
+        {
+          "date": "2026-12-26",
+          "open": "13:30",
+          "close": "14:20"
+        },
+        {
+          "date": "2026-12-26",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-26",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-27",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2026-12-27",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2026-12-28",
+          "open": "14:00",
+          "close": "14:50"
+        },
+        {
+          "date": "2026-12-28",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-12-28",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-28",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-29",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-29",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-30",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-12-30",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-31",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2026-12-31",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2026-12-31",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2026-12-31",
+          "open": "18:00",
+          "close": "18:50"
+        },
+        {
+          "date": "2027-01-01",
+          "open": "13:00",
+          "close": "13:50"
+        },
+        {
+          "date": "2027-01-01",
+          "open": "14:00",
+          "close": "14:50"
+        },
+        {
+          "date": "2027-01-01",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2027-01-01",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-01",
+          "open": "19:00",
+          "close": "19:50"
+        },
+        {
+          "date": "2027-01-01",
+          "open": "20:00",
+          "close": "20:50"
+        },
+        {
+          "date": "2027-01-02",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-02",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-02",
+          "open": "18:00",
+          "close": "18:50"
+        },
+        {
+          "date": "2027-01-02",
+          "open": "19:00",
+          "close": "19:50"
+        },
+        {
+          "date": "2027-01-03",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2027-01-03",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2027-01-04",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-04",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-05",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-05",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-08",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2027-01-08",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-09",
+          "open": "12:00",
+          "close": "13:30"
+        },
+        {
+          "date": "2027-01-09",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-09",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-10",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2027-01-10",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2027-01-23",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-23",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-24",
+          "open": "11:00",
+          "close": "11:50"
+        },
+        {
+          "date": "2027-01-24",
+          "open": "12:00",
+          "close": "12:50"
+        },
+        {
+          "date": "2027-01-24",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2027-01-24",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2027-01-25",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-25",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-26",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-26",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-27",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2027-01-27",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-28",
+          "open": "16:30",
+          "close": "17:20"
+        },
+        {
+          "date": "2027-01-29",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2027-01-29",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-30",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-01-30",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-01-31",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2027-01-31",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2027-02-06",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-02-06",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-02-07",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2027-02-07",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2027-02-12",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2027-02-12",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-02-14",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2027-02-14",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2027-02-20",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-02-20",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-02-21",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2027-02-21",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2027-02-27",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-02-27",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-02-27",
+          "open": "18:00",
+          "close": "18:50"
+        },
+        {
+          "date": "2027-02-27",
+          "open": "19:00",
+          "close": "19:50"
+        },
+        {
+          "date": "2027-02-28",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2027-02-28",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2027-03-05",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2027-03-05",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-03-06",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-03-06",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-03-07",
+          "open": "12:20",
+          "close": "13:10"
+        },
+        {
+          "date": "2027-03-07",
+          "open": "13:20",
+          "close": "14:10"
+        },
+        {
+          "date": "2027-03-07",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2027-03-07",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2027-03-13",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-03-13",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-03-14",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2027-03-14",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2027-03-15",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-03-15",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-03-16",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-03-16",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-03-17",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2027-03-17",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-03-18",
+          "open": "15:30",
+          "close": "16:20"
+        },
+        {
+          "date": "2027-03-18",
+          "open": "16:30",
+          "close": "17:20"
+        },
+        {
+          "date": "2027-03-19",
+          "open": "15:00",
+          "close": "15:50"
+        },
+        {
+          "date": "2027-03-19",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-03-19",
+          "open": "19:00",
+          "close": "19:50"
+        },
+        {
+          "date": "2027-03-19",
+          "open": "20:00",
+          "close": "20:50"
+        },
+        {
+          "date": "2027-03-20",
+          "open": "16:00",
+          "close": "16:50"
+        },
+        {
+          "date": "2027-03-20",
+          "open": "17:00",
+          "close": "17:50"
+        },
+        {
+          "date": "2027-03-21",
+          "open": "14:30",
+          "close": "15:20"
+        },
+        {
+          "date": "2027-03-21",
+          "open": "15:30",
+          "close": "16:20"
         }
       ],
       "divergence": false
     },
     "schedule": {
-      "input_sha": "d04c75e86b9749323c53ce378e26515c9c6268a035e848d7b11bbf8a53f3694a",
+      "input_sha": "e7192b69cffd8558d61d4727458077c6834db36fef5cd2dad7246d28af0e7bae",
       "gemini": [
-        {
-          "date": "2026-10-31",
-          "weekday": "Sat",
-          "events": [
-            {
-              "time": "00:00",
-              "name": "All Day Athletics Primetime Lacrosse"
-            },
-            {
-              "time": "10:15",
-              "name": "RSO K-pop Dance Club"
-            },
-            {
-              "time": "10:45",
-              "name": "Pilates 60"
-            },
-            {
-              "time": "11:00",
-              "name": "Rhythm Ride 60"
-            },
-            {
-              "time": "12:00",
-              "name": "Club Sports Ballroom Dance"
-            },
-            {
-              "time": "12:00",
-              "name": "Club Sports Ballroom Dance"
-            },
-            {
-              "time": "12:00",
-              "name": "RSO Project UBallet"
-            },
-            {
-              "time": "12:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "12:15",
-              "name": "Club Triathlon"
-            },
-            {
-              "time": "13:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "13:45",
-              "name": "RSO UMass Belly Dance Club"
-            },
-            {
-              "time": "14:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "15:00",
-              "name": "Pilates 60"
-            },
-            {
-              "time": "15:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "15:30",
-              "name": "RSO UMass ALTITUDE"
-            },
-            {
-              "time": "16:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "16:15",
-              "name": "RSO Vietnamese Dance Movement (VDM)"
-            },
-            {
-              "time": "17:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "17:30",
-              "name": "RSO UMass Boxing Club"
-            },
-            {
-              "time": "18:00",
-              "name": "RSO Minutemen Dancers Dance Club"
-            },
-            {
-              "time": "18:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "19:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            }
-          ]
-        },
         {
           "date": "2026-11-01",
           "weekday": "Sun",
           "events": [
-            {
-              "time": "00:00",
-              "name": "All Day Athletics Primetime Lacrosse"
-            },
             {
               "time": "09:45",
               "name": "Bouldering Basics"
@@ -2308,11 +3249,165 @@
             {
               "time": "09:30",
               "name": "Barre 45"
+            },
+            {
+              "time": "11:00",
+              "name": "RSO UMass Dance Team"
+            },
+            {
+              "time": "12:00",
+              "name": "Core 30"
+            },
+            {
+              "time": "12:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "13:00",
+              "name": "Wrestling Club"
+            },
+            {
+              "time": "13:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "14:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "15:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "15:30",
+              "name": "Pilates 60"
+            },
+            {
+              "time": "16:00",
+              "name": "Slow Flow Yoga 60"
+            },
+            {
+              "time": "16:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "16:15",
+              "name": "Rec Cycle 45"
+            },
+            {
+              "time": "16:30",
+              "name": "ABC 60 (Abs/Booty/Cardio)"
+            },
+            {
+              "time": "16:45",
+              "name": "Sculpt 60"
+            },
+            {
+              "time": "17:00",
+              "name": "Intramural Flag Football"
+            },
+            {
+              "time": "17:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "17:15",
+              "name": "Rhythm Ride 60"
+            },
+            {
+              "time": "17:15",
+              "name": "Barre 45"
+            },
+            {
+              "time": "17:45",
+              "name": "Zumba 60"
+            },
+            {
+              "time": "18:00",
+              "name": "Pilates 60"
+            },
+            {
+              "time": "18:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "18:15",
+              "name": "Step 45"
+            },
+            {
+              "time": "18:30",
+              "name": "Rhythm Ride 45"
+            },
+            {
+              "time": "19:00",
+              "name": "Legs & Core 45"
+            },
+            {
+              "time": "19:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "19:15",
+              "name": "RSO Pulse Dance Company"
+            },
+            {
+              "time": "19:15",
+              "name": "Arms & Core 45"
+            },
+            {
+              "time": "20:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "20:30",
+              "name": "Ballroom Dance"
+            },
+            {
+              "time": "21:00",
+              "name": "RSO UMass Dance Company"
+            },
+            {
+              "time": "21:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            }
+          ]
+        },
+        {
+          "date": "2026-11-06",
+          "weekday": "Fri",
+          "events": [
+            {
+              "time": "06:00",
+              "name": "Faculty/Staff Pickleball"
+            },
+            {
+              "time": "07:30",
+              "name": "Athletics: XC/Track Practice"
+            },
+            {
+              "time": "08:00",
+              "name": "Vinyasa Yoga 60"
+            },
+            {
+              "time": "08:15",
+              "name": "Pilates 60"
+            },
+            {
+              "time": "09:30",
+              "name": "Sculpt 60"
+            },
+            {
+              "time": "09:30",
+              "name": "Rec Cycle 45"
+            },
+            {
+              "time": "10:00",
+              "name": "Slow Flow Yoga 60"
             }
           ]
         }
       ],
-      "divergence": true
+      "divergence": false
     },
     "alert-overrides": {
       "input_sha": "9a70c408db280da4aa92e136891b3f88153debab55c4ebcd3cc2563be671aaea",
