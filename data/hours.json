@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-24T14:51:36-05:00",
+  "last_updated": "2026-11-25T13:55:57-05:00",
   "timezone": "America/New_York",
   "facilities": [
     {
@@ -49,7 +49,7 @@
         "Saturday & Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-11-24T14:51:36-05:00"
+      "last_scraped": "2026-11-25T13:55:57-05:00"
     },
     {
       "id": "curry-hicks-pool",
@@ -131,7 +131,7 @@
         "Sunday: CLOSED"
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-11-24T14:51:36-05:00"
+      "last_scraped": "2026-11-25T13:55:57-05:00"
     },
     {
       "id": "rockwell-climbing",
@@ -188,7 +188,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-11-24T14:51:36-05:00"
+      "last_scraped": "2026-11-25T13:55:57-05:00"
     },
     {
       "id": "recreation-center",
@@ -245,7 +245,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-11-24T14:51:36-05:00"
+      "last_scraped": "2026-11-25T13:55:57-05:00"
     },
     {
       "id": "mullins-tennis",
@@ -269,7 +269,7 @@
         "CLOSED until further notice."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-11-24T14:51:36-05:00"
+      "last_scraped": "2026-11-25T13:55:57-05:00"
     },
     {
       "id": "mullins-ice",
@@ -293,7 +293,7 @@
         "Schedule changes weekly \u2014 see source link for the latest week."
       ],
       "scrape_status": "ok",
-      "last_scraped": "2026-11-24T14:51:36-05:00",
+      "last_scraped": "2026-11-25T13:55:57-05:00",
       "events": [
         {
           "date": "2026-11-25",
@@ -342,7 +342,7 @@
       },
       "notes": [],
       "scrape_status": "ok",
-      "last_scraped": "2026-11-24T14:51:36-05:00",
+      "last_scraped": "2026-11-25T13:55:57-05:00",
       "water_quality": {
         "status": "unknown",
         "headline": "Swimming is not recommended at Puffer's Pond due to high levels of E.",
@@ -590,55 +590,9 @@
   ],
   "schedule": [
     {
-      "date": "2026-11-24",
-      "weekday": "Tue",
-      "events": [
-        {
-          "time": "15:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "16:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "17:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "18:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "19:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "20:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "21:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        }
-      ]
-    },
-    {
       "date": "2026-11-25",
       "weekday": "Wed",
       "events": [
-        {
-          "time": "07:30",
-          "name": "Athletics: XC/Track Practice"
-        },
-        {
-          "time": "12:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
-        {
-          "time": "13:00",
-          "name": "15 minute Climbing Orientation Offered Every Hour"
-        },
         {
           "time": "14:00",
           "name": "15 minute Climbing Orientation Offered Every Hour"
@@ -830,6 +784,88 @@
         {
           "time": "14:00",
           "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "15:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "16:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "16:30",
+          "name": "RSO Stage Crew Dance Team"
+        },
+        {
+          "time": "16:45",
+          "name": "RSO Dhadak Fusion Dance Team"
+        },
+        {
+          "time": "17:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "18:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "19:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-30",
+      "weekday": "Mon",
+      "events": [
+        {
+          "time": "07:00",
+          "name": "Club Sports Men's & Women's Volleyball Practice"
+        },
+        {
+          "time": "07:00",
+          "name": "Rhythm Ride 60"
+        },
+        {
+          "time": "07:30",
+          "name": "Athletics: XC/Track Practice"
+        },
+        {
+          "time": "07:30",
+          "name": "Power Yoga 60"
+        },
+        {
+          "time": "07:30",
+          "name": "Pilates 60"
+        },
+        {
+          "time": "08:15",
+          "name": "Rhythm Ride 60"
+        },
+        {
+          "time": "09:00",
+          "name": "Sculpt 60"
+        },
+        {
+          "time": "12:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "12:15",
+          "name": "Pilates 60"
+        },
+        {
+          "time": "13:00",
+          "name": "Club Sports"
+        },
+        {
+          "time": "13:00",
+          "name": "15 minute Climbing Orientation Offered Every Hour"
+        },
+        {
+          "time": "13:30",
+          "name": "RSO UMass Jiu-Jitsu Club"
         }
       ]
     }
@@ -1057,7 +1093,7 @@
       "divergence": false
     },
     "mullins-ice": {
-      "input_sha": "988c47328fd7a93c5b747f207b6f2723025e1e9185cdad2a13b12afcbd12daac",
+      "input_sha": "e6f0cfe92fcf34e1118f3c4210cf4ee1542f80181a7b0df00fd34bbcf1a1533a",
       "gemini": [
         {
           "date": "2026-11-25",
@@ -1123,58 +1159,12 @@
       "divergence": false
     },
     "schedule": {
-      "input_sha": "7fe675adc7e042284ce2775ba7a849782d3ae89914d487373401d06eb67ce190",
+      "input_sha": "3a638de45e63deb653ff7af1373f5ba7754af36fa33678eabe750d1e87ebcb79",
       "gemini": [
-        {
-          "date": "2026-11-24",
-          "weekday": "Tue",
-          "events": [
-            {
-              "time": "15:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "16:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "17:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "18:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "19:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "20:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "21:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            }
-          ]
-        },
         {
           "date": "2026-11-25",
           "weekday": "Wed",
           "events": [
-            {
-              "time": "07:30",
-              "name": "Athletics: XC/Track Practice"
-            },
-            {
-              "time": "12:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
-            {
-              "time": "13:00",
-              "name": "15 minute Climbing Orientation Offered Every Hour"
-            },
             {
               "time": "14:00",
               "name": "15 minute Climbing Orientation Offered Every Hour"
@@ -1366,6 +1356,88 @@
             {
               "time": "14:00",
               "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "15:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "16:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "16:30",
+              "name": "RSO Stage Crew Dance Team"
+            },
+            {
+              "time": "16:45",
+              "name": "RSO Dhadak Fusion Dance Team"
+            },
+            {
+              "time": "17:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "18:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "19:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            }
+          ]
+        },
+        {
+          "date": "2026-11-30",
+          "weekday": "Mon",
+          "events": [
+            {
+              "time": "07:00",
+              "name": "Club Sports Men's & Women's Volleyball Practice"
+            },
+            {
+              "time": "07:00",
+              "name": "Rhythm Ride 60"
+            },
+            {
+              "time": "07:30",
+              "name": "Athletics: XC/Track Practice"
+            },
+            {
+              "time": "07:30",
+              "name": "Power Yoga 60"
+            },
+            {
+              "time": "07:30",
+              "name": "Pilates 60"
+            },
+            {
+              "time": "08:15",
+              "name": "Rhythm Ride 60"
+            },
+            {
+              "time": "09:00",
+              "name": "Sculpt 60"
+            },
+            {
+              "time": "12:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "12:15",
+              "name": "Pilates 60"
+            },
+            {
+              "time": "13:00",
+              "name": "Club Sports"
+            },
+            {
+              "time": "13:00",
+              "name": "15 minute Climbing Orientation Offered Every Hour"
+            },
+            {
+              "time": "13:30",
+              "name": "RSO UMass Jiu-Jitsu Club"
             }
           ]
         }
